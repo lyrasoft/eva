@@ -1,0 +1,66 @@
+{
+    "name": "lyrasoft/earth",
+    "description": "Home Land of LYRASOFT",
+    "homepage": "https://github.com/lyrasoft/earth",
+    "license": "MIT",
+    "minimum-stability": "beta",
+    "authors": [
+        {
+            "name": "Simon Asika",
+            "email": "asika32764@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=8.0",
+        "ext-json": "*",
+        "windwalker/core": "^4.0",
+        "windwalker/renderer": "^4.0",
+        "windwalker/dom": "^4.0",
+        "windwalker/edge": "^4.0",
+        "windwalker/orm": "^4.0",
+        "windwalker/session": "^4.0",
+        "windwalker/form": "^4.0",
+        "windwalker/authentication": "^4.0",
+        "windwalker/unicorn": "^1.0",
+        "lyrasoft/luna": "^2.0",
+        "symfony/var-dumper": "^5.0",
+        "asika/cross-env": "^1.0",
+        "myclabs/php-enum": "^1.8",
+        "thl/pinyin": "^1.2"
+    },
+    "require-dev": {
+    },
+    "scripts": {
+        "post-create-project-cmd": [
+            "php windwalker run prepare",
+            "Windwalker\\Core\\Composer\\StarterInstaller::rootInstall"
+        ],
+        "post-autoload-dump": [
+            "php windwalker pkg:install --tag config",
+            "php windwalker cache:clear renderer"
+        ],
+        "reinstall": [
+            "Windwalker\\Core\\Composer\\StarterInstaller::genEnv",
+            "php windwalker run prepare"
+        ]
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        },
+        "files": [
+            "src/bootstrap.php"
+        ]
+    },
+    "config": {
+        "platform": {
+            "php": "8.0.0"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "4.x-dev",
+            "next": "4.x-dev"
+        }
+    }
+}
