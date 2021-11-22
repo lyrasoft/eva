@@ -11,8 +11,7 @@ declare(strict_types=1);
 
 namespace App\Seeder;
 
-use App\Entity\Member;
-use App\Entity\Portfolio;
+use Lyrasoft\Portfolio\Entity\Portfolio;
 use Lyrasoft\Luna\Entity\Category;
 use Lyrasoft\Luna\Entity\Tag;
 use Lyrasoft\Luna\Entity\TagMap;
