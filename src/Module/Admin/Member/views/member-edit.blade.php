@@ -4,7 +4,7 @@
  * Global variables
  * --------------------------------------------------------------
  * @var  $app       AppContext      Application context.
- * @var  $vm        PortfolioEditView  The view model object.
+ * @var  $vm        MemberEditView  The view model object.
  * @var  $uri       SystemUri       System Uri information.
  * @var  $chronos   ChronosService  The chronos datetime service.
  * @var  $nav       Navigator       Navigator object to build route.
@@ -14,8 +14,8 @@
 
 declare(strict_types=1);
 
-use App\Entity\Portfolio;
-use App\Module\Admin\Portfolio\PortfolioEditView;
+use App\Entity\Member;
+use App\Module\Admin\Member\MemberEditView;
 use Windwalker\Core\Application\AppContext;
 use Windwalker\Core\Asset\AssetService;
 use Windwalker\Core\DateTime\ChronosService;
@@ -26,7 +26,7 @@ use Windwalker\Form\Form;
 
 /**
  * @var Form      $form
- * @var Portfolio $item
+ * @var Member $item
  */
 ?>
 
@@ -39,10 +39,10 @@ use Windwalker\Form\Form;
 @section('content')
     <form name="admin-form" id="admin-form"
         novalidate uni-form-validate='{"scroll": true}'
-        action="{{ $nav->to('portfolio_edit') }}"
+        action="{{ $nav->to('member_edit') }}"
         method="POST" enctype="multipart/form-data">
 
-        <x-title-bar :form="$form"></x-title-bar>
+        <x-title-bar :form="$form" title-field="name"></x-title-bar>
 
         <div class="row">
             <div class="col-md-7">
@@ -54,13 +54,13 @@ use Windwalker\Form\Form;
                 </x-fieldset>
             </div>
             <div class="col-md-5">
-                <x-fieldset name="meta" :title="$lang('unicorn.fieldset.meta')"
+                <x-fieldset name="detail" title="詳細資訊"
                     :form="$form"
                     class="mb-4"
                     is="card"
                 >
                 </x-fieldset>
-                <x-fieldset name="seo" title="SEO"
+                <x-fieldset name="meta" :title="$lang('unicorn.fieldset.meta')"
                     :form="$form"
                     class="mb-4"
                     is="card"

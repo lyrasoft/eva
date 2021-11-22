@@ -9,10 +9,10 @@
 
 declare(strict_types=1);
 
-namespace App\Module\Admin\Portfolio;
+namespace App\Module\Admin\Member;
 
-use App\Module\Admin\Portfolio\Form\EditForm;
-use App\Repository\PortfolioRepository;
+use App\Module\Admin\Member\Form\EditForm;
+use App\Repository\MemberRepository;
 use Unicorn\Controller\CrudController;
 use Unicorn\Controller\GridController;
 use Unicorn\Upload\FileUploadService;
@@ -23,16 +23,16 @@ use Windwalker\DI\Attributes\Autowire;
 use Windwalker\ORM\Event\AfterSaveEvent;
 
 /**
- * The PortfolioController class.
+ * The MemberController class.
  */
 #[Controller()]
-class PortfolioController
+class MemberController
 {
     public function save(
         AppContext $app,
         CrudController $controller,
         Navigator $nav,
-        #[Autowire] PortfolioRepository $repository,
+        #[Autowire] MemberRepository $repository,
         FileUploadService $fileUploadService
     ): mixed {
         $form = $app->make(EditForm::class);
@@ -41,9 +41,9 @@ class PortfolioController
             function (AfterSaveEvent $event) use ($repository, $app, $fileUploadService) {
                 $data = $event->getData();
 
-                $data['cover'] = $fileUploadService->handleFileIfUploaded(
-                        $app->file('item')['cover'] ?? null
-                    )?->getUri() ?? $data['cover'];
+                $data['image'] = $fileUploadService->handleFileIfUploaded(
+                    $app->file('item')['image'] ?? null
+                )?->getUri() ?? $data['image'];
 
                 $repository->save($data);
             }
@@ -53,10 +53,10 @@ class PortfolioController
 
         switch ($app->input('task')) {
             case 'save2close':
-                return $nav->to(PortfolioListView::class);
+                return $nav->to(MemberListView::class);
 
             case 'save2new':
-                return $nav->to(PortfolioEditView::class)->var('new', 1);
+                return $nav->to(MemberEditView::class)->var('new', 1);
 
             case 'save2copy':
                 $controller->rememberForClone($app, $repository);
@@ -69,7 +69,7 @@ class PortfolioController
 
     public function delete(
         AppContext $app,
-        #[Autowire] PortfolioRepository $repository,
+        #[Autowire] MemberRepository $repository,
         CrudController $controller
     ): mixed {
         return $app->call([$controller, 'delete'], compact('repository'));
@@ -77,7 +77,7 @@ class PortfolioController
 
     public function filter(
         AppContext $app,
-        #[Autowire] PortfolioRepository $repository,
+        #[Autowire] MemberRepository $repository,
         GridController $controller
     ): mixed {
         return $app->call([$controller, 'filter'], compact('repository'));
@@ -85,7 +85,7 @@ class PortfolioController
 
     public function batch(
         AppContext $app,
-        #[Autowire] PortfolioRepository $repository,
+        #[Autowire] MemberRepository $repository,
         GridController $controller
     ): mixed {
         $task = $app->input('task');
@@ -100,7 +100,7 @@ class PortfolioController
 
     public function copy(
         AppContext $app,
-        #[Autowire] PortfolioRepository $repository,
+        #[Autowire] MemberRepository $repository,
         GridController $controller
     ): mixed {
         return $app->call([$controller, 'copy'], compact('repository'));

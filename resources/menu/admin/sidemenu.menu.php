@@ -96,6 +96,28 @@ $menu->registerChildren(
     }
 );
 
+// Portfolio
+$menu->link('團隊成員', '#')
+    ->icon('fal fa-people-pants-simple');
+
+$menu->registerChildren(
+    function (MenuBuilder $menu) use ($nav, $lang) {
+        // Category
+        $menu->link(
+            '團隊分類',
+            $nav->to('category_list', ['type' => 'member'])
+        )
+            ->icon('fal fa-sitemap');
+
+        // Portfolio
+        $menu->link(
+            '成員管理',
+            $nav->to('member_list')
+        )
+            ->icon('fal fa-person');
+    }
+);
+
 // Menu
 $menu->link(
     $lang('luna.menu.manager.title', title: $lang('luna.menu.type.mainmenu')),
@@ -103,9 +125,17 @@ $menu->link(
 )
     ->icon('fal fa-list');
 
-// Config Core
-$menu->link(
-    $lang('luna.config.title', $lang('luna.config.type.core')),
-    $nav->to('config_core')
-)
-    ->icon('fal fa-cog');
+// Configs
+$menu->link('設定檔', '#')
+    ->icon('fal fa-cogs');
+
+$menu->registerChildren(
+    function (MenuBuilder $menu) use ($nav, $lang) {
+        // Config Core
+        $menu->link(
+            $lang('luna.config.title', $lang('luna.config.type.core')),
+            $nav->to('config_core')
+        )
+            ->icon('fal fa-cog');
+    }
+);

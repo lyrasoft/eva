@@ -24,11 +24,8 @@ use Windwalker\Core\Router\SystemUri;
 
 $coreConfig = $app->service(\Lyrasoft\Luna\Services\ConfigService::class)->getConfig('core');
 
-$categories = $app->service(\Lyrasoft\Luna\Repository\CategoryRepository::class)
-    ->getListSelector()
-    ->where('category.state', 1)
-    ->where('category.type', 'article')
-    ->ordering('category.lft', 'ASC');
+$menu = $app->service(\Lyrasoft\Luna\Services\MenuService::class)
+    ->loadMenuFromFile('mainmenu', WINDWALKER_RESOURCES . '/menu/front/mainmenu.menu.php');
 ?>
 
 @extends('global.html')
@@ -65,30 +62,7 @@ $categories = $app->service(\Lyrasoft\Luna\Repository\CategoryRepository::class)
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                            <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="#">Home</a>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" aria-current="page" href="#"
-
-                                    data-bs-toggle="dropdown"
-                                >
-                                    Categories
-                                </a>
-                                <ul class="dropdown-menu" aria-labelledby="categories">
-                                    @foreach ($categories as $category)
-                                        <li>
-                                            <a class="dropdown-item"
-                                                href="{{ $nav->to('article_category')->var('path', $category->path) }}">
-                                                {{ str_repeat('-', $category->level - 1) }}
-                                                {{ $category->title }}
-                                            </a>
-                                        </li>
-                                    @endforeach
-                                </ul>
-                            </li>
-                        </ul>
+                        <x-menu-root :menu="$menu" dropdown class="navbar-nav me-auto mb-2 mb-lg-0"></x-menu-root>
                     </div>
                 </div>
             </nav>

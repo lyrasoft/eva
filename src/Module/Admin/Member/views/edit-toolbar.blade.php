@@ -4,7 +4,7 @@
  * Global variables
  * --------------------------------------------------------------
  * @var  $app       AppContext      Application context.
- * @var  $view      PortfolioEditView  The view modal object.
+ * @var  $view      MemberEditView  The view modal object.
  * @var  $uri       SystemUri       System Uri information.
  * @var  $chronos   ChronosService  The chronos datetime service.
  * @var  $nav       Navigator       Navigator object to build route.
@@ -14,7 +14,7 @@
 
 declare(strict_types=1);
 
-use App\Module\Admin\Portfolio\PortfolioEditView;
+use App\Module\Admin\Member\MemberEditView;
 use Windwalker\Core\Application\AppContext;
 use Windwalker\Core\Asset\AssetService;
 use Windwalker\Core\DateTime\ChronosService;
@@ -70,7 +70,7 @@ use Windwalker\Core\Router\SystemUri;
     </button>
 
     <a class="btn btn-default btn-outline-secondary btn-sm"
-        href="{{ $nav->to('portfolio_list') }}">
+        href="{{ $nav->to('member_list') }}">
         <span class="glyphicon glyphicon-remove fa fa-remove fa-times"></span>
         @lang('unicorn.toolbar.cancel')
     </a>

@@ -9,11 +9,11 @@
 
 declare(strict_types=1);
 
-namespace App\Module\Admin\Portfolio;
+namespace App\Module\Admin\Member;
 
-use App\Entity\Portfolio;
-use App\Module\Admin\Portfolio\Form\EditForm;
-use App\Repository\PortfolioRepository;
+use App\Entity\Member;
+use App\Module\Admin\Member\Form\EditForm;
+use App\Repository\MemberRepository;
 use Windwalker\Core\Application\AppContext;
 use Windwalker\Core\Attributes\ViewModel;
 use Windwalker\Core\Form\FormFactory;
@@ -26,13 +26,13 @@ use Windwalker\DI\Attributes\Autowire;
 use Windwalker\ORM\ORM;
 
 /**
- * The PortfolioEditView class.
+ * The MemberEditView class.
  */
 #[ViewModel(
-    layout: 'portfolio-edit',
-    js: 'portfolio-edit.js'
+    layout: 'member-edit',
+    js: 'member-edit.js'
 )]
-class PortfolioEditView implements ViewModelInterface
+class MemberEditView implements ViewModelInterface
 {
     use TranslatorTrait;
 
@@ -40,7 +40,7 @@ class PortfolioEditView implements ViewModelInterface
         protected ORM $orm,
         protected FormFactory $formFactory,
         protected Navigator $nav,
-        #[Autowire] protected PortfolioRepository $repository
+        #[Autowire] protected MemberRepository $repository
     ) {
     }
 
@@ -66,10 +66,6 @@ class PortfolioEditView implements ViewModelInterface
                     ?: $this->orm->extractEntity($item)
             );
 
-        $form->fill(
-            ['meta' => $item?->getMeta()]
-        );
-
         $this->prepareMetadata($app, $view);
 
         return compact('form', 'id', 'item');
@@ -87,7 +83,7 @@ class PortfolioEditView implements ViewModelInterface
     {
         $view->getHtmlFrame()
             ->setTitle(
-                $this->trans('unicorn.title.edit', title: '作品')
+                $this->trans('unicorn.title.edit', title: '成員')
             );
     }
 }

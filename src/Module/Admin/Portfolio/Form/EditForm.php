@@ -41,12 +41,12 @@ class EditForm implements FieldDefinitionInterface
     public function define(Form $form): void
     {
         $form->add('title', TextField::class)
-            ->label('Title')
+            ->label('標題')
             ->addFilter('trim')
             ->required(true);
 
         $form->add('alias', TextField::class)
-            ->label('Alias')
+            ->label('網址別名')
             ->addFilter('trim');
 
         $form->fieldset(
@@ -127,6 +127,21 @@ class EditForm implements FieldDefinitionInterface
                             'height' => 500,
                         ]
                     );
+            }
+        );
+
+        $form->fieldset(
+            'seo',
+            function (Form $form) {
+                $form->add('meta/title', TextField::class)
+                    ->label('SEO 標題');
+
+                $form->add('meta/description', TextareaField::class)
+                    ->label('SEO 描述')
+                    ->rows(7);
+
+                $form->add('meta/keyword', TextField::class)
+                    ->label('SEO 關鍵字');
             }
         );
 

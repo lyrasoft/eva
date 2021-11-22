@@ -41,7 +41,7 @@ return [
 
             'admin' => [
                 'base' => 'admin.global.body',
-                'auth' => 'admin.global.body',
+                'auth' => 'admin.global.auth',
                 'edit' => 'admin.global.body-edit',
                 'list' => 'admin.global.body-list',
                 'modal' => 'admin.global.pure',

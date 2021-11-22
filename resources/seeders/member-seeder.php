@@ -12,7 +12,6 @@ declare(strict_types=1);
 namespace App\Seeder;
 
 use App\Entity\Member;
-use App\Entity\Portfolio;
 use Lyrasoft\Luna\Entity\Category;
 use Lyrasoft\Luna\Entity\Tag;
 use Lyrasoft\Luna\Entity\TagMap;
@@ -22,10 +21,8 @@ use Windwalker\Database\DatabaseAdapter;
 use Windwalker\ORM\EntityMapper;
 use Windwalker\ORM\ORM;
 
-use function Windwalker\collect;
-
 /**
- * Portfolio Seeder
+ * Member Seeder
  *
  * @var Seeder          $seeder
  * @var ORM             $orm
@@ -36,29 +33,19 @@ $seeder->import(
         $faker = $seeder->faker('zh_TW');
 
         $userIds = $orm->findColumn(User::class, 'id', [])->dump();
-        $categoryIds = $orm->findColumn(Category::class, 'id', ['type' => 'portfolio'])->dump();
+        $categoryIds = $orm->findColumn(Category::class, 'id', ['type' => 'member'])->dump();
         $tagIds = $orm->findColumn(Tag::class, 'id')->dump();
-        /** @var EntityMapper<Portfolio> $mapper */
-        $mapper = $orm->mapper(Portfolio::class);
+        /** @var EntityMapper<Member> $mapper */
+        $mapper = $orm->mapper(Member::class);
 
-        foreach (range(1, 50) as $i) {
+        foreach (range(1, 30) as $i) {
             $item = $mapper->createEntity();
 
-            $item->setTitle($faker->sentence(3));
-            $item->setSubtitle($faker->sentence(2));
+            $item->setName($faker->name());
             $item->setCategoryId((int) $faker->randomElement($categoryIds));
+            $item->setIntro($faker->paragraph(5));
             $item->setDescription($faker->paragraph(10));
-            $item->setCover($faker->unsplashImage(1600, 800));
-            $item->setImages(
-                collect($faker->unsplashImages(random_int(5, 8), 1000, 1000))
-                ->map(fn ($url) => [
-                    'title' => '',
-                    'url' => $url,
-                    'description' => ''
-                ])
-                ->dump()
-            );
-            $item->setUrl($faker->url());
+            $item->setImage($faker->unsplashImage(400, 400));
             $item->setState(1);
             $item->setOrdering($i);
             $item->setCreatedBy((int) $faker->randomElement($userIds));
@@ -66,14 +53,14 @@ $seeder->import(
             $item->setCreated($created = $faker->dateTimeThisYear());
             $item->setModified($created->modify('+10days'));
 
-            /** @var Portfolio $item */
+            /** @var Member $item */
             $item = $mapper->createOne($item);
 
             foreach ($faker->randomElements($tagIds, random_int(3, 5)) as $tagId) {
                 $map = new TagMap();
                 $map->setTargetId($item->getId());
                 $map->setTagId((int) $tagId);
-                $map->setType('portfolio');
+                $map->setType('member');
 
                 $orm->createOne(TagMap::class, $map);
             }

@@ -93,7 +93,7 @@ $user = $app->service(\Lyrasoft\Luna\User\UserService::class)->getUser();
                                 <span>My Profile</span>
                             </a>
                             <a class="dropdown-item text-danger" href="javascript://"
-                                onclick="u.form().post()">
+                                onclick="u.form().post('{{ $nav->to('logout') }}')">
                                 <i class="fa-regular fa-power-off font-size-16 align-middle me-1 text-danger"></i>
                                 <span key="t-logout">Logout</span></a>
                         </div>
