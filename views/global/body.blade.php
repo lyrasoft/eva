@@ -51,9 +51,9 @@ $menu = $app->service(\Lyrasoft\Luna\Services\MenuService::class)
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
                 <div class="container">
                     <a class="navbar-brand" href="#">
-                        <img src="{{ $asset->path('images/logo-h.svg') }}"
-                            alt="Windwalker LOGO"
-                            style="height: 25px;"
+                        <img src="{{ $asset->path('images/logo-cw-h.svg') }}"
+                            alt="LOGO"
+                            style="height: 27px;"
                         />
                     </a>
                     <button class="navbar-toggler" type="button"
