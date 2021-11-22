@@ -27,9 +27,9 @@
         "asika/cross-env": "^1.0",
         "myclabs/php-enum": "^1.8",
         "thl/pinyin": "^1.2",
-        "lyrasoft/theme-skote": "^3.2"
-    },
-    "require-dev": {
+        "lyrasoft/theme-skote": "^3.2",
+        "lyrasoft/portfolio": "^1.0",
+        "lyrasoft/member": "^1.0"
     },
     "scripts": {
         "post-create-project-cmd": [

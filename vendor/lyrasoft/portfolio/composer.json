@@ -1,0 +1,32 @@
+{
+    "name": "lyrasoft/portfolio",
+    "description": "LYRASOFT portfolio package",
+    "type": "windwalker-package",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Lyrasoft\\Portfolio\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Simon Asika",
+            "email": "asika32764@gmail.com"
+        }
+    ],
+    "minimum-stability": "beta",
+    "require": {},
+    "extra": {
+        "windwalker":{
+            "packages": [
+                "Lyrasoft\\Portfolio\\PortfolioPackage"
+            ],
+            "modules": [
+                "src/Module"
+            ]
+        },
+        "branch-alias": {
+            "dev-master": "2.x-dev"
+        }
+    }
+}
