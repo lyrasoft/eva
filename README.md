@@ -1,9 +1,13 @@
-# LYRASOFT Earth 2.0
+# LYRASOFT EVA
+
+<div align="center">
+    <img src="https://user-images.githubusercontent.com/1639206/142924046-eb7a1438-4987-4f13-ab73-fde2108a7c1e.jpg">
+</div>
 
 ## Installation Via Composer
 
 ``` bash
-composer create-project lyrasoft/earth your_project
+composer create-project lyrasoft/eva your_project
 ```
 
 ## Prepare System
