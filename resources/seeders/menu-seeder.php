@@ -38,7 +38,7 @@ $types = [
  */
 $seeder->import(
     static function () use ($seeder, $orm, $db, $types) {
-        $faker = $seeder->faker('en_US');
+        $faker = $seeder->faker('zh_TW');
 
         /** @var NestedSetMapper $mapper */
         $mapper = $orm->mapper(Menu::class);

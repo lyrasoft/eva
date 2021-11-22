@@ -28,13 +28,40 @@ $root = $app->service(\Lyrasoft\Luna\Services\MenuService::class)
     ->loadMenuFromFile('sidemenu', WINDWALKER_RESOURCES . '/menu/admin/sidemenu.menu.php');
 ?>
 
-<ul id="submenu" class="nav nav-stacked nav-pills flex-column">
-    @foreach ($root->getChildren() as $menuItem)
-        <li class="nav-item {{ $menuItem->isActive(true) ? 'active' : '' }}">
-            <a href="{{ $menuItem->route($nav) }}"
-                class="nav-link {{ $menuItem->isActive(true) ? 'active' : '' }}">
-                {{ $menuItem->getTitle() }}
-            </a>
+
+
+@foreach ($root->getChildren() as $menuItem)
+    @if ($menuItem->getLayout() === 'placeholder.header')
+        <li class="menu-title" key="t-menu">
+            {{ $menuItem->getTitle() }}
         </li>
-    @endforeach
-</ul>
+    @else
+        @if ($menuItem->hasChildren())
+            <li class="">
+                <a href="javascript: void(0);" class="has-arrow waves-effect" aria-expanded="false">
+                    <i class="{{ $menuItem->getIcon() }} fa-fw" style="font-size: 1rem"></i>
+                    <span>{{ $menuItem->getTitle() }}</span>
+                </a>
+                <ul class="sub-menu mm-collapse" aria-expanded="false" style="">
+                    @foreach ($menuItem->getChildren() as $childItem)
+                        <li class="{{ $childItem->isActive(true) ? 'active' : '' }}">
+                            <a href="{{ $childItem->route($nav) }}"
+                                class="{{ $childItem->isActive(true) ? 'active' : '' }}">
+                                <span class="{{ $childItem->getIcon() }} fa-fw"></span>
+                                <span>{{ $childItem->getTitle() }}</span>
+                            </a>
+                        </li>
+                    @endforeach
+                </ul>
+            </li>
+        @else
+            <li class="{{ $menuItem->isActive(true) ? 'active' : '' }}">
+                <a href="{{ $menuItem->route($nav) }}"
+                    class="{{ $menuItem->isActive(true) ? 'active' : '' }}">
+                    <i class="{{ $menuItem->getIcon() }} fa-fw" style="font-size: 1rem"></i>
+                    <span>{{ $menuItem->getTitle() }}</span>
+                </a>
+            </li>
+        @endif
+    @endif
+@endforeach

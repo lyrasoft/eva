@@ -11,15 +11,17 @@ declare(strict_types=1);
 
 namespace App\Seeder;
 
-use Lyrasoft\Luna\Entity\Page;
+use Lyrasoft\Luna\Entity\Tag;
+use Lyrasoft\Luna\Entity\TagMap;
 use Lyrasoft\Luna\Entity\User;
 use Windwalker\Core\Seed\Seeder;
 use Windwalker\Database\DatabaseAdapter;
 use Windwalker\ORM\EntityMapper;
 use Windwalker\ORM\ORM;
+use Windwalker\Utilities\Utf8String;
 
 /**
- * Page Seeder
+ * Tag Seeder
  *
  * @var Seeder          $seeder
  * @var ORM             $orm
@@ -30,22 +32,16 @@ $seeder->import(
         $faker = $seeder->faker('zh_TW');
 
         $userIds = $orm->findColumn(User::class, 'id', [])->dump();
-        /** @var EntityMapper<Page> $mapper */
-        $mapper = $orm->mapper(Page::class);
+        /** @var EntityMapper<Tag> $mapper */
+        $mapper = $orm->mapper(Tag::class);
 
-        $content = json_decode(file_get_contents(__DIR__ . '/data/page.json'), true);
-
-        foreach (range(1, 50) as $i) {
+        foreach (range(1, 30) as $i) {
             $item = $mapper->createEntity();
 
-            $item->setExtends('global.body');
-            $item->setTitle($faker->sentence(2));
-            $item->setImage($faker->unsplashImage(800, 600));
-            $item->setContent($content);
+            $item->setTitle(Utf8String::ucfirst($faker->word));
             $item->setState(1);
-            $item->setOrdering($i);
             $item->setCreated($created = $faker->dateTimeThisYear);
-            $item->setModified($created->modify('+1month'));
+            $item->setModified($created->modify('+10days'));
             $item->setCreatedBy((int) $faker->randomElement($userIds));
             $item->setModifiedBy((int) $faker->randomElement($userIds));
 
@@ -58,6 +54,6 @@ $seeder->import(
 
 $seeder->clear(
     static function () use ($seeder, $orm, $db) {
-        $seeder->truncate(Page::class);
+        $seeder->truncate(Tag::class, TagMap::class);
     }
 );

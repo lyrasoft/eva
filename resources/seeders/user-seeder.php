@@ -29,7 +29,7 @@ use function Windwalker\uid;
  */
 $seeder->import(
     static function (Password $password) use ($seeder, $orm, $db) {
-        $faker = $seeder->faker('en_US');
+        $faker = $seeder->faker('zh_TW');
 
         /** @var EntityMapper<User> $mapper */
         $mapper = $orm->mapper(User::class);

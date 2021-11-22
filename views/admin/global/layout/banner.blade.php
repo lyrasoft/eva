@@ -25,16 +25,18 @@ use Windwalker\Core\Router\SystemUri;
 $htmlFrame = $app->service(\Windwalker\Core\Html\HtmlFrame::class);
 
 ?>
-<section class="admin-header bg-light py-3 position-sticky" style="top: 0; z-index: 5">
-    <div class="d-flex flex-column flex-lg-row justify-content-between align-items-center px-3">
-        <div class="mb-3 mb-lg-0">
-            <h1 class="h3 m-0">{{ $htmlFrame->getTitle() }}</h1>
-        </div>
 
-        <div>
-            @section('admin-toolbar')
-                @include('admin.global.layout.toolbar')
-            @show
-        </div>
+<!-- start page title -->
+<div class="page-title-box d-sm-flex align-items-center justify-content-between position-sticky py-2 mb-3"
+    style="background-color: var(--bs-body-bg); top: 70px; z-index: 5; margin-top: -1rem">
+    <h4 class="mb-sm-0 font-size-18">
+        {{ $htmlFrame->getTitle() }}
+    </h4>
+
+    <div class="page-title-right">
+        @section('admin-toolbar')
+            @include('admin.global.layout.toolbar')
+        @show
     </div>
-</section>
+</div>
+<!-- end page title -->

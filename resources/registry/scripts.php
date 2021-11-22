@@ -28,7 +28,7 @@ return [
     'prepare' => [
         'cross-env COMPOSER_PROCESS_TIMEOUT=600 composer install',
         'yarn install',
-        'yarn build',
+        'yarn build default admin',
     ],
 
     // Prepare for development and reset migration

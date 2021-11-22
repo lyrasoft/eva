@@ -25,9 +25,8 @@ use Windwalker\Core\Router\SystemUri;
 $menu = $app->service(\Unicorn\Legacy\Html\MenuHelper::class);
 ?>
 @section('nav')
-    <li class="nav-item {{ $menu->active('home') }}">
-        <a class="nav-link" href="{{ $nav->to('home') }}">
-            @lang('unicorn.title.dashboard')
-        </a>
-    </li>
+    <a class="header-item d-flex align-items-center {{ $menu->active('home') }}"
+        href="{{ $nav->to('home') }}">
+        @lang('unicorn.title.dashboard')
+    </a>
 @stop

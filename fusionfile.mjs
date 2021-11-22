@@ -5,7 +5,7 @@
  * @license    MIT
  */
 
-import fusion, { sass, babel, parallel } from '@windwalker-io/fusion';
+import fusion, { sass, babel, parallel, src, symlink } from '@windwalker-io/fusion';
 import { jsSync, installVendors, findModules } from '@windwalker-io/core';
 
 export async function css() {
@@ -81,10 +81,36 @@ export async function syncJS() {
   return Promise.all([]);
 }
 
+export async function admin() {
+  fusion.watch([
+    'vendor/lyrasoft/theme-skote/src/**/*',
+    'resources/assets/scss/admin/**/*.scss'
+  ]);
+
+  sass(
+    'theme/admin/src/assets/scss/app.scss',
+    'www/assets/css/admin/app.css'
+  );
+  sass(
+    'resources/assets/scss/admin/bootstrap.scss',
+    'www/assets/css/admin/bootstrap.css'
+  );
+  sass(
+    'resources/assets/scss/admin/icons.scss',
+    'www/assets/css/admin/icons.css'
+  );
+  babel(
+    'theme/admin/src/assets/js/app.js',
+    'www/assets/js/admin/app.js'
+  );
+  src('theme/admin/dist/assets/libs/').pipe(symlink('www/assets/vendor/admin/'));
+  src('theme/admin/dist/assets/fonts/').pipe(symlink('www/assets/css/fonts/'));
+}
+
 export async function install() {
-  return installVendors(
+  installVendors(
     [
-      '@fortawesome/fontawesome-free',
+      '@fortawesome/fontawesome-pro',
       'wowjs',
       'animate.css',
       'jarallax',
@@ -93,6 +119,8 @@ export async function install() {
       'lyrasoft/luna'
     ]
   );
+
+  src('vendor/lyrasoft/theme-skote/').pipe(symlink('theme/admin'));
 }
 
 export default parallel(css, js, images);

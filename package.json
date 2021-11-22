@@ -10,13 +10,14 @@
         "postinstall": "yarn build install"
     },
     "dependencies": {
-        "@fortawesome/fontawesome-free": "next",
+        "@fortawesome/fontawesome-pro": "next",
         "@windwalker-io/core": "^4.0",
         "@windwalker-io/fusion": "^1.0",
         "@windwalker-io/unicorn": "^1.0",
         "animate.css": "^4.1.1",
         "bootstrap": "^5.0.0",
         "jarallax": "^1.12.8",
+        "jquery": "^3.6.0",
         "wowjs": "^1.1.3"
     },
     "//": {

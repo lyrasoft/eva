@@ -30,7 +30,7 @@ use Windwalker\Utilities\Utf8String;
  */
 $seeder->import(
     static function () use ($seeder, $orm, $db) {
-        $faker = $seeder->faker('en_US');
+        $faker = $seeder->faker('zh_TW');
         $type = 'article';
 
         /** @var EntityMapper<Article> $mapper */

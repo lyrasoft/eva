@@ -36,9 +36,17 @@ $seeder->import(
                 'max_level' => 3,
                 'number' => 30
             ],
+            'portfolio' => [
+                'max_level' => 1,
+                'number' => 7
+            ],
+            'member' => [
+                'max_level' => 1,
+                'number' => 7
+            ],
         ];
 
-        $faker = $seeder->faker('en_US');
+        $faker = $seeder->faker('zh_TW');
 
         /** @var NestedSetMapper<Category> $mapper */
         $mapper = $orm->mapper(Category::class);
@@ -56,7 +64,7 @@ $seeder->import(
                 $item = $mapper->createEntity();
 
                 $item->setType($type);
-                $item->setTitle(Utf8String::ucwords($faker->sentence(3)));
+                $item->setTitle(Utf8String::ucwords($faker->sentence(2)));
                 $item->setAlias(SlugHelper::safe($item->getTitle()));
                 $item->setDescription($faker->paragraph(5));
                 $item->setImage($faker->unsplashImage(800, 600));
