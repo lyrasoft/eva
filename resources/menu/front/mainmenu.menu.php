@@ -26,21 +26,6 @@ use Windwalker\Core\Language\LangService;
  * @var LangService $lang
  */
 
-$nested = new class {
-    public function register(MenuBuilder $menu, NodeInterface $node, callable $callback): void
-    {
-        foreach ($node->getChildren() as $child) {
-            $callback($child, $menu);
-
-            $menu->registerChildren(
-                function (MenuBuilder $menu) use ($callback, $child) {
-                    $this->register($menu, $child, $callback);
-                }
-            );
-        }
-    }
-};
-
 $menu->link('首頁', $nav->to('home'))
     ->icon('fal fa-home');
 
@@ -48,7 +33,7 @@ $menu->link('分類', $nav->to('article_category'))
     ->icon('fal fa-files');
 
 $menu->registerChildren(
-    function (MenuBuilder $menu) use ($nested, $app, $nav) {
+    function (MenuBuilder $menu) use ($app, $nav) {
         $categories = $app->service(CategoryRepository::class)
             ->getListSelector()
             ->where('category.state', 1)
@@ -57,8 +42,7 @@ $menu->registerChildren(
 
         $categoryNodes = TreeBuilder::create($categories);
 
-        $nested->register(
-            $menu,
+        $menu->fromTree(
             $categoryNodes,
             function (NodeInterface $node, MenuBuilder $menu) use ($nav) {
                 $menu->link(
@@ -75,7 +59,7 @@ $menu->link('案例', $nav->to('article_category'))
     ->icon('fal fa-files');
 
 $menu->registerChildren(
-    function (MenuBuilder $menu) use ($nested, $app, $nav) {
+    function (MenuBuilder $menu) use ($app, $nav) {
         $categories = $app->service(CategoryRepository::class)
             ->getListSelector()
             ->where('category.state', 1)
@@ -84,8 +68,7 @@ $menu->registerChildren(
 
         $categoryNodes = TreeBuilder::create($categories);
 
-        $nested->register(
-            $menu,
+        $menu->fromTree(
             $categoryNodes,
             function (NodeInterface $node, MenuBuilder $menu) use ($nav) {
                 $menu->link(
