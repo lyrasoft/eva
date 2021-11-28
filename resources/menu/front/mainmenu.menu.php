@@ -85,7 +85,7 @@ $menu->link('團隊成員', $nav->to('member_category'))
     ->icon('fal fa-users');
 
 $menu->registerChildren(
-    function (MenuBuilder $menu) use ($nested, $app, $nav) {
+    function (MenuBuilder $menu) use ($app, $nav) {
         $categories = $app->service(CategoryRepository::class)
             ->getListSelector()
             ->where('category.state', 1)
@@ -94,8 +94,7 @@ $menu->registerChildren(
 
         $categoryNodes = TreeBuilder::create($categories);
 
-        $nested->register(
-            $menu,
+        $menu->fromTree(
             $categoryNodes,
             function (NodeInterface $node, MenuBuilder $menu) use ($nav) {
                 $menu->link(
