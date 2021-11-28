@@ -41,7 +41,7 @@
             "php windwalker pkg:install --tag config",
             "php windwalker cache:clear renderer"
         ],
-        "reinstall": [
+        "env": [
             "Windwalker\\Core\\Composer\\StarterInstaller::genEnv",
             "php windwalker run prepare"
         ]
