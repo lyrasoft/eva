@@ -32,6 +32,9 @@
         "lyrasoft/portfolio": "^1.0",
         "lyrasoft/member": "^1.0"
     },
+    "require-dev": {
+        "windwalker/framework": "dev-master"
+    },
     "scripts": {
         "post-create-project-cmd": [
             "php windwalker run prepare",

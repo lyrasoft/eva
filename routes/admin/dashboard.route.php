@@ -2,8 +2,6 @@
 
 namespace App\Routes;
 
-use App\Module\Admin\Acme\AcmeController;
-use App\Module\Admin\Acme\AcmeView;
 use App\Module\Admin\Dashboard\DashboardController;
 use App\Module\Admin\Dashboard\DashboardView;
 use Windwalker\Core\Router\RouteCreator;
@@ -14,5 +12,6 @@ $router->group('dashboard')
     ->register(function (RouteCreator $router) {
         $router->any('home', '/')
             ->controller(DashboardController::class)
-            ->view(DashboardView::class);
+            ->view(DashboardView::class)
+            ->redirect('article_list');
     });
