@@ -22,6 +22,8 @@ use Windwalker\Core\Language\LangService;
 use Windwalker\Core\Router\Navigator;
 use Windwalker\Core\Router\SystemUri;
 
+$app->service(\Windwalker\Core\Html\HtmlFrame::class)
+    ->addBodyClass('sidebar-enable vertical-collpsed');
 ?>
 
 @extends('admin.global.body')

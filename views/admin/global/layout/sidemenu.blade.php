@@ -28,8 +28,6 @@ $root = $app->service(\Lyrasoft\Luna\Services\MenuService::class)
     ->loadMenuFromFile('sidemenu', WINDWALKER_RESOURCES . '/menu/admin/sidemenu.menu.php');
 ?>
 
-
-
 @foreach ($root->getChildren() as $menuItem)
     @if ($menuItem->getLayout() === 'placeholder.header')
         <li class="menu-title" key="t-menu">
@@ -37,7 +35,7 @@ $root = $app->service(\Lyrasoft\Luna\Services\MenuService::class)
         </li>
     @else
         @if ($menuItem->hasChildren())
-            <li class="">
+            <li class="{{ $menuItem->isActive(true) ? 'mm-active' : '' }}">
                 <a href="javascript: void(0);" class="has-arrow waves-effect" aria-expanded="false">
                     <i class="{{ $menuItem->getIcon() }} fa-fw" style="font-size: 1rem"></i>
                     <span>{{ $menuItem->getTitle() }}</span>

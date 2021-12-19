@@ -18,6 +18,7 @@
         "bootstrap": "^5.0.0",
         "jarallax": "^1.12.8",
         "jquery": "^3.6.0",
+        "sortablejs": "^1.14.0",
         "wowjs": "^1.1.3"
     },
     "//": {

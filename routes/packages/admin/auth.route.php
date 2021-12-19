@@ -14,8 +14,7 @@ $router->group('auth')
     ->register(function (RouteCreator $router) {
         $router->any('login', '/login')
             ->controller(AuthController::class)
-            ->view(AuthLoginView::class)
-            ->layoutPaths(WINDWALKER_SOURCE . '/Module/Admin/Auth/views');
+            ->view(AuthLoginView::class);
 
         $router->any('logout', '/logout')
             ->controller(AuthController::class, 'logout');

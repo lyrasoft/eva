@@ -10,6 +10,7 @@ use Windwalker\Core\Router\RouteCreator;
 /** @var  RouteCreator $router */
 
 $router->group('portfolio')
+    ->extra('menu', ['sidemenu' => 'portfolio_list'])
     ->register(function (RouteCreator $router) {
         $router->any('portfolio_list', '/portfolio/list')
             ->controller(PortfolioController::class)

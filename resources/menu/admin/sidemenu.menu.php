@@ -31,10 +31,8 @@ $menu->link('用戶', '#')
 $menu->registerChildren(
     function (MenuBuilder $menu) use ($nav, $lang) {
         // User
-        $menu->link(
-            $lang('unicorn.title.grid', title: $lang('luna.user.title')),
-            $nav->to('user_list')
-        )
+        $menu->link($lang('unicorn.title.grid', title: $lang('luna.user.title')))
+            ->to($nav->to('user_list'))
             ->icon('fal fa-users');
     }
 );
@@ -45,31 +43,23 @@ $menu->link('內容管理', '#')
 $menu->registerChildren(
     function (MenuBuilder $menu) use ($nav, $lang) {
         // Category
-        $menu->link(
-            $lang('luna.article.category.list'),
-            $nav->to('category_list', ['type' => 'article'])
-        )
+        $menu->link($lang('luna.article.category.list'))
+            ->to($nav->to('category_list', ['type' => 'article']))
             ->icon('fal fa-sitemap');
 
         // Article
-        $menu->link(
-            $lang('unicorn.title.grid', title: $lang('luna.article.title')),
-            $nav->to('article_list')
-        )
+        $menu->link($lang('unicorn.title.grid', title: $lang('luna.article.title')))
+            ->to($nav->to('article_list'))
             ->icon('fal fa-newspaper');
 
         // Page
-        $menu->link(
-            $lang('unicorn.title.grid', title: $lang('luna.page.title')),
-            $nav->to('page_list')
-        )
+        $menu->link($lang('unicorn.title.grid', title: $lang('luna.page.title')))
+            ->to($nav->to('page_list'))
             ->icon('fal fa-files');
 
         // Tag
-        $menu->link(
-            $lang('unicorn.title.grid', title: $lang('luna.tag.title')),
-            $nav->to('tag_list')
-        )
+        $menu->link($lang('unicorn.title.grid', title: $lang('luna.tag.title')))
+            ->to($nav->to('tag_list'))
             ->icon('fal fa-tags');
     }
 );
@@ -81,17 +71,13 @@ $menu->link('案例作品', '#')
 $menu->registerChildren(
     function (MenuBuilder $menu) use ($nav, $lang) {
         // Category
-        $menu->link(
-            '作品分類',
-            $nav->to('category_list', ['type' => 'portfolio'])
-        )
+        $menu->link('作品分類')
+            ->to($nav->to('category_list', ['type' => 'portfolio']))
             ->icon('fal fa-sitemap');
 
         // Portfolio
-        $menu->link(
-            '作品管理',
-            $nav->to('portfolio_list')
-        )
+        $menu->link('作品管理')
+            ->to($nav->to('portfolio_list'))
             ->icon('fal fa-images');
     }
 );
@@ -103,26 +89,20 @@ $menu->link('團隊成員', '#')
 $menu->registerChildren(
     function (MenuBuilder $menu) use ($nav, $lang) {
         // Category
-        $menu->link(
-            '團隊分類',
-            $nav->to('category_list', ['type' => 'member'])
-        )
+        $menu->link('團隊分類')
+            ->to($nav->to('category_list', ['type' => 'member']))
             ->icon('fal fa-sitemap');
 
         // Portfolio
-        $menu->link(
-            '成員管理',
-            $nav->to('member_list')
-        )
+        $menu->link('成員管理')
+            ->to($nav->to('member_list'))
             ->icon('fal fa-person');
     }
 );
 
 // Menu
-$menu->link(
-    $lang('luna.menu.manager.title', title: $lang('luna.menu.type.mainmenu')),
-    $nav->to('menu_list', ['type' => 'mainmenu'])
-)
+$menu->link($lang('luna.menu.manager.title', title: $lang('luna.menu.type.mainmenu')))
+    ->to($nav->to('menu_list', ['type' => 'mainmenu']))
     ->icon('fal fa-list');
 
 // Configs
@@ -132,10 +112,8 @@ $menu->link('設定檔', '#')
 $menu->registerChildren(
     function (MenuBuilder $menu) use ($nav, $lang) {
         // Config Core
-        $menu->link(
-            $lang('luna.config.title', $lang('luna.config.type.core')),
-            $nav->to('config_core')
-        )
+        $menu->link($lang('luna.config.title', $lang('luna.config.type.core')))
+            ->to($nav->to('config_core'))
             ->icon('fal fa-cog');
     }
 );

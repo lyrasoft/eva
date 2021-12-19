@@ -10,6 +10,7 @@ use Windwalker\Core\Router\RouteCreator;
 /** @var  RouteCreator $router */
 
 $router->group('member')
+    ->extra('menu', ['sidemenu' => 'member_list'])
     ->register(function (RouteCreator $router) {
         $router->any('member_list', '/member/list')
             ->controller(MemberController::class)

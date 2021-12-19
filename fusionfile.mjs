@@ -103,8 +103,6 @@ export async function admin() {
     'theme/admin/src/assets/js/app.js',
     'www/assets/js/admin/app.js'
   );
-  src('theme/admin/dist/assets/libs/').pipe(symlink('www/assets/vendor/admin/'));
-  src('theme/admin/dist/assets/fonts/').pipe(symlink('www/assets/css/fonts/'));
 }
 
 export async function install() {
@@ -121,6 +119,8 @@ export async function install() {
   );
 
   src('vendor/lyrasoft/theme-skote/').pipe(symlink('theme/admin'));
+  src('theme/admin/dist/assets/libs/').pipe(symlink('www/assets/vendor/admin/'));
+  src('theme/admin/dist/assets/fonts/').pipe(symlink('www/assets/css/fonts/'));
 }
 
 export default parallel(css, js, images);
