@@ -105,6 +105,11 @@ $menu->link($lang('luna.menu.manager.title', title: $lang('luna.menu.type.mainme
     ->to($nav->to('menu_list', ['type' => 'mainmenu']))
     ->icon('fal fa-list');
 
+// Contact
+$menu->link($lang('contact.list.title', title: $lang('contact.main.title')))
+    ->to($nav->to('contact_list', ['type' => 'main']))
+    ->icon('fal fa-phone-volume');
+
 // Configs
 $menu->link('設定檔', '#')
     ->icon('fal fa-cogs');

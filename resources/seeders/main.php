@@ -21,4 +21,5 @@ return [
     __DIR__ . '/menu-seeder.php',
     __DIR__ . '/member-seeder.php',
     __DIR__ . '/portfolio-seeder.php',
+    __DIR__ . '/contact-seeder.php',
 ];
