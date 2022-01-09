@@ -31,6 +31,7 @@
         "lyrasoft/theme-skote": "^3.2",
         "lyrasoft/portfolio": "^1.0",
         "lyrasoft/member": "^1.0",
+        "lyrasoft/contact": "^1.0",
         "symfony/mailer": "^5.4"
     },
     "require-dev": {
