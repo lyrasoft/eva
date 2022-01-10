@@ -118,9 +118,11 @@ export async function install() {
     ]
   );
 
-  src('vendor/lyrasoft/theme-skote/').pipe(symlink('theme/admin'));
-  src('theme/admin/dist/assets/libs/').pipe(symlink('www/assets/vendor/admin/'));
-  src('theme/admin/dist/assets/fonts/').pipe(symlink('www/assets/css/fonts/'));
+  src('vendor/lyrasoft/theme-skote/').pipe(symlink('theme/admin'))
+    .on('end', () => {
+      src('theme/admin/dist/assets/libs/').pipe(symlink('www/assets/vendor/admin/'));
+      src('theme/admin/dist/assets/fonts/').pipe(symlink('www/assets/css/fonts/'));
+    });
 }
 
 export default parallel(css, js, images);
