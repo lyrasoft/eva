@@ -29,7 +29,7 @@ return [
                 'google' => CaptchaManager::recaptcha(
                     (string) env('RECAPTCHA_KEY'),
                     (string) env('RECAPTCHA_SECRET'),
-                    (string) env('RECAPTCHA_TYPE', 'checkbox'),
+                    (string) env('RECAPTCHA_TYPE'),
                 ),
                 'image' => CaptchaManager::gregwar(),
                 'none' => fn () => new NullCaptchaDriver()

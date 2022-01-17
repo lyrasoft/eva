@@ -34,7 +34,19 @@ return [
     // Prepare for development and reset migration
     'preparedev' => [
         'cross-env NODE_ENV=development php windwalker run prepare',
-        'php windwalker mig:reset --seed -f'
+        'php windwalker mig:reset --seed -f',
+        \Windwalker\cmd(
+            'lyra pstorm:sniffer -p',
+            null,
+            true
+        )
+    ],
+
+    // Update code and dependencies
+    'update' => [
+        'git pull',
+        'cross-env COMPOSER_PROCESS_TIMEOUT=600 composer install',
+        'php windwalker run prepare',
     ],
 
     // Deploy new version

@@ -13,6 +13,7 @@ namespace App\Seeder;
 
 use Lyrasoft\Luna\Entity\Category;
 use Lyrasoft\Luna\Entity\User;
+use Lyrasoft\Luna\Services\LocaleService;
 use Unicorn\Enum\BasicState;
 use Unicorn\Utilities\SlugHelper;
 use Windwalker\Core\Seed\Seeder;
@@ -46,10 +47,14 @@ $seeder->import(
             ],
         ];
 
-        $faker = $seeder->faker('zh_TW');
+        /** @var NestedSetMapper<Category> $mapper */
+        $mapper = $orm->mapper(Category::class);
+
+        $faker = $seeder->faker('en_US');
 
         /** @var NestedSetMapper<Category> $mapper */
         $mapper = $orm->mapper(Category::class);
+        $langCodes = LocaleService::getSeederLangCodes($orm);
         $userIds = $orm->findColumn(User::class, 'id')->dump();
 
         $existsRecordIds = [];
@@ -60,8 +65,11 @@ $seeder->import(
             $existsRecordIds[$type] = [1];
 
             foreach (range(1, $detail['number']) as $i) {
+                $langCode = $faker->randomElement($langCodes);
                 /** @var Category $item */
                 $item = $mapper->createEntity();
+
+                $faker = $seeder->faker($langCode);
 
                 $item->setType($type);
                 $item->setTitle(Utf8String::ucwords($faker->sentence(2)));
@@ -69,6 +77,7 @@ $seeder->import(
                 $item->setDescription($faker->paragraph(5));
                 $item->setImage($faker->unsplashImage(800, 600));
                 $item->setState(BasicState::from($faker->randomElement([1, 1, 1, 0])));
+                $item->setLanguage($langCode);
                 $item->setCreated($created = $faker->dateTimeThisYear());
                 $item->setModified($created->modify('+10days'));
                 $item->setCreatedBy((int) $faker->randomElement($userIds));

@@ -34,7 +34,7 @@ return [
                             'admin' => create_role(
                                 'admin',
                                 'Admin'
-                            ),
+                            )
                         ]
                     ),
                 ]
@@ -44,24 +44,24 @@ return [
         'actions_db_enabled' => false,
         'actions' => [
             AccessService::ADMIN_ACCESS_ACTION => [
-                'manager' => true,
+                'manager' => true
             ],
 
             AccessService::SUPERUSER_ACTION => [
-                'superuser' => true,
+                'superuser' => true
             ],
 
             'create' => [
-                'manager' => true,
+                'manager' => true
             ],
 
             'edit' => [
-                'manager' => true,
+                'manager' => true
             ],
 
             'delete' => [
-                'manager' => true,
+                'manager' => true
             ],
-        ],
-    ],
+        ]
+    ]
 ];
