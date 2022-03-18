@@ -19,5 +19,5 @@ use Windwalker\Core\Attributes\Controller;
 #[Controller()]
 class HomeController
 {
-
+    //
 }

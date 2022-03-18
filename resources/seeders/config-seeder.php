@@ -43,7 +43,6 @@ $seeder->import(
 
         $seeder->outCounting();
     }
-
 );
 
 $seeder->clear(
