@@ -30,7 +30,7 @@ $menu = $app->service(\Lyrasoft\Luna\Services\MenuService::class)
 
 @extends('global.html')
 
-@if ($ga = trim($coreConfig->get('ga')))
+@if ($ga = trim((string) $coreConfig->get('ga')))
 @push('meta')
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id={{ $ga }}"></script>
