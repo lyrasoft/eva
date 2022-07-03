@@ -24,6 +24,7 @@
         "windwalker/authentication": "^4.0",
         "windwalker/unicorn": "^1.0",
         "lyrasoft/luna": "^2.0",
+        "lyrasoft/toolkit": "^1.0",
         "symfony/var-dumper": "^5.0",
         "asika/cross-env": "^1.0",
         "myclabs/php-enum": "^1.8",
@@ -40,14 +41,19 @@
     "scripts": {
         "post-create-project-cmd": [
             "php windwalker run prepare",
-            "Windwalker\\Core\\Composer\\StarterInstaller::rootInstall"
+            "php windwalker pkg:install lyrasoft/luna --tag routes",
+            "Windwalker\\Core\\Composer\\StarterInstaller::rootInstall",
+            "Lyrasoft\\Toolkit\\Installer\\EarthInstaller::install",
+            "php windwalker run prepare"
         ],
         "post-autoload-dump": [
             "php windwalker pkg:install --tag config",
+            "php windwalker pkg:install lyrasoft/toolkit --tag ide",
             "php windwalker cache:clear renderer"
         ],
         "env": [
             "Windwalker\\Core\\Composer\\StarterInstaller::genEnv",
+            "Lyrasoft\\Toolkit\\Installer\\EarthInstaller::npmrc",
             "php windwalker run prepare"
         ]
     },
@@ -61,7 +67,7 @@
     },
     "config": {
         "platform": {
-            "php": "8.0.0"
+            "php": "8.0.5"
         }
     },
     "extra": {

@@ -100,6 +100,10 @@ $menu->registerChildren(
     }
 );
 
+// Widget
+$menu->link($lang('unicorn.title.grid', title: $lang('luna.widget.title')))
+    ->to($nav->to('widget_list'));
+
 // Menu
 $menu->link($lang('luna.menu.manager.title', title: $lang('luna.menu.type.mainmenu')))
     ->to($nav->to('menu_list', ['type' => 'mainmenu']))
