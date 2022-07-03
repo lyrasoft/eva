@@ -55,7 +55,7 @@ $menu->registerChildren(
 );
 
 // Portfolio
-$menu->link('案例', $nav->to('article_category'))
+$menu->link('案例', $nav->to('portfolio_category'))
     ->icon('fal fa-files');
 
 $menu->registerChildren(
