@@ -13,6 +13,8 @@
     "require": {
         "php": ">=8.0",
         "ext-json": "*",
+        "windwalker/authentication": "^4.0",
+        "windwalker/authorization": "^4.0",
         "windwalker/core": "^4.0",
         "windwalker/di": "^4.0",
         "windwalker/renderer": "^4.0",
@@ -21,7 +23,6 @@
         "windwalker/orm": "^4.0",
         "windwalker/session": "^4.0",
         "windwalker/form": "^4.0",
-        "windwalker/authentication": "^4.0",
         "windwalker/unicorn": "^1.0",
         "lyrasoft/luna": "^2.0",
         "lyrasoft/toolkit": "^1.0",
@@ -34,9 +35,6 @@
         "lyrasoft/member": "^1.0",
         "lyrasoft/contact": "^1.0",
         "symfony/mailer": "^5.4"
-    },
-    "require-dev": {
-
     },
     "scripts": {
         "post-create-project-cmd": [
