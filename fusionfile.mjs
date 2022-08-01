@@ -117,6 +117,8 @@ export async function install() {
       'wowjs',
       'animate.css',
       'jarallax',
+      'swiper',
+      'youtube-background',
     ],
     [
       'lyrasoft/luna'
