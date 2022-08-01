@@ -90,21 +90,23 @@ export async function admin() {
     'resources/assets/scss/admin/**/*.scss'
   ]);
 
-  sass(
-    'theme/admin/src/assets/scss/app.scss',
-    'www/assets/css/admin/app.css'
-  );
-  sass(
-    'resources/assets/scss/admin/bootstrap.scss',
-    'www/assets/css/admin/bootstrap.css'
-  );
-  sass(
-    'resources/assets/scss/admin/icons.scss',
-    'www/assets/css/admin/icons.css'
-  );
-  babel(
-    'theme/admin/src/assets/js/app.js',
-    'www/assets/js/admin/app.js'
+  return wait(
+    sass(
+      'theme/admin/src/assets/scss/app.scss',
+      'www/assets/css/admin/app.css'
+    ),
+    sass(
+      'resources/assets/scss/admin/bootstrap.scss',
+      'www/assets/css/admin/bootstrap.css'
+    ),
+    sass(
+      'resources/assets/scss/admin/icons.scss',
+      'www/assets/css/admin/icons.css'
+    ),
+    babel(
+      'theme/admin/src/assets/js/app.js',
+      'www/assets/js/admin/app.js'
+    )
   );
 }
 
