@@ -45,6 +45,10 @@ $seeder->import(
                 'max_level' => 1,
                 'number' => 7
             ],
+            'banner' => [
+                'max_level' => 1,
+                'number' => 3
+            ],
         ];
 
         /** @var NestedSetMapper<Category> $mapper */

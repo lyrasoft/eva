@@ -5,7 +5,7 @@
  * @license    MIT
  */
 
-import fusion, { sass, babel, parallel, src, symlink } from '@windwalker-io/fusion';
+import fusion, { sass, babel, parallel, src, symlink, wait } from '@windwalker-io/fusion';
 import { jsSync, installVendors, findModules } from '@windwalker-io/core';
 
 export async function css() {
@@ -17,28 +17,30 @@ export async function css() {
   ]);
   // Watch end
 
-  // Front
-  sass(
-    [
-      'resources/assets/scss/front/main.scss',
-      ...findModules('Front/**/assets/*.scss'),
-      'src/Module/Front/**/assets/*.scss'
-    ],
-    'www/assets/css/front/main.css'
-  );
-  sass(
-    'resources/assets/scss/front/bootstrap.scss',
-    'www/assets/css/front/bootstrap.css'
-  );
-
-  // Admin
-  sass(
-    [
-      'resources/assets/scss/admin/main.scss',
-      ...findModules('Admin/**/assets/*.scss'),
-      'src/Module/Admin/**/assets/*.scss'
-    ],
-    'www/assets/css/admin/main.css'
+  return wait(
+    // Front
+    sass(
+      [
+        'resources/assets/scss/front/main.scss',
+        ...findModules('Front/**/assets/*.scss'),
+        'src/Module/Front/**/assets/*.scss'
+      ],
+      'www/assets/css/front/main.css'
+    ),
+    // Boostrap
+    sass(
+      'resources/assets/scss/front/bootstrap.scss',
+      'www/assets/css/front/bootstrap.css'
+    ),
+    // Admin
+    sass(
+      [
+        'resources/assets/scss/admin/main.scss',
+        ...findModules('Admin/**/assets/*.scss'),
+        'src/Module/Admin/**/assets/*.scss'
+      ],
+      'www/assets/css/admin/main.css'
+    )
   );
 }
 
@@ -48,10 +50,11 @@ export async function js() {
   // Watch end
 
   // Compile Start
-  babel('resources/assets/src/**/*.{js,mjs}', 'www/assets/js/', { module: 'systemjs' });
+  return wait(
+    babel('resources/assets/src/**/*.{js,mjs}', 'www/assets/js/', { module: 'systemjs' }),
+    syncJS()
+  );
   // Compile end
-
-  return syncJS();
 }
 
 export async function images() {
@@ -60,7 +63,9 @@ export async function images() {
   // Watch end
 
   // Compile Start
-  return await fusion.copy('resources/assets/images/**/*', 'www/assets/images/')
+  return wait(
+    fusion.copy('resources/assets/images/**/*', 'www/assets/images/')
+  );
   // Compile end
 }
 
@@ -75,10 +80,8 @@ export async function syncJS() {
     'www/assets/js/view/'
   );
 
-  babel(dest.path + '**/*.{mjs,js}', null, { module: 'systemjs' });
+  return babel(dest.path + '**/*.{mjs,js}', null, { module: 'systemjs' });
   // Compile end
-
-  return Promise.all([]);
 }
 
 export async function admin() {
@@ -87,21 +90,23 @@ export async function admin() {
     'resources/assets/scss/admin/**/*.scss'
   ]);
 
-  sass(
-    'theme/admin/src/assets/scss/app.scss',
-    'www/assets/css/admin/app.css'
-  );
-  sass(
-    'resources/assets/scss/admin/bootstrap.scss',
-    'www/assets/css/admin/bootstrap.css'
-  );
-  sass(
-    'resources/assets/scss/admin/icons.scss',
-    'www/assets/css/admin/icons.css'
-  );
-  babel(
-    'theme/admin/src/assets/js/app.js',
-    'www/assets/js/admin/app.js'
+  return wait(
+    sass(
+      'theme/admin/src/assets/scss/app.scss',
+      'www/assets/css/admin/app.css'
+    ),
+    sass(
+      'resources/assets/scss/admin/bootstrap.scss',
+      'www/assets/css/admin/bootstrap.css'
+    ),
+    sass(
+      'resources/assets/scss/admin/icons.scss',
+      'www/assets/css/admin/icons.css'
+    ),
+    babel(
+      'theme/admin/src/assets/js/app.js',
+      'www/assets/js/admin/app.js'
+    )
   );
 }
 
@@ -112,6 +117,8 @@ export async function install() {
       'wowjs',
       'animate.css',
       'jarallax',
+      'swiper',
+      'youtube-background',
     ],
     [
       'lyrasoft/luna'

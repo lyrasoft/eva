@@ -9,12 +9,14 @@
 
 declare(strict_types=1);
 
+use Lyrasoft\Banner\Widget\Banner\BannerWidget;
 use Lyrasoft\Luna\Widget\Custom\CustomHtmlWidget;
 
 return [
     'widget' => [
         'types' => [
             'custom_html' => CustomHtmlWidget::class,
+            'banner' => BannerWidget::class
         ],
         'positions' => [
             'demo' => 'Demo'
