@@ -101,22 +101,9 @@ $menu->registerChildren(
 );
 
 // Banner
-$menu->link('橫幅', '#')
+$menu->link('橫幅管理')
+    ->to($nav->to('banner_list'))
     ->icon('fal fa-gallery-thumbnails');
-
-$menu->registerChildren(
-    function (MenuBuilder $menu) use ($nav, $lang) {
-        // Category
-        $menu->link('橫幅分類')
-            ->to($nav->to('category_list', ['type' => 'banner']))
-            ->icon('fal fa-sitemap');
-
-        // Banner
-        $menu->link('橫幅管理')
-            ->to($nav->to('banner_list'))
-            ->icon('fal fa-images');
-    }
-);
 
 // Widget
 $menu->link($lang('unicorn.title.grid', title: $lang('luna.widget.title')))
