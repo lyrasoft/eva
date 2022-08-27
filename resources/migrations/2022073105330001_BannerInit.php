@@ -29,6 +29,7 @@ $mig->up(
             function (Schema $schema) {
                 $schema->primary('id');
                 $schema->integer('category_id');
+                $schema->varchar('type')->length(50);
                 $schema->varchar('title');
                 $schema->varchar('subtitle');
                 $schema->varchar('image');

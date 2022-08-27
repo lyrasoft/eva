@@ -13,12 +13,15 @@ namespace App\Seeder;
 
 use Lyrasoft\Banner\Entity\Banner;
 use Lyrasoft\Banner\Enum\BannerVideoType;
+use Lyrasoft\Banner\Service\BannerService;
 use Lyrasoft\Luna\Entity\Category;
 use Lyrasoft\Luna\Entity\User;
 use Windwalker\Core\Seed\Seeder;
 use Windwalker\Database\DatabaseAdapter;
 use Windwalker\ORM\EntityMapper;
 use Windwalker\ORM\ORM;
+use Windwalker\Utilities\Enum\EnumTranslatableInterface;
+use function Windwalker\value;
 
 /**
  * Banner Seeder
@@ -28,7 +31,7 @@ use Windwalker\ORM\ORM;
  * @var DatabaseAdapter $db
  */
 $seeder->import(
-    static function () use ($seeder, $orm, $db) {
+    static function (BannerService $bannerService) use ($seeder, $orm, $db) {
         $faker = $seeder->faker('zh_TW');
 
         /** @var EntityMapper<Banner> $mapper */
@@ -36,8 +39,10 @@ $seeder->import(
         // $langCodes = LocaleService::getSeederLangCodes($orm);
         $categoryIds = $orm->findColumn(Category::class, 'id', ['type' => 'banner'])->dump();
         $userIds = $orm->findColumn(User::class, 'id')->dump();
+        /** @var EnumTranslatableInterface $typeEnum */
+        $typeEnum = $bannerService->getTypeEnum();
 
-        $bannerTypes = ['image', 'video'];
+        $mediaTypes = ['image', 'video'];
 
         foreach (range(1, 15) as $i) {
             $item = $mapper->createEntity();
@@ -45,11 +50,18 @@ $seeder->import(
             $item->setTitle($faker->sentence(2));
             $item->setSubtitle($faker->sentence(4));
             $item->setDescription($faker->sentence(7));
-            $item->setCategoryId((int) $faker->randomElement($categoryIds));
 
-            $bannerType = $faker->randomElement($bannerTypes);
+            if ($typeEnum) {
+                $item->setType(
+                    value($faker->randomElement($typeEnum::values()))
+                );
+            } else {
+                $item->setCategoryId((int) $faker->randomElement($categoryIds));
+            }
 
-            if ($bannerType === 'video') {
+            $mediaType = $faker->randomElement($mediaTypes);
+
+            if ($mediaType === 'video') {
                 /** @var BannerVideoType $videoType */
                 $videoType = $faker->randomElement(BannerVideoType::values());
                 $item->setVideoType($videoType);
