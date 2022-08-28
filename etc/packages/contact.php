@@ -17,6 +17,11 @@ return [
 
         'receivers' => [
             'main' => [
+                'roles' => [
+                    'superuser',
+                    'manager',
+                    'admin',
+                ],
                 'cc' => [
                     //
                 ],
