@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Part of Windwalker project.
  *
@@ -90,7 +91,7 @@ $traces = BacktraceHelper::normalizeBacktraces($exception->getTrace(), $root);
 
     <h2>BackTrace</h2>
 
-    <table>
+    <table role="none">
         @foreach ($traces as $i => $trace)
             <tr>
                 <td>

@@ -1,5 +1,9 @@
 <?php
 
+declare(strict_types=1);
+
+namespace App\View;
+
 /**
  * Global variables
  * --------------------------------------------------------------
@@ -12,8 +16,7 @@
  * @var $lang      LangService     The language translation service.
  */
 
-declare(strict_types=1);
-
+use Lyrasoft\Luna\Services\ConfigService;
 use Windwalker\Core\Application\AppContext;
 use Windwalker\Core\Asset\AssetService;
 use Windwalker\Core\Attributes\ViewModel;
@@ -22,10 +25,11 @@ use Windwalker\Core\Language\LangService;
 use Windwalker\Core\Router\Navigator;
 use Windwalker\Core\Router\SystemUri;
 
-$coreConfig = $app->service(\Lyrasoft\Luna\Services\ConfigService::class)->getConfig('core');
+$coreConfig = $app->service(ConfigService::class)->getConfig('core');
 
 $menu = $app->service(\Lyrasoft\Luna\Services\MenuService::class)
     ->loadMenuFromFile('mainmenu', WINDWALKER_RESOURCES . '/menu/front/mainmenu.menu.php');
+
 ?>
 
 @extends('global.html')
