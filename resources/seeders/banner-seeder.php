@@ -21,6 +21,7 @@ use Windwalker\Database\DatabaseAdapter;
 use Windwalker\ORM\EntityMapper;
 use Windwalker\ORM\ORM;
 use Windwalker\Utilities\Enum\EnumTranslatableInterface;
+
 use function Windwalker\value;
 
 /**
