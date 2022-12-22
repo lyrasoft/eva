@@ -17,6 +17,7 @@ namespace App\View;
  */
 
 use Lyrasoft\Luna\Services\ConfigService;
+use Lyrasoft\Luna\User\UserService;
 use Windwalker\Core\Application\AppContext;
 use Windwalker\Core\Asset\AssetService;
 use Windwalker\Core\Attributes\ViewModel;
@@ -29,6 +30,8 @@ $coreConfig = $app->service(ConfigService::class)->getConfig('core');
 
 $menu = $app->service(\Lyrasoft\Luna\Services\MenuService::class)
     ->loadMenuFromFile('mainmenu', WINDWALKER_RESOURCES . '/menu/front/mainmenu.menu.php');
+
+$user = $app->service(UserService::class)->getUser();
 
 ?>
 
@@ -67,6 +70,26 @@ $menu = $app->service(\Lyrasoft\Luna\Services\MenuService::class)
                     </button>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <x-menu-root :menu="$menu" dropdown class="navbar-nav me-auto mb-2 mb-lg-0"></x-menu-root>
+
+                        <ul class="navbar-nav mb-2 mb-lg-0">
+                            <x-locale-dropdown class="nav-item" />
+
+                            @if (!$user->isLogin())
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ $nav->to('login')->withReturn($uri->current()) }}">
+                                        <span class="fa fa-sign-in-alt"></span>
+                                        Login
+                                    </a>
+                                </li>
+                            @else
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ $nav->to('logout') }}">
+                                        <span class="fa fa-sign-out-alt"></span>
+                                        Logout
+                                    </a>
+                                </li>
+                            @endif
+                        </ul>
                     </div>
                 </div>
             </nav>
