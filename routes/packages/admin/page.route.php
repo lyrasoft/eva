@@ -1,6 +1,8 @@
 <?php
 
-namespace Lyrasoft\Luna\Routes;
+declare(strict_types=1);
+
+namespace App\Routes;
 
 use Lyrasoft\Luna\Module\Admin\Page\PageController;
 use Lyrasoft\Luna\Module\Admin\Page\PageEditView;
@@ -20,7 +22,7 @@ $router->group('page')
             ->putHandler('filter')
             ->patchHandler('batch');
 
-        $router->get('page_edit', '/page/edit[/{id}]')
+        $router->any('page_edit', '/page/edit[/{id}]')
             ->controller(PageController::class)
             ->view(PageEditView::class);
 

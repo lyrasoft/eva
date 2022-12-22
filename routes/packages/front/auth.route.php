@@ -9,6 +9,8 @@
 
 declare(strict_types=1);
 
+namespace App\Routes;
+
 /** @var $router RouteCreator */
 
 use Lyrasoft\Luna\Module\Front\Auth\AuthController;
@@ -46,6 +48,10 @@ $router->group('auth')
             // Activate
             $router->any('resend_activate', '/auth/resend/activate')
                 ->controller(AuthController::class, 'resend');
+
+            // Check Account
+            $router->any('account_check', '/auth/account/check')
+                ->controller(AuthController::class, 'accountCheck');
 
             // Forget Password
             $router->any('forget_request', '/forget/request[/{layout}]')

@@ -2,12 +2,7 @@
 
 declare(strict_types=1);
 
-/**
- * Part of phoenix project.
- *
- * @copyright  Copyright {C} 2016 {ORGANIZATION}. All rights reserved.
- * @license    GNU General Public License version 2 or later.
- */
+namespace App\Routes;
 
 use Lyrasoft\Luna\Module\Admin\Category\CategoryController;
 use Lyrasoft\Luna\Module\Admin\Category\CategoryEditView;
@@ -40,5 +35,9 @@ $router->group('category')
             // Ajax Category List
             $router->any('category_ajax_list', '/category/ajax/list/{type}')
                 ->controller(CategoryController::class, 'ajaxList');
+
+            // Ajax Category List
+            $router->any('category_tree', '/category/ajax/tree/{type}')
+                ->controller(CategoryController::class, 'tree');
         }
     );

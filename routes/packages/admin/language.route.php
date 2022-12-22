@@ -1,10 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Routes;
 
+use Lyrasoft\Luna\Module\Admin\Language\LanguageAjaxController;
 use Lyrasoft\Luna\Module\Admin\Language\LanguageController;
 use Lyrasoft\Luna\Module\Admin\Language\LanguageEditView;
 use Lyrasoft\Luna\Module\Admin\Language\LanguageListView;
+use Windwalker\Core\Middleware\JsonApiMiddleware;
 use Windwalker\Core\Router\RouteCreator;
 
 /** @var  RouteCreator $router */
@@ -22,4 +26,8 @@ $router->group('language')
         $router->any('language_edit', '/language/edit[/{id}]')
             ->controller(LanguageController::class)
             ->view(LanguageEditView::class);
+
+        $router->any('language_ajax', '/language/ajax/{task}')
+            ->controller(LanguageAjaxController::class, 'handle')
+            ->middleware(JsonApiMiddleware::class);
     });
