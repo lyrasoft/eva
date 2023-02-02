@@ -22,8 +22,8 @@ use Windwalker\Core\Router\Navigator;
 use Windwalker\Core\Router\SystemUri;
 
 /**
- * @var $field \App\Field\FlatListField
- * @var $node \Lyrasoft\Luna\Tree\NodeInterface
+ * @var $field \Unicorn\Field\FlatListField
+ * @var $node  \Lyrasoft\Luna\Tree\NodeInterface
  */
 
 $option = $field->createItemOption($node->getValue());

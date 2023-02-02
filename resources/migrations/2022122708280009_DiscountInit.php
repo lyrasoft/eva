@@ -11,8 +11,8 @@ declare(strict_types=1);
 
 namespace App\Migration;
 
-use App\Entity\DiscountUsage;
-use App\Entity\Discount;
+use Lyrasoft\ShopGo\Entity\Discount;
+use Lyrasoft\ShopGo\Entity\DiscountUsage;
 use Windwalker\Core\Console\ConsoleApplication;
 use Windwalker\Core\Migration\Migration;
 use Windwalker\Database\Schema\Schema;

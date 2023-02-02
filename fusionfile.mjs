@@ -93,7 +93,8 @@ export async function install() {
       'jarallax',
     ],
     [
-      'lyrasoft/luna'
+      'lyrasoft/luna',
+      'lyrasoft/shopgo'
     ]
   );
 }

@@ -11,14 +11,14 @@ declare(strict_types=1);
 
 namespace App\Seeder;
 
-use App\Data\ListOption;
-use App\Data\ListOptionCollection;
-use App\Entity\Product;
-use App\Entity\ProductFeature;
-use App\Entity\ProductVariant;
-use App\Entity\ShopCategoryMap;
-use App\Service\VariantService;
-use App\ShopGoPackage;
+use Lyrasoft\ShopGo\Data\ListOption;
+use Lyrasoft\ShopGo\Data\ListOptionCollection;
+use Lyrasoft\ShopGo\Entity\Product;
+use Lyrasoft\ShopGo\Entity\ProductFeature;
+use Lyrasoft\ShopGo\Entity\ProductVariant;
+use Lyrasoft\ShopGo\Entity\ShopCategoryMap;
+use Lyrasoft\ShopGo\Service\VariantService;
+use Lyrasoft\ShopGo\ShopGoPackage;
 use Lyrasoft\Luna\Entity\Category;
 use Unicorn\Utilities\SlugHelper;
 use Windwalker\Core\Seed\Seeder;

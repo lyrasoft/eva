@@ -22,8 +22,8 @@ use Windwalker\Core\Router\Navigator;
 use Windwalker\Core\Router\SystemUri;
 
 /**
- * @var $field \App\Field\FlatListField
- * @var $tree \Lyrasoft\Luna\Tree\NodeInterface
+ * @var $field \Unicorn\Field\FlatListField
+ * @var $tree  \Lyrasoft\Luna\Tree\NodeInterface
  */
 
 ?>
@@ -44,15 +44,15 @@ use Windwalker\Core\Router\SystemUri;
 
 <script>
     (function (fieldWrapper) {
-        [].forEach.call(fieldWrapper.querySelectorAll('[data-task=children-toggle]'), function (button) {
-            button.addEventListener('click', function () {
-               var toggle = button.dataset.toggle || 'all';
-               var wrapper = button.closest('[data-role=list-wrapper]');
-               u.selectAll(wrapper.querySelectorAll('input'))
-                   .forEach(function (input) {
-                       input.checked = toggle === 'all';
-                   });
+      [].forEach.call(fieldWrapper.querySelectorAll('[data-task=children-toggle]'), function (button) {
+        button.addEventListener('click', function () {
+          var toggle = button.dataset.toggle || 'all';
+          var wrapper = button.closest('[data-role=list-wrapper]');
+          u.selectAll(wrapper.querySelectorAll('input'))
+            .forEach(function (input) {
+              input.checked = toggle === 'all';
             });
         });
+      });
     })(document.querySelector('#{{ $field->getId('__inner') }}'));
 </script>

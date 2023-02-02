@@ -11,11 +11,11 @@ declare(strict_types=1);
 
 namespace App\Seeder;
 
-use App\Entity\AdditionalPurchase;
-use App\Entity\AdditionalPurchaseMap;
-use App\Entity\Product;
-use App\Entity\ProductVariant;
-use App\ShopGoPackage;
+use Lyrasoft\ShopGo\Entity\AdditionalPurchase;
+use Lyrasoft\ShopGo\Entity\AdditionalPurchaseMap;
+use Lyrasoft\ShopGo\Entity\Product;
+use Lyrasoft\ShopGo\Entity\ProductVariant;
+use Lyrasoft\ShopGo\ShopGoPackage;
 use Windwalker\Core\Seed\Seeder;
 use Windwalker\Data\Collection;
 use Windwalker\Database\DatabaseAdapter;

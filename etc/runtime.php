@@ -11,9 +11,7 @@ use App\Console\Application as ConsoleApplication;
 use App\Web\Application as WebApplication;
 use Windwalker\DI\Container;
 use Windwalker\Http\Middleware\FileProcessMiddleware;
-use Windwalker\Http\Server\HttpServer;
 use Windwalker\Http\Server\PhpServer;
-
 use Windwalker\Http\Server\SwooleHttpServer;
 
 use function Windwalker\DI\create;

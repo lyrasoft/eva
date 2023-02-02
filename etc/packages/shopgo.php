@@ -9,16 +9,20 @@
 
 declare(strict_types=1);
 
-use App\Enum\OrderNoMode;
+use Lyrasoft\ShopGo\Enum\OrderNoMode;
 
 return [
     'shopgo' => [
+        'providers' => [
+            Lyrasoft\ShopGo\ShopGoPackage::class
+        ],
+
         'currency' => [
             'main' => 'USD'
         ],
 
         'fixtures' => [
-            'locale' => 'zh_TW',
+            'locale' => 'en_US',
         ],
 
         'address' => [

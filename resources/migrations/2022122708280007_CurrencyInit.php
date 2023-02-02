@@ -11,8 +11,8 @@ declare(strict_types=1);
 
 namespace App\Migration;
 
-use App\Entity\Currency;
-use App\Enum\SignPosition;
+use Lyrasoft\ShopGo\Entity\Currency;
+use Lyrasoft\ShopGo\Enum\SignPosition;
 use Windwalker\Core\Console\ConsoleApplication;
 use Windwalker\Core\Migration\Migration;
 use Windwalker\Database\Schema\Schema;

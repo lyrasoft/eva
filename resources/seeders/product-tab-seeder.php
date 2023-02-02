@@ -11,13 +11,12 @@ declare(strict_types=1);
 
 namespace App\Seeder;
 
-use App\Entity\ProductTab;
-use App\Entity\ShopCategoryMap;
-use App\ShopGoPackage;
+use Lyrasoft\ShopGo\Entity\ProductTab;
+use Lyrasoft\ShopGo\Entity\ShopCategoryMap;
+use Lyrasoft\ShopGo\ShopGoPackage;
 use Lyrasoft\Luna\Entity\Article;
 use Lyrasoft\Luna\Entity\Category;
 use Lyrasoft\Luna\Entity\Page;
-use Lyrasoft\Luna\Entity\User;
 use Windwalker\Core\Seed\Seeder;
 use Windwalker\Database\DatabaseAdapter;
 use Windwalker\ORM\EntityMapper;

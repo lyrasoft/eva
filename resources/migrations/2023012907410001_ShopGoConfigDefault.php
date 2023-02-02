@@ -11,12 +11,11 @@ declare(strict_types=1);
 
 namespace App\Migration;
 
-use App\Enum\OrderNoMode;
+use Lyrasoft\ShopGo\Enum\OrderNoMode;
 use Lyrasoft\Luna\Entity\Config;
 use Lyrasoft\Toolkit\Encode\BaseConvert;
 use Windwalker\Core\Console\ConsoleApplication;
 use Windwalker\Core\Migration\Migration;
-use Windwalker\Database\Schema\Schema;
 use Windwalker\ORM\EntityMapper;
 use Windwalker\ORM\ORM;
 

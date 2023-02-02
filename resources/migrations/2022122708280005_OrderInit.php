@@ -11,12 +11,12 @@ declare(strict_types=1);
 
 namespace App\Migration;
 
-use App\Entity\OrderState;
-use App\Entity\OrderHistory;
-use App\Entity\OrderTotal;
-use App\Entity\OrderItem;
-use App\Entity\Order;
-use App\ShopGoPackage;
+use Lyrasoft\ShopGo\Entity\Order;
+use Lyrasoft\ShopGo\Entity\OrderHistory;
+use Lyrasoft\ShopGo\Entity\OrderItem;
+use Lyrasoft\ShopGo\Entity\OrderState;
+use Lyrasoft\ShopGo\Entity\OrderTotal;
+use Lyrasoft\ShopGo\ShopGoPackage;
 use Windwalker\Core\Console\ConsoleApplication;
 use Windwalker\Core\Migration\Migration;
 use Windwalker\Database\Schema\Schema;

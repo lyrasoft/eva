@@ -11,8 +11,8 @@ declare(strict_types=1);
 
 namespace App\Seeder;
 
-use App\Entity\Shipping;
-use App\ShopGoPackage;
+use Lyrasoft\ShopGo\Entity\Shipping;
+use Lyrasoft\ShopGo\ShopGoPackage;
 use Unicorn\Utilities\SlugHelper;
 use Windwalker\Core\Seed\Seeder;
 use Windwalker\Database\DatabaseAdapter;

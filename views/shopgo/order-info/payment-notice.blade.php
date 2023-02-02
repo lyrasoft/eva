@@ -22,7 +22,7 @@ use Windwalker\Core\Router\Navigator;
 use Windwalker\Core\Router\SystemUri;
 
 /**
- * @var \App\Entity\Order $order
+ * @var \Lyrasoft\ShopGo\Entity\Order $order
  */
 ?>
 
@@ -31,9 +31,9 @@ use Windwalker\Core\Router\SystemUri;
         您的繳款方式為 {{ $order->getPayment()->trans($lang) }}。
     </p>
 
-    <?php
-    $expiry = \Windwalker\chronos('+6days');
-    ?>
+        <?php
+        $expiry = \Windwalker\chronos('+6days');
+        ?>
 
     <p>
         提醒您，請在 7 日內完成付款，屆時訂單將自動取消無法付款。若有任何問題請聯繫客服。

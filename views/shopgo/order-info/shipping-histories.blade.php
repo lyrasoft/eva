@@ -16,14 +16,8 @@ declare(strict_types=1);
 
 namespace App\View;
 
-use App\Data\ShippingHistory;
-use App\Entity\Order;
-use Windwalker\Core\Application\AppContext;
-use Windwalker\Core\Asset\AssetService;
-use Windwalker\Core\DateTime\ChronosService;
-use Windwalker\Core\Language\LangService;
-use Windwalker\Core\Router\Navigator;
-use Windwalker\Core\Router\SystemUri;
+use Lyrasoft\ShopGo\Data\ShippingHistory;
+use Lyrasoft\ShopGo\Entity\Order;
 
 /**
  * @var Order             $order

@@ -16,9 +16,8 @@ namespace App\view;
  * @var $lang      LangService     The language translation service.
  */
 
-use App\Entity\Order;
-use App\Service\LocationService;
-use App\ShopGoPackage;
+use Lyrasoft\ShopGo\Entity\Order;
+use Lyrasoft\ShopGo\Service\LocationService;
 use Windwalker\Core\Application\AppContext;
 use Windwalker\Core\Asset\AssetService;
 use Windwalker\Core\DateTime\ChronosService;

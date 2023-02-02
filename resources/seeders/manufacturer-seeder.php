@@ -11,8 +11,8 @@ declare(strict_types=1);
 
 namespace App\Seeder;
 
-use App\Entity\Manufacturer;
-use App\ShopGoPackage;
+use Lyrasoft\ShopGo\Entity\Manufacturer;
+use Lyrasoft\ShopGo\ShopGoPackage;
 use Lyrasoft\Luna\Entity\Tag;
 use Lyrasoft\Luna\Entity\TagMap;
 use Lyrasoft\Luna\Entity\User;

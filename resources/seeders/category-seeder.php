@@ -41,6 +41,10 @@ $seeder->import(
                 'max_level' => 2,
                 'number' => 30,
             ],
+            'attribute_group' => [
+                'max_level' => 1,
+                'number' => 10,
+            ],
         ];
 
         $faker = $seeder->faker('en_US');

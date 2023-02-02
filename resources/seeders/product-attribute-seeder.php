@@ -11,10 +11,10 @@ declare(strict_types=1);
 
 namespace App\Seeder;
 
-use App\Data\ListOption;
-use App\Entity\ProductAttribute;
-use App\Enum\ProductAttributeType;
-use App\ShopGoPackage;
+use Lyrasoft\ShopGo\Data\ListOption;
+use Lyrasoft\ShopGo\Entity\ProductAttribute;
+use Lyrasoft\ShopGo\Enum\ProductAttributeType;
+use Lyrasoft\ShopGo\ShopGoPackage;
 use Windwalker\Core\Seed\Seeder;
 use Windwalker\Database\DatabaseAdapter;
 use Windwalker\ORM\EntityMapper;

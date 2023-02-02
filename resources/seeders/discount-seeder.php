@@ -11,14 +11,13 @@ declare(strict_types=1);
 
 namespace App\Seeder;
 
-use App\Entity\Discount;
-use App\Entity\DiscountUsage;
-use App\Entity\Order;
-use App\Entity\Product;
-use App\Enum\DiscountCombine;
-use App\Enum\DiscountMethod;
-use App\Enum\DiscountType;
-use App\ShopGoPackage;
+use Lyrasoft\ShopGo\Entity\Discount;
+use Lyrasoft\ShopGo\Entity\DiscountUsage;
+use Lyrasoft\ShopGo\Entity\Product;
+use Lyrasoft\ShopGo\Enum\DiscountCombine;
+use Lyrasoft\ShopGo\Enum\DiscountMethod;
+use Lyrasoft\ShopGo\Enum\DiscountType;
+use Lyrasoft\ShopGo\ShopGoPackage;
 use Lyrasoft\Luna\Entity\User;
 use Lyrasoft\Luna\User\Password;
 use Windwalker\Core\Seed\Seeder;

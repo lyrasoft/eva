@@ -11,12 +11,12 @@ declare(strict_types=1);
 
 namespace App\Migration;
 
-use App\Entity\ProductTab;
-use App\Entity\ProductAttributeMap;
-use App\Entity\ProductAttribute;
-use App\Entity\ProductFeature;
-use App\Entity\ProductVariant;
-use App\Entity\Product;
+use Lyrasoft\ShopGo\Entity\Product;
+use Lyrasoft\ShopGo\Entity\ProductAttribute;
+use Lyrasoft\ShopGo\Entity\ProductAttributeMap;
+use Lyrasoft\ShopGo\Entity\ProductFeature;
+use Lyrasoft\ShopGo\Entity\ProductTab;
+use Lyrasoft\ShopGo\Entity\ProductVariant;
 use Windwalker\Core\Console\ConsoleApplication;
 use Windwalker\Core\Migration\Migration;
 use Windwalker\Database\Schema\Schema;

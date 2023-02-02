@@ -25,7 +25,6 @@ return [
 
         'paths' => [
             __DIR__ . '/../../views',
-            __DIR__ . '/../../views/shopgo'
         ],
 
         'namespaces' => [
@@ -77,9 +76,6 @@ return [
             'components' => [
                 'component' => XComponent::class,
                 'template' => XComponent::class,
-
-                'tabs' => '@theme::bootstrap.tabs',
-                'tab' => '@theme::bootstrap.tab',
             ]
         ],
 

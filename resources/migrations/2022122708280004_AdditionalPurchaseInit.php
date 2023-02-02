@@ -11,8 +11,8 @@ declare(strict_types=1);
 
 namespace App\Migration;
 
-use App\Entity\AdditionalPurchase;
-use App\Entity\AdditionalPurchaseMap;
+use Lyrasoft\ShopGo\Entity\AdditionalPurchase;
+use Lyrasoft\ShopGo\Entity\AdditionalPurchaseMap;
 use Windwalker\Core\Console\ConsoleApplication;
 use Windwalker\Core\Migration\Migration;
 use Windwalker\Database\Schema\Schema;

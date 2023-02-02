@@ -16,9 +16,9 @@ namespace App\view;
  * @var $lang      LangService     The language translation service.
  */
 
-use App\Cart\Price\PriceSet;
-use App\Entity\OrderItem;
-use App\Service\CurrencyService;
+use Lyrasoft\ShopGo\Cart\Price\PriceSet;
+use Lyrasoft\ShopGo\Entity\OrderItem;
+use Lyrasoft\ShopGo\Service\CurrencyService;
 use Windwalker\Core\Application\AppContext;
 use Windwalker\Core\Asset\AssetService;
 use Windwalker\Core\DateTime\ChronosService;

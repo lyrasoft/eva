@@ -30,8 +30,8 @@
         "myclabs/php-enum": "^1.8",
         "thl/pinyin": "^1.2",
         "swoole/ide-helper": "^5.0",
-        "brick/math": "^0.11.0",
-        "lyrasoft/sequence": "^1.0"
+        "lyrasoft/shopgo": "dev-master",
+        "lyrasoft/portfolio": "^1.0"
     },
     "require-dev": {
         "psr/http-server-handler": "^1.0",
@@ -76,5 +76,11 @@
             "dev-master": "4.x-dev",
             "next": "4.x-dev"
         }
-    }
+    },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "./vendor/lyrasoft/shopgo"
+        }
+    ]
 }

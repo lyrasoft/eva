@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2e01f8cede36590db3ca5889184ef459",
+    "content-hash": "26cd7d4cccdf98deb8c455a68fe160d8",
     "packages": [
         {
             "name": "asika/cross-env",
@@ -903,6 +903,56 @@
             "time": "2023-01-09T06:23:45+00:00"
         },
         {
+            "name": "lyrasoft/portfolio",
+            "version": "1.0.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/lyrasoft/luna-portfolio.git",
+                "reference": "99d4f1712f3fac0955c1fcc579737f003bb16ea3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/lyrasoft/luna-portfolio/zipball/99d4f1712f3fac0955c1fcc579737f003bb16ea3",
+                "reference": "99d4f1712f3fac0955c1fcc579737f003bb16ea3",
+                "shasum": ""
+            },
+            "type": "windwalker-package",
+            "extra": {
+                "windwalker": {
+                    "packages": [
+                        "Lyrasoft\\Portfolio\\PortfolioPackage"
+                    ],
+                    "modules": [
+                        "src/Module"
+                    ]
+                },
+                "branch-alias": {
+                    "dev-master": "1.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Lyrasoft\\Portfolio\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Simon Asika",
+                    "email": "asika32764@gmail.com"
+                }
+            ],
+            "description": "LYRASOFT portfolio package",
+            "support": {
+                "issues": "https://github.com/lyrasoft/luna-portfolio/issues",
+                "source": "https://github.com/lyrasoft/luna-portfolio/tree/1.0.4"
+            },
+            "time": "2022-12-14T08:29:33+00:00"
+        },
+        {
             "name": "lyrasoft/sequence",
             "version": "1.0.0",
             "source": {
@@ -945,6 +995,48 @@
                 "source": "https://github.com/lyrasoft/luna-sequence/tree/1.0.0"
             },
             "time": "2022-03-03T08:26:59+00:00"
+        },
+        {
+            "name": "lyrasoft/shopgo",
+            "version": "dev-master",
+            "dist": {
+                "type": "path",
+                "url": "./vendor/lyrasoft/shopgo",
+                "reference": "280a4aa693b24e9c6388cc2324d36f763656f44b"
+            },
+            "require": {
+                "brick/math": "^0.11.0",
+                "lyrasoft/sequence": "^1.0"
+            },
+            "type": "luna-package",
+            "extra": {
+                "windwalker": {
+                    "packages": [
+                        "Lyrasoft\\ShopGo\\ShopGoPackage"
+                    ],
+                    "modules": [
+                        "src/Module"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Lyrasoft\\ShopGo\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Simon Asika",
+                    "email": "asika32764@gmail.com"
+                }
+            ],
+            "description": "Luna ShopGo package",
+            "transport-options": {
+                "relative": true
+            }
         },
         {
             "name": "lyrasoft/toolkit",
@@ -3943,12 +4035,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/windwalker-io/unicorn.git",
-                "reference": "01fc4632044da79dfc0448f3e854a9478c8b7b60"
+                "reference": "063a389483600135ca9bb1dfc28072ab4970bec8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/windwalker-io/unicorn/zipball/01fc4632044da79dfc0448f3e854a9478c8b7b60",
-                "reference": "01fc4632044da79dfc0448f3e854a9478c8b7b60",
+                "url": "https://api.github.com/repos/windwalker-io/unicorn/zipball/063a389483600135ca9bb1dfc28072ab4970bec8",
+                "reference": "063a389483600135ca9bb1dfc28072ab4970bec8",
                 "shasum": ""
             },
             "require": {
@@ -4006,7 +4098,7 @@
                 "issues": "https://github.com/windwalker-io/unicorn/issues",
                 "source": "https://github.com/windwalker-io/unicorn/tree/main"
             },
-            "time": "2023-01-26T19:42:14+00:00"
+            "time": "2023-02-01T07:19:31+00:00"
         }
     ],
     "packages-dev": [
@@ -4130,6 +4222,7 @@
     "stability-flags": {
         "windwalker/core": 20,
         "windwalker/unicorn": 20,
+        "lyrasoft/shopgo": 20,
         "windwalker/framework": 20
     },
     "prefer-stable": false,
@@ -4142,5 +4235,5 @@
     "platform-overrides": {
         "php": "8.0.5"
     },
-    "plugin-api-version": "2.3.0"
+    "plugin-api-version": "2.1.0"
 }
