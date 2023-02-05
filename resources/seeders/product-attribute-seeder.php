@@ -11,8 +11,10 @@ declare(strict_types=1);
 
 namespace App\Seeder;
 
+use Lyrasoft\Luna\Entity\Category;
 use Lyrasoft\ShopGo\Data\ListOption;
 use Lyrasoft\ShopGo\Entity\ProductAttribute;
+use Lyrasoft\ShopGo\Entity\ShopCategoryMap;
 use Lyrasoft\ShopGo\Enum\ProductAttributeType;
 use Lyrasoft\ShopGo\ShopGoPackage;
 use Windwalker\Core\Seed\Seeder;
@@ -36,12 +38,30 @@ $seeder->import(
 
         /** @var EntityMapper<ProductAttribute> $mapper */
         $mapper = $orm->mapper(ProductAttribute::class);
+        $productCategoryIds = $orm->findColumn(Category::class, 'id', ['type' => 'product'])->dump();
+        $groupIds = $orm->findColumn(Category::class, 'id', ['type' => 'attribute'])->dump();
 
-        foreach (range(1, 10) as $i) {
+        // Make Group Maps
+        foreach ($groupIds as $groupId) {
+            foreach ($faker->randomElements($productCategoryIds, 15) as $productCategoryId) {
+                $map = new ShopCategoryMap();
+                $map->setType('attribute_group');
+                $map->setCategoryId((int) $productCategoryId);
+                $map->setTargetId((int) $groupId);
+
+                $orm->createOne(ShopCategoryMap::class, $map);
+            }
+        }
+
+        $groupIds[] = '0';
+
+        foreach (range(1, 30) as $i) {
             $type = $faker->randomElement(ProductAttributeType::values());
+            $groupId = $faker->randomElement($groupIds);
 
             $item = $mapper->createEntity();
             $item->setType($type);
+            $item->setCategoryId((int) $groupId);
             $item->setTitle($faker->sentence(1));
             $item->setKey(
                 StrNormalize::toSnakeCase(trim($item->getTitle(), '.'))

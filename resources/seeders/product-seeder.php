@@ -11,15 +11,19 @@ declare(strict_types=1);
 
 namespace App\Seeder;
 
+use Lyrasoft\Luna\Entity\Category;
 use Lyrasoft\ShopGo\Data\ListOption;
 use Lyrasoft\ShopGo\Data\ListOptionCollection;
 use Lyrasoft\ShopGo\Entity\Product;
+use Lyrasoft\ShopGo\Entity\ProductAttribute;
+use Lyrasoft\ShopGo\Entity\ProductAttributeMap;
 use Lyrasoft\ShopGo\Entity\ProductFeature;
 use Lyrasoft\ShopGo\Entity\ProductVariant;
 use Lyrasoft\ShopGo\Entity\ShopCategoryMap;
+use Lyrasoft\ShopGo\Enum\ProductAttributeType;
+use Lyrasoft\ShopGo\Service\ProductAttributeService;
 use Lyrasoft\ShopGo\Service\VariantService;
 use Lyrasoft\ShopGo\ShopGoPackage;
-use Lyrasoft\Luna\Entity\Category;
 use Unicorn\Utilities\SlugHelper;
 use Windwalker\Core\Seed\Seeder;
 use Windwalker\Database\DatabaseAdapter;
@@ -38,7 +42,16 @@ use function Windwalker\uid;
  * @var DatabaseAdapter $db
  */
 $seeder->import(
-    static function (ShopGoPackage $shopGo) use ($seeder, $orm, $db, &$sortGroup) {
+    static function (
+        ShopGoPackage $shopGo,
+        ProductAttributeService $productAttributeService
+    ) use (
+        $seeder,
+        $orm,
+        $db,
+        &
+        $sortGroup
+    ) {
         $faker = $seeder->faker($shopGo->config('fixtures.locale') ?: 'en_US');
 
         /** @var EntityMapper<Product> $mapper */
@@ -117,6 +130,30 @@ $seeder->import(
                 $mapMapper->createOne($map);
             }
 
+            // Attributes
+            [$attributes] = $productAttributeService->getAttributesAndGroupsByCategoryId($item->getCategoryId());
+
+            /** @var ProductAttribute[] $attributes */
+            foreach ($attributes as $attribute) {
+                $attrMap = new ProductAttributeMap();
+                $attrMap->setAttributeId($attribute->getId());
+                $attrMap->setKey($attribute->getKey());
+                $attrMap->setProductId($item->getId());
+                $attrMap->setLocale('*');
+
+                if ($attribute->getType() === ProductAttributeType::BOOL()) {
+                     $attrMap->setValue((string) random_int(0, 1));
+                } elseif ($attribute->getType() === ProductAttributeType::TEXT()) {
+                    $attrMap->setValue($faker->sentence());
+                } elseif ($attribute->getType() === ProductAttributeType::SELECT()) {
+                    $options = $attribute->getOptions()->dump();
+                    $option = $faker->randomElement($options);
+                    $attrMap->setValue($option->value);
+                }
+
+                $orm->createOne(ProductAttributeMap::class, $attrMap);
+            }
+
             // Main Variant
             $variant = new ProductVariant();
             $variant->setProductId($item->getId());
@@ -136,7 +173,7 @@ $seeder->import(
             $variant->setCover($faker->unsplashImage(800, 800));
             $variant->setImages(
                 array_map(
-                    static fn ($image) => [
+                    static fn($image) => [
                         'url' => $image,
                         'uid' => uid(),
                     ],
@@ -179,7 +216,7 @@ $seeder->import(
                 $variant->setCover($faker->unsplashImage(800, 800));
                 $variant->setImages(
                     array_map(
-                        static fn ($image) => [
+                        static fn($image) => [
                             'url' => $image,
                             'uid' => uid(),
                         ],
