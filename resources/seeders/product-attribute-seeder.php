@@ -66,6 +66,7 @@ $seeder->import(
             $item->setKey(
                 StrNormalize::toSnakeCase(trim($item->getTitle(), '.'))
             );
+            $item->setDisplay(true);
             $item->setOrdering($i);
             $item->setState(1);
 

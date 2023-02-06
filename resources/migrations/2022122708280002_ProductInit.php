@@ -130,6 +130,7 @@ $mig->up(
                 $schema->varchar('type')->comment('ProductAttributeType: text,list,bool');
                 $schema->varchar('title');
                 $schema->varchar('key');
+                $schema->bool('display');
                 $schema->integer('ordering');
                 $schema->bool('state');
                 $schema->json('options')->nullable(true);
