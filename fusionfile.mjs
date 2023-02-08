@@ -91,6 +91,8 @@ export async function install() {
       'wowjs',
       'animate.css',
       'jarallax',
+      'sweetalert',
+      'swiper',
     ],
     [
       'lyrasoft/luna',

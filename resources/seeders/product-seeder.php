@@ -78,7 +78,7 @@ $seeder->import(
             );
             $item->setAlias(SlugHelper::safe($item->getTitle()));
             $item->setOriginPrice((float) $faker->randomElement([500, 1000, 1500, 2000, 2500, 3000, 3500]));
-            $item->setSafeStock(random_int(5, 20));
+            $item->setSafeStock(random_int(3, 5));
             $item->setIntro($faker->paragraph(2));
             $item->setDescription($faker->paragraph(5));
             $item->setMeta(

@@ -13,6 +13,7 @@ namespace App\Module\Front;
 
 use Lyrasoft\Luna\Script\FontAwesomeScript;
 use Lyrasoft\Luna\Services\ConfigService;
+use Lyrasoft\ShopGo\Script\ShopGoScript;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Unicorn\Script\UnicornScript;
@@ -34,7 +35,7 @@ class FrontMiddleware extends AbstractLifecycleMiddleware
         protected AssetService $asset,
         protected HtmlFrame $htmlFrame,
         protected UnicornScript $unicornScript,
-        protected FontAwesomeScript $fontAwesomeScript,
+        protected FontAwesomeScript $fontAwesomeScript
     ) {
     }
 

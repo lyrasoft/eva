@@ -17,6 +17,8 @@
         "animate.css": "^4.1.1",
         "bootstrap": "^5.3.0-alpha1",
         "jarallax": "^1.12.8",
+        "sweetalert": "^2.1.2",
+        "swiper": "^9.0.3",
         "wowjs": "^1.1.3"
     },
     "//": {

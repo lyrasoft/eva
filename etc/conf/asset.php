@@ -25,6 +25,8 @@ return [
             '@view/' => 'js/view/',
             '@vendor/' => 'vendor/',
             '@core/' => 'vendor/@windwalker-io/core/dist/',
+
+            '@sweetalert'   => 'vendor/sweetalert/dist/sweetalert.min.js',
         ],
         'scopes' => []
     ],

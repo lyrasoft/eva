@@ -50,16 +50,17 @@ class ProductController
             ->get(ProductVariant::class);
 
         if (!$variant) {
-            throw new RouteNotFoundException(
-                $this->trans('shopgo.product.message.variant.not.found')
-            );
+            return [
+                'variant' => null,
+                'discounts' => []
+            ];
         }
 
         $variant = $variantService->prepareVariantView($variant);
 
         return [
             'variant' => $variant,
-            'discounts' => ''
+            'discounts' => []
         ];
     }
 }

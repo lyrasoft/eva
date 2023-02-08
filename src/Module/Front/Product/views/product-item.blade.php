@@ -26,6 +26,7 @@ use Lyrasoft\ShopGo\Entity\ProductTab;
 use Lyrasoft\ShopGo\Entity\ProductVariant;
 use Lyrasoft\ShopGo\Script\ShopGoScript;
 use Lyrasoft\ShopGo\Service\ProductAttributeService;
+use Unicorn\Image\ImagePlaceholder;
 use Unicorn\Script\UnicornScript;
 use Unicorn\Script\VueScript;
 use Windwalker\Core\Application\AppContext;
@@ -46,9 +47,12 @@ use Windwalker\Core\Router\SystemUri;
  * @var $features       ProductFeature[]
  */
 
+$imagePlaceholder = $app->service(ImagePlaceholder::class);
 $attributeService = $app->service(ProductAttributeService::class);
 
-$app->service(ShopGoScript::class)->vueUtilities();
+$shopGoScript = $app->service(ShopGoScript::class);
+$shopGoScript->vueUtilities();
+$shopGoScript->productCart();
 
 $vueScript = $app->service(VueScript::class);
 $vueScript->vue();
@@ -60,8 +64,11 @@ $uniScript->data('product.item.props', [
     'features' => $features,
     'mainVariant' => $variant,
 ]);
+$uniScript->data('image.default', $imagePlaceholder->placeholderSquare());
 
 $uniScript->addRoute('@product_ajax');
+
+$app->service(ShopGoScript::class)->swiper();
 
 ?>
 
@@ -72,13 +79,28 @@ $uniScript->addRoute('@product_ajax');
     <div class="l-product-item container my-5">
 
         <div id="product-item-app" class="row">
-            <div class="col-lg-6 l-product-item__images l-product-images">
+            <div class="col-lg-6 l-product-item__images l-product-images mb-4 mb-lg-0">
                 <div class="l-product-images__hero border ratio ratio-1x1">
-                    <img src="{{ $variant->getCover() }}" alt="Cover">
+                    <img :src="imageView" alt="Cover">
                 </div>
 
-                <div class="l-product-images__nav">
-
+                <div class="l-product-images__nav mt-2 c-product-images swiper"
+                    ref="swiper">
+                    <div class="swiper-wrapper">
+                        <div v-for="image of images" class="c-product-image border swiper-slide"
+                            style="cursor: pointer"
+                            @mouseenter="imageView = image.url"
+                        >
+                            <div class="c-product-images__inner ratio ratio-1x1">
+                                <img class=""
+                                    :src="image.url"
+                                    :alt="image.title || 'image'">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-button-prev"></div>
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-pagination"></div>
                 </div>
             </div>
             <div class="col-lg-6 l-product-item__info l-product-info">
@@ -105,26 +127,34 @@ $uniScript->addRoute('@product_ajax');
                         </div>
                     @endif
 
-                    <div class="">
-                        {{-- Model --}}
-                        <div class="l-product-info__model c-info d-inline-block">
-                            <span class="c-info__label fw-bold">
-                                型號
-                            </span>
+                    <div class="d-flex justify-content-between">
+                        <div class="">
+                            {{-- Model --}}
+                            <div class="l-product-info__model c-info d-inline-block">
+                                <span class="c-info__label fw-bold">
+                                    型號
+                                </span>
 
-                            <span class="c-info__value">
-                                {{ $item->getModel() }}
-                            </span>
+                                <span class="c-info__value">
+                                    {{ $item->getModel() }}
+                                </span>
+                            </div>
+                            /
+                            {{-- SKU --}}
+                            <div class="l-product-info__sku c-info d-inline-block">
+                                <span class="c-info__label fw-bold">
+                                    SKU
+                                </span>
+
+                                <span class="c-info__value">
+                                    {{ $variant->getSku() }}
+                                </span>
+                            </div>
                         </div>
-                        /
-                        {{-- SKU --}}
-                        <div class="l-product-info__sku c-info d-inline-block">
-                            <span class="c-info__label fw-bold">
-                                SKU
-                            </span>
 
-                            <span class="c-info__value">
-                                {{ $variant->getSku() }}
+                        <div>
+                            <span v-if="outOfStock" class="badge bg-danger">
+                                @{{ currentVariant.outOfStockText || mainVariant.outOfStockText || '庫存不足' }}
                             </span>
                         </div>
                     </div>
@@ -132,23 +162,46 @@ $uniScript->addRoute('@product_ajax');
 
                 {{-- Price --}}
                 <div class="l-product-info__pricing l-pricing mt-4">
-                    <div class="l-pricing__final c-price fs-5">
-                        <span class="c-price__label">
-                            原價
-                        </span>
-                        <del class="c-price__value">
-                            {{ $vm->formatPrice($variant->getPriceSet()['origin']) }}
-                        </del>
+                    @if ($item->getOriginPrice())
+                        <div class="l-pricing__final c-price--origin fs-5">
+                            <span class="c-price__label">
+                                市價
+                            </span>
+                            <del class="c-price__value">
+                                {{ $vm->formatPrice($item->getOriginPrice()) }}
+                            </del>
+                        </div>
+                    @endif
+
+                    <div v-if="hasSubVariants && !currentVariant"
+                        class="l-pricing__range c-price c-price--range fs-4 fw-bold">
+                        @if ($minPrice !== $maxPrice)
+                            {{ $vm->formatPrice($minPrice, true) }}
+                            -
+                        @endif
+                        {{ $vm->formatPrice($maxPrice, true) }}
                     </div>
 
-                    <div class="l-pricing__final c-price fs-4 fw-bold">
-                        <span class="c-price__label">
-                            優惠價
-                        </span>
-                        <span class="c-price__value">
-                            {{ $vm->formatPrice($variant->getPriceSet()['final']) }}
-                        </span>
-                    </div>
+                    <template v-else>
+                        <div class="l-pricing__final c-price c-price--base fs-5"
+                            v-if="hasDiscount">
+                            <span class="c-price__label">
+                                售價
+                            </span>
+                            <del class="c-price__value">
+                                @{{ $formatPrice(currentVariant.priceSet.base.price) }}
+                            </del>
+                        </div>
+
+                        <div class="l-pricing__final c-price c-price--final fs-4 fw-bold">
+                            <span class="c-price__label">
+                                @{{ hasDiscount ? '優惠價' : '售價' }}
+                            </span>
+                            <span class="c-price__value">
+                                @{{ $formatPrice(currentVariant.priceSet.final.price) }}
+                            </span>
+                        </div>
+                    </template>
                 </div>
 
                 <hr />
@@ -223,11 +276,15 @@ $uniScript->addRoute('@product_ajax');
                     {{-- Quantity --}}
                     <div class="l-actions__quantity">
                         <div class="input-group">
-                            <button type="button" class="btn btn-secondary">
+                            <button type="button" class="btn btn-secondary"
+                                @click="quantity--">
                                 <i class="fa fa-minus"></i>
                             </button>
-                            <input type="text" class="form-control" value="1" />
-                            <button type="button" class="btn btn-secondary">
+                            <input type="text" class="form-control" v-model.number="quantity"
+                                data-role="quantity"
+                            />
+                            <button type="button" class="btn btn-secondary"
+                                @click="quantity++">
                                 <i class="fa fa-plus"></i>
                             </button>
                         </div>
@@ -235,12 +292,20 @@ $uniScript->addRoute('@product_ajax');
 
                     {{-- Buttons --}}
                     <div class="l-actions__buttons mt-3 d-grid d-lg-flex gap-2">
-                        <button type="button" class="btn btn-primary btn-lg flex-fill">
+                        <button type="button" class="btn btn-primary btn-lg flex-fill"
+                            data-task="buy"
+                            :data-id="product.id"
+                            :data-hash="currentVariant?.hash"
+                            :disabled="!currentVariant || outOfStock">
                             <i class="fa fa-cart-shopping"></i>
                             立即購買
                         </button>
 
-                        <button type="button" class="btn btn-outline-primary btn-lg flex-fill">
+                        <button type="button" class="btn btn-outline-primary btn-lg flex-fill"
+                            data-task="add-to-cart"
+                            :data-id="product.id"
+                            :data-hash="currentVariant?.hash"
+                            :disabled="!currentVariant || outOfStock">
                             <i class="fa fa-cart-plus"></i>
                             加入購物車
                         </button>

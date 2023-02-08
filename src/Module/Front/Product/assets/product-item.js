@@ -4,7 +4,7 @@ import '@main';
 
 await u.domready();
 
-const { createApp, ref, toRefs, reactive, computed, watch, provide, nextTick } = Vue;
+const { createApp, ref, toRefs, reactive, computed, watch, provide, nextTick, onMounted } = Vue;
 
 const ProductItemApp = {
   name: 'ProductItemApp',
@@ -15,13 +15,78 @@ const ProductItemApp = {
   },
   setup(props) {
     const state = reactive({
+      imageView: u.data('image.default'),
       selected: {},
-      currentVariant: null
+      currentVariant: null,
+      discounts: [],
+      hasSubVariants: props.product.variants !== 0,
+      quantity: 1
     });
 
-    if (props.product.variants === 0) {
+    if (!state.hasSubVariants) {
       state.currentVariant = props.mainVariant;
     }
+
+    const hasDiscount = computed(() => {
+      return Number(state.currentVariant.priceSet.base.price) !== Number(state?.currentVariant?.priceSet?.final?.price);
+    });
+
+    // Stock
+    const outOfStock = computed(() => {
+      if (!state?.currentVariant?.subtract) {
+        return false;
+      }
+
+      return Number(state.currentVariant.stockQuantity) - props.product.safeStock < state.quantity;
+    });
+
+    // Quantity
+    watch(() => state.quantity, (qty) => {
+      if (qty < 1) {
+        state.quantity = 1;
+      }
+    });
+
+    // Images
+    const swiper = ref(null);
+
+    onMounted(() => {
+      new Swiper(swiper.value, {
+        simulateTouch: true,
+        allowTouchMove: true,
+        autoHeight: true,
+        slidesPerView: 6,
+        spaceBetween: 8,
+        observe: true,
+        rewind: true,
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
+        },
+      });
+    });
+
+    const images = computed(() => {
+      let imgs = [];
+      let imgView = null;
+
+      if (state.currentVariant) {
+        if (!state.currentVariant.primary) {
+          imgs = [...props.mainVariant.images, ...state.currentVariant.images];
+        } else {
+          imgs = state.currentVariant.images;
+        }
+
+        imgView = state.currentVariant.images[0];
+      } else {
+        imgs = props.mainVariant.images;
+        imgView = props.mainVariant.images[0];
+      }
+
+      state.imageView = imgView?.url || u.data('image.default');
+
+      return imgs;
+    });
 
     const allSelected = computed(() => {
       return Object.values(props.features).length === Object.values(state.selected).length;
@@ -46,8 +111,13 @@ const ProductItemApp = {
         }
       );
 
-      console.log(res.data);
+      const { variant, discounts } = res.data.data;
+
+      state.currentVariant = variant;
+      state.discounts = discounts;
     }
+
+    const errorMsg = 'shopgo.product.message.variant.not.found';
 
     function toggleOption(option, feature) {
       state.selected[feature.id] = option;
@@ -60,6 +130,10 @@ const ProductItemApp = {
     return {
       ...toRefs(state),
       allSelected,
+      hasDiscount,
+      outOfStock,
+      swiper,
+      images,
 
       toggleOption,
       isSelected,

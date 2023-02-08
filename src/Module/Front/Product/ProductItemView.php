@@ -90,6 +90,22 @@ class ProductItemView implements ViewModelInterface
         // Prepare variant view & price
         $variant = $this->variantService->prepareVariantView($variant, $item);
 
+        // Sub Variants
+        $variants = $this->orm->from(ProductVariant::class)
+            ->where('product_id', $item->getId())
+            ->where('primary', '!=', 1)
+            ->where('state', 1)
+            ->all(ProductVariant::class);
+
+        $minPrice = 0;
+        $maxPrice = 0;
+
+        /** @var ProductVariant $subVariant */
+        foreach ($variants as $subVariant) {
+            $minPrice = min($minPrice, $variant->getPrice());
+            $maxPrice = max($maxPrice, $variant->getPrice());
+        }
+
         // Features
         $features = $this->variantService->findFeaturesFromProduct($item);
 
@@ -137,7 +153,9 @@ class ProductItemView implements ViewModelInterface
             'discounts',
             'shippings',
             'attrGroups',
-            'tabs'
+            'tabs',
+            'minPrice',
+            'maxPrice',
         );
     }
 
