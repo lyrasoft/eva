@@ -12,15 +12,15 @@ declare(strict_types=1);
 \Lyrasoft\Luna\Faker\FakerHelper::registerMoreLoremClasses();
 
 return [
-    __DIR__ . '/user-seeder.php',
-    __DIR__ . '/config-seeder.php',
-    __DIR__ . '/language-seeder.php',
-    __DIR__ . '/category-seeder.php',
-    __DIR__ . '/tag-seeder.php',
-    __DIR__ . '/article-seeder.php',
-    __DIR__ . '/page-seeder.php',
+    __DIR__ . '/base/user-seeder.php',
+    __DIR__ . '/base/config-seeder.php',
+    __DIR__ . '/base/language-seeder.php',
+    __DIR__ . '/base/category-seeder.php',
+    __DIR__ . '/base/tag-seeder.php',
+    __DIR__ . '/base/article-seeder.php',
+    __DIR__ . '/base/page-seeder.php',
     // __DIR__ . '/menu-seeder.php',
-    __DIR__ . '/widget-seeder.php',
+    __DIR__ . '/base/widget-seeder.php',
     __DIR__ . '/payment-seeder.php',
     __DIR__ . '/shipping-seeder.php',
     __DIR__ . '/manufacturer-seeder.php',

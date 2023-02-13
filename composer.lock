@@ -705,16 +705,16 @@
         },
         {
             "name": "jaybizzle/crawler-detect",
-            "version": "v1.2.112",
+            "version": "v1.2.113",
             "source": {
                 "type": "git",
                 "url": "https://github.com/JayBizzle/Crawler-Detect.git",
-                "reference": "2c555ce35a07a5c1c808cee7d5bb52c41a4c7b2f"
+                "reference": "6710b75871da2b718550c2bc33388315a3b20151"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/JayBizzle/Crawler-Detect/zipball/2c555ce35a07a5c1c808cee7d5bb52c41a4c7b2f",
-                "reference": "2c555ce35a07a5c1c808cee7d5bb52c41a4c7b2f",
+                "url": "https://api.github.com/repos/JayBizzle/Crawler-Detect/zipball/6710b75871da2b718550c2bc33388315a3b20151",
+                "reference": "6710b75871da2b718550c2bc33388315a3b20151",
                 "shasum": ""
             },
             "require": {
@@ -751,9 +751,9 @@
             ],
             "support": {
                 "issues": "https://github.com/JayBizzle/Crawler-Detect/issues",
-                "source": "https://github.com/JayBizzle/Crawler-Detect/tree/v1.2.112"
+                "source": "https://github.com/JayBizzle/Crawler-Detect/tree/v1.2.113"
             },
-            "time": "2022-10-05T21:52:44+00:00"
+            "time": "2023-02-02T21:01:40+00:00"
         },
         {
             "name": "jenssegers/agent",
@@ -1002,7 +1002,7 @@
             "dist": {
                 "type": "path",
                 "url": "./vendor/lyrasoft/shopgo",
-                "reference": "e3773373e57b977097d6545aaf4e86c6212340c5"
+                "reference": "1141182000d4d992a07927c939e6c7594f028d2d"
             },
             "require": {
                 "brick/math": "^0.11.0",
@@ -1145,16 +1145,16 @@
         },
         {
             "name": "monolog/monolog",
-            "version": "2.8.0",
+            "version": "2.9.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Seldaek/monolog.git",
-                "reference": "720488632c590286b88b80e62aa3d3d551ad4a50"
+                "reference": "f259e2b15fb95494c83f52d3caad003bbf5ffaa1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/720488632c590286b88b80e62aa3d3d551ad4a50",
-                "reference": "720488632c590286b88b80e62aa3d3d551ad4a50",
+                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/f259e2b15fb95494c83f52d3caad003bbf5ffaa1",
+                "reference": "f259e2b15fb95494c83f52d3caad003bbf5ffaa1",
                 "shasum": ""
             },
             "require": {
@@ -1169,7 +1169,7 @@
                 "doctrine/couchdb": "~1.0@dev",
                 "elasticsearch/elasticsearch": "^7 || ^8",
                 "ext-json": "*",
-                "graylog2/gelf-php": "^1.4.2",
+                "graylog2/gelf-php": "^1.4.2 || ^2@dev",
                 "guzzlehttp/guzzle": "^7.4",
                 "guzzlehttp/psr7": "^2.2",
                 "mongodb/mongodb": "^1.8",
@@ -1231,7 +1231,7 @@
             ],
             "support": {
                 "issues": "https://github.com/Seldaek/monolog/issues",
-                "source": "https://github.com/Seldaek/monolog/tree/2.8.0"
+                "source": "https://github.com/Seldaek/monolog/tree/2.9.1"
             },
             "funding": [
                 {
@@ -1243,7 +1243,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-07-24T11:55:47+00:00"
+            "time": "2023-02-06T13:44:46+00:00"
         },
         {
             "name": "myclabs/php-enum",
@@ -4069,12 +4069,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/windwalker-io/framework.git",
-                "reference": "38d1c06101588e49252337b2339b25c66e2b98d8"
+                "reference": "20cded510d8f6d62c867ea72ac095bd3be6aecbb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/windwalker-io/framework/zipball/38d1c06101588e49252337b2339b25c66e2b98d8",
-                "reference": "38d1c06101588e49252337b2339b25c66e2b98d8",
+                "url": "https://api.github.com/repos/windwalker-io/framework/zipball/20cded510d8f6d62c867ea72ac095bd3be6aecbb",
+                "reference": "20cded510d8f6d62c867ea72ac095bd3be6aecbb",
                 "shasum": ""
             },
             "require": {
@@ -4295,9 +4295,9 @@
             "homepage": "https://github.com/windwalker-io/framework",
             "support": {
                 "issues": "https://github.com/windwalker-io/framework/issues",
-                "source": "https://github.com/windwalker-io/framework/tree/4.0.25"
+                "source": "https://github.com/windwalker-io/framework/tree/4.0.26-beta1"
             },
-            "time": "2023-02-01T08:07:09+00:00"
+            "time": "2023-02-13T11:05:07+00:00"
         },
         {
             "name": "windwalker/unicorn",
@@ -4305,12 +4305,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/windwalker-io/unicorn.git",
-                "reference": "4612945e794d5ae060c0cfa28f503a10ffebd22a"
+                "reference": "ea2bd4e93fb3b73154491ab9dce8a80621e2e8f9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/windwalker-io/unicorn/zipball/4612945e794d5ae060c0cfa28f503a10ffebd22a",
-                "reference": "4612945e794d5ae060c0cfa28f503a10ffebd22a",
+                "url": "https://api.github.com/repos/windwalker-io/unicorn/zipball/ea2bd4e93fb3b73154491ab9dce8a80621e2e8f9",
+                "reference": "ea2bd4e93fb3b73154491ab9dce8a80621e2e8f9",
                 "shasum": ""
             },
             "require": {
@@ -4366,9 +4366,9 @@
             "homepage": "https://github.com/ventoviro/unicorn",
             "support": {
                 "issues": "https://github.com/windwalker-io/unicorn/issues",
-                "source": "https://github.com/windwalker-io/unicorn/tree/1.0.61"
+                "source": "https://github.com/windwalker-io/unicorn/tree/main"
             },
-            "time": "2023-02-01T08:03:32+00:00"
+            "time": "2023-02-13T11:07:21+00:00"
         }
     ],
     "packages-dev": [],
