@@ -14,6 +14,7 @@ namespace App\Seeder;
 use Lyrasoft\ShopGo\Entity\Address;
 use Lyrasoft\ShopGo\Entity\Location;
 use Lyrasoft\ShopGo\Enum\LocationType;
+use Lyrasoft\ShopGo\Service\LocationService;
 use Lyrasoft\ShopGo\ShopGoPackage;
 use Lyrasoft\Luna\Entity\User;
 use Windwalker\Core\Seed\Seeder;
@@ -29,39 +30,45 @@ use Windwalker\ORM\ORM;
  * @var DatabaseAdapter $db
  */
 $seeder->import(
-    static function (ShopGoPackage $shopGo) use ($seeder, $orm, $db) {
+    static function (ShopGoPackage $shopGo, LocationService $locationService) use ($seeder, $orm, $db) {
         $faker = $seeder->faker($shopGo->config('fixtures.locale') ?: 'en_US');
 
         /** @var EntityMapper<Address> $mapper */
         $mapper = $orm->mapper(Address::class);
 
         $userIds = $orm->findColumn(User::class, 'id')->dump();
-        $locationIds = $orm->findColumn(
+
+        $locations = $orm->findList(
             Location::class,
-            'id',
             [
                 'type' => [LocationType::STATE(), LocationType::CITY()]
             ]
-        )->dump();
+        )->all()->dump();
 
         foreach (range(1, 100) as $i) {
             $item = $mapper->createEntity();
 
+            $location = $faker->randomElement($locations);
+            [$country, $state, $city] = $locationService->getPathFromLocation($location);
+
             $item->setUserId((int) $faker->randomElement($userIds));
-            $item->setLocationId((int) $faker->randomElement($locationIds));
+            $item->setLocationId($location->getId());
             $item->setFirstname($faker->firstName());
             $item->setLastname($faker->lastName());
             $item->setFullname($item->getFirstname() . ' ' . $item->getLastname());
+            $item->setEmail($faker->email());
+            $item->setCountry($country->getTitle());
+            $item->setState($state->getTitle());
             $item->setCompany($faker->company());
             $item->setAddress1($faker->address());
             $item->setAddress2('');
-            $item->setCity($faker->city());
+            $item->setCity('');
             $item->setPostcode((string) random_int(100, 9999));
             $item->setPhone($faker->phoneNumber());
             $item->setMobile('09' . random_int(10000000, 99999999));
             $item->setVat((string) random_int(10000000, 99999999));
             $item->setDetails([]);
-            $item->setState(1);
+            $item->setEnabled(true);
 
             $mapper->createOne($item);
 

@@ -31,7 +31,9 @@
         "thl/pinyin": "^1.2",
         "swoole/ide-helper": "^5.0",
         "lyrasoft/shopgo": "dev-master",
-        "lyrasoft/portfolio": "^1.0"
+        "lyrasoft/portfolio": "^1.0",
+        "symfony/polyfill-php83": "^1.27",
+        "symfony/polyfill-php82": "^1.27"
     },
     "require-dev": {
         "psr/http-server-handler": "^1.0",

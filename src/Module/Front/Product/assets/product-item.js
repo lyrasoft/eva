@@ -12,13 +12,13 @@ const ProductItemApp = {
     product: Object,
     features: Object,
     mainVariant: Object,
+    discounts: Array,
   },
   setup(props) {
     const state = reactive({
       imageView: u.data('image.default'),
       selected: {},
       currentVariant: null,
-      discounts: [],
       hasSubVariants: props.product.variants !== 0,
       quantity: 1
     });
@@ -127,6 +127,36 @@ const ProductItemApp = {
       return state.selected[feature.id]?.uid === option.uid;
     }
 
+    // Discounts
+    const discountNotices = computed(() => {
+      if (!state.currentVariant) {
+        return [];
+      }
+
+      const items = [];
+
+      for (const discount of props.discounts) {
+        let price = null;
+
+        if (discount.method === 'fixed') {
+          price = discount.price;
+        } else if (discount.method === 'offsets') {
+          price = state.currentVariant.price + discount.price;
+        } else {
+          price = state.currentVariant.price * discount.price / 100;
+        }
+
+        const item = {
+          minProductQuantity: discount.minProductQuantity,
+          price
+        };
+
+        items.push(item);
+      }
+
+      return items;
+    });
+
     return {
       ...toRefs(state),
       allSelected,
@@ -134,6 +164,7 @@ const ProductItemApp = {
       outOfStock,
       swiper,
       images,
+      discountNotices,
 
       toggleOption,
       isSelected,

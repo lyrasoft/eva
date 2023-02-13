@@ -24,31 +24,15 @@ use Windwalker\Database\Schema\Schema;
  */
 $mig->up(
     static function () use ($mig) {
-        // $mig->updateTable(
-        //     Table::class,
-        //     function (Schema $schema) {}
-        // );
         $mig->createTable(
             Wishlist::class,
             function (Schema $schema) {
                 $schema->primary('id');
-                $schema->integer('uesr_id');
+                $schema->integer('user_id');
                 $schema->integer('product_id');
                 $schema->datetime('created');
 
-                $schema->addIndex('uesr_id');
-                $schema->addIndex('product_id');
-            }
-        );
-        $mig->createTable(
-            Wishlist::class,
-            function (Schema $schema) {
-                $schema->primary('id');
-                $schema->integer('uesr_id');
-                $schema->integer('product_id');
-                $schema->datetime('created');
-
-                $schema->addIndex('uesr_id');
+                $schema->addIndex('user_id');
                 $schema->addIndex('product_id');
             }
         );
@@ -60,8 +44,6 @@ $mig->up(
  */
 $mig->down(
     static function () use ($mig) {
-        // $mig->dropTableColumns(Table::class, 'column');
-        $mig->dropTables(Wishlist::class);
         $mig->dropTables(Wishlist::class);
     }
 );

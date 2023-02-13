@@ -13,6 +13,7 @@ namespace App\Module\Front\Product;
 
 use Lyrasoft\Luna\Entity\Category;
 use Lyrasoft\Luna\Module\Front\Category\CategoryViewTrait;
+use Lyrasoft\Luna\User\UserService;
 use Lyrasoft\ShopGo\Entity\ShopCategoryMap;
 use Lyrasoft\ShopGo\Repository\ProductRepository;
 use Lyrasoft\ShopGo\Traits\CurrencyAwareTrait;
@@ -45,6 +46,7 @@ class ProductListView implements ViewModelInterface
         protected ORM $orm,
         #[Autowire]
         protected ProductRepository $repository,
+        protected UserService $userService,
     ) {
     }
 
@@ -66,8 +68,9 @@ class ProductListView implements ViewModelInterface
         $category = $this->getCategory(['type' => 'article', 'path' => $path]);
 
         $limit = 16;
+        $user = $this->userService->getUser();
 
-        $items = $this->repository->getFrontListSelector()
+        $items = $this->repository->getFrontListSelector($user)
             ->addFilter('category_id', $category?->getId())
             ->searchTextFor(
                 $q ?? '',

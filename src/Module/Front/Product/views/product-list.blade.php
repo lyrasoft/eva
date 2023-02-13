@@ -19,7 +19,6 @@ namespace App\View;
 use App\Module\Front\Product\ProductListView;
 use Lyrasoft\ShopGo\Entity\Product;
 use Lyrasoft\ShopGo\Script\ShopGoScript;
-use Unicorn\Script\UnicornScript;
 use Windwalker\Core\Application\AppContext;
 use Windwalker\Core\Asset\AssetService;
 use Windwalker\Core\DateTime\ChronosService;
@@ -32,7 +31,9 @@ use Windwalker\ORM\ORM;
  * @var $item Product
  */
 
-$app->service(ShopGoScript::class)->productCart();
+$shopGoScript = $app->service(ShopGoScript::class);
+$shopGoScript->wishlistButton();
+$shopGoScript->productCart();
 
 $orm = $app->service(ORM::class);
 
@@ -60,9 +61,14 @@ $asset->js('js/front/product-cart.js');
                         :max-price="$maxPrice"
                         :min-stock="$minStock"
                         :max-stock="$maxStock"
+                        :added-wishlist="$item->wishlist?->id"
                     ></x-front.product.product-card>
                 </div>
             @endforeach
+        </div>
+
+        <div class="mt-3">
+            {!! $pagination->render() !!}
         </div>
     </div>
 @stop

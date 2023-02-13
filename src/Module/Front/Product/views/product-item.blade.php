@@ -45,6 +45,7 @@ use Windwalker\Core\Router\SystemUri;
  * @var $attribute      ProductAttribute
  * @var $tabs           ProductTab[]
  * @var $features       ProductFeature[]
+ * @var $additionalPurchases  ProductVariant[]
  */
 
 $imagePlaceholder = $app->service(ImagePlaceholder::class);
@@ -52,6 +53,7 @@ $attributeService = $app->service(ProductAttributeService::class);
 
 $shopGoScript = $app->service(ShopGoScript::class);
 $shopGoScript->vueUtilities();
+$shopGoScript->wishlistButton();
 $shopGoScript->productCart();
 
 $vueScript = $app->service(VueScript::class);
@@ -63,12 +65,27 @@ $uniScript->data('product.item.props', [
     'product' => $item,
     'features' => $features,
     'mainVariant' => $variant,
+    'discounts' => $discounts,
 ]);
 $uniScript->data('image.default', $imagePlaceholder->placeholderSquare());
 
 $uniScript->addRoute('@product_ajax');
 
-$app->service(ShopGoScript::class)->swiper();
+$shopGoScript = $app->service(ShopGoScript::class);
+
+$shopGoScript->swiper();
+$shopGoScript->swiper(
+    '.l-additional-purchases__slides',
+    [
+        'navigation' => [
+            'nextEl' => '.swiper-button-next',
+            'prevEl' => '.swiper-button-prev',
+        ],
+        'slidesPerView' => 4,
+        'spaceBetween' => 15,
+        'rewind' => true
+    ]
+);
 
 ?>
 
@@ -114,9 +131,9 @@ $app->service(ShopGoScript::class)->swiper();
 
                         {{-- Wishlist --}}
                         <div class="ms-auto l-product-info__favorite">
-                            <a href="javascript://" class="fs-4">
-                                <i class="far fa-heart"></i>
-                            </a>
+                            <x-wishlist-button class="fs-4" :id="$item->getId()"
+                                :added="(int) (bool) $wishlist">
+                            </x-wishlist-button>
                         </div>
                     </div>
 
@@ -189,7 +206,7 @@ $app->service(ShopGoScript::class)->swiper();
                                 售價
                             </span>
                             <del class="c-price__value">
-                                @{{ $formatPrice(currentVariant.priceSet.base.price) }}
+                                @{{ $formatPrice(currentVariant.priceSet.base.price, true) }}
                             </del>
                         </div>
 
@@ -198,7 +215,7 @@ $app->service(ShopGoScript::class)->swiper();
                                 @{{ hasDiscount ? '優惠價' : '售價' }}
                             </span>
                             <span class="c-price__value">
-                                @{{ $formatPrice(currentVariant.priceSet.final.price) }}
+                                @{{ $formatPrice(currentVariant.priceSet.final.price, true) }}
                             </span>
                         </div>
                     </template>
@@ -208,7 +225,7 @@ $app->service(ShopGoScript::class)->swiper();
 
                 {{-- Intro --}}
                 <div class="l-product-info__intro l-intro">
-                    {!! html_escape($item->getIntro(), true) !!}
+                    {!! $item->getIntro() !!}
                 </div>
 
                 {{-- Attributes --}}
@@ -235,21 +252,21 @@ $app->service(ShopGoScript::class)->swiper();
                 </div>
 
                 {{-- Discounts --}}
-                @if (count($discounts))
-                    <div class="l-product-info__discounts l-discounts mt-4">
-                        <h5>多件折扣</h5>
+                <div v-if="discounts.length" class="l-product-info__discounts l-discounts mt-4">
+                    <h5>多件折扣</h5>
 
-                        <div>
-                            @foreach ($discounts as $discount)
-                                <div>
-                                    購買 {{ $discount->getMinProductQuantity() }} 件以上，每個只要
-                                    {{ $vm->formatPrice($discount->getPrice()) }}
-                                    元
-                                </div>
-                            @endforeach
+                    <div v-if="currentVariant">
+                        <div v-for="discount of discountNotices">
+                            <div>
+                                購買 @{{ discount.minProductQuantity }} 件以上，每個只要
+                                @{{ $formatPrice(discount.price, true) }}
+                            </div>
                         </div>
                     </div>
-                @endif
+                    <div v-else>
+                        請先選擇規格
+                    </div>
+                </div>
 
                 @if (count($features))
                     <div class="l-product-info__features l-features mt-4">
@@ -314,6 +331,58 @@ $app->service(ShopGoScript::class)->swiper();
             </div>
         </div>
 
+        {{-- Additional Purchases --}}
+        @if (count($additionalPurchases))
+            <div class="l-additional-purchases mt-5">
+                <h3>加價購</h3>
+
+                <div class="l-additional-purchases__slides swiper">
+                    <div class="l-additional-purchases__wrapper swiper-wrapper">
+                        @foreach ($additionalPurchases as $additionalPurchase)
+                            <div class="c-additional-purchase-product card swiper-slide">
+                                <div class="card-body d-flex gap-2">
+                                    <div class="c-additional-purchase-product__cover "
+                                        style="width: 75px">
+                                        <div class="ratio ratio-1x1">
+                                            <img src="{{ $additionalPurchase->getCover() }}" alt="cover">
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <h6 class="c-additional-purchase-product__title mb-1">
+                                            {{ $additionalPurchase->product->title }}
+                                        </h6>
+
+                                        @if (!$additionalPurchase->isPrimary())
+                                            <div class="c-additional-purchase-product__variant text-muted">
+                                                {{ $additionalPurchase->getTitle() }}
+                                            </div>
+                                        @endif
+
+                                        <div class="c-additional-purchase-product__price">
+                                            {{ $vm->formatPrice($additionalPurchase->getPrice(), true) }}
+                                        </div>
+
+                                        <div class="c-additional-purchase-product__actions mt-2">
+                                            <button class="btn btn-outline-primary btn-sm"
+                                                data-task="addon"
+                                                data-ap-map-id="{{ $additionalPurchase->ap_map->id }}"
+                                            >
+                                                加購
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+
+                    <div class="swiper-button-prev"></div>
+                    <div class="swiper-button-next"></div>
+                </div>
+            </div>
+        @endif
+
+        {{-- Content --}}
         <div class="mt-5">
             <x-tabs>
 
@@ -322,7 +391,7 @@ $app->service(ShopGoScript::class)->swiper();
                 </x-tab>
 
                 <x-tab name="attributes" title="商品規格">
-                    Attributes
+                    @include('product-attributes')
                 </x-tab>
 
                 @foreach ($tabs as $tab)

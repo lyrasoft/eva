@@ -208,8 +208,10 @@ $seeder->import(
                 $currentFeatures[] = $feature;
             }
 
+            $hasSubVariants = $faker->randomElement([true, true, false]);
+
             /** @var array<ListOption[]> $variantGroups */
-            $variantGroups = $sortGroup($currentFeatures);
+            $variantGroups = $hasSubVariants ? $sortGroup($currentFeatures) : [];
 
             foreach ($variantGroups as $h => $options) {
                 $options = ListOptionCollection::wrap($options);

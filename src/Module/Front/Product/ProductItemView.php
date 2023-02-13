@@ -12,6 +12,9 @@ declare(strict_types=1);
 namespace App\Module\Front\Product;
 
 use Lyrasoft\Luna\Entity\Category;
+use Lyrasoft\Luna\User\UserService;
+use Lyrasoft\ShopGo\Entity\AdditionalPurchase;
+use Lyrasoft\ShopGo\Entity\AdditionalPurchaseMap;
 use Lyrasoft\ShopGo\Entity\Discount;
 use Lyrasoft\ShopGo\Entity\Product;
 use Lyrasoft\ShopGo\Entity\ProductAttribute;
@@ -19,6 +22,7 @@ use Lyrasoft\ShopGo\Entity\ProductTab;
 use Lyrasoft\ShopGo\Entity\ProductVariant;
 use Lyrasoft\ShopGo\Entity\Shipping;
 use Lyrasoft\ShopGo\Entity\ShopCategoryMap;
+use Lyrasoft\ShopGo\Entity\Wishlist;
 use Lyrasoft\ShopGo\Enum\DiscountType;
 use Lyrasoft\ShopGo\Repository\ProductRepository;
 use Lyrasoft\ShopGo\Service\ProductAttributeService;
@@ -59,6 +63,7 @@ class ProductItemView implements ViewModelInterface
         protected ORM $orm,
         #[Autowire]
         protected ProductRepository $repository,
+        protected UserService $userService,
         protected VariantService $variantService,
         protected ProductAttributeService $productAttributeService,
     ) {
@@ -140,10 +145,35 @@ class ProductItemView implements ViewModelInterface
             $group->setParams($params);
         }
 
+        // Additional Purchases
+        $additionalPurchases = $this->orm->from(ProductVariant::class)
+            ->leftJoin(Product::class)
+            ->leftJoin(
+                AdditionalPurchaseMap::class,
+                'ap_map',
+                'ap_map.attach_variant_id',
+                'product_variant.id'
+            )
+            ->where('ap_map.target_product_id', $item->getId())
+            ->groupByJoins()
+            ->all(ProductVariant::class);
+
         // Tabs
         $tabs = $this->getTabsByCategoryId($category->getId());
 
         $this->prepareMetadata($app, $view, $item, $variant);
+
+        // Wishlist
+        $user = $this->userService->getUser();
+
+        if ($user->isLogin()) {
+            $wishlist = $this->orm->findOne(
+                Wishlist::class,
+                ['user_id' => $user->getId(), 'product_id' => $item->getId()]
+            );
+        } else {
+            $wishlist = null;
+        }
 
         return compact(
             'item',
@@ -153,9 +183,12 @@ class ProductItemView implements ViewModelInterface
             'discounts',
             'shippings',
             'attrGroups',
+            'attributeSet',
             'tabs',
             'minPrice',
             'maxPrice',
+            'additionalPurchases',
+            'wishlist'
         );
     }
 

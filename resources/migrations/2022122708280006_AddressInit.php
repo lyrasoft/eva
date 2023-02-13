@@ -33,16 +33,19 @@ $mig->up(
                 $schema->varchar('firstname');
                 $schema->varchar('lastname');
                 $schema->varchar('fullname');
-                $schema->varchar('company');
-                $schema->varchar('address1');
-                $schema->varchar('address2');
-                $schema->varchar('city');
-                $schema->varchar('postcode');
+                $schema->varchar('email');
                 $schema->varchar('phone');
                 $schema->varchar('mobile');
+                $schema->varchar('company');
+                $schema->varchar('country');
+                $schema->varchar('state');
+                $schema->varchar('city');
+                $schema->varchar('postcode');
+                $schema->varchar('address1');
+                $schema->varchar('address2');
                 $schema->varchar('vat');
                 $schema->json('details')->nullable(true);
-                $schema->bool('state');
+                $schema->bool('enabled');
                 $schema->datetime('created');
                 $schema->datetime('modified');
 

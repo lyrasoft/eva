@@ -49,6 +49,7 @@ $mig->up(
         $mig->createTable(
             AdditionalPurchaseMap::class,
             function (Schema $schema) {
+                $schema->primary('id');
                 $schema->integer('additional_purchase_id');
                 $schema->integer('attach_product_id');
                 $schema->integer('attach_variant_id');

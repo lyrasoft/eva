@@ -11,7 +11,9 @@ declare(strict_types=1);
 
 namespace App\Module\Front\Product;
 
+use Lyrasoft\ShopGo\Entity\Discount;
 use Lyrasoft\ShopGo\Entity\ProductVariant;
+use Lyrasoft\ShopGo\Enum\DiscountType;
 use Lyrasoft\ShopGo\Service\VariantService;
 use Windwalker\Core\Application\AppContext;
 use Windwalker\Core\Attributes\Controller;
@@ -60,7 +62,6 @@ class ProductController
 
         return [
             'variant' => $variant,
-            'discounts' => []
         ];
     }
 }
