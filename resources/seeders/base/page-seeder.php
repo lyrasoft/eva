@@ -33,7 +33,7 @@ $seeder->import(
         /** @var EntityMapper<Page> $mapper */
         $mapper = $orm->mapper(Page::class);
 
-        $content = json_decode(file_get_contents(__DIR__ . '/data/page.json'), true);
+        $content = json_decode(file_get_contents(__DIR__ . '/../data/page.json'), true);
 
         foreach (range(1, 50) as $i) {
             $item = $mapper->createEntity();

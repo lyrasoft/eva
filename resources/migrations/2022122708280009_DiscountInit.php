@@ -52,7 +52,7 @@ $mig->up(
                 $schema->json('combine_targets')->nullable(true)->defaultValue(null);
                 $schema->json('users')->nullable(true)->defaultValue(null);
                 $schema->json('categories')->nullable(true)->defaultValue(null);
-                $schema->json('prodcuts')->nullable(true)->defaultValue(null);
+                $schema->json('products')->nullable(true)->defaultValue(null);
                 $schema->json('payments')->nullable(true)->defaultValue(null);
                 $schema->json('shippings')->nullable(true)->defaultValue(null);
                 $schema->json('apply_products')->nullable(true)->defaultValue(null);

@@ -1002,7 +1002,7 @@
             "dist": {
                 "type": "path",
                 "url": "./vendor/lyrasoft/shopgo",
-                "reference": "1141182000d4d992a07927c939e6c7594f028d2d"
+                "reference": "c420017971497a5f08c84100f656b0821fcb08a7"
             },
             "require": {
                 "brick/math": "^0.11.0",

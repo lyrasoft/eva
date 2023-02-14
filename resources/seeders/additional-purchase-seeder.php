@@ -12,9 +12,11 @@ declare(strict_types=1);
 namespace App\Seeder;
 
 use Lyrasoft\ShopGo\Entity\AdditionalPurchase;
-use Lyrasoft\ShopGo\Entity\AdditionalPurchaseMap;
+use Lyrasoft\ShopGo\Entity\AdditionalPurchaseAttachment;
+use Lyrasoft\ShopGo\Entity\AdditionalPurchaseTarget;
 use Lyrasoft\ShopGo\Entity\Product;
 use Lyrasoft\ShopGo\Entity\ProductVariant;
+use Lyrasoft\ShopGo\Enum\DiscountMethod;
 use Lyrasoft\ShopGo\ShopGoPackage;
 use Windwalker\Core\Seed\Seeder;
 use Windwalker\Data\Collection;
@@ -40,8 +42,8 @@ $seeder->import(
         $products = $orm->findList(Product::class)->all();
 
         /** @var Collection<Product> $attachmentProducts */
-        /** @var Collection<Product> $primaryProducts */
-        [$attachmentProducts, $primaryProducts] = $products->partition(
+        /** @var Collection<Product> $targetProducts */
+        [$attachmentProducts, $targetProducts] = $products->partition(
             fn (Product $product) => $product->canAttach()
         );
 
@@ -50,7 +52,15 @@ $seeder->import(
 
         $i = 1;
 
-        foreach ($attachmentProducts as $attachmentProduct) {
+        foreach ($attachmentProducts as $a => $attachmentProduct) {
+            $item = $mapper->createEntity();
+
+            $item->setTitle($attachmentProduct->getTitle());
+            $item->setState(1);
+            $item->setOrdering($a);
+
+            $ap = $mapper->createOne($item);
+
             /** @var Collection<ProductVariant> $variants */
             $variants = $variantGroups[$attachmentProduct->getId()];
 
@@ -58,37 +68,36 @@ $seeder->import(
             $chosenVariants = $faker->randomElements($variants->dump(), random_int(1, count($variants)));
 
             foreach ($chosenVariants as $variant) {
-                $item = $mapper->createEntity();
+                $attachment = new AdditionalPurchaseAttachment();
 
-                $item->setTitle(
-                    trim($attachmentProduct->getTitle() . ' - ' . $variant->getTitle(), ' -')
-                );
-                $item->setAttachProductId($attachmentProduct->getId());
-                $item->setAttachVariantId($variant->getId());
-                $item->setPrice(random_int(1, 30) * 100);
-                $item->setState(1);
-                $item->setOrdering($i);
+                $attachment->setAdditionalPurchaseId($ap->getId());
+                $attachment->setProductId($attachmentProduct->getId());
+                $attachment->setVariantId($variant->getId());
+                $attachment->setMethod(DiscountMethod::OFFSETS());
+                $attachment->setPrice(-200);
+                $attachment->setMaxQuantity(random_int(3, 7));
+                $attachment->setState(1);
+                $attachment->setOrdering($i);
 
-                $ap = $mapper->createOne($item);
+                $attachment = $orm->createOne(AdditionalPurchaseAttachment::class, $attachment);
 
                 $i++;
 
-                /** @var Product[] $chosenPrimaryProducts */
-                $chosenPrimaryProducts = $faker->randomElements($primaryProducts->dump(), random_int(1, 5));
+                $seeder->outCounting();
+            }
 
-                foreach ($chosenPrimaryProducts as $chosenPrimaryProduct) {
-                    $map = new AdditionalPurchaseMap();
+            /** @var Product[] $chosenTargetProducts */
+            $chosenTargetProducts = $faker->randomElements($targetProducts->dump(), random_int(1, 5));
 
-                    $map->setAdditionalPurchaseId($ap->getId());
-                    $map->setAttachProductId($attachmentProduct->getId());
-                    $map->setAttachVariantId($variant->getId());
-                    $map->setTargetProductId($chosenPrimaryProduct->getId());
+            foreach ($chosenTargetProducts as $chosenTargetProduct) {
+                $map = new AdditionalPurchaseTarget();
 
-                    $orm->createOne(AdditionalPurchaseMap::class, $map);
+                $map->setAdditionalPurchaseId($ap->getId());
+                $map->setProductId($chosenTargetProduct->getId());
 
-                    $seeder->outCounting();
-                }
+                $orm->createOne(AdditionalPurchaseTarget::class, $map);
 
+                $seeder->outCounting();
             }
         }
     }
