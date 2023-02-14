@@ -33,6 +33,8 @@ $mig->up(
                 $schema->varchar('title');
                 $schema->bool('state');
                 $schema->integer('ordering');
+                $schema->datetime('publish_up');
+                $schema->datetime('publish_down');
                 $schema->datetime('created')->comment('Created Date');
                 $schema->datetime('modified')->comment('Modified Date');
                 $schema->integer('created_by')->comment('Author');

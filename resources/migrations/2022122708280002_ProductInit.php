@@ -50,6 +50,8 @@ $mig->up(
                 $schema->bool('state');
                 $schema->longtext('search_index');
                 $schema->json('shippings')->nullable(true);
+                $schema->datetime('publish_up');
+                $schema->datetime('publish_down');
                 $schema->datetime('created');
                 $schema->datetime('modified');
                 $schema->integer('created_by');
@@ -60,6 +62,8 @@ $mig->up(
                 $schema->addIndex('category_id');
                 $schema->addIndex('model');
                 $schema->addIndex('alias');
+                $schema->addIndex('publish_up');
+                $schema->addIndex('publish_down');
             }
         );
         $mig->createTable(
@@ -86,8 +90,6 @@ $mig->up(
                 $schema->json('images')->nullable(true);
                 $schema->json('options')->nullable(true);
                 $schema->bool('state');
-                $schema->datetime('publish_up');
-                $schema->datetime('publish_down');
                 $schema->datetime('created');
                 $schema->datetime('modified');
                 $schema->integer('created_by');
@@ -97,8 +99,6 @@ $mig->up(
                 $schema->addIndex('product_id');
                 $schema->addIndex('hash');
                 $schema->addIndex('sku');
-                $schema->addIndex('publish_up');
-                $schema->addIndex('publish_down');
             }
         );
         $mig->createTable(

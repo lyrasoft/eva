@@ -33,6 +33,7 @@ use Windwalker\ORM\ORM;
 use Windwalker\Utilities\Str;
 use Windwalker\Utilities\Utf8String;
 
+use function Windwalker\chronos;
 use function Windwalker\uid;
 
 /**
@@ -66,7 +67,10 @@ $seeder->import(
         $features = $orm->findList(ProductFeature::class)->all();
 
         foreach (range(1, 100) as $i) {
+            $haveStartDay = $faker->randomElement([1, 0, 0, 0]);
             $item = $mapper->createEntity();
+
+            $startDay = chronos($faker->randomElement(['-5 days', '-10 days', '-15 days', '-50days']));
 
             $item->setCategoryId((int) $faker->randomElement($categoryIds));
             // $item->setPrimaryVariantId();
@@ -100,6 +104,11 @@ $seeder->import(
             $item->setCreatedBy(1);
             $item->setHits(random_int(1, 9999));
             $item->setParams([]);
+
+            if ($haveStartDay === 1) {
+                $item->setPublishUp($startDay);
+                $item->setPublishDown($startDay->modify('+25 days'));
+            }
 
             $item = $mapper->createOne($item);
 
@@ -216,8 +225,6 @@ $seeder->import(
             foreach ($variantGroups as $h => $options) {
                 $options = ListOptionCollection::wrap($options);
                 $variant = new ProductVariant();
-                $startDay = $item->getCreated()->modify($faker->randomElement(['+5 days', '+10 days', '+15 days']));
-                $haveStartDay = $faker->randomElement([1, 1, 0]);
 
                 $optUids = ListOptionCollection::wrap($options)
                     ->as(Collection::class)
@@ -250,11 +257,6 @@ $seeder->import(
                 );
                 $variant->setOptions($options);
                 $variant->setState(1);
-
-                if ($haveStartDay === 1) {
-                    $variant->setPublishUp($startDay);
-                    $variant->setPublishDown($startDay->modify('+25 days'));
-                }
 
                 $variant->setParams(compact('seed'));
 
