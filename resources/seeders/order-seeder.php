@@ -31,6 +31,7 @@ use Lyrasoft\ShopGo\Service\OrderStateService;
 use Lyrasoft\ShopGo\ShopGoPackage;
 use Lyrasoft\Luna\Entity\User;
 use Windwalker\Core\Seed\Seeder;
+use Windwalker\Data\Collection;
 use Windwalker\Database\DatabaseAdapter;
 use Windwalker\ORM\EntityMapper;
 use Windwalker\ORM\ORM;
@@ -85,21 +86,27 @@ $seeder->import(
             $chosenProducts = $faker->randomElements($products, random_int(3, 5));
             $productVariants = [];
 
+            /** @var Product $product */
             foreach ($chosenProducts as $product) {
+                /** @var Collection<ProductVariant> $variants */
                 $variants = $variantGroups[$product->getId()] ?? [];
+                $variants = $variants->keyBy('id');
+                $mainVariant = $variants[$product->getPrimaryVariantId()];
 
                 if (count($variants) > 0) {
                     $variant = $faker->randomElement($variants);
-                    $productVariants[] = $variant;
+                    $productVariants[] = [$product, $mainVariant, $variant];
                 }
             }
 
             $cartItems = [];
 
             /** @var ProductVariant $productVariant */
-            foreach ($productVariants as $productVariant) {
+            foreach ($productVariants as [$product, $mainVariant, $productVariant]) {
                 $cartItem = new CartItem();
-                $cartItem->setVariant($productVariant)
+                $cartItem->setProduct($product)
+                    ->setVariant($productVariant)
+                    ->setMainVariant($mainVariant)
                     ->setQuantity(random_int(1, 5))
                     ->setPriceSet($productVariant->getPriceSet())
                     ->setCover($productVariant->getCover())
@@ -129,7 +136,7 @@ $seeder->import(
             $item->setPaymentId($payment->getId());
 
             $paymentData = $item->getPaymentData()
-                ->setFullName($user->getName())
+                ->setName($user->getName())
                 ->setEmail($user->getEmail())
                 ->setAddress1($paymentAddress->getAddress1())
                 ->setAddress2($paymentAddress->getAddress2())
@@ -158,9 +165,9 @@ $seeder->import(
             $lastName = $shippingAddress->getLastname();
 
             $item->getShippingData()
-                ->setFullName($firstName . ' ' . $lastName)
-                ->setFirstName($firstName)
-                ->setLastName($lastName)
+                ->setName($firstName . ' ' . $lastName)
+                ->setFirstname($firstName)
+                ->setLastname($lastName)
                 ->setAddressId($shippingAddress->getId())
                 ->setAddress1($shippingAddress->getAddress1())
                 ->setAddress2($shippingAddress->getAddress2())

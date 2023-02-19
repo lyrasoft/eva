@@ -99,6 +99,7 @@ $mig->up(
                 $schema->decimal('price_unit')->length('20,4');
                 $schema->decimal('base_price_unit')->length('20,4');
                 $schema->decimal('total')->length('20,4');
+                $schema->json('price_set');
                 $schema->json('options')->nullable(true);
                 $schema->json('params')->nullable(true);
 

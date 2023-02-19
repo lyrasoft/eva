@@ -59,6 +59,7 @@ $seeder->import(
                 DiscountMethod::OFFSETS => - (random_int(1, 10) * 100),
                 DiscountMethod::FIXED => random_int(5, 40) * 100,
                 DiscountMethod::PERCENTAGE => random_int(1, 10) / 10,
+                default => 0
             });
             $item->setState(1);
             $item->setOrdering(1);
@@ -101,6 +102,7 @@ $seeder->import(
                 DiscountMethod::OFFSETS => - (random_int(1, 10) * 100),
                 DiscountMethod::FIXED => random_int(5, 40) * 100,
                 DiscountMethod::PERCENTAGE => random_int(1, 10) / 10,
+                default => 0,
             });
             $item->setFreeShipping($faker->randomElement([true, false]));
             $item->setPublishUp($faker->dateTimeThisYear());
@@ -147,6 +149,7 @@ $seeder->import(
                 DiscountMethod::OFFSETS => - (random_int(1, 10) * 100),
                 DiscountMethod::FIXED => random_int(5, 40) * 100,
                 DiscountMethod::PERCENTAGE => random_int(1, 10) / 10,
+                default => 0,
             });
             $item->setFreeShipping($faker->randomElement([true, false]));
             $item->setPublishUp($faker->dateTimeThisYear());

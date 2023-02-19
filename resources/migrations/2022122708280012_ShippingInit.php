@@ -33,10 +33,13 @@ $mig->up(
                 $schema->varchar('classname');
                 $schema->varchar('type');
                 $schema->varchar('title');
+                $schema->varchar('subtitle');
                 $schema->varchar('alias');
                 $schema->longtext('description');
+                $schema->varchar('note');
                 $schema->varchar('image');
                 $schema->json('payments')->nullable(true);
+                $schema->json('tags')->nullable(true);
                 $schema->json('pricing')->nullable(true);
                 $schema->bool('state');
                 $schema->integer('ordering');
@@ -60,7 +63,6 @@ $mig->up(
  */
 $mig->down(
     static function () use ($mig) {
-        // $mig->dropTableColumns(Table::class, 'column');
         $mig->dropTables(Shipping::class);
     }
 );

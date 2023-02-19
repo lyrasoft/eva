@@ -10,6 +10,7 @@
 declare(strict_types=1);
 
 use Lyrasoft\ShopGo\Enum\OrderNoMode;
+use Lyrasoft\ShopGo\Shipping\Basic\BasicShipping;
 use Lyrasoft\ShopGo\ShopGoPackage;
 use Lyrasoft\ShopGo\Subscriber\AdditionalPurchaseSubscriber;
 use Lyrasoft\ShopGo\Subscriber\DiscountSubscriber;
@@ -58,5 +59,11 @@ return [
         'invoice_no' => [
             'prefix' => 'INV'
         ],
+
+        'shipping' => [
+            'types' => [
+                'basic' => BasicShipping::class
+            ]
+        ]
     ]
 ];

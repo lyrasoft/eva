@@ -53,6 +53,7 @@ $mig->up(
                 $schema->json('users')->nullable(true)->defaultValue(null);
                 $schema->json('categories')->nullable(true)->defaultValue(null);
                 $schema->json('products')->nullable(true)->defaultValue(null);
+                $schema->json('tags')->nullable(true)->defaultValue(null);
                 $schema->json('payments')->nullable(true)->defaultValue(null);
                 $schema->json('shippings')->nullable(true)->defaultValue(null);
                 $schema->json('apply_products')->nullable(true)->defaultValue(null);
@@ -61,6 +62,7 @@ $mig->up(
                 $schema->decimal('min_cart_price')->length('20,4')->nullable(true)->defaultValue(null);
                 $schema->bool('free_shipping');
                 $schema->char('method')->length(10)->comment('DiscountMethod: offset,fixed,percentage');
+                $schema->bool('accumulate');
                 $schema->char('apply_to')->length(8)->comment('DiscountApplyTo: order,products,matched');
                 $schema->datetime('created');
                 $schema->datetime('modified');

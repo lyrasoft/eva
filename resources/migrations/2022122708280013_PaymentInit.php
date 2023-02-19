@@ -34,8 +34,10 @@ $mig->up(
                 $schema->varchar('classname');
                 $schema->varchar('type');
                 $schema->varchar('title');
+                $schema->varchar('subtitle');
                 $schema->varchar('alias');
                 $schema->longtext('description');
+                $schema->varchar('note');
                 $schema->varchar('image');
                 $schema->bool('state');
                 $schema->integer('ordering');

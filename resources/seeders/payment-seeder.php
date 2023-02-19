@@ -38,18 +38,20 @@ $seeder->import(
         $handlingStateId = 5;
         $state = $orm->findOne(OrderState::class, $handlingStateId);
 
-        $faker = $faker->unique();
+        $ufaker = $faker->unique();
 
         foreach (range(1, 5) as $i) {
             $item = $mapper->createEntity();
 
-            $item->setTitle(Utf8String::ucfirst($faker->word()) . ' Pay');
+            $item->setTitle(Utf8String::ucfirst($ufaker->word()) . ' Pay');
             $item->setAlias(SlugHelper::safe($item->getTitle()));
+            $item->setSubtitle($faker->sentence());
             $item->setDescription($faker->paragraph());
             $item->setImage($faker->unsplashImage(400, 400));
             $item->setOrderStateId($state?->getId() ?? 0);
             $item->setState(1);
             $item->setOrdering($i);
+            $item->setNote($faker->sentence());
 
             $mapper->createOne($item);
 
