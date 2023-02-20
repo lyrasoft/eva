@@ -116,7 +116,7 @@ $seeder->import(
             }
 
             // Create Cart Data
-            $cartData = $cartService->createCartDataFromItems($cartItems);
+            $cartData = $cartService->createCartDataFromItems($cartItems, []);
 
             // Start Create Order
             $item = $mapper->createEntity();

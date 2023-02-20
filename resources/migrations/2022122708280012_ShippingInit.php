@@ -39,7 +39,8 @@ $mig->up(
                 $schema->varchar('note');
                 $schema->varchar('image');
                 $schema->json('payments')->nullable(true);
-                $schema->json('tags')->nullable(true);
+                $schema->json('allow_tags')->nullable(true);
+                $schema->json('unallow_tags')->nullable(true);
                 $schema->json('pricing')->nullable(true);
                 $schema->bool('state');
                 $schema->integer('ordering');
