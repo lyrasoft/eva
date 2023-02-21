@@ -10,6 +10,7 @@
 declare(strict_types=1);
 
 use Lyrasoft\ShopGo\Enum\OrderNoMode;
+use Lyrasoft\ShopGo\Payment\Transfer\TransferPayment;
 use Lyrasoft\ShopGo\Shipping\Basic\BasicShipping;
 use Lyrasoft\ShopGo\ShopGoPackage;
 use Lyrasoft\ShopGo\Subscriber\AdditionalPurchaseSubscriber;
@@ -64,6 +65,12 @@ return [
             'types' => [
                 'basic' => BasicShipping::class
             ]
-        ]
+        ],
+
+        'payment' => [
+            'types' => [
+                'transfer' => TransferPayment::class
+            ]
+        ],
     ]
 ];
