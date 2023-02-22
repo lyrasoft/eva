@@ -13,6 +13,7 @@ namespace App\Module\Front;
 
 use Lyrasoft\Luna\Script\FontAwesomeScript;
 use Lyrasoft\Luna\Services\ConfigService;
+use Lyrasoft\ShopGo\Script\ShopGoScript;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Unicorn\Script\UnicornScript;
@@ -35,6 +36,7 @@ class FrontMiddleware extends AbstractLifecycleMiddleware
         protected HtmlFrame $htmlFrame,
         protected UnicornScript $unicornScript,
         protected FontAwesomeScript $fontAwesomeScript,
+        protected ShopGoScript $shopGoScript,
     ) {
     }
 
@@ -49,9 +51,8 @@ class FrontMiddleware extends AbstractLifecycleMiddleware
     {
         $this->lang->loadAllFromVendor('windwalker/unicorn', 'ini');
         $this->lang->loadAllFromVendor('lyrasoft/luna', 'ini');
-        $this->lang->loadAllFromVendor('lyrasoft/member', 'ini');
-        $this->lang->loadAllFromVendor('lyrasoft/portfolio', 'ini');
         $this->lang->loadAllFromVendor('lyrasoft/contact', 'ini');
+        $this->lang->loadAllFromVendor('lyrasoft/shopgo', 'ini');
         $this->lang->loadAll('ini');
 
         // Unicorn
@@ -63,6 +64,10 @@ class FrontMiddleware extends AbstractLifecycleMiddleware
         // Bootstrap
         $this->asset->css('css/front/bootstrap.min.css');
         $this->asset->js('vendor/bootstrap/dist/js/bootstrap.bundle.min.js');
+
+        $this->shopGoScript->sweetAlert();
+        $this->shopGoScript->wishlistButton();
+        $this->shopGoScript->productCart();
 
         // Main
         $this->asset->css('css/front/main.css');

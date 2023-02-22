@@ -37,6 +37,100 @@ $menu->registerChildren(
     }
 );
 
+$menu->link('商城管理', '#')
+    ->icon('fal fa-shop');
+
+$menu->registerChildren(
+    function (MenuBuilder $menu) use ($nav, $lang) {
+        $menu->link($lang('shopgo.product.category.title'))
+            ->to($nav->to('category_list', ['type' => 'product']))
+            ->icon('fal fa-sitemap');
+
+        $menu->link($lang('unicorn.title.grid', title: $lang('shopgo.product.title')))
+            ->to($nav->to('product_list'))
+            ->icon('fal fa-box-open');
+
+        $menu->link($lang('unicorn.title.grid', title: $lang('shopgo.additional.purchase.title')))
+            ->to($nav->to('additional_purchase_list'))
+            ->icon('fal fa-cart-plus');
+
+        $menu->link($lang('unicorn.title.grid', title: $lang('shopgo.product.feature.title')))
+            ->to($nav->to('product_feature_list'))
+            ->icon('fal fa-object-ungroup');
+
+        $menu->link($lang('unicorn.title.grid', title: $lang('shopgo.product.attribute.group.title')))
+            ->to($nav->to('product_attribute_group_list'))
+            ->icon('fal fa-object-group');
+
+        $menu->link($lang('unicorn.title.grid', title: $lang('shopgo.product.attribute.title')))
+            ->to($nav->to('product_attribute_list'))
+            ->icon('fal fa-rectangle-list');
+
+        $menu->link($lang('unicorn.title.grid', title: $lang('shopgo.product.tab.title')))
+            ->to($nav->to('product_tab_list'))
+            ->icon('fal fa-pager');
+
+        $menu->link($lang('unicorn.title.grid', title: $lang('shopgo.manufacturer.title')))
+            ->to($nav->to('manufacturer_list'))
+            ->icon('fal fa-building');
+    }
+);
+
+$menu->link('優惠', '#')
+    ->icon('fal fa-cart-arrow-down');
+
+$menu->registerChildren(
+    function (MenuBuilder $menu) use ($nav, $lang) {
+        $menu->link($lang('unicorn.title.grid', title: $lang('shopgo.discount.title')))
+            ->to($nav->to('discount_list'))
+            ->icon('fal fa-percent');
+    }
+);
+
+$menu->link('訂單', '#')
+    ->icon('fal fa-file-invoice-dollar');
+
+$menu->registerChildren(
+    function (MenuBuilder $menu) use ($nav, $lang) {
+        $menu->link($lang('unicorn.title.grid', title: $lang('shopgo.order.title')))
+            ->to($nav->to('order_list'))
+            ->icon('fal fa-file-invoice-dollar');
+
+        $menu->link($lang('unicorn.title.grid', title: $lang('luna.order_state.title')))
+            ->to($nav->to('order_state_list'))
+            ->icon('fal fa-list');
+    }
+);
+
+$menu->link('商城設定', '#')
+    ->icon('fal fa-cogs');
+
+$menu->registerChildren(
+    function (MenuBuilder $menu) use ($nav, $lang) {
+        $menu->link($lang('unicorn.title.grid', title: $lang('shopgo.currency.title')))
+            ->to($nav->to('currency_list'))
+            ->icon('fal fa-sterling-sign');
+
+        $menu->link($lang('unicorn.title.grid', title: $lang('luna.location.title')))
+            ->to($nav->to('location_list'))
+            ->icon('fa-solid fa-marker')
+            ->icon('fal fa-earth-asia');
+
+        $menu->link($lang('unicorn.title.grid', title: $lang('luna.payment.title')))
+            ->to($nav->to('payment_list'))
+            ->icon('fa-solid fa-dollar')
+            ->icon('fal fa-cash-register');
+
+        $menu->link($lang('unicorn.title.grid', title: $lang('luna.shipping.title')))
+            ->to($nav->to('shipping_list'))
+            ->icon('fal fa-truck');
+
+        $menu->link($lang('luna.config.title', $lang('shopgo.config.type.shop')))
+            ->to($nav->to('config_shopgo_shop'))
+            ->icon('fal fa-gear');
+    }
+);
+
 $menu->link('內容管理', '#')
     ->icon('fal fa-pen-ruler');
 
@@ -61,42 +155,6 @@ $menu->registerChildren(
         $menu->link($lang('unicorn.title.grid', title: $lang('luna.tag.title')))
             ->to($nav->to('tag_list'))
             ->icon('fal fa-tags');
-    }
-);
-
-// Portfolio
-$menu->link('案例作品', '#')
-    ->icon('fal fa-photo-film');
-
-$menu->registerChildren(
-    function (MenuBuilder $menu) use ($nav, $lang) {
-        // Category
-        $menu->link('作品分類')
-            ->to($nav->to('category_list', ['type' => 'portfolio']))
-            ->icon('fal fa-sitemap');
-
-        // Portfolio
-        $menu->link('作品管理')
-            ->to($nav->to('portfolio_list'))
-            ->icon('fal fa-images');
-    }
-);
-
-// Portfolio
-$menu->link('團隊成員', '#')
-    ->icon('fal fa-people-pants-simple');
-
-$menu->registerChildren(
-    function (MenuBuilder $menu) use ($nav, $lang) {
-        // Category
-        $menu->link('團隊分類')
-            ->to($nav->to('category_list', ['type' => 'member']))
-            ->icon('fal fa-sitemap');
-
-        // Portfolio
-        $menu->link('成員管理')
-            ->to($nav->to('member_list'))
-            ->icon('fal fa-person');
     }
 );
 

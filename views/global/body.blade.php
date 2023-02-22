@@ -33,6 +33,8 @@ $menu = $app->service(\Lyrasoft\Luna\Services\MenuService::class)
 
 $user = $app->service(UserService::class)->getUser();
 
+$cartStorage = $app->service(\Lyrasoft\ShopGo\Cart\CartStorage::class);
+$cartQuantity = $cartStorage->count();
 ?>
 
 @extends('global.html')
@@ -73,6 +75,23 @@ $user = $app->service(UserService::class)->getUser();
 
                         <ul class="navbar-nav mb-2 mb-lg-0">
                             <x-locale-dropdown class="nav-item" />
+
+                            <li class="nav-item">
+                                <a href="{{ $nav->to('cart') }}"
+                                    class="nav-link">
+                                    <div class="c-cart-button"
+                                        data-role="cart-button">
+                                        <div class="c-cart-button__quantity">
+                                            <i class="fa fa-cart-shopping"></i>
+
+                                            <span class="badge bg-danger"
+                                                data-role="cart-quantity">
+                                        {{ $cartQuantity }}
+                                    </span>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
 
                             @if (!$user->isLogin())
                                 <li class="nav-item">

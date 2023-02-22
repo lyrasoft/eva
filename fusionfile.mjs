@@ -119,9 +119,11 @@ export async function install() {
       'jarallax',
       'swiper',
       'youtube-background',
+      'sweetalert',
     ],
     [
-      'lyrasoft/luna'
+      'lyrasoft/luna',
+      'lyrasoft/shopgo',
     ]
   );
 

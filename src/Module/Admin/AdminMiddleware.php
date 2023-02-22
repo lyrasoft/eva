@@ -48,10 +48,9 @@ class AdminMiddleware extends AbstractLifecycleMiddleware
     {
         $this->lang->loadAllFromVendor('windwalker/unicorn', 'ini');
         $this->lang->loadAllFromVendor('lyrasoft/luna', 'ini');
-        $this->lang->loadAllFromVendor('lyrasoft/member', 'ini');
-        $this->lang->loadAllFromVendor('lyrasoft/portfolio', 'ini');
         $this->lang->loadAllFromVendor('lyrasoft/contact', 'ini');
         $this->lang->loadAllFromVendor('lyrasoft/banner', 'ini');
+        $this->lang->loadAllFromVendor('lyrasoft/shopgo', 'ini');
         $this->lang->loadAll('ini');
 
         // Unicorn

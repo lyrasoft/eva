@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3feb1e6f1158e1c3b8a45c02f8da25c4",
+    "content-hash": "51d902068c4a0e985bc176788b27efeb",
     "packages": [
         {
             "name": "asika/cross-env",
@@ -1183,103 +1183,6 @@
                 "source": "https://github.com/lyrasoft/luna/tree/2.0.62"
             },
             "time": "2023-02-01T07:59:01+00:00"
-        },
-        {
-            "name": "lyrasoft/member",
-            "version": "1.0.4",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/lyrasoft/luna-member.git",
-                "reference": "080e3ec67d48f4a666803ffe298784bd14e09dda"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/lyrasoft/luna-member/zipball/080e3ec67d48f4a666803ffe298784bd14e09dda",
-                "reference": "080e3ec67d48f4a666803ffe298784bd14e09dda",
-                "shasum": ""
-            },
-            "type": "windwalker-package",
-            "extra": {
-                "windwalker": {
-                    "packages": [
-                        "Lyrasoft\\Member\\MemberPackage"
-                    ],
-                    "modules": [
-                        "src/Module"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Lyrasoft\\Member\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Simon Asika",
-                    "email": "asika32764@gmail.com"
-                }
-            ],
-            "description": "LYRASOFT member package",
-            "support": {
-                "issues": "https://github.com/lyrasoft/luna-member/issues",
-                "source": "https://github.com/lyrasoft/luna-member/tree/1.0.4"
-            },
-            "time": "2022-12-09T07:45:49+00:00"
-        },
-        {
-            "name": "lyrasoft/portfolio",
-            "version": "1.0.4",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/lyrasoft/luna-portfolio.git",
-                "reference": "99d4f1712f3fac0955c1fcc579737f003bb16ea3"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/lyrasoft/luna-portfolio/zipball/99d4f1712f3fac0955c1fcc579737f003bb16ea3",
-                "reference": "99d4f1712f3fac0955c1fcc579737f003bb16ea3",
-                "shasum": ""
-            },
-            "type": "windwalker-package",
-            "extra": {
-                "windwalker": {
-                    "packages": [
-                        "Lyrasoft\\Portfolio\\PortfolioPackage"
-                    ],
-                    "modules": [
-                        "src/Module"
-                    ]
-                },
-                "branch-alias": {
-                    "dev-master": "1.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Lyrasoft\\Portfolio\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Simon Asika",
-                    "email": "asika32764@gmail.com"
-                }
-            ],
-            "description": "LYRASOFT portfolio package",
-            "support": {
-                "issues": "https://github.com/lyrasoft/luna-portfolio/issues",
-                "source": "https://github.com/lyrasoft/luna-portfolio/tree/1.0.4"
-            },
-            "time": "2022-12-14T08:29:33+00:00"
         },
         {
             "name": "lyrasoft/sequence",

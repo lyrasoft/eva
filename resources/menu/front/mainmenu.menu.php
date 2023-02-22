@@ -81,15 +81,15 @@ $menu->registerChildren(
 );
 
 // Members
-$menu->link('團隊成員', $nav->to('member_category'))
-    ->icon('fal fa-users');
+$menu->link('購物車', $nav->to('product_list'))
+    ->icon('fal fa-cart');
 
 $menu->registerChildren(
     function (MenuBuilder $menu) use ($app, $nav) {
         $categories = $app->service(CategoryRepository::class)
             ->getListSelector()
             ->where('category.state', 1)
-            ->where('category.type', 'member')
+            ->where('category.type', 'product')
             ->ordering('category.lft', 'ASC');
 
         $categoryNodes = TreeBuilder::create($categories);
@@ -99,7 +99,7 @@ $menu->registerChildren(
             function (NodeInterface $node, MenuBuilder $menu) use ($nav) {
                 $menu->link(
                     $node->getValue()->title,
-                    $nav->to('member_category')->var('path', $node->getValue()->path)
+                    $nav->to('product_list')->var('path', $node->getValue()->path)
                 );
             }
         );
