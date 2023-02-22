@@ -61,6 +61,10 @@ return [
             'prefix' => 'INV'
         ],
 
+        'checkout' => [
+            'allow_anonymous' => false
+        ],
+
         'shipping' => [
             'types' => [
                 'basic' => BasicShipping::class
