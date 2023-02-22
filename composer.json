@@ -33,7 +33,8 @@
         "lyrasoft/shopgo": "dev-master",
         "lyrasoft/portfolio": "^1.0",
         "symfony/polyfill-php83": "^1.27",
-        "symfony/polyfill-php82": "^1.27"
+        "symfony/polyfill-php82": "^1.27",
+        "lyrasoft/shopgo": "dev-master"
     },
     "require-dev": {
         "psr/http-server-handler": "^1.0",
@@ -78,11 +79,5 @@
             "dev-master": "4.x-dev",
             "next": "4.x-dev"
         }
-    },
-    "repositories": [
-        {
-            "type": "path",
-            "url": "./vendor/lyrasoft/shopgo"
-        }
-    ]
+    }
 }

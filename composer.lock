@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "73b6969601e519c7f3eb49c2edde5be1",
+    "content-hash": "52f451814f6019b36045cf1f6d887dba",
     "packages": [
         {
             "name": "asika/cross-env",
@@ -999,15 +999,22 @@
         {
             "name": "lyrasoft/shopgo",
             "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/lyrasoft/luna-shopgo.git",
+                "reference": "53642034a5fc525edadb17bcf65fffd1358993d8"
+            },
             "dist": {
-                "type": "path",
-                "url": "./vendor/lyrasoft/shopgo",
-                "reference": "c420017971497a5f08c84100f656b0821fcb08a7"
+                "type": "zip",
+                "url": "https://api.github.com/repos/lyrasoft/luna-shopgo/zipball/53642034a5fc525edadb17bcf65fffd1358993d8",
+                "reference": "53642034a5fc525edadb17bcf65fffd1358993d8",
+                "shasum": ""
             },
             "require": {
                 "brick/math": "^0.11.0",
                 "lyrasoft/sequence": "^1.0"
             },
+            "default-branch": true,
             "type": "luna-package",
             "extra": {
                 "windwalker": {
@@ -1024,6 +1031,7 @@
                     "Lyrasoft\\ShopGo\\": "src/"
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -1034,9 +1042,11 @@
                 }
             ],
             "description": "Luna ShopGo package",
-            "transport-options": {
-                "relative": true
-            }
+            "support": {
+                "issues": "https://github.com/lyrasoft/luna-shopgo/issues",
+                "source": "https://github.com/lyrasoft/luna-shopgo/tree/master"
+            },
+            "time": "2023-02-21T10:11:01+00:00"
         },
         {
             "name": "lyrasoft/toolkit",
@@ -4069,12 +4079,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/windwalker-io/framework.git",
-                "reference": "20cded510d8f6d62c867ea72ac095bd3be6aecbb"
+                "reference": "78f4af504c55509d23d996718e6970581b5afcf5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/windwalker-io/framework/zipball/20cded510d8f6d62c867ea72ac095bd3be6aecbb",
-                "reference": "20cded510d8f6d62c867ea72ac095bd3be6aecbb",
+                "url": "https://api.github.com/repos/windwalker-io/framework/zipball/78f4af504c55509d23d996718e6970581b5afcf5",
+                "reference": "78f4af504c55509d23d996718e6970581b5afcf5",
                 "shasum": ""
             },
             "require": {
@@ -4295,9 +4305,9 @@
             "homepage": "https://github.com/windwalker-io/framework",
             "support": {
                 "issues": "https://github.com/windwalker-io/framework/issues",
-                "source": "https://github.com/windwalker-io/framework/tree/4.0.26-beta1"
+                "source": "https://github.com/windwalker-io/framework/tree/master"
             },
-            "time": "2023-02-13T11:05:07+00:00"
+            "time": "2023-02-16T10:14:06+00:00"
         },
         {
             "name": "windwalker/unicorn",
