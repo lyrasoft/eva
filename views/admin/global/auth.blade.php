@@ -27,19 +27,33 @@ use Windwalker\Core\Router\SystemUri;
 @extends('global.html')
 
 @section('superbody')
-    <div class="container" style="margin-top: 100px">
-        <div class="mx-auto w-100" style="max-width: 450px">
-            <div class="mb-4 p-4">
-                <a href="{{ $nav->to('front::home') }}" target="_blank">
-                    <img class="img-fluid" src="https://i.imgur.com/tjr9ixV.png" alt="LOGO">
-                </a>
+    <div class="account-pages my-5 pt-sm-5">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-8 col-lg-6 col-xl-5">
+                    <div class="card overflow-hidden">
+                        <div class="card-body">
+                            @section('header')
+                                <div class="auth-logo text-center p-4">
+                                    <img style="height: 45px" src="{{ $asset->path('images/logo-cb-h.svg') }}" alt="LOGO">
+
+                                    <h4 class="mt-3 mb-0">後台管理</h4>
+                                </div>
+                            @show
+                            <div class="p-2">
+
+                                @section('message')
+                                    @include('@messages')
+                                @show
+
+                                @yield('container', 'Container')
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
             </div>
-
-            @section('message')
-                @include('@messages')
-            @show
-
-            @yield('container', 'Container')
         </div>
     </div>
 @stop

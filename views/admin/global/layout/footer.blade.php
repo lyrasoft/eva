@@ -23,12 +23,18 @@ use Windwalker\Core\Router\Navigator;
 use Windwalker\Core\Router\SystemUri;
 
 ?>
-<div id="copyright">
-    <div class="container-fluid">
-        <hr/>
 
-        <footer>
-            &copy; Windwalker {{ $chronos->localNow('Y') }}
-        </footer>
+<footer class="footer">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-6">
+                {{ $chronos->localNow('Y') }} © Windwalker.
+            </div>
+            <div class="col-sm-6">
+                <div class="text-sm-end d-none d-sm-block">
+                    {{--  Copyright Right  --}}
+                </div>
+            </div>
+        </div>
     </div>
-</div>
+</footer>

@@ -24,13 +24,11 @@ return [
         'enabled' => true,
 
         'paths' => [
-            __DIR__ . '/../../views',
+            __DIR__ . '/../../views'
         ],
 
         'namespaces' => [
-            '@theme' => [
-                WINDWALKER_ROOT . '/views/unicorn'
-            ]
+            //
         ],
 
         'renderers' => [

@@ -27,7 +27,11 @@ use Windwalker\Core\Router\SystemUri;
 @extends('admin.global.body')
 
 @section('content-container')
-    @include('@messages')
+    <div class="card">
+        <div class="card-body">
+            @include('@messages')
 
-    @yield('content', 'Admin List Content')
+            @yield('content', 'Admin List Content')
+        </div>
+    </div>
 @stop

@@ -26,47 +26,80 @@ $user = $app->service(\Lyrasoft\Luna\User\UserService::class)->getUser();
 ?>
 
 @section('header')
-    <div class="navbar navbar-dark bg-dark navbar-expand-lg">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="{{ $uri->path() }}">EARTH</a>
+    <header id="page-topbar">
+        <div class="navbar-header">
+            <div class="d-flex">
+                <!-- LOGO -->
+                <div class="navbar-brand-box text-start">
+                    {{--<a href="{{ $nav->to('home') }}" class="logo logo-dark">--}}
+                    {{--    <span class="logo-sm">--}}
+                    {{--        <img class="img-fluid" src="{{ $asset->path('images/logo-cw-h.svg') }}" alt="" height="22">--}}
+                    {{--    </span>--}}
+                    {{--    <span class="logo-lg">--}}
+                    {{--        <img class="img-fluid" src="{{ $asset->path('images/logo-cw-h.svg') }}" alt="" height="17">--}}
+                    {{--    </span>--}}
+                    {{--</a>--}}
 
-            <button type="button" class="navbar-toggler" data-bs-toggle="collapse"
-                data-bs-target="#top-navbar-content" aria-controls="#top-navbar-content" aria-expanded="false">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div id="top-navbar-content" class="collapse navbar-collapse">
-                <ul class="nav navbar-nav mr-auto">
-                    @section('nav')
-                        @include('admin.global.layout.mainmenu')
-                    @show
-                </ul>
-                <ul class="nav navbar-nav navbar-right ms-auto">
-                    <li class="nav-item">
-                        <a href="{{ $nav->to('front::home')->mute() }}" target="_blank"
-                            class="nav-link" title="Preview"
-                            data-bs-toggle="tooltip"
-                            data-placement="bottom">
-                            <span class="fa-regular fa-eye"></span>
-                        </a>
-                    </li>
+                    <a href="{{ $nav->to('home') }}" class="logo logo-light">
+                        <span class="logo-sm">
+                            <img src="{{ $asset->path('images/icon.svg') }}" alt="" height="45"
+                                style="margin-left: -12px">
+                        </span>
+                        <span class="logo-lg">
+                            <img  src="{{ $asset->path('images/logo-cw-h.svg') }}" alt="" height="35">
+                        </span>
+                    </a>
+                </div>
 
-                    @if ($user->isLogin())
-                        <li class="nav-item">
-                            <a href="javascript://"
-                                onclick="u.form().post('{{ $nav->to('logout') }}')"
-                                class="nav-link"
-                                title="Logout"
-                                data-bs-toggle="tooltip"
-                                data-placement="bottom"
-                            >
-                                <i class="fa-solid fa-right-from-bracket"></i>
+                <button type="button" class="btn btn-sm px-3 font-size-16 header-item waves-effect"
+                    id="vertical-menu-btn">
+                    <i class="fa fa-fw fa-bars"></i>
+                </button>
+
+                @section('nav')
+                    @include('admin.global.layout.mainmenu')
+                @show
+            </div>
+
+            <div class="d-flex">
+                <div class="ms-1" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Fullscreen">
+                    <button type="button" class="btn header-item noti-icon waves-effect d-flex align-items-center" data-bs-toggle="fullscreen">
+                        <i class="fa-regular fa-expand"></i>
+                    </button>
+                </div>
+
+                <div class="ms-1" data-bs-toggle="tooltip" data-bs-placement="bottom" title="See Frontend">
+                    <a class="btn header-item noti-icon waves-effect d-flex align-items-center"
+                        href="{{ $nav->to('front::home') }}"
+                        target="_blank"
+                    >
+                        <i class="fa-regular fa-eye"></i>
+                    </a>
+                </div>
+
+                @if ($user->isLogin())
+                    <div class="dropdown d-inline-block">
+                        <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown"
+                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <img class="rounded-circle header-profile-user" src="{{ $user->getAvatar() }}"
+                                alt="Header Avatar">
+                            <span class="d-none d-xl-inline-block ms-1">{{ $user->getName() }}</span>
+                            <i class="fa-regular fa-angle-down d-none d-xl-inline-block"></i>
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-end">
+                            <!-- item-->
+                            <a class="dropdown-item" href="{{ $nav->to('user_edit')->id($user->getId()) }}">
+                                <i class="fa-regular fa-user font-size-16 align-middle me-1"></i>
+                                <span>My Profile</span>
                             </a>
-                        </li>
-                    @endif
-                </ul>
+                            <a class="dropdown-item text-danger" href="javascript://"
+                                onclick="u.form().post('{{ $nav->to('logout') }}')">
+                                <i class="fa-regular fa-power-off font-size-16 align-middle me-1 text-danger"></i>
+                                <span key="t-logout">Logout</span></a>
+                        </div>
+                    </div>
+                @endif
             </div>
         </div>
-        <!--/.nav-collapse -->
-    </div>
-
+    </header>
 @show

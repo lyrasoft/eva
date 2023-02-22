@@ -16,7 +16,6 @@ namespace App\View;
  * @var $lang      LangService     The language translation service.
  */
 
-use Lyrasoft\Luna\Repository\CategoryRepository;
 use Lyrasoft\Luna\Services\ConfigService;
 use Lyrasoft\Luna\User\UserService;
 use Windwalker\Core\Application\AppContext;
@@ -29,11 +28,8 @@ use Windwalker\Core\Router\SystemUri;
 
 $coreConfig = $app->service(ConfigService::class)->getConfig('core');
 
-$categories = $app->service(CategoryRepository::class)
-    ->getAvailableListSelector()
-    ->where('category.state', 1)
-    ->where('category.type', 'article')
-    ->ordering('category.lft', 'ASC');
+$menu = $app->service(\Lyrasoft\Luna\Services\MenuService::class)
+    ->loadMenuFromFile('mainmenu', WINDWALKER_RESOURCES . '/menu/front/mainmenu.menu.php');
 
 $user = $app->service(UserService::class)->getUser();
 
@@ -62,9 +58,9 @@ $user = $app->service(UserService::class)->getUser();
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
                 <div class="container">
                     <a class="navbar-brand" href="#">
-                        <img src="{{ $asset->path('images/logo-h.svg') }}"
-                            alt="Windwalker LOGO"
-                            style="height: 25px;"
+                        <img src="{{ $asset->path('images/logo-cw-h.svg') }}"
+                            alt="LOGO"
+                            style="height: 27px;"
                         />
                     </a>
                     <button class="navbar-toggler" type="button"
@@ -73,29 +69,7 @@ $user = $app->service(UserService::class)->getUser();
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                            <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="#">Home</a>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" aria-current="page" href="#"
-                                    data-bs-toggle="dropdown"
-                                >
-                                    Categories
-                                </a>
-                                <ul class="dropdown-menu" aria-labelledby="categories">
-                                    @foreach ($categories as $category)
-                                        <li>
-                                            <a class="dropdown-item"
-                                                href="{{ $nav->to('article_category')->var('path', $category->path) }}">
-                                                {{ str_repeat('-', $category->level - 1) }}
-                                                {{ $category->title }}
-                                            </a>
-                                        </li>
-                                    @endforeach
-                                </ul>
-                            </li>
-                        </ul>
+                        <x-menu-root :menu="$menu" dropdown class="navbar-nav me-auto mb-2 mb-lg-0"></x-menu-root>
 
                         <ul class="navbar-nav mb-2 mb-lg-0">
                             <x-locale-dropdown class="nav-item" />

@@ -20,10 +20,9 @@ $result = $pagination->compile();
 $current = $result->getCurrent();
 
 $mobileNeighbours = 2;
-
 ?>
 
-@if ($pagination->getPages() > 1)
+@if ($pagination->getPages() >= 1)
     <nav aria-label="navigation">
         <ul class="pagination c-pagination">
             @if ($first = $result->getFirst())

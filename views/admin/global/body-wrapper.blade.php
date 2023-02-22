@@ -4,7 +4,7 @@
  * Global variables
  * --------------------------------------------------------------
  * @var $app       AppContext      Application context.
- * @var $view      ViewModel       The view modal object.
+ * @var $vm        object          The view model object.
  * @var $uri       SystemUri       System Uri information.
  * @var $chronos   ChronosService  The chronos datetime service.
  * @var $nav       Navigator       Navigator object to build route.
@@ -16,19 +16,17 @@ declare(strict_types=1);
 
 use Windwalker\Core\Application\AppContext;
 use Windwalker\Core\Asset\AssetService;
-use Windwalker\Core\Attributes\ViewModel;
 use Windwalker\Core\DateTime\ChronosService;
 use Windwalker\Core\Language\LangService;
 use Windwalker\Core\Router\Navigator;
 use Windwalker\Core\Router\SystemUri;
 
-$htmlFrame = $app->service(\Windwalker\Core\Html\HtmlFrame::class);
 ?>
 
 @extends('global.html')
 
 @section('superbody')
-<div class="main-wrapper" uni-cloak>
+<div id="layout-wrapper" uni-cloak>
     {{-- Header --}}
     @section('header')
         @include('admin.global.layout.header')
@@ -36,23 +34,33 @@ $htmlFrame = $app->service(\Windwalker\Core\Html\HtmlFrame::class);
 
     {{-- Main Container --}}
     @section('container')
-    <div class="row gx-0 flex-lg-nowrap">
         {{-- Sidebar --}}
         @section('sidebar')
-            @if (!$app->state('sidebar_hide'))
-                <div class="main-sidebar col-lg-2">
-                    @include('admin.global.layout.sidemenu')
+            <div class="vertical-menu">
+                <div data-simplebar class="h-100">
+                    <!--- Sidemenu -->
+                    <div id="sidebar-menu">
+                        <!-- Left Menu Start -->
+                        <ul class="metismenu list-unstyled" id="side-menu">
+                            @include('global.layout.sidemenu')
+                        </ul>
+                    </div>
                 </div>
-            @endif
+            </div>
         @show
-        <div class="main-body col">
-            @yield('body', 'Body Section')
 
-            @section('footer')
-                @include('admin.global.layout.footer')
-            @show
+    <div class="main-content" style="overflow: visible">
+
+        <div class="page-content">
+            <div class="container-fluid">
+                @yield('body', 'Body Section')
+            </div> <!-- container-fluid -->
         </div>
-    </div>
+        <!-- End Page-content -->
+
+        @section('copyright')
+            @include('admin.global.layout.footer')
+        @show
     @show
 </div>
 @stop

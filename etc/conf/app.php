@@ -12,15 +12,15 @@ declare(strict_types=1);
 use Windwalker\Core\Provider\DateTimeProvider;
 
 return [
-    'secret' => 'RKmfNwCJCSo-FU7vyVaz1w',
+    'secret' => 'Yfp1bUBPO2d6L3t1zMTJ8Q',
 
-    'name' => 'ShopGO',
+    'name' => 'ShopGo',
 
     'debug' => (bool) (env('APP_DEBUG') ?? false),
 
     'mode' => env('APP_ENV', 'prod'),
 
-    'timezone' => env('APP_TIMEZONE', 'UTC'),
+    'timezone' => env('APP_TIMEZONE', 'Asia/Taipei'),
 
     'server_timezone' => env('APP_SERVER_TIMEZONE', 'UTC'),
 

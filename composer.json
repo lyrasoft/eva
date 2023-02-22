@@ -1,7 +1,7 @@
 {
-    "name": "lyrasoft/earth",
+    "name": "lyrasoft/eva",
     "description": "Home Land of LYRASOFT",
-    "homepage": "https://github.com/lyrasoft/earth",
+    "homepage": "https://github.com/lyrasoft/eva",
     "license": "MIT",
     "minimum-stability": "beta",
     "authors": [
@@ -13,39 +13,37 @@
     "require": {
         "php": ">=8.0",
         "ext-json": "*",
-        "windwalker/core": "dev-master",
+        "windwalker/authentication": "^4.0",
+        "windwalker/authorization": "^4.0",
+        "windwalker/core": "^4.0",
+        "windwalker/di": "^4.0",
         "windwalker/renderer": "^4.0",
         "windwalker/dom": "^4.0",
         "windwalker/edge": "^4.0",
         "windwalker/orm": "^4.0",
         "windwalker/session": "^4.0",
         "windwalker/form": "^4.0",
-        "windwalker/authentication": "^4.0",
-        "windwalker/authorization": "^4.0",
-        "windwalker/unicorn": "dev-main",
+        "windwalker/unicorn": "^1.0",
         "lyrasoft/luna": "^2.0",
         "lyrasoft/toolkit": "^1.0",
-        "symfony/var-dumper": "^5.0",
+        "lyrasoft/theme-skote": "^3.2",
+        "lyrasoft/portfolio": "^1.0",
+        "lyrasoft/banner": "^1.0",
+        "lyrasoft/member": "^1.0",
+        "lyrasoft/contact": "^1.0",
+        "symfony/var-dumper": "^5.0||^6.0",
+        "symfony/mailer": "^5.4||^6.0",
         "asika/cross-env": "^1.0",
         "myclabs/php-enum": "^1.8",
         "thl/pinyin": "^1.2",
-        "swoole/ide-helper": "^5.0",
-        "lyrasoft/shopgo": "dev-master",
-        "lyrasoft/portfolio": "^1.0",
-        "symfony/polyfill-php83": "^1.27",
-        "symfony/polyfill-php82": "^1.27",
         "lyrasoft/shopgo": "dev-master"
-    },
-    "require-dev": {
-        "psr/http-server-handler": "^1.0",
-        "psr/http-server-middleware": "^1.0",
-        "windwalker/framework": "dev-master"
     },
     "scripts": {
         "post-create-project-cmd": [
             "php windwalker pkg:install lyrasoft/luna --tag routes",
             "Windwalker\\Core\\Composer\\StarterInstaller::rootInstall",
             "Lyrasoft\\Toolkit\\Installer\\EarthInstaller::install",
+            "Lyrasoft\\Toolkit\\Installer\\EarthInstaller::npmrc",
             "php windwalker run prepare"
         ],
         "post-autoload-dump": [
@@ -79,5 +77,11 @@
             "dev-master": "4.x-dev",
             "next": "4.x-dev"
         }
-    }
+    },
+    "repositories": [
+        {
+            "type": "git",
+            "url": "git@github.com:lyrasoft/theme-skote.git"
+        }
+    ]
 }

@@ -10,23 +10,11 @@
 declare(strict_types=1);
 
 use Lyrasoft\ShopGo\Enum\OrderNoMode;
-use Lyrasoft\ShopGo\Payment\Transfer\TransferPayment;
-use Lyrasoft\ShopGo\Shipping\Basic\BasicShipping;
-use Lyrasoft\ShopGo\ShopGoPackage;
-use Lyrasoft\ShopGo\Subscriber\AdditionalPurchaseSubscriber;
-use Lyrasoft\ShopGo\Subscriber\DiscountSubscriber;
 
 return [
     'shopgo' => [
         'providers' => [
             Lyrasoft\ShopGo\ShopGoPackage::class
-        ],
-
-        'listeners' => [
-            ShopGoPackage::class => [
-                AdditionalPurchaseSubscriber::class,
-                DiscountSubscriber::class,
-            ]
         ],
 
         'currency' => [
@@ -59,18 +47,6 @@ return [
 
         'invoice_no' => [
             'prefix' => 'INV'
-        ],
-
-        'shipping' => [
-            'types' => [
-                'basic' => BasicShipping::class
-            ]
-        ],
-
-        'payment' => [
-            'types' => [
-                'transfer' => TransferPayment::class
-            ]
         ],
     ]
 ];

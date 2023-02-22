@@ -10,27 +10,22 @@
 declare(strict_types=1);
 
 use Unicorn\Aws\S3Service;
-use Unicorn\Listener\DumpOrphansSubscriber;
-use Unicorn\Listener\UnicornAssetSubscriber;
-use Unicorn\UnicornPackage;
-use Windwalker\Core\Application\AppContext;
-use Windwalker\Core\Asset\AssetService;
 
 return [
     'unicorn' => [
         'enabled' => true,
 
         'listeners' => [
-            AssetService::class => [
-                UnicornAssetSubscriber::class
+            \Windwalker\Core\Asset\AssetService::class => [
+                \Unicorn\Listener\UnicornAssetSubscriber::class
             ],
-            AppContext::class => [
-                DumpOrphansSubscriber::class
+            \Windwalker\Core\Application\AppContext::class => [
+                \Unicorn\Listener\DumpOrphansSubscriber::class
             ],
         ],
 
         'providers' => [
-            UnicornPackage::class
+            \Unicorn\UnicornPackage::class
         ],
 
         'file_upload' => [

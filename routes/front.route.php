@@ -15,7 +15,6 @@ use App\Module\Front\FrontMiddleware;
 use App\Module\Front\Home\HomeController;
 use App\Module\Front\Home\HomeView;
 use Lyrasoft\Luna\Middleware\LocaleMiddleware;
-use Lyrasoft\ShopGo\Module\Front\Product\ProductListView;
 use Windwalker\Core\Middleware\CsrfMiddleware;
 use Windwalker\Core\Router\RouteCreator;
 
@@ -28,7 +27,9 @@ $router->group('front')
     ->middleware(FrontMiddleware::class)
     ->register(function (RouteCreator $router) {
         $router->get('home', '/')
-            ->view(ProductListView::class);
+            ->alias('foo')
+            ->handler(HomeController::class)
+            ->view(HomeView::class);
 
         $router->load(__DIR__ . '/front/*.php');
 

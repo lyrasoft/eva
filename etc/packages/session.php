@@ -9,7 +9,6 @@
 
 declare(strict_types=1);
 
-use Windwalker\Core\Application\AppContext;
 use Windwalker\Core\Manager\SessionManager;
 use Windwalker\Core\Session\CookiesAutoSecureSubscriber;
 use Windwalker\Core\Session\SessionRobotSubscriber;
@@ -56,13 +55,11 @@ return [
         ],
 
         'listeners' => [
-            AppContext::class => [
-                SessionRobotSubscriber::class,
-                create(
-                    CookiesAutoSecureSubscriber::class,
-                    enabled: (bool) env('COOKIES_AUTO_SECURE', '1')
-                )
-            ]
+            SessionRobotSubscriber::class,
+            create(
+                CookiesAutoSecureSubscriber::class,
+                enabled: (bool) env('COOKIES_AUTO_SECURE', '1')
+            )
         ],
 
         'bindings' => [

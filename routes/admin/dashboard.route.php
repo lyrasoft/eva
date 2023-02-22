@@ -12,5 +12,6 @@ $router->group('dashboard')
     ->register(function (RouteCreator $router) {
         $router->any('home', '/')
             ->controller(DashboardController::class)
-            ->view(DashboardView::class);
+            ->view(DashboardView::class)
+            ->redirect('article_list');
     });
