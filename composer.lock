@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "51d902068c4a0e985bc176788b27efeb",
+    "content-hash": "646b0383417793ccccd97bd182b44d38",
     "packages": [
         {
             "name": "asika/cross-env",
@@ -1234,12 +1234,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/lyrasoft/luna-shopgo.git",
-                "reference": "6091e0bcab38e41366ad84d497feef984af3c9d6"
+                "reference": "c6e33afa44db5d15b3e5975f2d1a1d81dcd7a9b2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/lyrasoft/luna-shopgo/zipball/6091e0bcab38e41366ad84d497feef984af3c9d6",
-                "reference": "6091e0bcab38e41366ad84d497feef984af3c9d6",
+                "url": "https://api.github.com/repos/lyrasoft/luna-shopgo/zipball/c6e33afa44db5d15b3e5975f2d1a1d81dcd7a9b2",
+                "reference": "c6e33afa44db5d15b3e5975f2d1a1d81dcd7a9b2",
                 "shasum": ""
             },
             "require": {
@@ -1278,7 +1278,7 @@
                 "issues": "https://github.com/lyrasoft/luna-shopgo/issues",
                 "source": "https://github.com/lyrasoft/luna-shopgo/tree/master"
             },
-            "time": "2023-02-22T06:46:12+00:00"
+            "time": "2023-02-23T11:31:14+00:00"
         },
         {
             "name": "lyrasoft/theme-skote",
@@ -4298,16 +4298,16 @@
         },
         {
             "name": "windwalker/core",
-            "version": "4.0.46",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/windwalker-io/core.git",
-                "reference": "6bd7abb67483957c45ef68c765130840cc2f07c9"
+                "reference": "5f5a62645faeb244f3d931d71411caefaedcdc3a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/windwalker-io/core/zipball/6bd7abb67483957c45ef68c765130840cc2f07c9",
-                "reference": "6bd7abb67483957c45ef68c765130840cc2f07c9",
+                "url": "https://api.github.com/repos/windwalker-io/core/zipball/5f5a62645faeb244f3d931d71411caefaedcdc3a",
+                "reference": "5f5a62645faeb244f3d931d71411caefaedcdc3a",
                 "shasum": ""
             },
             "require": {
@@ -4344,6 +4344,7 @@
                 "symfony/mailer": "Install ^5.2 to send mail.",
                 "tijsverkoyen/css-to-inline-styles": "Install ~2.0 if you want to use mail css inliner."
             },
+            "default-branch": true,
             "type": "library",
             "extra": {
                 "windwalker": {
@@ -4372,9 +4373,9 @@
             "homepage": "https://github.com/windwalker-io/core",
             "support": {
                 "issues": "https://github.com/windwalker-io/core/issues",
-                "source": "https://github.com/windwalker-io/core/tree/4.0.46"
+                "source": "https://github.com/windwalker-io/core/tree/master"
             },
-            "time": "2023-02-01T08:01:31+00:00"
+            "time": "2023-02-23T13:54:30+00:00"
         },
         {
             "name": "windwalker/data",
@@ -5845,6 +5846,7 @@
     "aliases": [],
     "minimum-stability": "beta",
     "stability-flags": {
+        "windwalker/core": 20,
         "lyrasoft/shopgo": 20
     },
     "prefer-stable": false,

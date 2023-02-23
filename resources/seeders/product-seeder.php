@@ -238,7 +238,12 @@ $seeder->import(
                 $variant->setSku('PRD' . Str::padLeft((string) $i, 7, '0') . '-' . ($h + 1));
                 $variant->setStockQuantity(random_int(1, 30));
                 $variant->setSubtract(true);
-                $variant->setPrice($mainVariant->getPrice() + (random_int(-10, 10) * 100));
+                $variant->setPrice(
+                    min(
+                        $mainVariant->getPrice() + (random_int(-10, 10) * 100),
+                        100
+                    )
+                );
                 $variant->getDimension()
                     ->setWidth(random_int(20, 100))
                     ->setHeight(random_int(20, 100))

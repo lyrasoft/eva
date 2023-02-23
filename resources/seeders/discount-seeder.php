@@ -52,13 +52,13 @@ $seeder->import(
             $item->setType(DiscountType::PRODUCT());
             $item->setSubtype('special');
             $item->setProductId($product->getId());
-            $item->setPublishUp(chronos('-6months'));
-            $item->setPublishDown(chronos('+6months'));
+            $item->setPublishUp(chronos('-3months'));
+            $item->setPublishDown(chronos('+3months'));
             $item->setMethod($faker->randomElement(DiscountMethod::cases()));
             $item->setPrice(match ($item->getMethod()->getValue()) {
                 DiscountMethod::OFFSETS => - (random_int(1, 10) * 100),
                 DiscountMethod::FIXED => random_int(5, 40) * 100,
-                DiscountMethod::PERCENTAGE => random_int(1, 10) / 10,
+                DiscountMethod::PERCENTAGE => random_int(1, 9) * 10,
                 default => 0
             });
             $item->setState(1);
@@ -101,7 +101,7 @@ $seeder->import(
             $item->setPrice(match ($item->getMethod()->getValue()) {
                 DiscountMethod::OFFSETS => - (random_int(1, 10) * 100),
                 DiscountMethod::FIXED => random_int(5, 40) * 100,
-                DiscountMethod::PERCENTAGE => random_int(1, 10) / 10,
+                DiscountMethod::PERCENTAGE => random_int(1, 9) * 10,
                 default => 0,
             });
             $item->setFreeShipping($faker->randomElement([true, false]));
@@ -148,7 +148,7 @@ $seeder->import(
             $item->setPrice(match ($item->getMethod()->getValue()) {
                 DiscountMethod::OFFSETS => - (random_int(1, 10) * 100),
                 DiscountMethod::FIXED => random_int(5, 40) * 100,
-                DiscountMethod::PERCENTAGE => random_int(1, 10) / 10,
+                DiscountMethod::PERCENTAGE => random_int(1, 9) * 10,
                 default => 0,
             });
             $item->setFreeShipping($faker->randomElement([true, false]));

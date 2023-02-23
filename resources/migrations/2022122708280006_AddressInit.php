@@ -32,7 +32,7 @@ $mig->up(
                 $schema->integer('location_id');
                 $schema->varchar('firstname');
                 $schema->varchar('lastname');
-                $schema->varchar('fullname');
+                $schema->varchar('name');
                 $schema->varchar('email');
                 $schema->varchar('phone');
                 $schema->varchar('mobile');
@@ -44,6 +44,7 @@ $mig->up(
                 $schema->varchar('address1');
                 $schema->varchar('address2');
                 $schema->varchar('vat');
+                $schema->varchar('formatted');
                 $schema->json('details')->nullable(true);
                 $schema->bool('enabled');
                 $schema->datetime('created');
@@ -61,7 +62,6 @@ $mig->up(
  */
 $mig->down(
     static function () use ($mig) {
-        // $mig->dropTableColumns(Table::class, 'column');
         $mig->dropTables(Address::class);
     }
 );

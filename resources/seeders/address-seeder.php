@@ -55,7 +55,7 @@ $seeder->import(
             $item->setLocationId($location->getId());
             $item->setFirstname($faker->firstName());
             $item->setLastname($faker->lastName());
-            $item->setFullname($item->getFirstname() . ' ' . $item->getLastname());
+            $item->setName($item->getFirstname() . ' ' . $item->getLastname());
             $item->setEmail($faker->email());
             $item->setCountry($country->getTitle());
             $item->setState($state->getTitle());
@@ -69,6 +69,9 @@ $seeder->import(
             $item->setVat((string) random_int(10000000, 99999999));
             $item->setDetails([]);
             $item->setEnabled(true);
+            $item->setFormatted(
+                $locationService->formatAddress($item, true)
+            );
 
             $mapper->createOne($item);
 
