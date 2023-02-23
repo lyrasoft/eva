@@ -9,6 +9,7 @@
 
 declare(strict_types=1);
 
+use Lyrasoft\Sequence\SequencePackage;
 use Windwalker\Utilities\Arr;
 
 use function Windwalker\include_arrays;
@@ -18,7 +19,7 @@ return Arr::mergeRecursive(
     [
         'factories' => include_arrays(__DIR__ . '/di/*.php'),
         'providers' => [
-            //
+            SequencePackage::class
         ],
         'bindings' => [
             //
