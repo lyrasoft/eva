@@ -84,13 +84,13 @@ $mig->up(
             OrderItem::class,
             function (Schema $schema) {
                 $schema->primary('id');
+                $schema->integer('parent_id');
                 $schema->integer('order_id');
                 $schema->integer('product_id');
                 $schema->integer('variant_id');
-                $schema->integer('primary_product_id');
-                $schema->integer('primary_variant_id');
-                $schema->bool('is_additional');
+                $schema->integer('attachment_id');
                 $schema->varchar('variant_hash');
+                $schema->varchar('key');
                 $schema->varchar('title');
                 $schema->varchar('variant_title');
                 $schema->varchar('image');
@@ -103,12 +103,12 @@ $mig->up(
                 $schema->json('options')->nullable(true);
                 $schema->json('params')->nullable(true);
 
+                $schema->addIndex('parent_id');
                 $schema->addIndex('order_id');
                 $schema->addIndex('product_id');
                 $schema->addIndex('variant_id');
-                $schema->addIndex('primary_product_id');
-                $schema->addIndex('primary_variant_id');
                 $schema->addIndex('variant_hash');
+                $schema->addIndex('attachment_id');
             }
         );
         $mig->createTable(

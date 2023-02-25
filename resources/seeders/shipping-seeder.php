@@ -46,7 +46,7 @@ $seeder->import(
             /** @var class-string<AbstractShipping> $type */
             $type = $faker->randomElement($types);
 
-            $item->setTitle(Utf8String::ucfirst($faker->word()) . ' Shipping');
+            $item->setTitle(Utf8String::ucfirst($ufaker->word()) . ' Shipping');
             $item->setAlias(SlugHelper::safe($item->getTitle()));
             $item->setSubtitle($faker->sentence());
             $item->setType($type::getType());

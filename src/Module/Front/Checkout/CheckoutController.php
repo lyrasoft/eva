@@ -21,7 +21,7 @@ use Lyrasoft\ShopGo\Entity\Shipping;
 use Lyrasoft\ShopGo\Enum\InvoiceType;
 use Lyrasoft\ShopGo\Payment\PaymentService;
 use Lyrasoft\ShopGo\Service\CheckoutService;
-use Lyrasoft\ShopGo\Service\LocationService;
+use Lyrasoft\ShopGo\Service\StockService;
 use Lyrasoft\ShopGo\Shipping\ShippingService;
 use Lyrasoft\ShopGo\ShopGoPackage;
 use Psr\Http\Message\UriInterface;
@@ -49,6 +49,7 @@ class CheckoutController
         Navigator $nav,
         UserService $userService,
         ShopGoPackage $shopGo,
+        StockService $stockService,
         CartService $cartService,
         CheckoutService $checkoutService
     ) {
@@ -61,7 +62,7 @@ class CheckoutController
         }
 
         $order = $orm->getDb()->transaction(
-            function () use ($cartService, $user, $app, $checkoutService) {
+            function () use ($stockService, $cartService, $user, $app, $checkoutService) {
                 $order = new Order();
 
                 $checkout = (array) $app->input('checkout');
@@ -89,6 +90,17 @@ class CheckoutController
                     $user
                 );
 
+                $cartData = $cartService->getCartDataForCheckout(
+                    $shippingLocation->getId(),
+                    $shipping['id'] ?? 0,
+                    $payment['id'] ?? 0,
+                    true
+                );
+
+                $stockService->checkStock($cartData);
+
+                $stockService->reduceStocks($cartData);
+
                 $order->setUserId($user->getId());
                 $order->setPaymentId((int) $payment['id']);
                 $order->setShippingId((int) $shipping['id']);
@@ -100,15 +112,6 @@ class CheckoutController
                     $order->setInvoiceType(InvoiceType::IDV());
                 }
 
-                $cartData = $cartService->getCartData(
-                    [
-                        'shipping_id' => $shipping['id'] ?? 0,
-                        'payment_id' => $payment['id'] ?? 0,
-                        'location_id' => $shippingLocation->getId(),
-                    ],
-                    CartService::FOR_UPDATE
-                );
-
                 return $order = $checkoutService->createOrder($order, $cartData);
             }
         );
@@ -116,8 +119,13 @@ class CheckoutController
         show($order);
     }
 
-    public function checkoutShipping(AppContext $app, ORM $orm, Navigator $nav, ShippingService $shippingService)
-    {
+    public function checkoutShipping(
+        AppContext $app,
+        ORM $orm,
+        Navigator $nav,
+        ShippingService $shippingService,
+        CartService $cartService
+    ) {
         $checkout = $app->input('checkout') ?? [];
 
         $shippingId = $checkout['shipping']['id'] ?? 0;
@@ -133,7 +141,7 @@ class CheckoutController
             return response()->redirect($nav->to('checkout_payment'), 307);
         }
 
-        $result = $shippingInstance->renderProcessLayout($app);
+        $result = $shippingInstance->checkoutLayout($cartService->getCartData());
 
         if (is_string($result)) {
             /** @var View $view */
@@ -153,8 +161,13 @@ class CheckoutController
         return $result;
     }
 
-    public function checkoutPayment(AppContext $app, ORM $orm, Navigator $nav, PaymentService $paymentService)
-    {
+    public function checkoutPayment(
+        AppContext $app,
+        ORM $orm,
+        Navigator $nav,
+        PaymentService $paymentService,
+        CartService $cartService
+    ) {
         $checkout = $app->input('checkout') ?? [];
 
         $paymentId = $checkout['payment']['id'] ?? 0;
@@ -170,7 +183,7 @@ class CheckoutController
             return response()->redirect($nav->to('checkout'), 307);
         }
 
-        $result = $paymentInstance->renderProcessLayout($app);
+        $result = $paymentInstance->checkoutLayout($cartService->getCartData());
 
         if (is_string($result)) {
             /** @var View $view */
