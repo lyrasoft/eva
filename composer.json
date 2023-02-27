@@ -34,7 +34,8 @@
         "asika/cross-env": "^1.0",
         "myclabs/php-enum": "^1.8",
         "thl/pinyin": "^1.2",
-        "lyrasoft/shopgo": "dev-master"
+        "lyrasoft/shopgo": "dev-master",
+        "lyrasoft/favorite": "dev-master"
     },
     "scripts": {
         "post-create-project-cmd": [
@@ -80,6 +81,10 @@
         {
             "type": "git",
             "url": "git@github.com:lyrasoft/theme-skote.git"
+        },
+        {
+            "type": "path",
+            "url": "./vendor/lyrasoft/favorite"
         }
     ]
 }

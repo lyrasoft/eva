@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "646b0383417793ccccd97bd182b44d38",
+    "content-hash": "8336a2a783857da9541296be518030d9",
     "packages": [
         {
             "name": "asika/cross-env",
@@ -1121,6 +1121,34 @@
             "time": "2022-08-28T08:19:30+00:00"
         },
         {
+            "name": "lyrasoft/favorite",
+            "version": "dev-master",
+            "dist": {
+                "type": "path",
+                "url": "./vendor/lyrasoft/favorite",
+                "reference": "72d9c2a44feaa7a4cb6776f4cc717f2e988a2a93"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Lyrasoft\\Favorite\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Simon Asika",
+                    "email": "asika32764@gmail.com"
+                }
+            ],
+            "description": "Lyrasoft Favorite package",
+            "transport-options": {
+                "relative": true
+            }
+        },
+        {
             "name": "lyrasoft/luna",
             "version": "2.0.62",
             "source": {
@@ -1234,12 +1262,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/lyrasoft/luna-shopgo.git",
-                "reference": "c6e33afa44db5d15b3e5975f2d1a1d81dcd7a9b2"
+                "reference": "767093351859295551013dc3cf51371cde034d12"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/lyrasoft/luna-shopgo/zipball/c6e33afa44db5d15b3e5975f2d1a1d81dcd7a9b2",
-                "reference": "c6e33afa44db5d15b3e5975f2d1a1d81dcd7a9b2",
+                "url": "https://api.github.com/repos/lyrasoft/luna-shopgo/zipball/767093351859295551013dc3cf51371cde034d12",
+                "reference": "767093351859295551013dc3cf51371cde034d12",
                 "shasum": ""
             },
             "require": {
@@ -1278,7 +1306,7 @@
                 "issues": "https://github.com/lyrasoft/luna-shopgo/issues",
                 "source": "https://github.com/lyrasoft/luna-shopgo/tree/master"
             },
-            "time": "2023-02-23T11:31:14+00:00"
+            "time": "2023-02-26T10:17:05+00:00"
         },
         {
             "name": "lyrasoft/theme-skote",
@@ -5847,7 +5875,8 @@
     "minimum-stability": "beta",
     "stability-flags": {
         "windwalker/core": 20,
-        "lyrasoft/shopgo": 20
+        "lyrasoft/shopgo": 20,
+        "lyrasoft/favorite": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

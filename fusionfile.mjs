@@ -124,6 +124,7 @@ export async function install() {
     [
       'lyrasoft/luna',
       'lyrasoft/shopgo',
+      'lyrasoft/favorite',
     ]
   );
 

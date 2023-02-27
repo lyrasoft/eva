@@ -15,7 +15,7 @@
         "@windwalker-io/fusion": "^1.0",
         "@windwalker-io/unicorn": "^1.0",
         "animate.css": "^4.1.1",
-        "bootstrap": "^5.3",
+        "bootstrap": "^5.3.0-alpha1",
         "jarallax": "^1.12.8",
         "jquery": "^3.6.0",
         "sortablejs": "^1.14.0",
