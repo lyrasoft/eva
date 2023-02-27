@@ -51,18 +51,15 @@ class EcpayPayment extends AbstractPayment
                 function (Form $form) {
                     $form->add('merchant_id', TextField::class)
                         ->label('MerchantID')
-                        ->placeholder('2000132')
-                        ->defaultValue('2000132');
+                        ->placeholder(env('ECPAY_PAYMENT_MERCHANT_ID', '2000132'));
 
                     $form->add('hash_key', TextField::class)
                         ->label('HashKey')
-                        ->placeholder('5294y06JbISpM5x9')
-                        ->defaultValue('5294y06JbISpM5x9');
+                        ->placeholder(env('ECPAY_PAYMENT_HASH_KEY', '5294y06JbISpM5x9'));
 
                     $form->add('hash_iv', TextField::class)
                         ->label('HashIV')
-                        ->placeholder('v77hoKGq4kWxNNIS')
-                        ->defaultValue('v77hoKGq4kWxNNIS');
+                        ->placeholder(env('ECPAY_PAYMENT_HASH_IV', 'v77hoKGq4kWxNNIS'));
 
                     $form->add('gateway', ListField::class)
                         ->label('支付方式')
@@ -97,23 +94,20 @@ class EcpayPayment extends AbstractPayment
             );
 
             $form->ns(
-                'receipt',
-                #[Fieldset('receipt', '電子發票參數')]
+                'invoice',
+                #[Fieldset('invoice', '電子發票參數')]
                 function (Form $form) {
                     $form->add('merchant_id', TextField::class)
                         ->label('MerchantID')
-                        ->placeholder('2000132')
-                        ->defaultValue('2000132');
+                        ->placeholder(env('ECPAY_INVOICE_MERCHANT_ID', '2000132'));
 
                     $form->add('hash_key', TextField::class)
                         ->label('HashKey')
-                        ->placeholder('ejCk326UnaZWKisg')
-                        ->defaultValue('ejCk326UnaZWKisg');
+                        ->placeholder(env('ECPAY_INVOICE_HASH_KEY', '5294y06JbISpM5x9'));
 
                     $form->add('hash_iv', TextField::class)
                         ->label('HashIV')
-                        ->placeholder('q9jcZX8Ib9LM8wYk')
-                        ->defaultValue('q9jcZX8Ib9LM8wYk');
+                        ->placeholder(env('ECPAY_INVOICE_HASH_IV', 'v77hoKGq4kWxNNIS'));
 
                     $form->add('tax_type', ListField::class)
                         ->label('課稅類別')
@@ -122,7 +116,6 @@ class EcpayPayment extends AbstractPayment
                         ->option('免稅', '3')
                         ->option('混和應稅與免稅', '9')
                         ->help('課稅類別。若為混合應稅與免稅時 (限收銀機發票無法分辨時使用，需通過申請核可)');
-
 
                     $form->add('inv_type', ListField::class)
                         ->label('字軌類別')
