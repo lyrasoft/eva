@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "646b0383417793ccccd97bd182b44d38",
+    "content-hash": "3e17aa29f5a8abd08f65cbf054fad3ad",
     "packages": [
         {
             "name": "asika/cross-env",
@@ -363,6 +363,44 @@
                 }
             ],
             "time": "2022-12-14T08:49:07+00:00"
+        },
+        {
+            "name": "ecpay/sdk",
+            "version": "1.2.20221021",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ECPay/SDK_PHP.git",
+                "reference": "eb9daf0cd1a8f2454588dd39daf149510e5c4f95"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ECPay/SDK_PHP/zipball/eb9daf0cd1a8f2454588dd39daf149510e5c4f95",
+                "reference": "eb9daf0cd1a8f2454588dd39daf149510e5c4f95",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^5.6.20 || ^7.0 || ^8.0"
+            },
+            "require-dev": {
+                "fzaninotto/faker": "1.9.x-dev",
+                "phpunit/phpunit": "^5.0 || ^6.0 || ^7.0 || ^8.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Ecpay\\Sdk\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "ECPay SDK",
+            "support": {
+                "issues": "https://github.com/ECPay/SDK_PHP/issues",
+                "source": "https://github.com/ECPay/SDK_PHP/tree/1.2.20221021"
+            },
+            "time": "2022-05-24T07:35:22+00:00"
         },
         {
             "name": "egulias/email-validator",

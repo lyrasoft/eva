@@ -9,6 +9,7 @@
 
 declare(strict_types=1);
 
+use App\Payment\Ecpay\EcpayPayment;
 use Lyrasoft\ShopGo\Enum\OrderNoMode;
 use Lyrasoft\ShopGo\Payment\Transfer\TransferPayment;
 use Lyrasoft\ShopGo\Shipping\Basic\BasicShipping;
@@ -73,7 +74,8 @@ return [
 
         'payment' => [
             'types' => [
-                'transfer' => TransferPayment::class
+                'transfer' => TransferPayment::class,
+                'ecpay' => EcpayPayment::class,
             ]
         ],
     ]

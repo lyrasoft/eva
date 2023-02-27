@@ -34,7 +34,8 @@
         "asika/cross-env": "^1.0",
         "myclabs/php-enum": "^1.8",
         "thl/pinyin": "^1.2",
-        "lyrasoft/shopgo": "dev-master"
+        "lyrasoft/shopgo": "dev-master",
+        "ecpay/sdk": "^1.2"
     },
     "scripts": {
         "post-create-project-cmd": [
