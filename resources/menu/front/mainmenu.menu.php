@@ -81,7 +81,7 @@ $menu->registerChildren(
 );
 
 // Members
-$menu->link('購物車', $nav->to('product_list'))
+$menu->link('商城', $nav->to('product_list'))
     ->icon('fal fa-cart');
 
 $menu->registerChildren(

@@ -31,7 +31,10 @@ $menu->link('會員選單', '#')
 
 $menu->registerChildren(
     function (MenuBuilder $menu) use ($app, $nav) {
-        $menu->link('我的訂單', $nav->to('order_list'))
-        ->icon('fa fa-file');
+        $menu->link('我的訂單', $nav->to('my_order_list'))
+            ->icon('fa fa-fw fa-file');
+
+        $menu->link('待買清單', $nav->to('wishlist'))
+            ->icon('fa fa-fw fa-heart');
     }
 );

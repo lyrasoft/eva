@@ -22,7 +22,15 @@ use Windwalker\Core\Router\RouteCreator;
 
 $router->group('front')
     ->namespace('front')
-    ->middleware(CsrfMiddleware::class)
+    ->middleware(
+        CsrfMiddleware::class,
+        options: [
+            'excludes' => [
+                'front::shipping_task',
+                'front::payment_task',
+            ]
+        ]
+    )
     ->middleware(LocaleMiddleware::class)
     ->middleware(FrontMiddleware::class)
     ->register(function (RouteCreator $router) {

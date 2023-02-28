@@ -92,8 +92,8 @@ $cartQuantity = $cartStorage->count();
 
                                                 <span class="badge bg-danger"
                                                     data-role="cart-quantity">
-                                        {{ $cartQuantity }}
-                                    </span>
+                                                        {{ $cartQuantity }}
+                                                    </span>
                                             </div>
                                         </div>
                                     </a>

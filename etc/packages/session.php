@@ -39,9 +39,9 @@ return [
             'expires' => '+150minutes',
             'path' => '/',
             'domain' => null,
-            'secure' => false,
+            'secure' => true,
             'httponly' => true,
-            'samesite' => CookiesInterface::SAMESITE_LAX,
+            'samesite' => CookiesInterface::SAMESITE_NONE,
         ],
 
         'ini' => [

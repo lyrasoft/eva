@@ -11,24 +11,43 @@ declare(strict_types=1);
 
 namespace App\Shipping\Ecpay;
 
+use Ecpay\Sdk\Factories\Factory;
+use Lyrasoft\Luna\User\Password;
 use Lyrasoft\ShopGo\Cart\CartData;
-use Lyrasoft\ShopGo\Cart\Price\PriceObject;
+use Lyrasoft\ShopGo\Entity\Location;
+use Lyrasoft\ShopGo\Entity\Order;
 use Lyrasoft\ShopGo\Field\OrderStateListField;
 use Lyrasoft\ShopGo\Shipping\AbstractShipping;
+use Lyrasoft\ShopGo\Shipping\PriceRangeTrait;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\UriInterface;
 use Unicorn\Field\ButtonRadioField;
 use Unicorn\Field\SwitcherField;
+use Windwalker\Core\Application\AppContext;
+use Windwalker\Core\Application\ApplicationInterface;
+use Windwalker\Core\Http\AppRequest;
 use Windwalker\Core\Language\LangService;
+use Windwalker\Core\Renderer\RendererService;
+use Windwalker\Core\Router\Navigator;
+use Windwalker\Core\Router\RouteUri;
+use Windwalker\DI\Attributes\Inject;
 use Windwalker\Form\Field\ListField;
 use Windwalker\Form\Field\NumberField;
 use Windwalker\Form\Field\SpacerField;
 use Windwalker\Form\Field\TextField;
 use Windwalker\Form\Form;
+use Windwalker\Renderer\CompositeRenderer;
 
 /**
  * The EcpayShipping class.
  */
 class EcpayShipping extends AbstractShipping
 {
+    use PriceRangeTrait;
+
+    #[Inject]
+    protected ApplicationInterface $app;
+
     public static function getTypeIcon(): string
     {
         return 'fa fa-truck';
@@ -44,15 +63,10 @@ class EcpayShipping extends AbstractShipping
         return '綠界超商取貨與付款';
     }
 
-    public function getShippingFeeComputer(CartData $cartData, PriceObject $total): \Closure
-    {
-        return function () {
-            //
-        };
-    }
-
     public function define(Form $form): void
     {
+        $this->registerPricingForm($form);
+
         $form->ns('params', function (Form $form) {
             $form->fieldset('shipping')
                 ->title('物流參數')
@@ -60,15 +74,15 @@ class EcpayShipping extends AbstractShipping
                     function (Form $form) {
                         $form->add('merchant_id', TextField::class)
                             ->label('MerchantID')
-                            ->placeholder(env('ECPAY_SHIPPING_MERCHANT_ID', '2000132'));
+                            ->placeholder($this->getEnvCredentials()[0]);
 
                         $form->add('hash_key', TextField::class)
                             ->label('HashKey')
-                            ->placeholder(env('ECPAY_SHIPPING_HASH_KEY', '5294y06JbISpM5x9'));
+                            ->placeholder($this->getEnvCredentials()[1]);
 
                         $form->add('hash_iv', TextField::class)
                             ->label('HashIV')
-                            ->placeholder(env('ECPAY_SHIPPING_HASH_IV', 'v77hoKGq4kWxNNIS'));
+                            ->placeholder($this->getEnvCredentials()[2]);
 
                         $form->add('gateway', ListField::class)
                             ->label('貨運方式')
@@ -143,17 +157,213 @@ class EcpayShipping extends AbstractShipping
                             ->option('冷凍', '0003')
                             ->defaultValue('0001');
 
-                        $form->add('mart_max_amount', NumberField::class)
+                        $form->add('cvs_max_amount', NumberField::class)
                             ->label('超商取貨最大金額')
                             ->min(0)
                             ->defaultValue(19999);
 
-                        $form->add('mart_min_amount', NumberField::class)
+                        $form->add('cvs_min_amount', NumberField::class)
                             ->label('超商取貨最小金額')
                             ->min(0)
                             ->defaultValue(0);
                     }
                 );
         });
+    }
+
+    public function isSupported(CartData $cartData): bool
+    {
+        $params = $this->getParams();
+
+        if (static::isCVS($params['gateway'])) {
+            $maxAmount = $params['cvs_max_amount'] ?? 19999;
+            $minAmount = $params['cvs_min_amount'] ?? 0;
+
+            $total = $cartData->getTotals()['total'];
+
+            return !($total->gt($maxAmount) || $total->lt($minAmount));
+        }
+
+        return true;
+    }
+
+    public function form(Location $location): string
+    {
+        $params = $this->getParams();
+
+        $type = $params['gateway'];
+
+        if (!static::isCVS($type)) {
+            return '';
+        }
+
+        /** @var CompositeRenderer $renderer */
+        $renderer = $this->app->service(RendererService::class)->createRenderer();
+        $renderer->addPath(WINDWALKER_VIEWS . '/shipping/ecpay');
+        $renderer->addPath(__DIR__ . '/views');
+
+        return $renderer->render(
+            'form',
+            [
+                'shipping' => $this,
+            ]
+        );
+    }
+
+    public function prepareOrder(Order $order, CartData $cartData): Order
+    {
+        $appRequest = $this->app->service(AppRequest::class);
+        $checkout = $appRequest->input('checkout');
+        $shipping = $checkout['shipping'];
+
+        if ($this->isCVSType()) {
+            $data = $order->getShippingData();
+
+            $data['CVSAddress'] = $shipping['CVSAddress'];
+            $data['CVSOutSide'] = $shipping['CVSOutSide'];
+            $data['CVSStoreID'] = $shipping['CVSStoreID'];
+            $data['CVSStoreName'] = $shipping['CVSStoreName'];
+            $data['CVSTelephone'] = $shipping['CVSTelephone'];
+            $data['LogisticsSubType'] = $shipping['LogisticsSubType'];
+        }
+
+        return $order;
+    }
+
+    public function processCheckout(Order $order, RouteUri $notifyUrl): UriInterface|ResponseInterface|null
+    {
+        return null;
+    }
+
+    public function orderInfo(Order $order): string
+    {
+        return '';
+    }
+
+    public function runTask(AppContext $app, string $task): mixed
+    {
+        return match ($task) {
+            'mapSelect' => $app->call([$this, 'mapSelect']),
+            'mapReply' => $app->call([$this, 'mapReply']),
+        };
+    }
+
+    public function mapSelect(AppContext $app, Navigator $nav): string
+    {
+        $params = $this->getParams();
+        $ecpay = $this->getEcpay();
+        $callback = $app->input('callback');
+
+        $formService = $ecpay->create('AutoSubmitFormWithCmvService');
+
+        $input = [
+            'MerchantID' => $this->getMerchantID(),
+            'LogisticsType' => 'CVS',
+            'LogisticsSubType' => $this->getSubtype(),
+            'IsCollection' => $params['is_collection'] ? 'Y' : 'N',
+
+            // 請參考 example/Logistics/Domestic/GetMapResponse.php 範例開發
+            'ServerReplyURL' => $reply = (string) $nav->to('shipping_task')
+                ->task('mapReply')
+                ->id($this->getData()->getId())
+                ->var('callback', $callback)
+                ->full(),
+
+            'ClientReplyURL' => $reply,
+        ];
+
+        $action = $this->getEndpoint('Express/map');
+
+        return $formService->generate($input, $action);
+    }
+
+    public function mapReply(AppContext $app): string
+    {
+        $callback = $app->input('callback');
+        $data = json_encode($app->input());
+
+        return <<<HTML
+<script>
+window.opener.{$callback}($data);
+window.close();
+</script>
+HTML;
+    }
+
+    public function getEndpoint(string $path): string
+    {
+        $stage = $this->isTest() ? '-stage' : '';
+
+        return "https://logistics{$stage}.ecpay.com.tw/" . $path;
+    }
+
+    public function isTest(): bool
+    {
+        return $this->getMerchantID() === '2000132';
+    }
+
+    public function getSubtype()
+    {
+        $params = $this->getParams();
+        $gateway = $params['gateway'];
+
+        if ($params['cvs_type'] === 'C2C') {
+            return $gateway . 'C2C';
+        }
+
+        return $gateway;
+    }
+
+    public function isCVSType(): bool
+    {
+        $params = $this->getParams();
+
+        $type = $params['gateway'];
+
+        return static::isCVS($type);
+    }
+
+    public static function isCVS(string $type): bool
+    {
+        return in_array($type, ['FAMI', 'UNIMART', 'HILIFE'], true);
+    }
+
+    public function getMerchantID(): string
+    {
+        return $this->getParams()['merchant_id'] ?: $this->getEnvCredentials()[0];
+    }
+
+    public function getHashKey(): string
+    {
+        return $this->getParams()['hash_key'] ?: $this->getEnvCredentials()[1];
+    }
+
+    public function getHashIV(): string
+    {
+        return $this->getParams()['hash_iv'] ?: $this->getEnvCredentials()[2];
+    }
+
+    public function getEcpay(): Factory
+    {
+        $params = $this->getParams();
+
+        return new Factory(
+            [
+                'hashKey' => $this->getHashKey(),
+                'hashIv' => $this->getHashIV(),
+            ]
+        );
+    }
+
+    /**
+     * @return  string[]
+     */
+    protected function getEnvCredentials(): array
+    {
+        return [
+            env('ECPAY_SHIPPING_MERCHANT_ID', '2000132'),
+            env('ECPAY_SHIPPING_HASH_KEY', '5294y06JbISpM5x9'),
+            env('ECPAY_SHIPPING_HASH_IV', 'v77hoKGq4kWxNNIS')
+        ];
     }
 }
