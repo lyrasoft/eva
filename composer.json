@@ -35,7 +35,7 @@
         "myclabs/php-enum": "^1.8",
         "thl/pinyin": "^1.2",
         "lyrasoft/shopgo": "dev-master",
-        "lyrasoft/favorite": "dev-master",
+        "lyrasoft/favorite": "^1.0",
         "ecpay/sdk": "^1.2"
     },
     "scripts": {
@@ -85,7 +85,7 @@
         },
         {
             "type": "path",
-            "url": "./vendor/lyrasoft/favorite"
+            "url": "./vendor/lyrasoft/shopgo-ecpay"
         }
     ]
 }

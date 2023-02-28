@@ -9,8 +9,8 @@
 
 declare(strict_types=1);
 
-use App\Payment\Ecpay\EcpayPayment;
-use App\Shipping\Ecpay\EcpayShipping;
+use Lyrasoft\ShopGo\Ecpay\EcpayPayment;
+use Lyrasoft\ShopGo\Ecpay\EcpayShipping;
 use Lyrasoft\ShopGo\Enum\OrderNoMode;
 use Lyrasoft\ShopGo\Payment\Transfer\TransferPayment;
 use Lyrasoft\ShopGo\Shipping\Basic\BasicShipping;

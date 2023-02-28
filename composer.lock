@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "890f780cdd0e75e3d2a3525c41b7da0a",
+    "content-hash": "fe218749c0cda5d6587a76bd3483bfbf",
     "packages": [
         {
             "name": "asika/cross-env",
@@ -1160,11 +1160,17 @@
         },
         {
             "name": "lyrasoft/favorite",
-            "version": "dev-master",
+            "version": "1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/lyrasoft/luna-favorite.git",
+                "reference": "22e12d42faba080ea078246b7d15d87ccb4ef4f5"
+            },
             "dist": {
-                "type": "path",
-                "url": "./vendor/lyrasoft/favorite",
-                "reference": "c36a724c9fb1d058ff7e70096e9f8301fe0f19ac"
+                "type": "zip",
+                "url": "https://api.github.com/repos/lyrasoft/luna-favorite/zipball/22e12d42faba080ea078246b7d15d87ccb4ef4f5",
+                "reference": "22e12d42faba080ea078246b7d15d87ccb4ef4f5",
+                "shasum": ""
             },
             "type": "library",
             "extra": {
@@ -1179,6 +1185,7 @@
                     "Lyrasoft\\Favorite\\": "src/"
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -1189,9 +1196,11 @@
                 }
             ],
             "description": "Lyrasoft Favorite package",
-            "transport-options": {
-                "relative": true
-            }
+            "support": {
+                "issues": "https://github.com/lyrasoft/luna-favorite/issues",
+                "source": "https://github.com/lyrasoft/luna-favorite/tree/1.0.1"
+            },
+            "time": "2023-02-27T12:49:55+00:00"
         },
         {
             "name": "lyrasoft/luna",
@@ -1307,16 +1316,17 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/lyrasoft/luna-shopgo.git",
-                "reference": "bf95b5546879377aa54f50efb842c9ba3f2f7fbc"
+                "reference": "7c386b4542e359350c651656e64e5407942300f8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/lyrasoft/luna-shopgo/zipball/bf95b5546879377aa54f50efb842c9ba3f2f7fbc",
-                "reference": "bf95b5546879377aa54f50efb842c9ba3f2f7fbc",
+                "url": "https://api.github.com/repos/lyrasoft/luna-shopgo/zipball/7c386b4542e359350c651656e64e5407942300f8",
+                "reference": "7c386b4542e359350c651656e64e5407942300f8",
                 "shasum": ""
             },
             "require": {
                 "brick/math": "^0.11.0",
+                "lyrasoft/favorite": "^1.0",
                 "lyrasoft/sequence": "^1.0"
             },
             "default-branch": true,
@@ -1351,7 +1361,7 @@
                 "issues": "https://github.com/lyrasoft/luna-shopgo/issues",
                 "source": "https://github.com/lyrasoft/luna-shopgo/tree/master"
             },
-            "time": "2023-02-27T03:58:44+00:00"
+            "time": "2023-02-28T14:07:12+00:00"
         },
         {
             "name": "lyrasoft/theme-skote",
@@ -5920,8 +5930,7 @@
     "minimum-stability": "beta",
     "stability-flags": {
         "windwalker/core": 20,
-        "lyrasoft/shopgo": 20,
-        "lyrasoft/favorite": 20
+        "lyrasoft/shopgo": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
