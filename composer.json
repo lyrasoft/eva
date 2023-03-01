@@ -36,7 +36,7 @@
         "thl/pinyin": "^1.2",
         "lyrasoft/shopgo": "dev-master",
         "lyrasoft/favorite": "^1.0",
-        "lyrasoft/shopgo-ecpay": "dev-master"
+        "lyrasoft/shopgo-ecpay": "^1.0"
     },
     "scripts": {
         "post-create-project-cmd": [

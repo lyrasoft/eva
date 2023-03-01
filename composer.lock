@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4000265e4312b28b2c0e04d762f3831b",
+    "content-hash": "3ed15c8a3cb1e1a7067a34694f8109eb",
     "packages": [
         {
             "name": "asika/cross-env",
@@ -1316,12 +1316,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/lyrasoft/luna-shopgo.git",
-                "reference": "7c386b4542e359350c651656e64e5407942300f8"
+                "reference": "e24d27c4e378e371d0df81f8a8fc2c3f8bbc2667"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/lyrasoft/luna-shopgo/zipball/7c386b4542e359350c651656e64e5407942300f8",
-                "reference": "7c386b4542e359350c651656e64e5407942300f8",
+                "url": "https://api.github.com/repos/lyrasoft/luna-shopgo/zipball/e24d27c4e378e371d0df81f8a8fc2c3f8bbc2667",
+                "reference": "e24d27c4e378e371d0df81f8a8fc2c3f8bbc2667",
                 "shasum": ""
             },
             "require": {
@@ -1361,26 +1361,25 @@
                 "issues": "https://github.com/lyrasoft/luna-shopgo/issues",
                 "source": "https://github.com/lyrasoft/luna-shopgo/tree/master"
             },
-            "time": "2023-02-28T14:07:12+00:00"
+            "time": "2023-03-01T03:48:24+00:00"
         },
         {
             "name": "lyrasoft/shopgo-ecpay",
-            "version": "dev-master",
+            "version": "1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/lyrasoft/shopgo-ecpay.git",
-                "reference": "9b0edd2884171a3d1723242c56b6d314b20b7194"
+                "reference": "85bd7861f1b751db32a359d9fef146a0dad4b682"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/lyrasoft/shopgo-ecpay/zipball/9b0edd2884171a3d1723242c56b6d314b20b7194",
-                "reference": "9b0edd2884171a3d1723242c56b6d314b20b7194",
+                "url": "https://api.github.com/repos/lyrasoft/shopgo-ecpay/zipball/85bd7861f1b751db32a359d9fef146a0dad4b682",
+                "reference": "85bd7861f1b751db32a359d9fef146a0dad4b682",
                 "shasum": ""
             },
             "require": {
                 "ecpay/sdk": "^1.2"
             },
-            "default-branch": true,
             "type": "shopgo-package",
             "autoload": {
                 "psr-4": {
@@ -1400,9 +1399,9 @@
             "description": "ShopGo Ecpay package",
             "support": {
                 "issues": "https://github.com/lyrasoft/shopgo-ecpay/issues",
-                "source": "https://github.com/lyrasoft/shopgo-ecpay/tree/master"
+                "source": "https://github.com/lyrasoft/shopgo-ecpay/tree/1.0.0"
             },
-            "time": "2023-02-28T16:10:39+00:00"
+            "time": "2023-02-28T16:40:30+00:00"
         },
         {
             "name": "lyrasoft/theme-skote",
@@ -5971,8 +5970,7 @@
     "minimum-stability": "beta",
     "stability-flags": {
         "windwalker/core": 20,
-        "lyrasoft/shopgo": 20,
-        "lyrasoft/shopgo-ecpay": 20
+        "lyrasoft/shopgo": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
