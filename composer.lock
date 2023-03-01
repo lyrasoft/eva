@@ -1316,12 +1316,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/lyrasoft/luna-shopgo.git",
-                "reference": "e24d27c4e378e371d0df81f8a8fc2c3f8bbc2667"
+                "reference": "3af8058ef60b9a2bf08a31a01422c5205569acb5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/lyrasoft/luna-shopgo/zipball/e24d27c4e378e371d0df81f8a8fc2c3f8bbc2667",
-                "reference": "e24d27c4e378e371d0df81f8a8fc2c3f8bbc2667",
+                "url": "https://api.github.com/repos/lyrasoft/luna-shopgo/zipball/3af8058ef60b9a2bf08a31a01422c5205569acb5",
+                "reference": "3af8058ef60b9a2bf08a31a01422c5205569acb5",
                 "shasum": ""
             },
             "require": {
@@ -1359,22 +1359,22 @@
             "description": "Luna ShopGo package",
             "support": {
                 "issues": "https://github.com/lyrasoft/luna-shopgo/issues",
-                "source": "https://github.com/lyrasoft/luna-shopgo/tree/master"
+                "source": "https://github.com/lyrasoft/luna-shopgo/tree/0.1.9"
             },
-            "time": "2023-03-01T03:48:24+00:00"
+            "time": "2023-03-01T04:21:16+00:00"
         },
         {
             "name": "lyrasoft/shopgo-ecpay",
-            "version": "1.0.0",
+            "version": "1.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/lyrasoft/shopgo-ecpay.git",
-                "reference": "85bd7861f1b751db32a359d9fef146a0dad4b682"
+                "reference": "ddd04c3bfa470aaf8054e659b2aa437162d89a28"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/lyrasoft/shopgo-ecpay/zipball/85bd7861f1b751db32a359d9fef146a0dad4b682",
-                "reference": "85bd7861f1b751db32a359d9fef146a0dad4b682",
+                "url": "https://api.github.com/repos/lyrasoft/shopgo-ecpay/zipball/ddd04c3bfa470aaf8054e659b2aa437162d89a28",
+                "reference": "ddd04c3bfa470aaf8054e659b2aa437162d89a28",
                 "shasum": ""
             },
             "require": {
@@ -1399,9 +1399,9 @@
             "description": "ShopGo Ecpay package",
             "support": {
                 "issues": "https://github.com/lyrasoft/shopgo-ecpay/issues",
-                "source": "https://github.com/lyrasoft/shopgo-ecpay/tree/1.0.0"
+                "source": "https://github.com/lyrasoft/shopgo-ecpay/tree/1.0.2"
             },
-            "time": "2023-02-28T16:40:30+00:00"
+            "time": "2023-03-01T04:20:37+00:00"
         },
         {
             "name": "lyrasoft/theme-skote",
