@@ -69,7 +69,8 @@ return [
         ],
 
         'checkout' => [
-            'allow_anonymous' => false
+            'allow_anonymous' => false,
+            'default_expiry' => '+7days',
         ],
 
         'shipping' => [
