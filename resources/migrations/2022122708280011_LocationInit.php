@@ -47,6 +47,7 @@ $mig->up(
                 $schema->text('address_format');
                 $schema->bool('postcode_required');
                 $schema->bool('has_states');
+                $schema->bool('can_ship');
                 $schema->varchar('call_prefix');
                 $schema->bool('state');
                 $schema->datetime('created');
@@ -83,7 +84,6 @@ $mig->up(
  */
 $mig->down(
     static function () use ($mig) {
-        // $mig->dropTableColumns(Table::class, 'column');
         $mig->dropTables(Location::class);
     }
 );
