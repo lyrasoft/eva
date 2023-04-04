@@ -73,6 +73,8 @@ return [
         ],
 
         'shipping' => [
+            'default_location_id' => env('SHOPGO_DEFAULT_LOCATION_ID'),
+            'location_labels' => null,
             'types' => [
                 'basic' => BasicShipping::class,
                 'ecpay' => EcpayShipping::class,
