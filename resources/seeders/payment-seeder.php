@@ -62,6 +62,13 @@ $seeder->import(
             $item->setOrdering($i);
             $item->setNote($faker->sentence());
 
+            $instance = $paymentService->createTypeInstance($item);
+            $defaultValues = $instance?->getDefaultFormValues();
+
+            $item->setParams(
+                $defaultValues['params'] ?? []
+            );
+
             $mapper->createOne($item);
 
             $seeder->outCounting();

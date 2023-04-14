@@ -57,6 +57,17 @@ $seeder->import(
             $item->setOrdering($i + 1);
             $item->setNote($faker->sentence());
 
+            $instance = $shippingService->createTypeInstance($item);
+            $defaultValues = $instance?->getDefaultFormValues();
+
+            $item->setPricing(
+                $defaultValues['pricing'] ?? []
+            );
+
+            $item->setParams(
+                $defaultValues['params'] ?? []
+            );
+
             $mapper->createOne($item);
 
             $seeder->outCounting();
