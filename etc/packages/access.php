@@ -77,6 +77,10 @@ return [
             'delete' => [
                 'manager' => true,
             ],
+
+            'shopgo.order.notify' => [
+                'admin' => true,
+            ]
         ],
     ],
 ];

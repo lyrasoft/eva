@@ -71,6 +71,7 @@ return [
 
         'checkout' => [
             'allow_anonymous' => false,
+            'partial_checkout' => false,
             'default_expiry' => '+7days',
         ],
 
