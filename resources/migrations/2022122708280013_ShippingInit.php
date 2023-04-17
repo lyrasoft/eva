@@ -17,7 +17,7 @@ use Windwalker\Core\Migration\Migration;
 use Windwalker\Database\Schema\Schema;
 
 /**
- * Migration UP: 2022122708280012_ShippingInit.
+ * Migration UP: 2022122708280013_ShippingInit.
  *
  * @var Migration          $mig
  * @var ConsoleApplication $app
