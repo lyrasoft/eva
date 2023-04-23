@@ -82,6 +82,8 @@ $cartQuantity = $cartStorage->count();
                             <ul class="navbar-nav mb-2 mb-lg-0">
                                 <x-locale-dropdown class="nav-item" />
 
+                                <x-currency-dropdown></x-currency-dropdown>
+
                                 <li class="nav-item">
                                     <a href="{{ $nav->to('cart') }}"
                                         class="nav-link">
