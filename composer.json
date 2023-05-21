@@ -36,7 +36,8 @@
         "thl/pinyin": "^1.2",
         "lyrasoft/shopgo": "dev-master",
         "lyrasoft/favorite": "^1.0",
-        "lyrasoft/shopgo-ecpay": "^1.0"
+        "lyrasoft/shopgo-ecpay": "^1.0",
+        "lyrasoft/sequence": "^1.0"
     },
     "require-dev": {
         "mpdf/mpdf": "^8.0",
