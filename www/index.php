@@ -11,6 +11,7 @@ namespace App\Public;
 use Windwalker\Core\Application\WebApplication;
 use Windwalker\Core\Runtime\Runtime;
 use Windwalker\Http\Event\RequestEvent;
+use Windwalker\Http\Output\Output;
 use Windwalker\Http\Server\HttpServer;
 
 $root = __DIR__ . '/..';
@@ -38,10 +39,10 @@ $app = $container->resolve('factories.apps.main');
 $app->boot();
 $server->getEventDispatcher()->addDealer($app->getEventDispatcher());
 
-$server->on('request', function (RequestEvent $event) use ($app) {
-    $req = $event->getRequest();
+$server->onRequest(function (RequestEvent $event) use ($app) {
+    $request = $event->getRequest();
 
-    $event->setResponse($app->execute($req));
+    $event->setResponse($app->execute($request));
 });
 
 $server->listen();
