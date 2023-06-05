@@ -1242,7 +1242,7 @@ $dropdown-border-radius:            $border-radius;
 $dropdown-border-width:             0;
 $dropdown-inner-border-radius:      calc(#{$dropdown-border-radius} - #{$dropdown-border-width});
 $dropdown-divider-bg:               $gray-200;
-$dropdown-divider-margin-y:         $spacer / 2;
+$dropdown-divider-margin-y:         calc($spacer / 2);
 $dropdown-box-shadow:               $box-shadow;
 
 $dropdown-link-color:               $gray-900;
@@ -1330,13 +1330,13 @@ $placeholder-opacity-min:           .2;
 // scss-docs-start card-variables
 $card-spacer-y:                     1.25rem;
 $card-spacer-x:                     1.25rem;
-$card-title-spacer-y:               $spacer / 2;
+$card-title-spacer-y:               calc($spacer / 2);
 $card-border-width:                 0;
 $card-box-shadow:                   null;
 $card-border-radius:                $border-radius;
 $card-border-color:                 $gray-300;
 $card-inner-border-radius:          calc(#{$card-border-radius} - #{$card-border-width});
-$card-cap-padding-y:                $card-spacer-y / 2;
+$card-cap-padding-y:                calc($card-spacer-y / 2);
 $card-cap-padding-x:                $card-spacer-x;
 $card-cap-bg:                       rgba($black, .03);
 $card-cap-color:                    null;
@@ -1347,7 +1347,7 @@ $card-img-overlay-padding:          $spacer;
 
 $card-title-desc:                   $gray-600;
 
-$card-group-margin:                 $grid-gutter-width / 2;
+$card-group-margin:                 calc($grid-gutter-width / 2);
 // scss-docs-end card-variables
 
 // Accordion
