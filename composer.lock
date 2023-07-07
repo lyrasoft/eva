@@ -1375,12 +1375,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/lyrasoft/luna-shopgo.git",
-                "reference": "7fa55e1073c40ed20c6230ac7c2051ea17033e4b"
+                "reference": "043b412a2597466ee02d3f05692fc26896007045"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/lyrasoft/luna-shopgo/zipball/7fa55e1073c40ed20c6230ac7c2051ea17033e4b",
-                "reference": "7fa55e1073c40ed20c6230ac7c2051ea17033e4b",
+                "url": "https://api.github.com/repos/lyrasoft/luna-shopgo/zipball/043b412a2597466ee02d3f05692fc26896007045",
+                "reference": "043b412a2597466ee02d3f05692fc26896007045",
                 "shasum": ""
             },
             "require": {
@@ -1422,7 +1422,7 @@
                 "issues": "https://github.com/lyrasoft/luna-shopgo/issues",
                 "source": "https://github.com/lyrasoft/luna-shopgo/tree/master"
             },
-            "time": "2023-07-07T05:07:48+00:00"
+            "time": "2023-07-07T05:20:39+00:00"
         },
         {
             "name": "lyrasoft/shopgo-ecpay",
