@@ -56,7 +56,7 @@ $seeder->import(
             $item->setPublishDown(chronos('+3months'));
             $item->setMethod($faker->randomElement(DiscountMethod::cases()));
             $item->setPrice(match ($item->getMethod()->getValue()) {
-                DiscountMethod::OFFSETS => - (random_int(1, 10) * 100),
+                DiscountMethod::OFFSETS => - (random_int(1, 20) * 10),
                 DiscountMethod::FIXED => random_int(5, 40) * 100,
                 DiscountMethod::PERCENTAGE => random_int(1, 9) * 10,
                 default => 0
@@ -76,7 +76,7 @@ $seeder->import(
                     $item->setSubtype('discount');
                     $item->setProductId($product->getId());
                     $item->setMinProductQuantity($d * 3);
-                    $item->setPrice(-(random_int(1, 5) * 100));
+                    $item->setPrice(-(random_int(1, 20) * 10));
                     $item->setMethod(DiscountMethod::OFFSETS());
                     $item->setState(1);
                     $item->setOrdering($d + 1);
@@ -99,7 +99,7 @@ $seeder->import(
             $item->setTitle($faker->sentence(2));
             $item->setMethod($faker->randomElement(DiscountMethod::cases()));
             $item->setPrice(match ($item->getMethod()->getValue()) {
-                DiscountMethod::OFFSETS => - (random_int(1, 10) * 100),
+                DiscountMethod::OFFSETS => - (random_int(1, 20) * 10),
                 DiscountMethod::FIXED => random_int(5, 40) * 100,
                 DiscountMethod::PERCENTAGE => random_int(1, 9) * 10,
                 default => 0,
@@ -146,7 +146,7 @@ $seeder->import(
             $item->setTitle($faker->sentence(2));
             $item->setMethod($faker->randomElement(DiscountMethod::cases()));
             $item->setPrice(match ($item->getMethod()->getValue()) {
-                DiscountMethod::OFFSETS => - (random_int(1, 10) * 100),
+                DiscountMethod::OFFSETS => - (random_int(1, 20) * 10),
                 DiscountMethod::FIXED => random_int(5, 40) * 100,
                 DiscountMethod::PERCENTAGE => random_int(1, 9) * 10,
                 default => 0,

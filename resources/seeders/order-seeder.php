@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace App\Seeder;
 
+use Lyrasoft\Luna\Entity\User;
 use Lyrasoft\ShopGo\Cart\CartItem;
 use Lyrasoft\ShopGo\Cart\CartService;
 use Lyrasoft\ShopGo\Entity\Address;
@@ -29,7 +30,6 @@ use Lyrasoft\ShopGo\Service\CheckoutService;
 use Lyrasoft\ShopGo\Service\LocationService;
 use Lyrasoft\ShopGo\Service\OrderStateService;
 use Lyrasoft\ShopGo\ShopGoPackage;
-use Lyrasoft\Luna\Entity\User;
 use Windwalker\Core\Seed\Seeder;
 use Windwalker\Data\Collection;
 use Windwalker\Database\DatabaseAdapter;
@@ -117,6 +117,19 @@ $seeder->import(
 
             // Create Cart Data
             $cartData = $cartService->createCartDataFromItems($cartItems, []);
+
+            foreach ($cartData->getItems() as $orderItem) {
+                $finalTotal = $orderItem->getPriceSet()['final_total'];
+
+                if ($finalTotal->lt(0)) {
+                    throw new \RuntimeException(
+                        sprintf(
+                            'A cartItem is negative price: %s.',
+                            (string) $finalTotal
+                        )
+                    );
+                }
+            }
 
             // Start Create Order
             $item = $mapper->createEntity();

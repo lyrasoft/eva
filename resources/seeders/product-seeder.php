@@ -34,6 +34,7 @@ use Windwalker\Utilities\Str;
 use Windwalker\Utilities\Utf8String;
 
 use function Windwalker\chronos;
+use function Windwalker\filter;
 use function Windwalker\uid;
 
 /**
@@ -239,9 +240,9 @@ $seeder->import(
                 $variant->setStockQuantity(random_int(1, 30));
                 $variant->setSubtract(true);
                 $variant->setPrice(
-                    min(
+                    filter(
                         $mainVariant->getPrice() + (random_int(-10, 10) * 100),
-                        100
+                        'range(min: 0, max: 100)'
                     )
                 );
                 $variant->getDimension()
