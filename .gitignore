@@ -27,8 +27,8 @@ Thumbs.db
 /theme
 
 # Remove above lines when you start a project
-# composer.lock
-# yarn.lock
+composer.lock
+yarn.lock
 package-lock.json
 
 #Test

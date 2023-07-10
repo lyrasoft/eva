@@ -4,6 +4,7 @@
     "homepage": "https://github.com/lyrasoft/eva",
     "license": "MIT",
     "minimum-stability": "beta",
+    "type": "project",
     "authors": [
         {
             "name": "Simon Asika",
