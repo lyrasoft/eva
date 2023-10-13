@@ -124,7 +124,7 @@ export async function admin() {
 
   return wait(
     sass(
-      'theme/admin/src/assets/scss/app.scss',
+      'resources/assets/scss/admin/app.scss',
       'www/assets/css/admin/app.css'
     ),
     sass(
