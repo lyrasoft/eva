@@ -1,10 +1,4 @@
 <?php
-/**
- * Part of Windwalker project.
- *
- * @copyright  Copyright (C) 2014 {ORGANIZATION}. All rights reserved.
- * @license    GNU Lesser General Public License version 3 or later.
- */
 
 use Symfony\Component\Dotenv\Dotenv;
 
@@ -18,6 +12,7 @@ const WINDWALKER_SOURCE = WINDWALKER_ROOT . DIRECTORY_SEPARATOR . 'src';
 const WINDWALKER_VIEWS = WINDWALKER_ROOT . DIRECTORY_SEPARATOR . 'views';
 const WINDWALKER_VENDOR = WINDWALKER_ROOT . DIRECTORY_SEPARATOR . 'vendor';
 const WINDWALKER_PUBLIC = WINDWALKER_ROOT . DIRECTORY_SEPARATOR . 'www';
+const WINDWALKER_SERVERS = WINDWALKER_ROOT . DIRECTORY_SEPARATOR . 'servers';
 
 const WINDWALKER_MIGRATIONS = WINDWALKER_RESOURCES . DIRECTORY_SEPARATOR . 'migrations';
 const WINDWALKER_SEEDERS    = WINDWALKER_RESOURCES . DIRECTORY_SEPARATOR . 'seeders';

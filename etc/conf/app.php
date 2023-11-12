@@ -1,18 +1,11 @@
 <?php
 
-/**
- * Part of Windwalker project.
- *
- * @copyright  Copyright (C) 2020 LYRASOFT.
- * @license    MIT
- */
-
 declare(strict_types=1);
 
 use Windwalker\Core\Provider\DateTimeProvider;
 
 return [
-    'secret' => '{{ REPLACE THIS AS RANDOM SECRET CODE }}',
+    'secret' => env('APP_SECRET'),
 
     'name' => 'Windwalker',
 

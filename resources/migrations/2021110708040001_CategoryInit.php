@@ -1,12 +1,5 @@
 <?php
 
-/**
- * Part of Windwalker project.
- *
- * @copyright  Copyright (C) 2021.
- * @license    __LICENSE__
- */
-
 declare(strict_types=1);
 
 namespace App\Migration;
@@ -60,9 +53,7 @@ $mig->up(
         /** @var NestedSetMapper $mapper */
         $mapper = $orm->mapper(Category::class);
 
-        if (!$mapper->getRoot()) {
-            $mapper->createRoot();
-        }
+        $mapper->createRootIfNotExist();
     }
 );
 

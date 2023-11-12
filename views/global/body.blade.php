@@ -57,7 +57,7 @@ $user = $app->service(UserService::class)->getUser();
         <header>
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
                 <div class="container">
-                    <a class="navbar-brand" href="#">
+                    <a class="navbar-brand" href="{{ $uti->path() }}">
                         <img src="{{ $asset->path('images/logo-cw-h.svg') }}"
                             alt="LOGO"
                             style="height: 27px;"
@@ -76,7 +76,7 @@ $user = $app->service(UserService::class)->getUser();
 
                             @if (!$user->isLogin())
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ $nav->to('login')->withReturn($uri->current()) }}">
+                                    <a class="nav-link" href="{{ $nav->to('login')->withReturn() }}">
                                         <span class="fa fa-sign-in-alt"></span>
                                         Login
                                     </a>

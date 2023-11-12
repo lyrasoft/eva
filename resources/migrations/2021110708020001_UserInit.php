@@ -1,12 +1,5 @@
 <?php
 
-/**
- * Part of Windwalker project.
- *
- * @copyright  Copyright (C) 2021.
- * @license    __LICENSE__
- */
-
 declare(strict_types=1);
 
 namespace App\Migration;
@@ -126,11 +119,11 @@ $mig->up(
 
         /** @var NestedSetMapper<UserRole> $roleMapper */
         $roleMapper = $orm->mapper(UserRole::class);
-        $root = $roleMapper->createRoot();
+        $root = $roleMapper->createRootIfNotExist();
 
         $role = new UserRole();
         $role->setTitle('Super User');
-        $role->setState(BasicState::PUBLISHED());
+        $role->setState(BasicState::PUBLISHED);
 
         $roleMapper->setPosition($role, $root->getPrimaryKeyValue());
         $roleMapper->createOne($role);

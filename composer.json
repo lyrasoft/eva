@@ -11,7 +11,7 @@
         }
     ],
     "require": {
-        "php": ">=8.0",
+        "php": ">=8.2",
         "ext-json": "*",
         "windwalker/authentication": "^4.0",
         "windwalker/authorization": "^4.0",
@@ -31,11 +31,15 @@
         "lyrasoft/banner": "^1.0",
         "lyrasoft/member": "^1.0",
         "lyrasoft/contact": "^1.0",
-        "symfony/var-dumper": "^5.0||^6.0",
-        "symfony/mailer": "^5.4||^6.0",
+        "symfony/mailer": "^5.4||^6.0||^7.0",
+        "dragonmantank/cron-expression": "^3.3",
+        "masterminds/html5": "^2.8",
+        "symfony/var-dumper": "^5.0||^6.0||^7.0",
         "asika/cross-env": "^1.0",
-        "myclabs/php-enum": "^1.8",
-        "thl/pinyin": "^1.2"
+        "asika32764/pinyin": "^1.2"
+    },
+    "require-dev": {
+        "nunomaduro/collision": "^7.8"
     },
     "scripts": {
         "post-create-project-cmd": [
@@ -48,6 +52,7 @@
         "post-autoload-dump": [
             "php windwalker pkg:install --tag config",
             "php windwalker pkg:install lyrasoft/toolkit --tag ide -f",
+            "php windwalker asset:sync || true",
             "php windwalker cache:clear renderer",
             "lyra pstorm:sniffer -p || true"
         ],
@@ -68,13 +73,11 @@
     },
     "config": {
         "platform": {
-            "php": "8.0.5"
+            "php": "8.2"
         }
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "4.x-dev",
-            "next": "4.x-dev"
         }
     },
     "repositories": [

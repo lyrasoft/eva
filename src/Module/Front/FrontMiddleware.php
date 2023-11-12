@@ -1,30 +1,26 @@
 <?php
 
-/**
- * Part of starter project.
- *
- * @copyright  Copyright (C) 2021 __ORGANIZATION__.
- * @license    __LICENSE__
- */
-
 declare(strict_types=1);
 
 namespace App\Module\Front;
 
+use Lyrasoft\Banner\BannerPackage;
+use Lyrasoft\Contact\ContactPackage;
+use Lyrasoft\Luna\LunaPackage;
 use Lyrasoft\Luna\Script\FontAwesomeScript;
 use Lyrasoft\Luna\Services\ConfigService;
+use Psr\Cache\InvalidArgumentException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Unicorn\Script\UnicornScript;
+use Unicorn\UnicornPackage;
 use Windwalker\Core\Application\AppContext;
 use Windwalker\Core\Asset\AssetService;
 use Windwalker\Core\Html\HtmlFrame;
 use Windwalker\Core\Language\TranslatorTrait;
 use Windwalker\Core\Middleware\AbstractLifecycleMiddleware;
+use Windwalker\DI\Exception\DefinitionException;
 
-/**
- * The FrontMiddleware class.
- */
 class FrontMiddleware extends AbstractLifecycleMiddleware
 {
     use TranslatorTrait;
@@ -41,24 +37,28 @@ class FrontMiddleware extends AbstractLifecycleMiddleware
     /**
      * prepareExecute
      *
-     * @param ServerRequestInterface $request
+     * @param  ServerRequestInterface  $request
      *
-     * @return  mixed
+     * @return void
+     * @throws InvalidArgumentException
+     * @throws DefinitionException
      */
     protected function preprocess(ServerRequestInterface $request): void
     {
-        $this->lang->loadAllFromVendor('windwalker/unicorn', 'ini');
-        $this->lang->loadAllFromVendor('lyrasoft/luna', 'ini');
-        $this->lang->loadAllFromVendor('lyrasoft/member', 'ini');
-        $this->lang->loadAllFromVendor('lyrasoft/portfolio', 'ini');
-        $this->lang->loadAllFromVendor('lyrasoft/contact', 'ini');
+        $this->lang->loadAllFromVendor(UnicornPackage::class, 'ini');
+        $this->lang->loadAllFromVendor(LunaPackage::class, 'ini');
+        $this->lang->loadAllFromVendor(ContactPackage::class, 'ini');
+        $this->lang->loadAllFromVendor(BannerPackage::class, 'ini');
+
         $this->lang->loadAll('ini');
 
         // Unicorn
         $this->unicornScript->init('js/front/main.js');
 
         // Font Awesome
-        $this->fontAwesomeScript->cssFont(FontAwesomeScript::PRO | FontAwesomeScript::DEFAULT_SET | FontAwesomeScript::LIGHT);
+        $this->fontAwesomeScript->cssFont(
+            FontAwesomeScript::PRO | FontAwesomeScript::DEFAULT_SET | FontAwesomeScript::LIGHT
+        );
 
         // Bootstrap
         $this->asset->css('css/front/bootstrap.min.css');
