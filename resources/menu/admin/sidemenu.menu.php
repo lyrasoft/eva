@@ -57,42 +57,6 @@ $menu->registerChildren(
     }
 );
 
-// Portfolio
-$menu->link('案例作品', '#')
-    ->icon('fal fa-photo-film');
-
-$menu->registerChildren(
-    function (MenuBuilder $menu) use ($nav, $lang) {
-        // Category
-        $menu->link('作品分類')
-            ->to($nav->to('category_list', ['type' => 'portfolio']))
-            ->icon('fal fa-sitemap');
-
-        // Portfolio
-        $menu->link('作品管理')
-            ->to($nav->to('portfolio_list'))
-            ->icon('fal fa-images');
-    }
-);
-
-// Portfolio
-$menu->link('團隊成員', '#')
-    ->icon('fal fa-people-pants-simple');
-
-$menu->registerChildren(
-    function (MenuBuilder $menu) use ($nav, $lang) {
-        // Category
-        $menu->link('團隊分類')
-            ->to($nav->to('category_list', ['type' => 'member']))
-            ->icon('fal fa-sitemap');
-
-        // Portfolio
-        $menu->link('成員管理')
-            ->to($nav->to('member_list'))
-            ->icon('fal fa-person');
-    }
-);
-
 // Banner
 $menu->link('橫幅管理')
     ->to($nav->to('banner_list'))

@@ -16,6 +16,7 @@
         "@windwalker-io/unicorn": "^1.0",
         "animate.css": "^4.1.1",
         "bootstrap": "^5.0.0",
+        "codemirror": "^5.63.3",
         "jarallax": "^1.12.8",
         "jquery": "^3.6.0",
         "sortablejs": "^1.14.0",
@@ -29,5 +30,10 @@
             "vendor/windwalker/unicorn/*",
             "vendor/windwalker/core/assets/*"
         ]
+    },
+    "devDependencies": {
+        "gulp-typescript": "^6.0.0-alpha.1",
+        "typescript": "^5.2.2",
+        "webpack": "^5.89.0"
     }
 }

@@ -57,7 +57,7 @@ $user = $app->service(UserService::class)->getUser();
         <header>
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
                 <div class="container">
-                    <a class="navbar-brand" href="{{ $uti->path() }}">
+                    <a class="navbar-brand" href="{{ $uri->path() }}">
                         <img src="{{ $asset->path('images/logo-cw-h.svg') }}"
                             alt="LOGO"
                             style="height: 27px;"

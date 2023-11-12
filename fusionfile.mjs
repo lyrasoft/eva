@@ -1,5 +1,5 @@
 
-import fusion, { sass, babel, parallel, wait, ts } from '@windwalker-io/fusion';
+import fusion, { sass, babel, parallel, wait, ts, src, symlink } from '@windwalker-io/fusion';
 import { syncModuleScripts, installVendors, findModules } from '@windwalker-io/core';
 
 export async function mainCSS() {
