@@ -83,7 +83,7 @@ export async function js() {
   // Compile Start
   return wait(
     babel('resources/assets/src/**/*.{js,mjs}', 'www/assets/js/', { module: 'systemjs' }),
-    ts('resources/assets/src/**/*.ts', 'www/assets/js/', { tsconfig: 'tsconfig.json' }),
+    ts('resources/assets/src/**/*.ts', 'www/assets/js/', { tsconfig: 'tsconfig.js.json' }),
     syncJS()
   );
   // Compile end
@@ -92,7 +92,11 @@ export async function js() {
 export async function syncJS() {
   // Compile Start
   return wait(
-    ...syncModuleScripts()
+    ...syncModuleScripts({
+      ts: {
+        tsconfig: 'tsconfig.js.json'
+      }
+    })
   );
   // Compile end
 }
