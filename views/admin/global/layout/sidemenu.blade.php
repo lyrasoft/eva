@@ -53,7 +53,7 @@ $root = $app->service(\Lyrasoft\Luna\Services\MenuService::class)
                 </ul>
             </li>
         @else
-            <li class="{{ $menuItem->isActive(true) ? 'active' : '' }}">
+            <li class="{{ $menuItem->isActive(true) ? 'mm-active' : '' }}">
                 <a href="{{ $menuItem->route($nav) }}"
                     class="{{ $menuItem->isActive(true) ? 'active' : '' }}">
                     <i class="{{ $menuItem->getIcon() }} fa-fw" style="font-size: 1rem"></i>
