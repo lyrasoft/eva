@@ -25,7 +25,14 @@ use Windwalker\Core\Router\RouteCreator;
 $router->group('front')
     ->namespace('front')
     ->middleware(MaintenanceMiddleware::class)
-    ->middleware(CsrfMiddleware::class)
+    ->middleware(
+        CsrfMiddleware::class,
+        options: [
+            'excludes' => [
+                'front::backup',
+            ]
+        ]
+    )
     ->middleware(LocaleMiddleware::class)
     ->middleware(FrontMiddleware::class)
     ->middleware(
