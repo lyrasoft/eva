@@ -35,7 +35,8 @@
         "masterminds/html5": "^2.8",
         "symfony/var-dumper": "^5.0||^6.0||^7.0",
         "asika/cross-env": "^1.0",
-        "asika32764/pinyin": "^1.2"
+        "asika32764/pinyin": "^1.2",
+        "lyrasoft/backup": "^2.0"
     },
     "require-dev": {
         "nunomaduro/collision": "^7.8"
