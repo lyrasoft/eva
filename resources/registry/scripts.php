@@ -19,7 +19,6 @@ declare(strict_types=1);
 return [
     // Prepare assets and install dependencies
     'prepare' => [
-        'cross-env COMPOSER_PROCESS_TIMEOUT=600 composer install',
         'yarn install',
         'yarn build default admin',
     ],
