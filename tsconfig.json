@@ -7,7 +7,6 @@
         "paths": {
             "@/*": ["./resources/assets/"],
             "@js/*": ["./resources/assets/src/*"],
-            "@vue/*": ["./resources/assets/vue/*"]
         }
     }
 }
