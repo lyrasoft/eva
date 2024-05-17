@@ -63,11 +63,6 @@ $user = $app->service(UserService::class)->getUser();
                             style="height: 27px;"
                         />
                     </a>
-                    <button class="navbar-toggler" type="button"
-                        data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-                        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <x-menu-root :menu="$menu" dropdown class="navbar-nav me-auto mb-2 mb-lg-0"></x-menu-root>
 
@@ -90,6 +85,24 @@ $user = $app->service(UserService::class)->getUser();
                                 </li>
                             @endif
                         </ul>
+                    </div>
+
+                    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel"
+                        data-bs-theme="dark">
+                        <div class="offcanvas-header">
+                            <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Offcanvas</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                        </div>
+                        <div class="offcanvas-body">
+                            <x-menu-root vertical :menu="$menu" class="navbar-nav me-auto mb-2 mb-lg-0"></x-menu-root>
+
+                            <ul class="navbar-nav mb-2 mb-lg-0">
+                                <x-locale-dropdown class="nav-item" />
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </nav>
