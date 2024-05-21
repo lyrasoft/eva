@@ -27,7 +27,7 @@ $menu->link('分類', $nav->to('article_category'))
 
 $menu->registerChildren(
     function (MenuBuilder $menu) use ($app, $nav) {
-        $categories = $app->service(CategoryRepository::class)
+        $categories = $app->make(CategoryRepository::class)
             ->getListSelector()
             ->where('category.state', 1)
             ->where('category.type', 'article')
