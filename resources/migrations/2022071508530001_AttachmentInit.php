@@ -11,7 +11,7 @@ declare(strict_types=1);
 
 namespace App\Migration;
 
-use App\Entity\Attachment;
+use Lyrasoft\Attachment\Entity\Attachment;
 use Windwalker\Core\Console\ConsoleApplication;
 use Windwalker\Core\Migration\Migration;
 use Windwalker\Database\Schema\Schema;

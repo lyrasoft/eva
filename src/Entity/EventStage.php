@@ -38,8 +38,8 @@ class EventStage implements EntityInterface
     #[Column('event_id')]
     protected int $eventId = 0;
 
-    #[Column('position_id')]
-    protected int $positionId = 0;
+    #[Column('venue_id')]
+    protected int $venueId = 0;
 
     #[Column('title')]
     protected string $title = '';
@@ -131,14 +131,14 @@ class EventStage implements EntityInterface
         return $this;
     }
 
-    public function getPositionId(): int
+    public function getVenueId(): int
     {
-        return $this->positionId;
+        return $this->venueId;
     }
 
-    public function setPositionId(int $positionId): static
+    public function setVenueId(int $venueId): static
     {
-        $this->positionId = $positionId;
+        $this->venueId = $venueId;
 
         return $this;
     }

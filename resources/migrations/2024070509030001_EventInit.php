@@ -55,7 +55,7 @@ $mig->up(
             function (Schema $schema) {
                 $schema->primary('id');
                 $schema->integer('event_id');
-                $schema->integer('position_id');
+                $schema->integer('venue_id');
                 $schema->varchar('title');
                 $schema->varchar('alias');
                 $schema->longtext('description');
@@ -74,7 +74,7 @@ $mig->up(
                 $schema->json('params')->nullable(true);
 
                 $schema->addIndex('event_id');
-                $schema->addIndex('position_id');
+                $schema->addIndex('venue_id');
             }
         );
 

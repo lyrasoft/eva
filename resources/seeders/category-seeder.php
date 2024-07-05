@@ -42,6 +42,10 @@ $seeder->import(
                 'max_level' => 1,
                 'number' => 3
             ],
+            'event' => [
+                'max_level' => 1,
+                'number' => 7
+            ],
         ];
 
         /** @var NestedSetMapper<Category> $mapper */
