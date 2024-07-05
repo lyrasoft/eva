@@ -38,7 +38,8 @@
         "asika32764/pinyin": "^1.2",
         "lyrasoft/backup": "^2.0",
         "lyrasoft/member": "^1.0",
-        "lyrasoft/attachment": "^1.0"
+        "lyrasoft/attachment": "^1.0",
+        "phpoffice/phpspreadsheet": "^2.1"
     },
     "require-dev": {
         "nunomaduro/collision": "^7.8||^8.0"
