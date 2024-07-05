@@ -57,6 +57,16 @@ $menu->registerChildren(
     }
 );
 
+// Category
+// $menu->link('成員分類')
+//     ->to($nav->to('category_list', ['type' => 'member']))
+//     ->icon('fal fa-sitemap');
+
+// Portfolio
+$menu->link('成員管理')
+    ->to($nav->to('member_list'))
+    ->icon('fal fa-person');
+
 // Banner
 $menu->link('橫幅管理')
     ->to($nav->to('banner_list'))
