@@ -267,12 +267,12 @@ class EventOrder implements EntityInterface
 
     public function getInvoiceData(): InvoiceData
     {
-        return $this->invoiceData;
+        return $this->invoiceData ??= new InvoiceData();
     }
 
-    public function setInvoiceData(InvoiceData $invoiceData): static
+    public function setInvoiceData(InvoiceData|array $invoiceData): static
     {
-        $this->invoiceData = $invoiceData;
+        $this->invoiceData = InvoiceData::wrap($invoiceData);
 
         return $this;
     }

@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace App\Seeder;
 
 use App\Entity\Venue;
+use App\EventBookingPackage;
+use Faker\Provider\Company;
 use Windwalker\Core\Seed\Seeder;
 use Windwalker\Database\DatabaseAdapter;
 use Windwalker\ORM\EntityMapper;
@@ -18,8 +20,14 @@ use Windwalker\ORM\ORM;
  * @var DatabaseAdapter $db
  */
 $seeder->import(
-    static function () use ($seeder, $orm, $db) {
-        $faker = $seeder->faker('en_US');
+    static function (
+        EventBookingPackage $eventBooking
+    ) use (
+        $seeder,
+        $orm,
+        $db
+    ) {
+        $faker = $seeder->faker($eventBooking->config('fixtures.locale') ?: 'en_US');
 
         /** @var EntityMapper<Venue> $mapper */
         $mapper = $orm->mapper(Venue::class);

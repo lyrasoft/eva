@@ -6,12 +6,11 @@ namespace App\Service;
 
 use App\Entity\EventOrder;
 use App\EventBookingPackage;
-use Lyrasoft\Sequence\Service\SequenceService;
 use Windwalker\Core\Application\ApplicationInterface;
 use Windwalker\DI\Attributes\Service;
 
 #[Service]
-class EventOrderService
+class InvoiceService
 {
     public function __construct(protected ApplicationInterface $app, protected EventBookingPackage $eventBooking)
     {
@@ -19,14 +18,14 @@ class EventOrderService
 
     public function createNo(EventOrder $order): string
     {
-        $orderNo = $this->eventBooking->config('order_no.handler');
+        $invoiceNoHandler = $this->eventBooking->config('invoice_no.handler');
 
-        if (!$orderNo instanceof \Closure) {
-            throw new \LogicException('Order NO handler is not closure');
+        if (!$invoiceNoHandler instanceof \Closure) {
+            throw new \LogicException('Invoice NO handler is not closure');
         }
 
         return $this->app->call(
-            $orderNo,
+            $invoiceNoHandler,
             [
                 'order' => $order,
                 EventOrder::class => $order,

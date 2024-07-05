@@ -8,6 +8,10 @@ use App\Entity\Event;
 use App\Entity\EventOrder;
 use App\Entity\EventPlan;
 use App\Entity\EventStage;
+use App\Enum\InvoiceType;
+use App\EventBookingPackage;
+use App\Service\EventOrderService;
+use App\Service\InvoiceService;
 use Windwalker\Core\Seed\Seeder;
 use Windwalker\Database\DatabaseAdapter;
 use Windwalker\ORM\EntityMapper;
@@ -23,8 +27,16 @@ use function Windwalker\collect;
  * @var DatabaseAdapter $db
  */
 $seeder->import(
-    static function () use ($seeder, $orm, $db) {
-        $faker = $seeder->faker('en_US');
+    static function (
+        EventOrderService $orderService,
+        InvoiceService $invoiceService,
+        EventBookingPackage $eventBooking
+    ) use (
+        $seeder,
+        $orm,
+        $db
+    ) {
+        $faker = $seeder->faker($eventBooking->config('fixtures.locale') ?: 'en_US');
 
         $events = $orm->findList(Event::class)
             ->all()
@@ -58,7 +70,15 @@ $seeder->import(
             $item->setStageId($stage->getId());
             $item->setPlanId($plan->getId());
             $item->setPlanTitle($plan->getTitle());
-            $item->setNo('E');
+            $item->setNo($orderService->createNo($item));
+            $item->setInvoiceType($faker->randomElement(InvoiceType::cases()));
+            $invoice = $item->getInvoiceData()
+                ->setNo($invoiceService->createNo($item));
+
+            if ($item->getInvoiceType() === InvoiceType::BUSINESS) {
+                $invoice->setVat($faker->numerify('########'));
+                $invoice->setTitle($faker->company());
+            }
         }
     }
 );

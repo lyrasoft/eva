@@ -8,6 +8,7 @@ use App\Entity\Event;
 use App\Entity\EventPlan;
 use App\Entity\EventStage;
 use App\Entity\Venue;
+use App\EventBookingPackage;
 use Lyrasoft\Luna\Entity\Category;
 use Unicorn\Utilities\SlugHelper;
 use Windwalker\Core\Seed\Seeder;
@@ -25,8 +26,14 @@ use function Windwalker\chronos;
  * @var DatabaseAdapter $db
  */
 $seeder->import(
-    static function () use ($seeder, $orm, $db) {
-        $faker = $seeder->faker('en_US');
+    static function (
+        EventBookingPackage $eventBooking
+    ) use (
+        $seeder,
+        $orm,
+        $db
+    ) {
+        $faker = $seeder->faker($eventBooking->config('fixtures.locale') ?: 'en_US');
 
         /** @var EntityMapper<Event> $mapper */
         $mapper = $orm->mapper(Event::class);
@@ -111,7 +118,6 @@ $seeder->import(
                 $plan->setPrice(800);
 
                 $planMapper->createOne($plan);
-
 
                 $seeder->outCounting();
             }
