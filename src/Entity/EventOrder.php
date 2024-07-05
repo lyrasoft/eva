@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Entity;
 
 use AllowDynamicProperties;
+use App\Data\EventOrderHistories;
 use App\Data\EventOrderTotals;
 use App\Data\InvoiceData;
 use App\Enum\EventOrderState;
@@ -96,6 +97,11 @@ class EventOrder implements EntityInterface
     #[Column('details')]
     #[Cast(JsonCast::class)]
     protected array $details = [];
+
+    #[Column('histories')]
+    #[Cast(JsonCast::class)]
+    #[Cast(EventOrderHistories::class)]
+    protected EventOrderHistories $histories;
 
     #[Column('state')]
     #[Cast(EventOrderState::class)]
@@ -519,6 +525,18 @@ class EventOrder implements EntityInterface
     public function setParams(array $params): static
     {
         $this->params = $params;
+
+        return $this;
+    }
+
+    public function getHistories(): EventOrderHistories
+    {
+        return $this->histories;
+    }
+
+    public function setHistories(EventOrderHistories|array $histories): static
+    {
+        $this->histories = EventOrderHistories::wrap($histories);
 
         return $this;
     }

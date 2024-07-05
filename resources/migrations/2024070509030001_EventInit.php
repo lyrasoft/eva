@@ -139,6 +139,7 @@ $mig->up(
                 $schema->varchar('phone');
                 $schema->varchar('address');
                 $schema->json('details')->nullable(true);
+                $schema->json('histories')->nullable(true);
                 $schema->varchar('state')->comment('OrderState: pending, paid, done');
                 $schema->integer('alternates');
                 $schema->varchar('payment');

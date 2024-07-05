@@ -6,11 +6,14 @@ namespace App\Seeder;
 
 use App\Entity\Event;
 use App\Entity\EventOrder;
+use App\Entity\EventPlan;
 use App\Entity\EventStage;
 use Windwalker\Core\Seed\Seeder;
 use Windwalker\Database\DatabaseAdapter;
 use Windwalker\ORM\EntityMapper;
 use Windwalker\ORM\ORM;
+
+use function Windwalker\collect;
 
 /**
  * EventOrder Seeder
@@ -32,6 +35,10 @@ $seeder->import(
             ->all()
             ->dump();
 
+        $planGroup = $orm->findList(EventPlan::class)
+            ->all()
+            ->groupBy('stageId');
+
         /** @var EntityMapper<EventOrder> $mapper */
         $mapper = $orm->mapper(EventOrder::class);
 
@@ -41,10 +48,17 @@ $seeder->import(
             /** @var Event $event */
             $event = $events[$stage->getEventId()];
 
+            $plans = $planGroup[$stage->getId()] ?? collect();
+            /** @var EventPlan $plan */
+            $plan = $faker->randomElement($plans->dump());
+
             $item = $mapper->createEntity();
 
             $item->setEventId($event->getId());
             $item->setStageId($stage->getId());
+            $item->setPlanId($plan->getId());
+            $item->setPlanTitle($plan->getTitle());
+            $item->setNo('E');
         }
     }
 );

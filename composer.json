@@ -39,7 +39,8 @@
         "lyrasoft/backup": "^2.0",
         "lyrasoft/member": "^1.0",
         "lyrasoft/attachment": "^1.0",
-        "phpoffice/phpspreadsheet": "^2.1"
+        "phpoffice/phpspreadsheet": "^2.1",
+        "lyrasoft/sequence": "^1.0"
     },
     "require-dev": {
         "nunomaduro/collision": "^7.8||^8.0"
