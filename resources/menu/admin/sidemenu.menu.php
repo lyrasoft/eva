@@ -62,6 +62,11 @@ $menu->registerChildren(
 //     ->to($nav->to('category_list', ['type' => 'member']))
 //     ->icon('fal fa-sitemap');
 
+// Events
+$menu->link('場館管理')
+    ->to($nav->to('venue_list'))
+    ->icon('fal fa-house-flag');
+
 // Portfolio
 $menu->link('成員管理')
     ->to($nav->to('member_list'))
