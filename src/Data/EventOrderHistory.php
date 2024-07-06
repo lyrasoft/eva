@@ -10,6 +10,7 @@ use Windwalker\Core\DateTime\Chronos;
 use Windwalker\Data\ValueObject;
 
 use function Windwalker\try_chronos;
+use function Windwalker\uid;
 
 class EventOrderHistory extends ValueObject
 {
@@ -26,6 +27,13 @@ class EventOrderHistory extends ValueObject
     public string $message = '';
 
     public Chronos $created;
+
+    public function __construct(mixed $data = null)
+    {
+        $this->id = uid();
+
+        parent::__construct($data);
+    }
 
     public function getId(): string
     {

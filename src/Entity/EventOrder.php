@@ -10,6 +10,7 @@ use App\Data\EventOrderTotals;
 use App\Data\InvoiceData;
 use App\Enum\EventOrderState;
 use App\Enum\InvoiceType;
+use Brick\Math\BigNumber;
 use DateTimeInterface;
 use Lyrasoft\Luna\Attributes\Author;
 use Lyrasoft\Luna\Attributes\Modifier;
@@ -46,12 +47,6 @@ class EventOrder implements EntityInterface
 
     #[Column('stage_id')]
     protected int $stageId = 0;
-
-    #[Column('plan_id')]
-    protected int $planId = 0;
-
-    #[Column('plan_title')]
-    protected string $planTitle = '';
 
     #[Column('no')]
     protected string $no = '';
@@ -205,30 +200,6 @@ class EventOrder implements EntityInterface
         return $this;
     }
 
-    public function getPlanId(): int
-    {
-        return $this->planId;
-    }
-
-    public function setPlanId(int $planId): static
-    {
-        $this->planId = $planId;
-
-        return $this;
-    }
-
-    public function getPlanTitle(): string
-    {
-        return $this->planTitle;
-    }
-
-    public function setPlanTitle(string $planTitle): static
-    {
-        $this->planTitle = $planTitle;
-
-        return $this;
-    }
-
     public function getNo(): string
     {
         return $this->no;
@@ -282,8 +253,12 @@ class EventOrder implements EntityInterface
         return $this->total;
     }
 
-    public function setTotal(float $total): static
+    public function setTotal(float|BigNumber $total): static
     {
+        if ($total instanceof BigNumber) {
+            $total = $total->toFloat();
+        }
+
         $this->total = $total;
 
         return $this;
@@ -291,12 +266,12 @@ class EventOrder implements EntityInterface
 
     public function getTotals(): EventOrderTotals
     {
-        return $this->totals;
+        return $this->totals ??= new EventOrderTotals();
     }
 
-    public function setTotals(EventOrderTotals $totals): static
+    public function setTotals(EventOrderTotals|array $totals): static
     {
-        $this->totals = $totals;
+        $this->totals = EventOrderTotals::wrap($totals);
 
         return $this;
     }
@@ -531,7 +506,7 @@ class EventOrder implements EntityInterface
 
     public function getHistories(): EventOrderHistories
     {
-        return $this->histories;
+        return $this->histories ??= new EventOrderHistories();
     }
 
     public function setHistories(EventOrderHistories|array $histories): static

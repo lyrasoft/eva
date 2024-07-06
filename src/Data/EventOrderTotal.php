@@ -6,6 +6,8 @@ namespace App\Data;
 
 use Windwalker\Data\ValueObject;
 
+use function Windwalker\uid;
+
 class EventOrderTotal extends ValueObject
 {
     public string $id = '';
@@ -21,6 +23,13 @@ class EventOrderTotal extends ValueObject
     public bool $protect = false;
 
     public array $params = [];
+
+    public function __construct(mixed $data = null)
+    {
+        $this->id = uid();
+
+        parent::__construct($data);
+    }
 
     public function getId(): string
     {

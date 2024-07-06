@@ -124,8 +124,6 @@ $mig->up(
                 $schema->integer('user_id');
                 $schema->integer('event_id');
                 $schema->integer('stage_id');
-                $schema->integer('plan_id');
-                $schema->varchar('plan_title');
                 $schema->varchar('no');
                 $schema->varchar('transaction_no');
                 $schema->varchar('invoice_type');
@@ -156,7 +154,6 @@ $mig->up(
                 $schema->addIndex('user_id');
                 $schema->addIndex('event_id');
                 $schema->addIndex('stage_id');
-                $schema->addIndex('plan_id');
             }
         );
 
@@ -169,6 +166,7 @@ $mig->up(
                 $schema->integer('event_id');
                 $schema->integer('stage_id');
                 $schema->integer('plan_id');
+                $schema->varchar('plan_title');
                 $schema->decimal('price');
                 $schema->varchar('name');
                 $schema->varchar('email');

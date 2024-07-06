@@ -23,10 +23,10 @@ return [
 
         'order_no' => [
             'handler' => function (EventOrder $order, SequenceService $sequenceService) {
-                return $sequenceService->getNextSerialAndPadZero(
+                return $sequenceService->getNextSerialWithPrefix(
                     'event_order',
-                    'EVT-' . \Windwalker\now('Ymd'),
-                    4
+                    'EVT-' . \Windwalker\now('Ym') . '-',
+                    6
                 );
             }
         ],
@@ -37,7 +37,7 @@ return [
 
         'invoice_no' => [
             'handler' => function (EventOrder $order, SequenceService $sequenceService) {
-                return $sequenceService->getNextSerialAndPadZero(
+                return $sequenceService->getNextSerialWithPrefix(
                     'event_invoice',
                     'INV-',
                     11
