@@ -33,10 +33,6 @@ class EditForm
             ->addFilter('trim')
             ->required(true);
 
-        $form->add('alias', TextField::class)
-            ->label($this->trans('unicorn.field.alias'))
-            ->addFilter('trim');
-
         $form->add('id', HiddenField::class);
     }
 
@@ -68,7 +64,7 @@ class EditForm
             );
 
         $form->add('note', TextareaField::class)
-            ->label('Note')
+            ->label('備註')
             ->rows(7);
     }
 

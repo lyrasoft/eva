@@ -8,10 +8,14 @@ use App\Module\Admin\Venue\Form\EditForm;
 use App\Repository\VenueRepository;
 use Unicorn\Controller\CrudController;
 use Unicorn\Controller\GridController;
+use Unicorn\Upload\FileUploadManager;
+use Unicorn\Upload\FileUploadService;
 use Windwalker\Core\Application\AppContext;
 use Windwalker\Core\Attributes\Controller;
 use Windwalker\Core\Router\Navigator;
 use Windwalker\DI\Attributes\Autowire;
+use Windwalker\DI\Attributes\Service;
+use Windwalker\ORM\Event\AfterSaveEvent;
 
 #[Controller()]
 class VenueController
@@ -21,8 +25,25 @@ class VenueController
         CrudController $controller,
         Navigator $nav,
         #[Autowire] VenueRepository $repository,
+        #[Service(FileUploadManager::class, 'image')]
+        FileUploadService $fileUploadService
     ): mixed {
         $form = $app->make(EditForm::class);
+
+        $controller->afterSave(
+            function (AfterSaveEvent $event) use ($repository, $app, $fileUploadService) {
+                $data = $event->getData();
+
+                $result = $fileUploadService->handleFileIfUploaded(
+                    $app->file('item')['image'] ?? null,
+                    'images/venue/cover-' . md5((string) $data['id']) . '.jpg',
+                );
+
+                $data['image'] = $result?->getUri(true) ?: $data['image'];
+
+                $repository->save($data);
+            }
+        );
 
         $uri = $app->call($controller->saveWithNamespace(...), compact('repository', 'form'));
 

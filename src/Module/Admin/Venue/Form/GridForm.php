@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Module\Admin\Venue\Form;
 
+use Lyrasoft\Luna\Field\CategoryListField;
 use Unicorn\Enum\BasicState;
 use Windwalker\Core\Language\TranslatorTrait;
 use Windwalker\Form\Attributes\FormDefine;
@@ -34,6 +35,12 @@ class GridForm
             ->label($this->trans('unicorn.field.state'))
             ->option($this->trans('unicorn.select.placeholder'), '')
             ->registerFromEnums(BasicState::class, $this->lang)
+            ->onchange('this.form.submit()');
+
+        $form->add('venue.category_id', CategoryListField::class)
+            ->label('分類')
+            ->categoryType('venue')
+            ->option($this->trans('unicorn.select.placeholder'), '')
             ->onchange('this.form.submit()');
     }
 

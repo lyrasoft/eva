@@ -26,6 +26,8 @@ use Windwalker\Core\Router\Navigator;
 use Windwalker\Core\Router\SystemUri;
 use App\Module\Admin\Venue\VenueListView;
 
+use function Windwalker\str;
+
 /**
  * @var $item Venue
  */
@@ -79,6 +81,21 @@ $workflow = $app->service(BasicStateWorkflow::class);
                         <x-sort field="venue.title">
                             @lang('unicorn.field.title')
                         </x-sort>
+                    </th>
+
+                    {{-- Position --}}
+                    <th class="text-nowrap">
+                        地點
+                    </th>
+
+                    {{-- Map --}}
+                    <th class="text-nowrap">
+                        地圖
+                    </th>
+
+                    {{-- Website --}}
+                    <th class="text-nowrap">
+                        網站
                     </th>
 
                     {{-- Category --}}
@@ -138,6 +155,35 @@ $workflow = $app->service(BasicStateWorkflow::class);
                                     {{ $item->getTitle() }}
                                 </a>
                             </div>
+                        </td>
+
+                        {{-- Position --}}
+                        <td>
+                            <div class="small">
+                                {{ $item->getAddress() }}
+                            </div>
+                        </td>
+
+                        {{-- Website --}}
+                        <td>
+                            @if ($item->getMapUrl())
+                                <a href="{{ $item->getMapUrl() }}" target="_blank"
+                                    class="btn btn-sm btn-outline-danger">
+                                    <i class="far fa-location-dot"></i>
+                                    觀看
+                                </a>
+                            @endif
+                        </td>
+
+                        {{-- Website --}}
+                        <td>
+                            @if ($item->getUrl())
+                                <a href="{{ $item->getUrl() }}" target="_blank"
+                                    class="btn btn-sm btn-outline-primary">
+                                    <i class="far fa-external-link"></i>
+                                    前往
+                                </a>
+                            @endif
                         </td>
 
                         {{-- Category --}}
