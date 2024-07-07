@@ -69,7 +69,7 @@ class VenueEditView implements ViewModelInterface
     protected function prepareMetadata(HtmlFrame $htmlFrame): void
     {
         $htmlFrame->setTitle(
-            $this->trans('unicorn.title.edit', title: 'Venue')
+            $this->trans('unicorn.title.edit', title: '場館')
         );
     }
 }
