@@ -99,12 +99,13 @@ $mig->up(
                 $schema->integer('stage_id');
                 $schema->varchar('title');
                 $schema->decimal('price');
-                $schema->decimal('origin_price');
+                $schema->decimal('origin_price')->nullable(true);
                 $schema->bool('state');
                 $schema->datetime('start_date');
                 $schema->datetime('end_date');
                 $schema->bool('require_validate');
                 $schema->integer('quota');
+                $schema->integer('sold');
                 $schema->integer('once_max');
                 $schema->datetime('created');
                 $schema->datetime('modified');

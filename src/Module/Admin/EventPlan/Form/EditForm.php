@@ -2,15 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\Module\Admin\Event\Form;
+namespace App\Module\Admin\EventPlan\Form;
 
-use Lyrasoft\Luna\Field\CategoryListField;
 use Lyrasoft\Luna\Field\UserModalField;
 use Unicorn\Field\CalendarField;
-use Unicorn\Field\SingleImageDragField;
 use Unicorn\Field\SwitcherField;
-use Unicorn\Field\TinymceEditorField;
-use Windwalker\Form\Field\TextareaField;
 use Windwalker\Form\Field\NumberField;
 use Unicorn\Enum\BasicState;
 use Windwalker\Core\Language\TranslatorTrait;
@@ -35,10 +31,6 @@ class EditForm
             ->addFilter('trim')
             ->required(true);
 
-        $form->add('alias', TextField::class)
-            ->label($this->trans('unicorn.field.alias'))
-            ->addFilter('trim');
-
         $form->add('id', HiddenField::class);
     }
 
@@ -47,20 +39,30 @@ class EditForm
     #[NS('item')]
     public function basic(Form $form): void
     {
-        $form->add('subtitle', TextField::class)
-            ->label('副標題');
+        $form->add('price', NumberField::class)
+            ->label('售價')
+            ->step('0.01');
 
-        $form->add('intro', TextareaField::class)
-            ->label('簡介')
-            ->rows(7);
+        $form->add('origin_price', NumberField::class)
+            ->label('原價')
+            ->step('0.01');
 
-        $form->add('description', TinymceEditorField::class)
-            ->label($this->trans('unicorn.field.description'))
-            ->editorOptions(
-                [
-                    'height' => 500
-                ]
-            );
+        $form->add('start_date', CalendarField::class)
+            ->label('開始時間');
+
+        $form->add('end_date', CalendarField::class)
+            ->label('結束時間');
+
+        $form->add('require_validate', SwitcherField::class)
+            ->label('需要審核')
+            ->circle(true)
+            ->color('primary');
+
+        $form->add('quota', NumberField::class)
+            ->label('限額');
+
+        $form->add('once_max', NumberField::class)
+            ->label('單次最大購買量');
     }
 
     #[FormDefine]
@@ -68,29 +70,11 @@ class EditForm
     #[NS('item')]
     public function meta(Form $form): void
     {
-        $form->add('category_id', CategoryListField::class)
-            ->label('分類')
-            ->option($this->trans('unicorn.select.placeholder'), '')
-            ->categoryType('event');
-
-        $form->add('cover', SingleImageDragField::class)
-            ->label('封面')
-            ->crop(true)
-            ->width(1200)
-            ->height(800)
-            ->showSizeNotice(true);
-
         $form->add('state', SwitcherField::class)
             ->label($this->trans('unicorn.field.published'))
             ->circle(true)
             ->color('success')
             ->defaultValue('1');
-
-        $form->add('start_date', CalendarField::class)
-            ->label('開始時間');
-
-        $form->add('end_date', CalendarField::class)
-            ->label('結束時間');
 
         $form->add('created', CalendarField::class)
             ->label($this->trans('unicorn.field.created'))
@@ -107,5 +91,9 @@ class EditForm
         $form->add('modified_by', UserModalField::class)
             ->label($this->trans('unicorn.field.modified_by'))
             ->disabled(true);
+
+        $form->add('event_id', HiddenField::class);
+
+        $form->add('stage_id', HiddenField::class);
     }
 }

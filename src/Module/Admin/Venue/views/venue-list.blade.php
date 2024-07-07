@@ -84,7 +84,7 @@ $workflow = $app->service(BasicStateWorkflow::class);
                     </th>
 
                     {{-- Position --}}
-                    <th class="text-nowrap">
+                    <th class="text-nowrap" style="width: 30%">
                         地點
                     </th>
 

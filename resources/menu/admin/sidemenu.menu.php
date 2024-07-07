@@ -67,6 +67,10 @@ $menu->link('場館管理')
     ->to($nav->to('venue_list'))
     ->icon('fal fa-house-flag');
 
+$menu->link('活動管理')
+    ->to($nav->to('event_list'))
+    ->icon('fal fa-calendar');
+
 // Portfolio
 $menu->link('成員管理')
     ->to($nav->to('member_list'))

@@ -47,7 +47,7 @@ class EventPlan implements EntityInterface
     protected float $price = 0.0;
 
     #[Column('origin_price')]
-    protected float $originPrice = 0.0;
+    protected ?float $originPrice = null;
 
     #[Column('state')]
     #[Cast('int')]
@@ -68,6 +68,9 @@ class EventPlan implements EntityInterface
 
     #[Column('quota')]
     protected int $quota = 0;
+
+    #[Column('sold')]
+    protected int $sold = 0;
 
     #[Column('once_max')]
     protected int $onceMax = 0;
@@ -160,12 +163,12 @@ class EventPlan implements EntityInterface
         return $this;
     }
 
-    public function getOriginPrice(): float
+    public function getOriginPrice(): ?float
     {
         return $this->originPrice;
     }
 
-    public function setOriginPrice(float $originPrice): static
+    public function setOriginPrice(?float $originPrice): static
     {
         $this->originPrice = $originPrice;
 
@@ -300,6 +303,18 @@ class EventPlan implements EntityInterface
     public function setParams(array $params): static
     {
         $this->params = $params;
+
+        return $this;
+    }
+
+    public function getSold(): int
+    {
+        return $this->sold;
+    }
+
+    public function setSold(int $sold): static
+    {
+        $this->sold = $sold;
 
         return $this;
     }

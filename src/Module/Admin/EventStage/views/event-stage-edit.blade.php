@@ -8,7 +8,7 @@ namespace App\View;
  * Global variables
  * --------------------------------------------------------------
  * @var  $app       AppContext      Application context.
- * @var  $vm        EventEditView  The view model object.
+ * @var  $vm        EventStageEditView  The view model object.
  * @var  $uri       SystemUri       System Uri information.
  * @var  $chronos   ChronosService  The chronos datetime service.
  * @var  $nav       Navigator       Navigator object to build route.
@@ -16,8 +16,8 @@ namespace App\View;
  * @var  $lang      LangService     The language translation service.
  */
 
-use App\Entity\Event;
-use App\Module\Admin\Event\EventEditView;
+use App\Entity\EventStage;
+use App\Module\Admin\EventStage\EventStageEditView;
 use Windwalker\Core\Application\AppContext;
 use Windwalker\Core\Asset\AssetService;
 use Windwalker\Core\DateTime\ChronosService;
@@ -28,22 +28,20 @@ use Windwalker\Form\Form;
 
 /**
  * @var $form Form
- * @var $item Event
+ * @var $item EventStage
  */
 ?>
 
-@extends('admin.global.body-edit')
+@extends('layout.event.event-stage-edit-layout')
 
 @section('toolbar-buttons')
     @include('edit-toolbar')
 @stop
 
-@section('content')
-    <x-event-edit-nav :event-id="$item?->getId()"></x-event-edit-nav>
-
+@section('edit-content')
     <form name="admin-form" id="admin-form"
         uni-form-validate='{"scroll": true}'
-        action="{{ $nav->to('event_edit') }}"
+        action="{{ $nav->to('event_stage_edit') }}"
         method="POST" enctype="multipart/form-data">
 
         <x-title-bar :form="$form" ns="item"></x-title-bar>

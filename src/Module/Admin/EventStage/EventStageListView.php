@@ -2,11 +2,12 @@
 
 declare(strict_types=1);
 
-namespace App\Module\Admin\Event;
+namespace App\Module\Admin\EventStage;
 
 use App\Entity\Event;
-use App\Module\Admin\Event\Form\GridForm;
-use App\Repository\EventRepository;
+use App\Entity\EventStage;
+use App\Module\Admin\EventStage\Form\GridForm;
+use App\Repository\EventStageRepository;
 use Unicorn\View\FormAwareViewModelTrait;
 use Unicorn\View\ORMAwareViewModelTrait;
 use Windwalker\Core\Application\AppContext;
@@ -21,16 +22,16 @@ use Windwalker\Core\View\ViewModelInterface;
 use Windwalker\DI\Attributes\Autowire;
 
 /**
- * The EventListView class.
+ * The EventStageListView class.
  */
 #[ViewModel(
     layout: [
-        'default' => 'event-list',
-        'modal' => 'event-modal',
+        'default' => 'event-stage-list',
+        'modal' => 'event-stage-modal',
     ],
-    js: 'event-list.js'
+    js: 'event-stage-list.js'
 )]
-class EventListView implements ViewModelInterface, FilterAwareViewModelInterface
+class EventStageListView implements ViewModelInterface, FilterAwareViewModelInterface
 {
     use TranslatorTrait;
     use FilterAwareViewModelTrait;
@@ -39,7 +40,7 @@ class EventListView implements ViewModelInterface, FilterAwareViewModelInterface
 
     public function __construct(
         #[Autowire]
-        protected EventRepository $repository,
+        protected EventStageRepository $repository,
     ) {
     }
 
@@ -55,6 +56,9 @@ class EventListView implements ViewModelInterface, FilterAwareViewModelInterface
     {
         $state = $this->repository->getState();
 
+        $eventId = $app->input('eventId');
+        $event = $this->orm->mustFindOne(Event::class, $eventId);
+
         // Prepare Items
         $page     = $state->rememberFromRequest('page');
         $limit    = $state->rememberFromRequest('limit') ?? 30;
@@ -68,10 +72,11 @@ class EventListView implements ViewModelInterface, FilterAwareViewModelInterface
                 $search['*'] ?? '',
                 $this->getSearchFields()
             )
+            ->where('event_stage.event_id', $eventId)
             ->ordering($ordering)
             ->page($page)
             ->limit($limit)
-            ->setDefaultItemClass(Event::class);
+            ->setDefaultItemClass(EventStage::class);
 
         $pagination = $items->getPagination();
 
@@ -81,7 +86,7 @@ class EventListView implements ViewModelInterface, FilterAwareViewModelInterface
 
         $showFilters = $this->isFiltered($filter);
 
-        return compact('items', 'pagination', 'form', 'showFilters', 'ordering');
+        return compact('items', 'pagination', 'form', 'showFilters', 'ordering', 'event');
     }
 
     /**
@@ -91,7 +96,7 @@ class EventListView implements ViewModelInterface, FilterAwareViewModelInterface
      */
     public function getDefaultOrdering(): string
     {
-        return 'event.id DESC';
+        return 'event_stage.id DESC';
     }
 
     /**
@@ -102,9 +107,9 @@ class EventListView implements ViewModelInterface, FilterAwareViewModelInterface
     public function getSearchFields(): array
     {
         return [
-            'event.id',
-            'event.title',
-            'event.alias',
+            'event_stage.id',
+            'event_stage.title',
+            'event_stage.alias',
         ];
     }
 
@@ -112,7 +117,7 @@ class EventListView implements ViewModelInterface, FilterAwareViewModelInterface
     protected function prepareMetadata(HtmlFrame $htmlFrame): void
     {
         $htmlFrame->setTitle(
-            $this->trans('unicorn.title.grid', title: '活動')
+            $this->trans('unicorn.title.grid', title: 'EventStage')
         );
     }
 }

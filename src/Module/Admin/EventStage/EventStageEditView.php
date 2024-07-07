@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\Module\Admin\Event;
+namespace App\Module\Admin\EventStage;
 
-use App\Entity\Event;
-use App\Module\Admin\Event\Form\EditForm;
-use App\Repository\EventRepository;
+use App\Entity\EventStage;
+use App\Module\Admin\EventStage\Form\EditForm;
+use App\Repository\EventStageRepository;
 use Unicorn\View\FormAwareViewModelTrait;
 use Unicorn\View\ORMAwareViewModelTrait;
 use Windwalker\Core\Application\AppContext;
@@ -19,20 +19,20 @@ use Windwalker\Core\View\ViewModelInterface;
 use Windwalker\DI\Attributes\Autowire;
 
 /**
- * The EventEditView class.
+ * The EventStageEditView class.
  */
 #[ViewModel(
-    layout: 'event-edit',
-    js: 'event-edit.js'
+    layout: 'event-stage-edit',
+    js: 'event-stage-edit.js'
 )]
-class EventEditView implements ViewModelInterface
+class EventStageEditView implements ViewModelInterface
 {
     use TranslatorTrait;
     use ORMAwareViewModelTrait;
     use FormAwareViewModelTrait;
 
     public function __construct(
-        #[Autowire] protected EventRepository $repository,
+        #[Autowire] protected EventStageRepository $repository,
     ) {
     }
 
@@ -48,11 +48,11 @@ class EventEditView implements ViewModelInterface
     {
         $id = $app->input('id');
 
-        /** @var Event $item */
+        /** @var EventStage $item */
         $item = $this->repository->getItem($id);
 
         // Bind item for injection
-        $view[Event::class] = $item;
+        $view[EventStage::class] = $item;
 
         $form = $this->createForm(EditForm::class)
             ->fill(
@@ -62,14 +62,16 @@ class EventEditView implements ViewModelInterface
                 ]
             );
 
-        return compact('form', 'id', 'item');
+        $eventStage = $item;
+
+        return compact('form', 'id', 'item', 'eventStage');
     }
 
     #[ViewMetadata]
     protected function prepareMetadata(HtmlFrame $htmlFrame): void
     {
         $htmlFrame->setTitle(
-            $this->trans('unicorn.title.edit', title: '活動')
+            $this->trans('unicorn.title.edit', title: 'EventStage')
         );
     }
 }

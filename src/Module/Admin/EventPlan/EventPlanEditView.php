@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\Module\Admin\Event;
+namespace App\Module\Admin\EventPlan;
 
-use App\Entity\Event;
-use App\Module\Admin\Event\Form\EditForm;
-use App\Repository\EventRepository;
+use App\Entity\EventPlan;
+use App\Module\Admin\EventPlan\Form\EditForm;
+use App\Repository\EventPlanRepository;
 use Unicorn\View\FormAwareViewModelTrait;
 use Unicorn\View\ORMAwareViewModelTrait;
 use Windwalker\Core\Application\AppContext;
@@ -19,20 +19,20 @@ use Windwalker\Core\View\ViewModelInterface;
 use Windwalker\DI\Attributes\Autowire;
 
 /**
- * The EventEditView class.
+ * The EventPlanEditView class.
  */
 #[ViewModel(
-    layout: 'event-edit',
-    js: 'event-edit.js'
+    layout: 'event-plan-edit',
+    js: 'event-plan-edit.js'
 )]
-class EventEditView implements ViewModelInterface
+class EventPlanEditView implements ViewModelInterface
 {
     use TranslatorTrait;
     use ORMAwareViewModelTrait;
     use FormAwareViewModelTrait;
 
     public function __construct(
-        #[Autowire] protected EventRepository $repository,
+        #[Autowire] protected EventPlanRepository $repository,
     ) {
     }
 
@@ -48,11 +48,11 @@ class EventEditView implements ViewModelInterface
     {
         $id = $app->input('id');
 
-        /** @var Event $item */
+        /** @var EventPlan $item */
         $item = $this->repository->getItem($id);
 
         // Bind item for injection
-        $view[Event::class] = $item;
+        $view[EventPlan::class] = $item;
 
         $form = $this->createForm(EditForm::class)
             ->fill(
@@ -69,7 +69,7 @@ class EventEditView implements ViewModelInterface
     protected function prepareMetadata(HtmlFrame $htmlFrame): void
     {
         $htmlFrame->setTitle(
-            $this->trans('unicorn.title.edit', title: '活動')
+            $this->trans('unicorn.title.edit', title: 'EventPlan')
         );
     }
 }

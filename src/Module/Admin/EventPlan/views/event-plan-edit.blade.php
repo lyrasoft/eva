@@ -8,7 +8,7 @@ namespace App\View;
  * Global variables
  * --------------------------------------------------------------
  * @var  $app       AppContext      Application context.
- * @var  $vm        EventEditView  The view model object.
+ * @var  $vm        EventPlanEditView  The view model object.
  * @var  $uri       SystemUri       System Uri information.
  * @var  $chronos   ChronosService  The chronos datetime service.
  * @var  $nav       Navigator       Navigator object to build route.
@@ -16,8 +16,8 @@ namespace App\View;
  * @var  $lang      LangService     The language translation service.
  */
 
-use App\Entity\Event;
-use App\Module\Admin\Event\EventEditView;
+use App\Entity\EventPlan;
+use App\Module\Admin\EventPlan\EventPlanEditView;
 use Windwalker\Core\Application\AppContext;
 use Windwalker\Core\Asset\AssetService;
 use Windwalker\Core\DateTime\ChronosService;
@@ -28,7 +28,7 @@ use Windwalker\Form\Form;
 
 /**
  * @var $form Form
- * @var $item Event
+ * @var $item EventPlan
  */
 ?>
 
@@ -39,11 +39,9 @@ use Windwalker\Form\Form;
 @stop
 
 @section('content')
-    <x-event-edit-nav :event-id="$item?->getId()"></x-event-edit-nav>
-
     <form name="admin-form" id="admin-form"
         uni-form-validate='{"scroll": true}'
-        action="{{ $nav->to('event_edit') }}"
+        action="{{ $nav->to('event_plan_edit') }}"
         method="POST" enctype="multipart/form-data">
 
         <x-title-bar :form="$form" ns="item"></x-title-bar>
