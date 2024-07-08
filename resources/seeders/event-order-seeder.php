@@ -75,7 +75,7 @@ $seeder->import(
             $attends = [];
             $total = BigDecimal::zero();
 
-            foreach (range(1, 3) as $a) {
+            foreach (range(1, 12) as $a) {
                 /** @var EventPlan $plan */
                 $plan = $faker->randomElement($plans->dump());
 

@@ -48,8 +48,8 @@ $links = [
     ],
     [
         'title' => '報名者管理',
-        'link' => fn() => $nav->to('event_plan_list')->var('eventStageId', $eventStage->getId()),
-        'active' => fn() => $menu->active('event_attend_list')
+        'link' => fn() => $nav->to('event_stage_attend_list')->var('eventStageId', $eventStage->getId()),
+        'active' => fn() => $menu->active('event_stage_attend_list')
     ],
 ];
 ?>
@@ -76,7 +76,11 @@ $links = [
         </div>
 
         <div class="col-md-10">
-            @yield('edit-content')
+            @section('edit-content')
+                <x-card>
+                    @yield('card-content')
+                </x-card>
+            @show
         </div>
     </div>
 @stop
