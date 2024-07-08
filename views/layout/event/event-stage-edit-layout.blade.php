@@ -49,7 +49,7 @@ $links = [
     [
         'title' => '報名者管理',
         'link' => fn() => $nav->to('event_plan_list')->var('eventStageId', $eventStage->getId()),
-        'active' => fn() => $menu->active('event_plan_list')
+        'active' => fn() => $menu->active('event_attend_list')
     ],
 ];
 ?>

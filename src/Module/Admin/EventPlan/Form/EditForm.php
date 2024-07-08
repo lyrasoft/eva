@@ -41,6 +41,7 @@ class EditForm
     {
         $form->add('price', NumberField::class)
             ->label('售價')
+            ->required(true)
             ->step('0.01');
 
         $form->add('origin_price', NumberField::class)
@@ -59,10 +60,15 @@ class EditForm
             ->color('primary');
 
         $form->add('quota', NumberField::class)
-            ->label('限額');
+            ->required(true)
+            ->label('限額')
+            ->min(0);
 
         $form->add('once_max', NumberField::class)
-            ->label('單次最大購買量');
+            ->required(true)
+            ->label('單次最大購買量')
+            ->defaultValue('1')
+            ->min(1);
     }
 
     #[FormDefine]

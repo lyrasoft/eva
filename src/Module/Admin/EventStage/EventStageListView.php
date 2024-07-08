@@ -8,6 +8,7 @@ use App\Entity\Event;
 use App\Entity\EventStage;
 use App\Module\Admin\EventStage\Form\GridForm;
 use App\Repository\EventStageRepository;
+use App\Traits\EventScopeViewTrait;
 use Unicorn\View\FormAwareViewModelTrait;
 use Unicorn\View\ORMAwareViewModelTrait;
 use Windwalker\Core\Application\AppContext;
@@ -37,6 +38,7 @@ class EventStageListView implements ViewModelInterface, FilterAwareViewModelInte
     use FilterAwareViewModelTrait;
     use ORMAwareViewModelTrait;
     use FormAwareViewModelTrait;
+    use EventScopeViewTrait;
 
     public function __construct(
         #[Autowire]
@@ -56,8 +58,7 @@ class EventStageListView implements ViewModelInterface, FilterAwareViewModelInte
     {
         $state = $this->repository->getState();
 
-        $eventId = $app->input('eventId');
-        $event = $this->orm->mustFindOne(Event::class, $eventId);
+        $event = $this->prepareCurrentEvent($app, $view);
 
         // Prepare Items
         $page     = $state->rememberFromRequest('page');
@@ -72,7 +73,7 @@ class EventStageListView implements ViewModelInterface, FilterAwareViewModelInte
                 $search['*'] ?? '',
                 $this->getSearchFields()
             )
-            ->where('event_stage.event_id', $eventId)
+            ->where('event_stage.event_id', $event->getId())
             ->ordering($ordering)
             ->page($page)
             ->limit($limit)
@@ -87,6 +88,11 @@ class EventStageListView implements ViewModelInterface, FilterAwareViewModelInte
         $showFilters = $this->isFiltered($filter);
 
         return compact('items', 'pagination', 'form', 'showFilters', 'ordering', 'event');
+    }
+
+    public function reorderEnabled(string $ordering): bool
+    {
+        return $ordering === 'event_stage.ordering ASC';
     }
 
     /**
@@ -110,14 +116,20 @@ class EventStageListView implements ViewModelInterface, FilterAwareViewModelInte
             'event_stage.id',
             'event_stage.title',
             'event_stage.alias',
+            'event_stage.intro',
+            'event_stage.description',
         ];
     }
 
     #[ViewMetadata]
-    protected function prepareMetadata(HtmlFrame $htmlFrame): void
+    protected function prepareMetadata(HtmlFrame $htmlFrame, Event $event): void
     {
         $htmlFrame->setTitle(
-            $this->trans('unicorn.title.grid', title: 'EventStage')
+            $this->trans(
+                'event.edit.heading',
+                event: $event->getTitle(),
+                title: $this->trans('unicorn.title.grid', title: '梯次')
+            )
         );
     }
 }

@@ -23,7 +23,10 @@ use Windwalker\ORM\Attributes\Table;
 use Windwalker\ORM\Cast\JsonCast;
 use Windwalker\ORM\EntityInterface;
 use Windwalker\ORM\EntityTrait;
+use Windwalker\ORM\Event\AfterCopyEvent;
+use Windwalker\ORM\Event\BeforeCopyEvent;
 use Windwalker\ORM\Metadata\EntityMetadata;
+use Windwalker\Utilities\Str;
 
 #[Table('event_plans', 'event_plan')]
 #[AllowDynamicProperties]
@@ -101,6 +104,21 @@ class EventPlan implements EntityInterface
     public static function setup(EntityMetadata $metadata): void
     {
         //
+    }
+
+    #[BeforeCopyEvent]
+    public static function beforeCopy(BeforeCopyEvent $event): void
+    {
+        $data = &$event->getData();
+
+        $mapper = $event->getEntityMapper();
+
+        while ($mapper->findOne(['title' => $data['title'], 'stage_id' => $data['stage_id']])) {
+            $data['title'] = Str::increment($data['title'], '%s %d');
+        }
+
+        $data['sold'] = 0;
+        $data['state'] = 0;
     }
 
     public function getId(): ?int

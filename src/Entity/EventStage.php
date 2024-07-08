@@ -9,6 +9,7 @@ use DateTimeInterface;
 use Lyrasoft\Luna\Attributes\Author;
 use Lyrasoft\Luna\Attributes\Modifier;
 use Lyrasoft\Luna\Attributes\Slugify;
+use Unicorn\Attributes\NewOrdering;
 use Unicorn\Enum\BasicState;
 use Windwalker\Core\DateTime\Chronos;
 use Windwalker\Core\DateTime\ServerTimeCast;
@@ -24,7 +25,10 @@ use Windwalker\ORM\Attributes\Table;
 use Windwalker\ORM\Cast\JsonCast;
 use Windwalker\ORM\EntityInterface;
 use Windwalker\ORM\EntityTrait;
+use Windwalker\ORM\Event\AfterCopyEvent;
+use Windwalker\ORM\Event\BeforeCopyEvent;
 use Windwalker\ORM\Metadata\EntityMetadata;
+use Windwalker\Utilities\Str;
 
 #[Table('event_stages', 'event_stage')]
 #[AllowDynamicProperties]
@@ -55,13 +59,16 @@ class EventStage implements EntityInterface
     protected string $attendUrl = '';
 
     #[Column('quota')]
-    protected int $quota = 0;
+    protected ?int $quota = null;
 
     #[Column('alternate')]
-    protected int $alternate = 0;
+    protected ?int $alternate = null;
 
     #[Column('less')]
-    protected int $less = 0;
+    protected ?int $less = null;
+
+    #[Column('attends')]
+    protected int $attends = 0;
 
     #[Column('state')]
     #[Cast('int')]
@@ -105,6 +112,45 @@ class EventStage implements EntityInterface
     public static function setup(EntityMetadata $metadata): void
     {
         //
+    }
+
+    #[BeforeCopyEvent]
+    public static function beforeCopy(BeforeCopyEvent $event): void
+    {
+        $data = &$event->getData();
+
+        $mapper = $event->getEntityMapper();
+
+        while ($mapper->findOne(['title' => $data['title'], 'event_id' => $data['event_id']])) {
+            $data['title'] = Str::increment($data['title'], '%s %d');
+        }
+
+        while ($mapper->findOne(['alias' => $data['alias'], 'event_id' => $data['event_id']])) {
+            $data['alias'] = Str::increment($data['alias'], '%s-%d');
+        }
+
+        $data['state'] = 0;
+        $data['attends'] = 0;
+    }
+
+    #[AfterCopyEvent]
+    public static function afterCopy(AfterCopyEvent $event): void
+    {
+        $old = $event->getOldEntity();
+
+        /** @var static $item */
+        $item = $event->getEntity();
+        $orm = $event->getORM();
+
+        $orm->copy(
+            EventPlan::class,
+            [
+                'stage_id' => $old?->getId()
+            ],
+            [
+                'stage_id' => $item->getId()
+            ]
+        );
     }
 
     public function getId(): ?int
@@ -191,36 +237,36 @@ class EventStage implements EntityInterface
         return $this;
     }
 
-    public function getQuota(): int
+    public function getQuota(): ?int
     {
         return $this->quota;
     }
 
-    public function setQuota(int $quota): static
+    public function setQuota(?int $quota): static
     {
         $this->quota = $quota;
 
         return $this;
     }
 
-    public function getAlternate(): int
+    public function getAlternate(): ?int
     {
         return $this->alternate;
     }
 
-    public function setAlternate(int $alternate): static
+    public function setAlternate(?int $alternate): static
     {
         $this->alternate = $alternate;
 
         return $this;
     }
 
-    public function getLess(): int
+    public function getLess(): ?int
     {
         return $this->less;
     }
 
-    public function setLess(int $less): static
+    public function setLess(?int $less): static
     {
         $this->less = $less;
 
@@ -331,6 +377,18 @@ class EventStage implements EntityInterface
     public function setParams(array $params): static
     {
         $this->params = $params;
+
+        return $this;
+    }
+
+    public function getAttends(): int
+    {
+        return $this->attends;
+    }
+
+    public function setAttends(int $attends): static
+    {
+        $this->attends = $attends;
 
         return $this;
     }

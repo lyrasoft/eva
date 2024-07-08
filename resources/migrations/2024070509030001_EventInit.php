@@ -60,9 +60,10 @@ $mig->up(
                 $schema->varchar('alias');
                 $schema->longtext('description');
                 $schema->varchar('attend_url');
-                $schema->integer('quota');
-                $schema->integer('alternate');
-                $schema->integer('less');
+                $schema->integer('quota')->nullable(true);
+                $schema->integer('alternate')->nullable(true);
+                $schema->integer('less')->nullable(true);
+                $schema->integer('attends');
                 $schema->bool('state');
                 $schema->integer('ordering');
                 $schema->datetime('start_date');

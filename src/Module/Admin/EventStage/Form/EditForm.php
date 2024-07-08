@@ -52,7 +52,8 @@ class EditForm
             ->option($this->trans('unicorn.select.placeholder'), '');
 
         $form->add('quota', NumberField::class)
-            ->label('人數限制');
+            ->label('人數限制')
+            ->required(true);
 
         $form->add('less', NumberField::class)
             ->label('最低人數');

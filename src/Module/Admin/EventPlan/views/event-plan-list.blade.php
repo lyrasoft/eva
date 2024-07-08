@@ -26,6 +26,8 @@ use Windwalker\Core\Router\Navigator;
 use Windwalker\Core\Router\SystemUri;
 use App\Module\Admin\EventPlan\EventPlanListView;
 
+use function EventBooking\priceFormat;
+
 /**
  * @var $item EventPlan
  */
@@ -76,6 +78,39 @@ $workflow = $app->service(BasicStateWorkflow::class);
                             </x-sort>
                         </th>
 
+                        {{-- Price --}}
+                        <th class="text-end">
+                            <x-sort field="event_plan.price">
+                                票價
+                            </x-sort>
+                        </th>
+
+                        {{-- Quota / Sold --}}
+                        <th class="text-end">
+                            <x-sort field="event_plan.sold">
+                                人數
+                            </x-sort>
+                        </th>
+
+                        {{-- Sale --}}
+                        <th>
+                            銷售中
+                        </th>
+
+                        {{-- Start --}}
+                        <th>
+                            <x-sort field="event_plan.start_date">
+                                開始
+                            </x-sort>
+                        </th>
+
+                        {{-- End --}}
+                        <th>
+                            <x-sort field="event_plan.end_date">
+                                結束
+                            </x-sort>
+                        </th>
+
                         {{-- Delete --}}
                         <th style="width: 1%" class="text-nowrap">
                             @lang('unicorn.field.delete')
@@ -115,7 +150,64 @@ $workflow = $app->service(BasicStateWorkflow::class);
                                     <a href="{{ $nav->to('event_plan_edit')->id($item->getId()) }}">
                                         {{ $item->getTitle() }}
                                     </a>
+
+                                    @if ($item->isRequireValidate())
+                                        <i class="far fa-shield-check"
+                                            data-bs-toggle="tooltip"
+                                            title="需要審核"
+                                        ></i>
+                                    @endif
                                 </div>
+                            </td>
+
+                            {{-- Price --}}
+                            <td class="text-end">
+                                {{ $vm->priceFormat($item->getPrice()) }}
+                            </td>
+
+                            {{-- Sold / Quota --}}
+                            <td class="text-end">
+                                {{ priceFormat($item->getSold()) }}
+                                /
+                                {{ priceFormat($item->getQuota()) }}
+                            </td>
+
+                            <td>
+                                @if ($item->getState()->isUnpublished())
+                                    <div class="text-danger">
+                                        <i class="far fa-pause"></i>
+                                        關閉
+                                    </div>
+                                @else
+                                    @if (!$item->getStartDate() || $item->getStartDate()->isPast())
+                                        @if (!$item->getEndDate() || $item->getEndDate()->isFuture())
+                                            <div class="text-success">
+                                                <i class="far fa-play"></i>
+                                                銷售中
+                                            </div>
+                                        @else
+                                            <div class="text-danger">
+                                                <i class="far fa-stop"></i>
+                                                已結束
+                                            </div>
+                                        @endif
+                                    @else
+                                        <div class="text-warning">
+                                            <i class="far fa-clock"></i>
+                                            尚未開始
+                                        </div>
+                                    @endif
+                                @endif
+                            </td>
+
+                            {{-- Start --}}
+                            <td>
+                                {{ $chronos->toLocalFormat($item->getStartDate(), 'Y-m-d H:i') ?: '-' }}
+                            </td>
+
+                            {{-- End --}}
+                            <td>
+                                {{ $chronos->toLocalFormat($item->getEndDate(), 'Y-m-d H:i') ?: '-' }}
                             </td>
 
                             {{-- Delete --}}

@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace App\Module\Admin\EventStage;
 
+use App\Entity\Event;
 use App\Entity\EventStage;
 use App\Module\Admin\EventStage\Form\EditForm;
 use App\Repository\EventStageRepository;
+use App\Traits\EventScopeViewTrait;
 use Unicorn\View\FormAwareViewModelTrait;
 use Unicorn\View\ORMAwareViewModelTrait;
 use Windwalker\Core\Application\AppContext;
@@ -30,6 +32,7 @@ class EventStageEditView implements ViewModelInterface
     use TranslatorTrait;
     use ORMAwareViewModelTrait;
     use FormAwareViewModelTrait;
+    use EventScopeViewTrait;
 
     public function __construct(
         #[Autowire] protected EventStageRepository $repository,
@@ -48,6 +51,8 @@ class EventStageEditView implements ViewModelInterface
     {
         $id = $app->input('id');
 
+        $event = $this->prepareCurrentEvent($app, $view);
+
         /** @var EventStage $item */
         $item = $this->repository->getItem($id);
 
@@ -64,14 +69,18 @@ class EventStageEditView implements ViewModelInterface
 
         $eventStage = $item;
 
-        return compact('form', 'id', 'item', 'eventStage');
+        return compact('form', 'id', 'item', 'event', 'eventStage');
     }
 
     #[ViewMetadata]
-    protected function prepareMetadata(HtmlFrame $htmlFrame): void
+    protected function prepareMetadata(HtmlFrame $htmlFrame, Event $event): void
     {
         $htmlFrame->setTitle(
-            $this->trans('unicorn.title.edit', title: 'EventStage')
+            $this->trans(
+                'event.edit.heading',
+                event: $event->getTitle(),
+                title: $this->trans('unicorn.title.edit', title: '梯次')
+            )
         );
     }
 }

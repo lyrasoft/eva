@@ -5,6 +5,8 @@ declare(strict_types=1);
 use App\Entity\EventOrder;
 use Lyrasoft\Sequence\Service\SequenceService;
 
+use function EventBooking\priceFormat;
+
 return [
     'event_booking' => [
         'enabled' => true,
@@ -44,5 +46,7 @@ return [
                 );
             }
         ],
+
+        'price_formatter' => static fn(mixed $price) => priceFormat($price, '$')
     ]
 ];

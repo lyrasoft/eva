@@ -4,9 +4,12 @@ declare(strict_types=1);
 
 namespace App\Module\Admin\EventPlan;
 
+use App\Entity\Event;
 use App\Entity\EventPlan;
+use App\Entity\EventStage;
 use App\Module\Admin\EventPlan\Form\EditForm;
 use App\Repository\EventPlanRepository;
+use App\Traits\EventScopeViewTrait;
 use Unicorn\View\FormAwareViewModelTrait;
 use Unicorn\View\ORMAwareViewModelTrait;
 use Windwalker\Core\Application\AppContext;
@@ -30,6 +33,7 @@ class EventPlanEditView implements ViewModelInterface
     use TranslatorTrait;
     use ORMAwareViewModelTrait;
     use FormAwareViewModelTrait;
+    use EventScopeViewTrait;
 
     public function __construct(
         #[Autowire] protected EventPlanRepository $repository,
@@ -48,6 +52,8 @@ class EventPlanEditView implements ViewModelInterface
     {
         $id = $app->input('id');
 
+        [$event, $eventStage] = $this->prepareCurrentEventAndStage($app, $view);
+
         /** @var EventPlan $item */
         $item = $this->repository->getItem($id);
 
@@ -62,14 +68,19 @@ class EventPlanEditView implements ViewModelInterface
                 ]
             );
 
-        return compact('form', 'id', 'item');
+        return compact('form', 'id', 'item', 'event', 'eventStage');
     }
 
     #[ViewMetadata]
-    protected function prepareMetadata(HtmlFrame $htmlFrame): void
+    protected function prepareMetadata(HtmlFrame $htmlFrame, Event $event, EventStage $eventStage): void
     {
         $htmlFrame->setTitle(
-            $this->trans('unicorn.title.edit', title: 'EventPlan')
+            $this->trans(
+                'event.stage.edit.heading',
+                event: $event->getTitle(),
+                stage: $eventStage->getTitle(),
+                title: $this->trans('unicorn.title.edit', title: '票價方案')
+            )
         );
     }
 }

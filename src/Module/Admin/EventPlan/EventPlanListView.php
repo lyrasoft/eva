@@ -4,9 +4,13 @@ declare(strict_types=1);
 
 namespace App\Module\Admin\EventPlan;
 
+use App\Entity\Event;
 use App\Entity\EventPlan;
+use App\Entity\EventStage;
 use App\Module\Admin\EventPlan\Form\GridForm;
 use App\Repository\EventPlanRepository;
+use App\Traits\EventScopeViewTrait;
+use App\Traits\PriceFormatTrait;
 use Unicorn\View\FormAwareViewModelTrait;
 use Unicorn\View\ORMAwareViewModelTrait;
 use Windwalker\Core\Application\AppContext;
@@ -36,6 +40,8 @@ class EventPlanListView implements ViewModelInterface, FilterAwareViewModelInter
     use FilterAwareViewModelTrait;
     use ORMAwareViewModelTrait;
     use FormAwareViewModelTrait;
+    use PriceFormatTrait;
+    use EventScopeViewTrait;
 
     public function __construct(
         #[Autowire]
@@ -55,14 +61,13 @@ class EventPlanListView implements ViewModelInterface, FilterAwareViewModelInter
     {
         $state = $this->repository->getState();
 
-        $eventId = $app->input('eventId');
-        $eventStageId = $app->input('eventStageId');
+        [$event, $eventStage] = $this->prepareCurrentEventAndStage($app, $view);
 
         // Prepare Items
-        $page     = $state->rememberFromRequest('page');
-        $limit    = $state->rememberFromRequest('limit') ?? 30;
-        $filter   = (array) $state->rememberFromRequest('filter');
-        $search   = (array) $state->rememberFromRequest('search');
+        $page = $state->rememberFromRequest('page');
+        $limit = $state->rememberFromRequest('limit') ?? 30;
+        $filter = (array) $state->rememberFromRequest('filter');
+        $search = (array) $state->rememberFromRequest('search');
         $ordering = $state->rememberFromRequest('list_ordering') ?? $this->getDefaultOrdering();
 
         $items = $this->repository->getListSelector()
@@ -71,7 +76,7 @@ class EventPlanListView implements ViewModelInterface, FilterAwareViewModelInter
                 $search['*'] ?? '',
                 $this->getSearchFields()
             )
-            ->where('event_plan.stage_id', $eventStageId)
+            ->where('event_plan.stage_id', $eventStage->getId())
             ->ordering($ordering)
             ->page($page)
             ->limit($limit)
@@ -85,7 +90,15 @@ class EventPlanListView implements ViewModelInterface, FilterAwareViewModelInter
 
         $showFilters = $this->isFiltered($filter);
 
-        return compact('items', 'pagination', 'form', 'showFilters', 'ordering');
+        return compact(
+            'items',
+            'pagination',
+            'form',
+            'showFilters',
+            'ordering',
+            'event',
+            'eventStage'
+        );
     }
 
     /**
@@ -108,15 +121,19 @@ class EventPlanListView implements ViewModelInterface, FilterAwareViewModelInter
         return [
             'event_plan.id',
             'event_plan.title',
-            'event_plan.alias',
         ];
     }
 
     #[ViewMetadata]
-    protected function prepareMetadata(HtmlFrame $htmlFrame): void
+    protected function prepareMetadata(HtmlFrame $htmlFrame, Event $event, EventStage $eventStage): void
     {
         $htmlFrame->setTitle(
-            $this->trans('unicorn.title.grid', title: 'EventPlan')
+            $this->trans(
+                'event.stage.edit.heading',
+                event: $event->getTitle(),
+                stage: $eventStage->getTitle(),
+                title: $this->trans('unicorn.title.grid', title: '票價方案')
+            )
         );
     }
 }

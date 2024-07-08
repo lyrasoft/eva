@@ -12,6 +12,7 @@ use Windwalker\Core\Application\AppContext;
 use Windwalker\Core\Attributes\Controller;
 use Windwalker\Core\Router\Navigator;
 use Windwalker\DI\Attributes\Autowire;
+use Windwalker\ORM\Event\BeforeSaveEvent;
 
 #[Controller()]
 class EventStageController
@@ -23,6 +24,14 @@ class EventStageController
         #[Autowire] EventStageRepository $repository,
     ): mixed {
         $form = $app->make(EditForm::class);
+
+        $controller->beforeSave(
+            function (BeforeSaveEvent $event) use ($app) {
+                $data = &$event->getData();
+
+                $data['event_id'] = $app->input('eventId');
+            }
+        );
 
         $uri = $app->call($controller->saveWithNamespace(...), compact('repository', 'form'));
 

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Repository;
 
 use App\Entity\EventStage;
+use App\Entity\Venue;
 use Unicorn\Attributes\ConfigureAction;
 use Unicorn\Attributes\Repository;
 use Unicorn\Repository\Actions\BatchAction;
@@ -27,7 +28,8 @@ class EventStageRepository implements ManageRepositoryInterface, ListRepositoryI
     {
         $selector = $this->createSelector();
 
-        $selector->from(EventStage::class);
+        $selector->from(EventStage::class)
+            ->leftJoin(Venue::class);
 
         return $selector;
     }

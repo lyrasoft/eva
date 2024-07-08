@@ -26,6 +26,8 @@ use Windwalker\Core\Router\Navigator;
 use Windwalker\Core\Router\SystemUri;
 use App\Module\Admin\EventStage\EventStageListView;
 
+use function EventBooking\priceFormat;
+
 /**
  * @var $item EventStage
  */
@@ -79,6 +81,48 @@ $workflow = $app->service(BasicStateWorkflow::class);
                                 </x-sort>
                             </th>
 
+                            {{-- Venue --}}
+                            <th class="text-nowrap">
+                                <x-sort field="event_stage.venue_id">
+                                    場地
+                                </x-sort>
+                            </th>
+
+                            {{-- Start --}}
+                            <th class="text-nowrap">
+                                <x-sort field="event_stage.start_date">
+                                    開始時間
+                                </x-sort>
+                            </th>
+
+                            {{-- End --}}
+                            <th class="text-nowrap">
+                                <x-sort field="event_stage.end_date">
+                                    結束時間
+                                </x-sort>
+                            </th>
+
+                            {{-- Attends / Quota --}}
+                            <th class="text-nowrap text-end">
+                                <x-sort field="event_stage.attends">
+                                    人數
+                                </x-sort>
+                            </th>
+
+                            {{-- Less --}}
+                            <th class="text-nowrap text-end">
+                                <x-sort field="event_stage.less">
+                                    最低人數
+                                </x-sort>
+                            </th>
+
+                            {{-- Alt --}}
+                            <th class="text-nowrap text-end">
+                                <x-sort field="event_stage.alternate">
+                                    可候補
+                                </x-sort>
+                            </th>
+
                             {{-- Delete --}}
                             <th style="width: 1%" class="text-nowrap">
                                 @lang('unicorn.field.delete')
@@ -119,6 +163,41 @@ $workflow = $app->service(BasicStateWorkflow::class);
                                             {{ $item->getTitle() }}
                                         </a>
                                     </div>
+                                </td>
+
+                                {{-- Venue --}}
+                                <td>
+                                    @if ($item->venue)
+                                        <i class="far fa-house-flag"></i>
+                                        {{ $item->venue?->title }}
+                                    @endif
+                                </td>
+
+                                {{-- Start --}}
+                                <td>
+                                    {{ $chronos->toLocalFormat($item->getStartDate(), 'Y-m-d H:i') ?: '-' }}
+                                </td>
+
+                                {{-- End --}}
+                                <td>
+                                    {{ $chronos->toLocalFormat($item->getEndDate(), 'Y-m-d H:i') ?: '-' }}
+                                </td>
+
+                                {{-- Attends / Quota --}}
+                                <td class="text-end">
+                                    {{ priceFormat($item->getAttends()) }}
+                                    /
+                                    {{ priceFormat($item->getQuota()) }}
+                                </td>
+
+                                {{-- Less --}}
+                                <td class="text-end">
+                                    {{ priceFormat($item->getLess()) ?: '-' }}
+                                </td>
+
+                                {{-- Alt --}}
+                                <td class="text-end">
+                                    {{ priceFormat($item->getAlternate()) ?: '-' }}
                                 </td>
 
                                 {{-- Delete --}}
