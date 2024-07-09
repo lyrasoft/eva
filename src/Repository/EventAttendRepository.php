@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Repository;
 
+use App\Entity\Event;
 use App\Entity\EventAttend;
 use App\Entity\EventOrder;
 use App\Entity\EventPlan;
@@ -33,6 +34,7 @@ class EventAttendRepository implements ManageRepositoryInterface, ListRepository
         $selector->from(EventAttend::class)
             ->leftJoin(EventPlan::class, 'plan')
             ->leftJoin(EventStage::class, 'stage')
+            ->leftJoin(Event::class, 'event')
             ->leftJoin(EventOrder::class, 'order', 'order.id', 'event_attend.order_id');
 
         return $selector;

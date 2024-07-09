@@ -14,7 +14,7 @@ enum EventOrderState: string implements EnumTranslatableInterface
 
     case UNPAID = 'unpaid';
     case PENDING_APPROVAL = 'pending_approval';
-    case PAID = 'paid';
+    // case PAID = 'paid';
     case DONE = 'done';
     case CANCEL = 'cancel';
     case FAIL = 'fail';

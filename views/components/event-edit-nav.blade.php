@@ -33,6 +33,12 @@ $url = $nav->self();
 <div class="card">
     <div class="card-body p-2">
         <nav class="nav nav-pills">
+            <a class="nav-item nav-link bg-light me-2"
+                href="{{ $nav->to('event_list') }}">
+                <i class="far fa-chevron-left"></i>
+                回到活動列表
+            </a>
+
             <a class="nav-item nav-link {{ $menu->active('event_edit') }}"
                 href="{{ $nav->to('event_edit')->id($eventId) }}">
                 活動編輯

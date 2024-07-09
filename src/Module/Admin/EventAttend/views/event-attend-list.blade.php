@@ -16,6 +16,7 @@ namespace App\View;
  * @var  $lang      LangService     The language translation service.
  */
 
+use App\Entity\Event;
 use App\Entity\EventAttend;
 use App\Entity\EventOrder;
 use App\Entity\EventPlan;
@@ -32,19 +33,26 @@ use Windwalker\Core\Router\SystemUri;
 use App\Module\Admin\EventAttend\EventAttendListView;
 
 /**
- * @var $item EventAttend
+ * @var $item       EventAttend
+ * @var $inStage    bool
+ * @var $event      Event
+ * @var $eventStage EventStage
  */
 
 $workflow = $app->service(EventAttendStateWorkflow::class);
 ?>
 
-@extends('layout.event.event-stage-edit-layout')
+@extends(
+    $inStage
+        ? 'layout.event.event-stage-edit-layout'
+        : 'admin.global.body-list'
+)
 
 @section('toolbar-buttons')
     @include('list-toolbar')
 @stop
 
-@section('card-content')
+@section($inStage ? 'card-content' : 'content')
     <form id="admin-form" action="" x-data="{ grid: $store.grid }"
         x-ref="gridForm"
         data-ordering="{{ $ordering }}"
@@ -72,6 +80,13 @@ $workflow = $app->service(EventAttendStateWorkflow::class);
                             @lang('unicorn.field.state')
                         </x-sort>
                     </th>
+
+                    @if (!$inStage)
+                        {{-- Event --}}
+                        <th>
+                            活動
+                        </th>
+                    @endif
 
                     {{-- Name --}}
                     <th class="text-nowrap">
@@ -107,9 +122,9 @@ $workflow = $app->service(EventAttendStateWorkflow::class);
                     </th>
 
                     {{-- Delete --}}
-                    <th style="width: 1%" class="text-nowrap">
-                        @lang('unicorn.field.delete')
-                    </th>
+                    {{--<th style="width: 1%" class="text-nowrap">--}}
+                    {{--    @lang('unicorn.field.delete')--}}
+                    {{--</th>--}}
 
                     {{-- ID --}}
                     <th style="width: 1%" class="text-nowrap text-end">
@@ -125,6 +140,7 @@ $workflow = $app->service(EventAttendStateWorkflow::class);
                     @php
                         $order = $vm->tryEntity(EventOrder::class, $item->order);
                         $plan = $vm->tryEntity(EventPlan::class, $item->plan);
+                        $event = $vm->tryEntity(Event::class, $item->event);
                         $stage = $vm->tryEntity(EventStage::class, $item->stage);
                     @endphp
                     <tr>
@@ -142,6 +158,18 @@ $workflow = $app->service(EventAttendStateWorkflow::class);
                                 :value="$item->state"
                             ></x-state-dropdown>
                         </td>
+
+                        @if (!$inStage)
+                            {{-- Event --}}
+                            <td>
+                                <div>
+                                    {{ $event->getTitle() }}
+                                </div>
+                                <div class="text-muted small mt-1">
+                                    {{ $stage->getTitle() }}
+                                </div>
+                            </td>
+                        @endif
 
                         {{-- Name --}}
                         <td>
@@ -217,15 +245,15 @@ $workflow = $app->service(EventAttendStateWorkflow::class);
                             @endif
                         </td>
 
-                        {{-- Delete --}}
-                        <td class="text-center">
-                            <button type="button" class="btn btn-sm btn-outline-secondary"
-                                @click="grid.deleteItem('{{ $item->getId() }}')"
-                                data-dos
-                            >
-                                <i class="fa-solid fa-trash"></i>
-                            </button>
-                        </td>
+                        {{--                        --}}{{-- Delete --}}
+                        {{--                        <td class="text-center">--}}
+                        {{--                            <button type="button" class="btn btn-sm btn-outline-secondary"--}}
+                        {{--                                @click="grid.deleteItem('{{ $item->getId() }}')"--}}
+                        {{--                                data-dos--}}
+                        {{--                            >--}}
+                        {{--                                <i class="fa-solid fa-trash"></i>--}}
+                        {{--                            </button>--}}
+                        {{--                        </td>--}}
 
                         {{-- ID --}}
                         <td class="text-end">

@@ -71,6 +71,10 @@ $menu->link('活動管理')
     ->to($nav->to('event_list'))
     ->icon('fal fa-calendar');
 
+$menu->link('報名者管理')
+    ->to($nav->to('event_attend_list'))
+    ->icon('fal fa-users');
+
 // Portfolio
 $menu->link('成員管理')
     ->to($nav->to('member_list'))

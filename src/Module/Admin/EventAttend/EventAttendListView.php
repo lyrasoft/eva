@@ -4,7 +4,10 @@ declare(strict_types=1);
 
 namespace App\Module\Admin\EventAttend;
 
+use App\Entity\Event;
 use App\Entity\EventAttend;
+use App\Entity\EventStage;
+use App\Enum\EventOrderState;
 use App\Module\Admin\EventAttend\Form\GridForm;
 use App\Repository\EventAttendRepository;
 use App\Traits\EventScopeViewTrait;
@@ -49,7 +52,7 @@ class EventAttendListView implements ViewModelInterface, FilterAwareViewModelInt
     /**
      * Prepare view data.
      *
-     * @param  AppContext  $app   The request app context.
+     * @param  AppContext  $app  The request app context.
      * @param  View        $view  The view object.
      *
      * @return  array
@@ -58,21 +61,27 @@ class EventAttendListView implements ViewModelInterface, FilterAwareViewModelInt
     {
         $state = $this->repository->getState();
 
+        $inStage = $app->getMatchedRoute()?->getName() === 'admin::event_stage_attend_list';
+
         $stageId = $app->input('eventStageId');
+        $event = null;
         $eventStage = null;
 
         if ($stageId) {
-            $eventStage = $this->getCurrentEventStage($app);
-
-            $view[$eventStage::class] = $eventStage;
+            [$event, $eventStage] = $this->prepareCurrentEventAndStage($app, $view);
         }
 
         // Prepare Items
-        $page     = $state->rememberFromRequest('page');
-        $limit    = $state->rememberFromRequest('limit') ?? 30;
-        $filter   = (array) $state->rememberFromRequest('filter');
-        $search   = (array) $state->rememberFromRequest('search');
+        $page = $state->rememberFromRequest('page');
+        $limit = $state->rememberFromRequest('limit') ?? 30;
+        $filter = (array) $state->rememberFromRequest('filter');
+        $search = (array) $state->rememberFromRequest('search');
         $ordering = $state->rememberFromRequest('list_ordering') ?? $this->getDefaultOrdering();
+
+        // Clear filters
+        if (!($filter['event_attend.event_id'] ?? null)) {
+            $filter['event_attend.stage_id'] = '';
+        }
 
         $items = $this->repository->getListSelector()
             ->setFilters($filter)
@@ -82,8 +91,9 @@ class EventAttendListView implements ViewModelInterface, FilterAwareViewModelInt
             )
             ->tapIf(
                 (bool) $eventStage,
-                fn (ListSelector $selector) => $selector->where('event_attend.stage_id', $eventStage->getEventId())
+                fn(ListSelector $selector) => $selector->where('event_attend.stage_id', $eventStage->getEventId())
             )
+            ->where('order.state', [EventOrderState::DONE, EventOrderState::PENDING_APPROVAL])
             ->ordering($ordering)
             ->page($page)
             ->limit($limit)
@@ -92,12 +102,24 @@ class EventAttendListView implements ViewModelInterface, FilterAwareViewModelInt
         $pagination = $items->getPagination();
 
         // Prepare Form
-        $form = $this->createForm(GridForm::class)
+        $form = $this->createForm(
+            GridForm::class,
+            inStage: $inStage,
+            eventId: (int) ($filter['event_attend.event_id'] ?? null)
+        )
             ->fill(compact('search', 'filter'));
 
         $showFilters = $this->isFiltered($filter);
 
-        return compact('items', 'pagination', 'form', 'showFilters', 'ordering', 'eventStage');
+        return compact(
+            'items',
+            'pagination',
+            'form',
+            'showFilters',
+            'ordering',
+            'eventStage',
+            'inStage',
+        );
     }
 
     /**
@@ -125,10 +147,21 @@ class EventAttendListView implements ViewModelInterface, FilterAwareViewModelInt
     }
 
     #[ViewMetadata]
-    protected function prepareMetadata(HtmlFrame $htmlFrame): void
+    protected function prepareMetadata(HtmlFrame $htmlFrame, ?Event $event = null, ?EventStage $eventStage = null): void
     {
-        $htmlFrame->setTitle(
-            $this->trans('unicorn.title.grid', title: 'EventAttend')
-        );
+        $title = $this->trans('unicorn.title.grid', title: '報名者');
+
+        if (!$eventStage) {
+            $htmlFrame->setTitle($title);
+        } else {
+            $htmlFrame->setTitle(
+                $this->trans(
+                    'event.stage.edit.heading',
+                    event: $event?->getTitle(),
+                    stage: $eventStage?->getTitle(),
+                    title: $title
+                )
+            );
+        }
     }
 }

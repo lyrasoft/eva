@@ -65,9 +65,8 @@ $seeder->import(
         /** @var EntityMapper<EventOrder> $mapper */
         $mapper = $orm->mapper(EventOrder::class);
 
-        foreach (range(1, 50) as $i) {
-            /** @var EventStage $stage */
-            $stage = $faker->randomElement($stages);
+        /** @var EventStage $stage */
+        foreach ($stages as $stage) {
             /** @var Event $event */
             $event = $events[$stage->getEventId()];
 
@@ -75,7 +74,7 @@ $seeder->import(
             $attends = [];
             $total = BigDecimal::zero();
 
-            foreach (range(1, 12) as $a) {
+            foreach (range(1, 3) as $a) {
                 /** @var EventPlan $plan */
                 $plan = $faker->randomElement($plans->dump());
 
@@ -133,7 +132,7 @@ $seeder->import(
             $item->setMobile($faker->numerify('09########'));
             $item->setPhone($faker->numerify('02-####-####'));
             $item->setAddress($faker->address());
-            $item->setState(EventOrderState::UNPAID);
+            $item->setState(EventOrderState::DONE);
             $item->getHistories()
                 ->append(
                     (new EventOrderHistory())
