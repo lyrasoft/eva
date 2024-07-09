@@ -4,16 +4,16 @@ declare(strict_types=1);
 
 namespace App\Traits;
 
-use App\Service\PriceFormatService;
+use App\Service\PriceFormatter;
 use Windwalker\DI\Attributes\Inject;
 
 trait PriceFormatTrait
 {
     #[Inject]
-    protected PriceFormatService $priceFormatService;
+    protected PriceFormatter $priceFormatter;
 
     public function priceFormat(mixed $price): string
     {
-        return $this->priceFormatService->format($price);
+        return $this->priceFormatter->format($price);
     }
 }

@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use App\Entity\EventAttend;
 use App\Entity\EventOrder;
 use Lyrasoft\Sequence\Service\SequenceService;
 
@@ -27,7 +28,17 @@ return [
             'handler' => function (EventOrder $order, SequenceService $sequenceService) {
                 return $sequenceService->getNextSerialWithPrefix(
                     'event_order',
-                    'EVT-' . \Windwalker\now('Ym') . '-',
+                    'EVT-' . \Windwalker\now('ym') . '-',
+                    5
+                );
+            }
+        ],
+
+        'attend_no' => [
+            'handler' => function (EventOrder $order, EventAttend $attend, SequenceService $sequenceService) {
+                return $sequenceService->getNextSerialWithPrefix(
+                    'event_attend',
+                    'A-' . \Windwalker\now('ym') . '-',
                     6
                 );
             }

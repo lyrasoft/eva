@@ -16,6 +16,7 @@ use App\Enum\EventOrderState;
 use App\Enum\InvoiceType;
 use App\Enum\OrderHistoryType;
 use App\EventBookingPackage;
+use App\Service\EventAttendeeService;
 use App\Service\EventOrderService;
 use App\Service\InvoiceService;
 use Brick\Math\BigDecimal;
@@ -38,6 +39,7 @@ use function Windwalker\collect;
 $seeder->import(
     static function (
         EventOrderService $orderService,
+        EventAttendeeService $attendeeService,
         InvoiceService $invoiceService,
         EventBookingPackage $eventBooking,
         LangService $lang,
@@ -155,6 +157,7 @@ $seeder->import(
 
             foreach ($attends as $attend) {
                 $attend->setOrderId($item->getId());
+                $attend->setNo($attendeeService->createNo($item, $attend));
 
                 $orm->createOne($attend);
 

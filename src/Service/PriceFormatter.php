@@ -9,7 +9,7 @@ use Windwalker\Core\Application\ApplicationInterface;
 use Windwalker\DI\Attributes\Service;
 
 #[Service]
-class PriceFormatService
+class PriceFormatter
 {
     public function __construct(protected EventBookingPackage $eventBooking, protected ApplicationInterface $app)
     {

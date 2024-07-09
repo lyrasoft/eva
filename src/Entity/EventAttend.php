@@ -52,6 +52,9 @@ class EventAttend implements EntityInterface
     #[Column('plan_title')]
     protected string $planTitle = '';
 
+    #[Column('no')]
+    protected string $no = '';
+
     #[Column('price')]
     protected float $price = 0.0;
 
@@ -405,6 +408,18 @@ class EventAttend implements EntityInterface
     public function setPlanTitle(string $planTitle): static
     {
         $this->planTitle = $planTitle;
+
+        return $this;
+    }
+
+    public function getNo(): string
+    {
+        return $this->no;
+    }
+
+    public function setNo(string $no): static
+    {
+        $this->no = $no;
 
         return $this;
     }

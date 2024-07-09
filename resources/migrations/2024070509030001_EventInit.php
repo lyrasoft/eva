@@ -153,6 +153,7 @@ $mig->up(
                 $schema->integer('modified_by');
                 $schema->json('params')->nullable(true);
 
+                $schema->addIndex('no');
                 $schema->addIndex('user_id');
                 $schema->addIndex('event_id');
                 $schema->addIndex('stage_id');
@@ -169,6 +170,7 @@ $mig->up(
                 $schema->integer('stage_id');
                 $schema->integer('plan_id');
                 $schema->varchar('plan_title');
+                $schema->varchar('no');
                 $schema->decimal('price');
                 $schema->varchar('name');
                 $schema->varchar('email');
@@ -187,6 +189,7 @@ $mig->up(
                 $schema->integer('modified_by');
                 $schema->json('params')->nullable(true);
 
+                $schema->addIndex('no');
                 $schema->addIndex('order_id');
                 $schema->addIndex('user_id');
                 $schema->addIndex('event_id');
