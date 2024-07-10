@@ -28,9 +28,14 @@ class EventOrderHistory extends ValueObject
 
     public Chronos $created;
 
+    public int $userId = 0;
+
+    public string $userName = '';
+
     public function __construct(mixed $data = null)
     {
         $this->id = uid();
+        $this->setCreated('now');
 
         parent::__construct($data);
     }
@@ -115,6 +120,30 @@ class EventOrderHistory extends ValueObject
     public function setCreated(string|\DateTimeInterface $created): static
     {
         $this->created = try_chronos($created);
+
+        return $this;
+    }
+
+    public function getUserId(): int
+    {
+        return $this->userId;
+    }
+
+    public function setUserId(int $userId): static
+    {
+        $this->userId = $userId;
+
+        return $this;
+    }
+
+    public function getUserName(): string
+    {
+        return $this->userName;
+    }
+
+    public function setUserName(string $userName): static
+    {
+        $this->userName = $userName;
 
         return $this;
     }

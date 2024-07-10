@@ -136,7 +136,7 @@ $seeder->import(
             $item->setAddress($faker->address());
             $item->setState(EventOrderState::DONE);
             $item->getHistories()
-                ->append(
+                ->push(
                     (new EventOrderHistory())
                         ->setState(EventOrderState::UNPAID)
                         ->setStateText(EventOrderState::UNPAID->getTitle($lang))

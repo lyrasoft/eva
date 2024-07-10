@@ -45,7 +45,9 @@ $alert = $item->getParams()['alert'] ?? [];
 $screenshots = $item->getScreenshots();
 
 $event = $vm->tryEntity(Event::class, $screenshots['event']);
-$stage = $vm->tryEntity(Event::class, $screenshots['stage']);
+$stage = $vm->tryEntity(EventStage::class, $screenshots['stage']);
+
+$histories = $item->getHistories();
 ?>
 
 @extends('admin.global.body-edit')
@@ -87,6 +89,7 @@ $stage = $vm->tryEntity(Event::class, $screenshots['stage']);
                 </div>
             </div>
 
+            {{-- Atendees --}}
             <div class="card">
                 <h4 class="card-header">
                     參與人員
@@ -111,6 +114,36 @@ $stage = $vm->tryEntity(Event::class, $screenshots['stage']);
                     @endforeach
                 </div>
             </div>
+
+            <div class="row">
+
+                {{-- Histories --}}
+                <div class="col-lg-6">
+                    <div class="card">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <div>
+                                @lang('event.order.field.histories')
+                            </div>
+                            <div class="d-flex justify-content-end">
+                                <a href="javascript://" class="btn btn-sm btn-info"
+                                    style="width: 150px"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#state-change-modal"
+                                >
+                                    @lang('event.order.button.change.state')
+                                </a>
+                            </div>
+                        </div>
+
+                        <x-order-histories :histories="$histories" class="list-group-flush"></x-order-histories>
+                    </div>
+                </div>
+
+                {{-- Invoice --}}
+                <div class="col-lg-6">
+
+                </div>
+            </div>
         </div>
 
         <div class="d-none">
@@ -121,4 +154,6 @@ $stage = $vm->tryEntity(Event::class, $screenshots['stage']);
             <x-csrf></x-csrf>
         </div>
     </form>
+
+    <x-state-change-modal id="state-change-modal" :order="$item"></x-state-change-modal>
 @stop
