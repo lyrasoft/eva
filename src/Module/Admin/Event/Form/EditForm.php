@@ -7,6 +7,7 @@ namespace App\Module\Admin\Event\Form;
 use Lyrasoft\Luna\Field\CategoryListField;
 use Lyrasoft\Luna\Field\UserModalField;
 use Unicorn\Field\CalendarField;
+use Unicorn\Field\MultiUploaderField;
 use Unicorn\Field\SingleImageDragField;
 use Unicorn\Field\SwitcherField;
 use Unicorn\Field\TinymceEditorField;
@@ -61,6 +62,9 @@ class EditForm
                     'height' => 500
                 ]
             );
+
+        $form->add('images', MultiUploaderField::class)
+            ->label('圖片集');
     }
 
     #[FormDefine]
@@ -86,11 +90,17 @@ class EditForm
             ->color('success')
             ->defaultValue('1');
 
+        $form->add('publish_up', CalendarField::class)
+            ->label('發佈時間')
+            ->help('活動上架的時間');
+
         $form->add('start_date', CalendarField::class)
-            ->label('開始時間');
+            ->label('活動開始時間')
+            ->help('活動本身的開始時間');
 
         $form->add('end_date', CalendarField::class)
-            ->label('結束時間');
+            ->label('活動結束時間')
+            ->help('活動本身的結束時間');
 
         $form->add('created', CalendarField::class)
             ->label($this->trans('unicorn.field.created'))

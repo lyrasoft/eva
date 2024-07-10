@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace App\Repository;
 
+use App\Entity\Event;
 use App\Entity\EventStage;
 use App\Entity\Venue;
+use Lyrasoft\Luna\Entity\Category;
 use Unicorn\Attributes\ConfigureAction;
 use Unicorn\Attributes\Repository;
 use Unicorn\Repository\Actions\BatchAction;
@@ -30,6 +32,27 @@ class EventStageRepository implements ManageRepositoryInterface, ListRepositoryI
 
         $selector->from(EventStage::class)
             ->leftJoin(Venue::class);
+
+        return $selector;
+    }
+
+    public function getAvailableListSelector(): ListSelector
+    {
+        $selector = $this->createSelector();
+
+        $selector->from(EventStage::class)
+            ->leftJoin(Venue::class)
+            ->leftJoin(Event::class)
+            ->leftJoin(
+                Category::class,
+                'category',
+                'category.id',
+                'event.category_id'
+            );
+
+        $selector->where('event_stage.state', 1);
+        $selector->where('event.state', 1);
+        $selector->where('category.state', 1);
 
         return $selector;
     }

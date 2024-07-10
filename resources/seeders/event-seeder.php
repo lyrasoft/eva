@@ -44,7 +44,7 @@ $seeder->import(
         /** @var EntityMapper<EventPlan> $planMapper */
         $planMapper = $orm->mapper(EventPlan::class);
 
-        $categoryIds = $orm->findColumn(Category::class, 'id')->dump();
+        $categoryIds = $orm->findColumn(Category::class, 'id', ['type' => 'event'])->dump();
         $venueIds = $orm->findColumn(Venue::class, 'id')->dump();
 
         $createImage = function (int $w = 1200, int $h = 800) use ($faker) {
@@ -82,6 +82,14 @@ $seeder->import(
                 $stage->setEventId($event->getId());
                 $stage->setVenueId((int) $faker->randomElement($venueIds));
                 $stage->setTitle('Stage ' . $s);
+                $stage->setCover($faker->unsplashImage(1200, 800));
+                $stage->setImages(
+                    [
+                        $createImage(),
+                        $createImage(),
+                        $createImage(),
+                    ]
+                );
                 $stage->setDescription($faker->paragraph(3));
                 $stage->setQuota(20);
                 $stage->setAlternate(5);
