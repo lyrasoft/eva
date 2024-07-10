@@ -69,6 +69,10 @@ class Event implements EntityInterface
     #[Cast(BasicState::class)]
     protected BasicState $state;
 
+    #[Column('publish_up')]
+    #[CastNullable(ServerTimeCast::class)]
+    protected ?Chronos $publishUp = null;
+
     #[Column('start_date')]
     #[CastNullable(ServerTimeCast::class)]
     protected ?Chronos $startDate = null;
@@ -317,6 +321,18 @@ class Event implements EntityInterface
     public function setParams(array $params): static
     {
         $this->params = $params;
+
+        return $this;
+    }
+
+    public function getPublishUp(): ?Chronos
+    {
+        return $this->publishUp;
+    }
+
+    public function setPublishUp(\DateTimeInterface|string|null $publishUp): static
+    {
+        $this->publishUp = Chronos::tryWrap($publishUp);
 
         return $this;
     }

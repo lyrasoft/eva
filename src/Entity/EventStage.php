@@ -9,10 +9,11 @@ use DateTimeInterface;
 use Lyrasoft\Luna\Attributes\Author;
 use Lyrasoft\Luna\Attributes\Modifier;
 use Lyrasoft\Luna\Attributes\Slugify;
-use Unicorn\Attributes\NewOrdering;
 use Unicorn\Enum\BasicState;
 use Windwalker\Core\DateTime\Chronos;
 use Windwalker\Core\DateTime\ServerTimeCast;
+use Windwalker\Core\Router\Navigator;
+use Windwalker\Core\Router\RouteUri;
 use Windwalker\ORM\Attributes\AutoIncrement;
 use Windwalker\ORM\Attributes\Cast;
 use Windwalker\ORM\Attributes\CastNullable;
@@ -52,6 +53,13 @@ class EventStage implements EntityInterface
     #[Slugify]
     protected string $alias = '';
 
+    #[Column('cover')]
+    protected string $cover = '';
+
+    #[Column('images')]
+    #[Cast(JsonCast::class)]
+    protected array $images = [];
+
     #[Column('description')]
     protected string $description = '';
 
@@ -77,6 +85,10 @@ class EventStage implements EntityInterface
 
     #[Column('ordering')]
     protected int $ordering = 0;
+
+    #[Column('publish_up')]
+    #[CastNullable(ServerTimeCast::class)]
+    protected ?Chronos $publishUp = null;
 
     #[Column('start_date')]
     #[CastNullable(ServerTimeCast::class)]
@@ -145,12 +157,17 @@ class EventStage implements EntityInterface
         $orm->copy(
             EventPlan::class,
             [
-                'stage_id' => $old?->getId()
+                'stage_id' => $old?->getId(),
             ],
             [
-                'stage_id' => $item->getId()
+                'stage_id' => $item->getId(),
             ]
         );
+    }
+
+    public function makeLink(Navigator $nav): RouteUri
+    {
+        return $nav->to('front::event_stage_item')->id($this->getId())->alias($this->getAlias());
     }
 
     public function getId(): ?int
@@ -389,6 +406,42 @@ class EventStage implements EntityInterface
     public function setAttends(int $attends): static
     {
         $this->attends = $attends;
+
+        return $this;
+    }
+
+    public function getPublishUp(): ?Chronos
+    {
+        return $this->publishUp;
+    }
+
+    public function setPublishUp(\DateTimeInterface|string|null $publishUp): static
+    {
+        $this->publishUp = Chronos::tryWrap($publishUp);
+
+        return $this;
+    }
+
+    public function getCover(): string
+    {
+        return $this->cover;
+    }
+
+    public function setCover(string $cover): static
+    {
+        $this->cover = $cover;
+
+        return $this;
+    }
+
+    public function getImages(): array
+    {
+        return $this->images;
+    }
+
+    public function setImages(array $images): static
+    {
+        $this->images = $images;
 
         return $this;
     }

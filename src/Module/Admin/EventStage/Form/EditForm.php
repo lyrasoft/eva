@@ -7,6 +7,8 @@ namespace App\Module\Admin\EventStage\Form;
 use App\Field\VenueListField;
 use Lyrasoft\Luna\Field\UserModalField;
 use Unicorn\Field\CalendarField;
+use Unicorn\Field\MultiUploaderField;
+use Unicorn\Field\SingleImageDragField;
 use Unicorn\Field\SwitcherField;
 use Unicorn\Field\TinymceEditorField;
 use Windwalker\Form\Field\TextareaField;
@@ -68,6 +70,9 @@ class EditForm
                     'height' => 500
                 ]
             );
+
+        $form->add('images', MultiUploaderField::class)
+            ->label('圖片集');
     }
 
 
@@ -76,6 +81,13 @@ class EditForm
     #[NS('item')]
     public function meta(Form $form): void
     {
+        $form->add('cover', SingleImageDragField::class)
+            ->label('封面')
+            ->crop(true)
+            ->width(1200)
+            ->height(800)
+            ->showSizeNotice(true);
+
         $form->add('attend_url', UrlField::class)
             ->label('報名連結')
             ->help('用以取代內建報名機制');
@@ -86,11 +98,15 @@ class EditForm
             ->color('success')
             ->defaultValue('1');
 
+        $form->add('publish_up', CalendarField::class)
+            ->label('發佈時間')
+            ->help('梯次上架的時間');
+
         $form->add('start_date', CalendarField::class)
-            ->label('Start Date');
+            ->label('梯次開始時間');
 
         $form->add('end_date', CalendarField::class)
-            ->label('End Date');
+            ->label('梯次結束時間');
 
         $form->add('created', CalendarField::class)
             ->label($this->trans('unicorn.field.created'))

@@ -46,3 +46,5 @@ $menu->registerChildren(
         );
     }
 );
+
+$menu->link('活動梯次列表', $nav->to('event_stage_list'));

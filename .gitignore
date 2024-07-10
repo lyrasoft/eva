@@ -30,8 +30,8 @@ Thumbs.db
 /theme
 
 # Remove above lines when you start a project
-composer.lock
-yarn.lock
+#composer.lock
+#yarn.lock
 package-lock.json
 
 #Test
@@ -41,7 +41,7 @@ package-lock.json
 # Others
 
 # @Dev
-etc/packages/*.php
-!etc/packages/debugger.php
-!etc/packages/session.php
+#etc/packages/*.php
+#!etc/packages/debugger.php
+#!etc/packages/session.php
 # @EndDev

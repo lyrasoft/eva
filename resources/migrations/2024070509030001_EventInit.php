@@ -37,6 +37,7 @@ $mig->up(
                 $schema->longtext('intro');
                 $schema->longtext('description');
                 $schema->bool('state');
+                $schema->datetime('publish_up');
                 $schema->datetime('start_date');
                 $schema->datetime('end_date');
                 $schema->datetime('created');
@@ -58,6 +59,8 @@ $mig->up(
                 $schema->integer('venue_id');
                 $schema->varchar('title');
                 $schema->varchar('alias');
+                $schema->varchar('cover');
+                $schema->json('images');
                 $schema->longtext('description');
                 $schema->varchar('attend_url');
                 $schema->integer('quota')->nullable(true);
@@ -66,6 +69,7 @@ $mig->up(
                 $schema->integer('attends');
                 $schema->bool('state');
                 $schema->integer('ordering');
+                $schema->datetime('publish_up');
                 $schema->datetime('start_date');
                 $schema->datetime('end_date');
                 $schema->datetime('created');
