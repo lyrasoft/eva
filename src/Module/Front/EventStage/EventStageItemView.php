@@ -8,6 +8,7 @@ use App\Entity\Event;
 use App\Entity\EventPlan;
 use App\Entity\EventStage;
 use App\Repository\EventStageRepository;
+use App\Service\EventViewService;
 use Lyrasoft\Luna\Entity\Category;
 use Lyrasoft\Luna\Module\Front\Category\CategoryViewTrait;
 use Windwalker\Core\Application\AppContext;
@@ -33,6 +34,7 @@ class EventStageItemView implements ViewModelInterface
 
     public function __construct(
         protected ORM $orm,
+        protected EventViewService $eventViewService,
         #[Autowire] protected EventStageRepository $repository
     ) {
         //
@@ -53,39 +55,9 @@ class EventStageItemView implements ViewModelInterface
 
         /** @var EventStage $item */
         $item = $this->repository->mustGetItem($id);
-
-        if (!$item->getState()->isPublished()) {
-            throw new RouteNotFoundException('Event Stage not found.');
-        }
-
-        if ($item->getPublishUp() && $item->getPublishUp()->isFuture()) {
-            throw new RouteNotFoundException('Event Stage not started.');
-        }
-
-        if ($item->getEndDate() && $item->getEndDate()->isPast()) {
-            throw new RouteNotFoundException('Event Stage was ended.');
-        }
-
         $event = $this->orm->mustFindOne(Event::class, $item->getEventId());
 
-        if (!$event->getState()->isPublished()) {
-            throw new RouteNotFoundException('Event not found.');
-        }
-
-        if ($event->getPublishUp() && $event->getPublishUp()->isFuture()) {
-            throw new RouteNotFoundException('Event not started.');
-        }
-
-        if ($event->getEndDate() && $event->getEndDate()->isPast()) {
-            throw new RouteNotFoundException('Event was ended.');
-        }
-
-        /** @var Category $category */
-        $category = $this->getCategoryOrFail($event->getCategoryId());
-
-        if (!$category->getState()->isPublished()) {
-            throw new RouteNotFoundException('Category not published.');
-        }
+        [, , $category] = $this->eventViewService->checkEventAndStageAvailable($event, $item);
 
         // Keep URL unique
         if (($item->getAlias() !== $alias) && !$app->retrieve(Browser::class)->isRobot()) {

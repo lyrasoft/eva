@@ -99,7 +99,7 @@ $priceFormatter = $app->retrieve(PriceFormatter::class);
                 $canAttend = false;
                 @endphp
 
-                <form id="attend-form" action="{{ $nav->to('event_attending') }}" method="post">
+                <form id="attend-form" action="{{ $nav->to('event_attending')->var('stageId', $item->getId()) }}" method="post">
                     <table class="table table-striped">
                         <thead>
                         <tr>
@@ -199,8 +199,6 @@ $priceFormatter = $app->retrieve(PriceFormatter::class);
                     </table>
 
                     <div class="d-none">
-                        <input name="stage_id" type="hidden" value="{{ $item->getId() }}" />
-
                         <x-csrf></x-csrf>
                     </div>
                 </form>

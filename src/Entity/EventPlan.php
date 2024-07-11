@@ -336,4 +336,21 @@ class EventPlan implements EntityInterface
 
         return $this;
     }
+
+    public function isPublishUp(): bool
+    {
+        if ($this->getState()->isUnpublished()) {
+            return false;
+        }
+
+        if ($this->getStartDate() && $this->getStartDate()->isFuture()) {
+            return false;
+        }
+
+        if ($this->getEndDate() && $this->getEndDate()->isPast()) {
+            return false;
+        }
+
+        return true;
+    }
 }
