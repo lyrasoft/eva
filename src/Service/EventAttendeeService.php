@@ -19,7 +19,7 @@ class EventAttendeeService
 
     public function createNo(EventOrder $order, EventAttend $attend): string
     {
-        $handler = $this->eventBooking->config('attend_no.handler');
+        $handler = $this->eventBooking->config('attends.no_handler');
 
         if (!$handler instanceof \Closure) {
             throw new \LogicException('Attend NO handler is not closure');

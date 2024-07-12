@@ -17,6 +17,9 @@ $router->group('event-attending')
             ->view(EventAttendingView::class)
             ->postHandler('attending');
 
-        $router->any('event_checkout', '/event/checkout')
+        $router->any('event_checkout', '/event/checkout/{stageId}')
             ->controller(EventAttendingController::class, 'checkout');
+
+        $router->any('event_receive_notify', '/event/receive/notify/{id}')
+            ->controller(EventAttendingController::class, 'receiveNotify');
     });

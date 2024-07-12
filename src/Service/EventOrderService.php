@@ -19,7 +19,7 @@ class EventOrderService
 
     public function createNo(EventOrder $order): string
     {
-        $orderNo = $this->eventBooking->config('order_no.handler');
+        $orderNo = $this->eventBooking->config('order.no_handler');
 
         if (!$orderNo instanceof \Closure) {
             throw new \LogicException('Order NO handler is not closure');

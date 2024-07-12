@@ -55,14 +55,12 @@ class EventAttendingView implements ViewModelInterface
 
         [, , $category] = $this->eventViewService->checkEventAndStageAvailable($event, $stage);
 
-        $attendingData = $this->eventAttendingService->getAttendingDataObject($stage);
-
-        $data = $app->state->getAndForget('attending.order.data');
+        $attendingStore = $this->eventAttendingService->getAttendingStore($stage);
 
         $user = $this->userService->getUser();
 
         $form = $this->formFactory->create(EventAttendingForm::class)
-            ->fill($data);
+            ->fillTo('order', $attendingStore->getOrderData());
 
         if ($user->isLogin()) {
             $form['order/name']->setValue($user->getName());
@@ -73,7 +71,7 @@ class EventAttendingView implements ViewModelInterface
             'event',
             'stage',
             'category',
-            'attendingData',
+            'attendingStore',
             'form',
         );
     }

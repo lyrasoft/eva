@@ -10,11 +10,35 @@ use Lyrasoft\Luna\Entity\Category;
 use Lyrasoft\Luna\Module\Front\Category\CategoryViewTrait;
 use Windwalker\Core\Router\Exception\RouteNotFoundException;
 use Windwalker\DI\Attributes\Service;
+use Windwalker\ORM\ORM;
 
 #[Service]
 class EventViewService
 {
     use CategoryViewTrait;
+
+    public function __construct(protected ORM $orm)
+    {
+    }
+
+    /**
+     * @param  EventStage|int  $stage
+     *
+     * @return  array{ 0: Event, 1: EventStage, 2: Category }
+     */
+    public function checkStageAvailableById(EventStage|int $stage): array
+    {
+        if (is_int($stage)) {
+            $stage = $this->orm->mustFindOne(EventStage::class, $stage);
+        }
+
+        $event = $this->orm->mustFindOne(Event::class, $stage->getEventId());
+
+        [$event, $category] = $this->checkEventAvailable($event);
+        $stage = $this->checkStageSelfAvailable($stage);
+
+        return [$event, $stage, $category];
+    }
 
     /**
      * @param  Event       $event
@@ -25,7 +49,7 @@ class EventViewService
     public function checkEventAndStageAvailable(Event $event, EventStage $stage): array
     {
         [$event, $category] = $this->checkEventAvailable($event);
-        $stage = $this->checkEventStageAvailable($stage);
+        $stage = $this->checkStageSelfAvailable($stage);
 
         return [$event, $stage, $category];
     }
@@ -59,7 +83,7 @@ class EventViewService
         return [$event, $category];
     }
 
-    public function checkEventStageAvailable(EventStage $stage): EventStage
+    public function checkStageSelfAvailable(EventStage $stage): EventStage
     {
         if (!$stage->getState()->isPublished()) {
             throw new RouteNotFoundException('Event Stage not found.');

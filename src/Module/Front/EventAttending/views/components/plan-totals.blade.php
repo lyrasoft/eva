@@ -16,7 +16,7 @@ namespace App\view;
  * @var $lang      LangService     The language translation service.
  */
 
-use App\Data\EventAttendingData;
+use App\Data\EventAttendingStore;
 use App\Data\EventAttendingPlan;
 use App\Data\EventOrderTotal;
 use App\Entity\EventPlan;
@@ -32,7 +32,7 @@ use Windwalker\Edge\Component\ComponentAttributes;
 
 /**
  * @var $plan       EventAttendingPlan
- * @var $data       EventAttendingData
+ * @var $store    EventAttendingStore
  * @var $grandTotal EventOrderTotal
  * @var $attributes ComponentAttributes
  */
@@ -43,7 +43,7 @@ $attributes->props(
 
 $priceFormatter = $app->retrieve(PriceFormatter::class);
 
-$grandTotal = $data->getTotals()->get('grand_total');
+$grandTotal = $store->getTotals()->get('grand_total');
 ?>
 
 <div class="l-plan-totals">
@@ -60,7 +60,7 @@ $grandTotal = $data->getTotals()->get('grand_total');
         </thead>
 
         <tbody>
-        @foreach ($data->getAttendingPlans() as $plan)
+        @foreach ($storage->getAttendingPlans() as $plan)
             <tr>
                 <td>
                     {{ $plan->getPlan()->getTitle() }}

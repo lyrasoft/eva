@@ -16,9 +16,8 @@ namespace App\view;
  * @var $lang      LangService     The language translation service.
  */
 
-use App\Data\EventAttendingData;
+use App\Data\EventAttendingStore;
 use App\Data\EventAttendingPlan;
-use App\Entity\EventPlan;
 use Windwalker\Core\Application\AppContext;
 use Windwalker\Core\Asset\AssetService;
 use Windwalker\Core\DateTime\ChronosService;
@@ -31,7 +30,7 @@ use function Windwalker\tid;
 
 /**
  * @var $plan       EventAttendingPlan
- * @var $data       EventAttendingData
+ * @var $store      EventAttendingStore
  * @var $attributes ComponentAttributes
  */
 
@@ -45,7 +44,7 @@ $i = 0;
 <div class="l-attendee-form">
     <h3 class="mb-3">報名者資料</h3>
 
-    @foreach ($data->getAttendingPlans() as $plan)
+    @foreach ($store->getAttendingPlans() as $plan)
         @if (!$plan->getQuantity())
             @continue
         @endif
@@ -55,8 +54,11 @@ $i = 0;
 
             @foreach (range(1, $plan->getQuantity()) as $k)
                 @php
+                    $attend = $plan->getAttends()[$k - 1] ?? [];
                     $i++;
-                    $uid = tid();
+                    $uid = $attend['uid'] ?? tid();
+                    $pid = $plan->getPlan()->getId();
+                    $fieldNamePrefix = "attends[$pid][$uid]";
                 @endphp
                 <div>
                     <div class="card bg-light mb-3" data-uid="{{ $uid }}">
@@ -75,8 +77,9 @@ $i = 0;
                                         </label>
                                         <input id="input-attend-{{ $uid }}-name" type="text"
                                             class="form-control"
-                                            name="attends[{{ $uid }}][name]"
+                                            name="{{ $fieldNamePrefix }}[name]"
                                             required
+                                            value="{{ $attend['name'] ?? '' }}"
                                         />
                                     </div>
 
@@ -88,8 +91,9 @@ $i = 0;
                                         </label>
                                         <input id="input-attend-{{ $uid }}-email" type="email"
                                             class="form-control"
-                                            name="attends[{{ $uid }}][email]"
+                                            name="{{ $fieldNamePrefix }}[email]"
                                             required
+                                            value="{{ $attend['email'] ?? '' }}"
                                         />
                                     </div>
                                 </div>
@@ -103,7 +107,8 @@ $i = 0;
                                         </label>
                                         <input id="input-attend-{{ $uid }}-nick" type="text"
                                             class="form-control"
-                                            name="attends[{{ $uid }}][nick]"
+                                            name="{{ $fieldNamePrefix }}[nick]"
+                                            value="{{ $attend['nick'] ?? '' }}"
                                         />
                                     </div>
 
@@ -115,9 +120,10 @@ $i = 0;
                                         </label>
                                         <input id="input-attend-{{ $uid }}-mobile" type="tel"
                                             class="form-control"
-                                            name="attends[{{ $uid }}][mobile]"
+                                            name="{{ $fieldNamePrefix }}[mobile]"
                                             pattern="09\d{8}"
                                             required
+                                            value="{{ $attend['mobile'] ?? '' }}"
                                         />
                                         <div class="text-muted small mt-1">
                                             格式: 09 開頭共 10 碼數字，不加 -
@@ -129,7 +135,9 @@ $i = 0;
                     </div>
 
                     <div class="d-none">
-                        <input type="hidden" name="attends[{{ $uid }}][plan_id]" value="{{ $plan->getPlan()->getId() }}" />
+                        <input type="hidden" name="{{ $fieldNamePrefix }}[uid]" value="{{ $uid }}" />
+                        <input type="hidden" name="{{ $fieldNamePrefix }}[plan_id]"
+                            value="{{ $plan->getPlan()->getId() }}" />
                     </div>
                 </div>
             @endforeach

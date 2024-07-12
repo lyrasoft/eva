@@ -4,7 +4,12 @@ declare(strict_types=1);
 
 use App\Entity\EventAttend;
 use App\Entity\EventOrder;
+use App\Payment\TransferPayment;
 use Lyrasoft\Sequence\Service\SequenceService;
+
+use Lyrasoft\Toolkit\Encode\BaseConvert;
+
+use Windwalker\Core\Renderer\RendererService;
 
 use function EventBooking\priceFormat;
 
@@ -24,8 +29,8 @@ return [
             'locale' => 'en_US',
         ],
 
-        'order_no' => [
-            'handler' => function (EventOrder $order, SequenceService $sequenceService) {
+        'order' => [
+            'no_handler' => function (EventOrder $order, SequenceService $sequenceService) {
                 return $sequenceService->getNextSerialWithPrefix(
                     'event_order',
                     'EVT-' . \Windwalker\now('ym') . '-',
@@ -34,8 +39,8 @@ return [
             }
         ],
 
-        'attend_no' => [
-            'handler' => function (EventOrder $order, EventAttend $attend, SequenceService $sequenceService) {
+        'attends' => [
+            'no_handler' => function (EventOrder $order, EventAttend $attend, SequenceService $sequenceService) {
                 return $sequenceService->getNextSerialWithPrefix(
                     'event_attend',
                     'A-' . \Windwalker\now('ym') . '-',
@@ -44,12 +49,8 @@ return [
             }
         ],
 
-        'payment_no' => [
-            'maxlength' => 20, // Digits length will be maxlength - 9
-        ],
-
-        'invoice_no' => [
-            'handler' => function (EventOrder $order, SequenceService $sequenceService) {
+        'invoice' => [
+            'no_handler' => function (EventOrder $order, SequenceService $sequenceService) {
                 return $sequenceService->getNextSerialWithPrefix(
                     'event_invoice',
                     'INV-',
@@ -58,6 +59,30 @@ return [
             }
         ],
 
-        'price_formatter' => static fn(mixed $price) => priceFormat($price, '$')
+        'price_formatter' => static fn(mixed $price) => priceFormat($price, '$'),
+
+        'payment' => [
+            'no_handler' => function (EventOrder $order) {
+                // Max length: 20
+                $no = 'P' . str_pad((string) $order->getId(), 13, '0', STR_PAD_LEFT);
+
+                if (WINDWALKER_DEBUG) {
+                    $no .= 'T' . BaseConvert::encode(time(), BaseConvert::BASE62);
+                }
+
+                return $no;
+            },
+
+            'gateways' => [
+                'transfer' => \Windwalker\DI\create(
+                    TransferPayment::class,
+                    renderHandler: function () {
+                        return <<<TEXT
+                        銀行帳戶: (800) 123123123
+                        TEXT;
+                    }
+                )
+            ]
+        ]
     ]
 ];

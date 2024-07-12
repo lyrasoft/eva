@@ -18,7 +18,7 @@ class InvoiceService
 
     public function createNo(EventOrder $order): string
     {
-        $invoiceNoHandler = $this->eventBooking->config('invoice_no.handler');
+        $invoiceNoHandler = $this->eventBooking->config('invoice.no_handler');
 
         if (!$invoiceNoHandler instanceof \Closure) {
             throw new \LogicException('Invoice NO handler is not closure');

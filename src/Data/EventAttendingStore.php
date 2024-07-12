@@ -5,14 +5,22 @@ declare(strict_types=1);
 namespace App\Data;
 
 use App\Entity\EventAttend;
+use App\Entity\EventOrder;
+use App\Entity\EventStage;
 use Brick\Math\BigDecimal;
 use Windwalker\Data\Collection;
 use Windwalker\Data\ValueObject;
 
 use function Windwalker\collect;
 
-class EventAttendingData extends ValueObject
+class EventAttendingStore extends ValueObject
 {
+    public array $orderData = [];
+
+    public ?EventOrder $order = null;
+
+    public EventStage $stage;
+
     public EventOrderTotals $totals;
 
     public array $attendingPlans = [];
@@ -92,5 +100,41 @@ class EventAttendingData extends ValueObject
         }
 
         return $gt;
+    }
+
+    public function getOrderData(): array
+    {
+        return $this->orderData;
+    }
+
+    public function setOrderData(array $orderData): static
+    {
+        $this->orderData = $orderData;
+
+        return $this;
+    }
+
+    public function getOrder(): ?EventOrder
+    {
+        return $this->order;
+    }
+
+    public function setOrder(?EventOrder $order): static
+    {
+        $this->order = $order;
+
+        return $this;
+    }
+
+    public function getStage(): EventStage
+    {
+        return $this->stage;
+    }
+
+    public function setStage(EventStage $stage): static
+    {
+        $this->stage = $stage;
+
+        return $this;
     }
 }

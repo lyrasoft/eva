@@ -16,6 +16,7 @@ namespace App\View;
  * @var  $lang      LangService     The language translation service.
  */
 
+use App\Data\EventAttendingStore;
 use App\Entity\Event;
 use App\Entity\EventPlan;
 use App\Entity\EventStage;
@@ -33,11 +34,12 @@ use Windwalker\Form\Form;
 use function Windwalker\str;
 
 /**
- * @var $event    Event
- * @var $stage    EventStage
- * @var $category Category
- * @var $plan     EventPlan
- * @var $form     Form
+ * @var $event                Event
+ * @var $stage                EventStage
+ * @var $category             Category
+ * @var $plan                 EventPlan
+ * @var $form                 Form
+ * @var $attendingStore EventAttendingStore
  */
 ?>
 
@@ -45,7 +47,8 @@ use function Windwalker\str;
 
 @section('content')
     <div class="container l-event-attending my-4">
-        <form id="attending-form" action="{{ $nav->to('event_checkout') }}" method="post"
+        <form id="attending-form" action="{{ $nav->to('event_checkout')->var('stageId', $stage->getId()) }}"
+            method="post"
             uni-form-validate='{"scroll": true}'>
             <div class="mx-auto d-flex flex-column gap-4" style="max-width: 960px">
                 <header class="mb-4">
@@ -59,10 +62,10 @@ use function Windwalker\str;
                 <x-components.payer-form :form="$form" />
 
                 {{-- Attends--}}
-                <x-components.attendee-form :data="$attendingData" />
+                <x-components.attendee-form :store="$attendingStore" />
 
                 {{-- Totals --}}
-                <x-components.plan-totals :data="$attendingData" />
+                <x-components.plan-totals :store="$attendingStore" />
 
                 <div class="text-center">
                     <button type="submit"
