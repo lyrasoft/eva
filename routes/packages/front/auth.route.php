@@ -1,12 +1,5 @@
 <?php
 
-/**
- * Part of earth project.
- *
- * @copyright  Copyright (C) 2021 __ORGANIZATION__.
- * @license    __LICENSE__
- */
-
 declare(strict_types=1);
 
 namespace App\Routes;
@@ -33,6 +26,9 @@ $router->group('auth')
             $router->any('logout', '/logout')
                 ->controller(AuthController::class, 'logout');
 
+            $router->any('auth_ajax', '/auth/ajax[/{task}]')
+                ->controller(AuthController::class, 'ajax');
+
             // Registration
             $router->any('registration', '/registration')
                 ->postHandler(AuthController::class, 'register')
@@ -57,6 +53,9 @@ $router->group('auth')
             $router->any('forget_request', '/forget/request[/{layout}]')
                 ->postHandler(ForgetController::class, 'request')
                 ->view(ForgetRequestView::class);
+
+            $router->any('forget_wellknown', '/.well-known/change-password')
+                ->redirect('forget_request');
 
             $router->any('forget_confirm', '/forget/confirm')
                 ->controller(ForgetController::class, 'confirm');

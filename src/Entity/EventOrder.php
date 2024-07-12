@@ -102,11 +102,18 @@ class EventOrder implements EntityInterface
     #[Cast(EventOrderState::class)]
     protected EventOrderState $state;
 
+    #[Column('attends')]
+    protected int $attends = 0;
+
     #[Column('alternates')]
     protected int $alternates = 0;
 
     #[Column('payment')]
     protected string $payment = '';
+
+    #[Column('payment_data')]
+    #[Cast(JsonCast::class)]
+    protected array $paymentData = [];
 
     #[Column('expired_at')]
     #[CastNullable(ServerTimeCast::class)]
@@ -512,6 +519,30 @@ class EventOrder implements EntityInterface
     public function setHistories(EventOrderHistories|array $histories): static
     {
         $this->histories = EventOrderHistories::wrap($histories);
+
+        return $this;
+    }
+
+    public function getPaymentData(): array
+    {
+        return $this->paymentData;
+    }
+
+    public function setPaymentData(array $paymentData): static
+    {
+        $this->paymentData = $paymentData;
+
+        return $this;
+    }
+
+    public function getAttends(): int
+    {
+        return $this->attends;
+    }
+
+    public function setAttends(int $attends): static
+    {
+        $this->attends = $attends;
 
         return $this;
     }

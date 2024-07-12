@@ -14,8 +14,8 @@ trait PaymentTrait
     #[Inject]
     protected Navigator $nav;
 
-    public function getReceiveEndpoint(EventOrder $order): RouteUri
+    public function getTaskEndpoint(EventOrder $order): RouteUri
     {
-        return $this->nav->to('event_receive_notify')->id($order->getId())->full();
+        return $this->nav->to('event_payment_task')->id($order->getId())->full();
     }
 }

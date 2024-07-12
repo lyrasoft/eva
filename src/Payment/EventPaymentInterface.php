@@ -21,7 +21,7 @@ interface EventPaymentInterface
 
     public function orderInfo(EventOrder $order, iterable $attends): string;
 
-    public function receiveNotify(AppContext $app, EventOrder $order): mixed;
+    public function runTask(AppContext $app, EventOrder $order): mixed;
 
     public function createTransactionNo(EventOrder $order): string;
 }

@@ -60,7 +60,7 @@ $grandTotal = $store->getTotals()->get('grand_total');
         </thead>
 
         <tbody>
-        @foreach ($storage->getAttendingPlans() as $plan)
+        @foreach ($store->getAttendingPlans() as $plan)
             <tr>
                 <td>
                     {{ $plan->getPlan()->getTitle() }}

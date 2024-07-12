@@ -4,7 +4,10 @@ declare(strict_types=1);
 
 namespace App\Repository;
 
+use App\Entity\Event;
 use App\Entity\EventOrder;
+use App\Entity\EventStage;
+use App\Entity\Venue;
 use Unicorn\Attributes\ConfigureAction;
 use Unicorn\Attributes\Repository;
 use Unicorn\Repository\Actions\BatchAction;
@@ -28,6 +31,23 @@ class EventOrderRepository implements ManageRepositoryInterface, ListRepositoryI
         $selector = $this->createSelector();
 
         $selector->from(EventOrder::class);
+
+        return $selector;
+    }
+
+    public function getFrontListSelector(): ListSelector
+    {
+        $selector = $this->createSelector();
+
+        $selector->from(EventOrder::class)
+            ->leftJoin(Event::class)
+            ->leftJoin(EventStage::class, 'stage')
+            ->leftJoin(
+                Venue::class,
+                'venue',
+                'stage.venue_id',
+                'venue.id'
+            );
 
         return $selector;
     }

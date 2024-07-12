@@ -128,6 +128,7 @@ class EventAttendingController
                 $order->setDetails($orderData['details'] ?? []);
                 $order->setPayment('atm');
                 $order->setScreenshots(compact('event', 'stage'));
+                $order->setAttends(count($store->getAllAttends()));
 
                 $store->setOrder($order);
 
@@ -172,14 +173,12 @@ class EventAttendingController
         // Todo: Event
 
         $order = $store->getOrder();
-        $orderUri = $app->getNav()->to('event_order_item')->var('no', $order->getName());
+        $orderUri = $app->getNav()->to('event_order_item')->var('no', $order->getNo());
 
         try {
             $result = $eventCheckoutService->processPayment($store);
 
-            if (!$result) {
-                return $result;
-            }
+            return $result ?: $orderUri;
         } catch (\Exception $e) {
             $app->addMessage($e->getMessage(), 'warning');
             Logger::error('checkout-error', $e->getMessage(), ['exception' => $e]);
@@ -188,7 +187,7 @@ class EventAttendingController
         }
     }
 
-    public function receiveNotify(AppContext $app, ORM $orm, EventPaymentService $paymentService)
+    public function paymentTask(AppContext $app, ORM $orm, EventPaymentService $paymentService)
     {
         $id = $app->input('id');
 
@@ -204,6 +203,6 @@ class EventAttendingController
             return 'Gateway not found.';
         }
 
-        return $gateway->receiveNotify($app, $order);
+        return $gateway->runTask($app, $order);
     }
 }

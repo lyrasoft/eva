@@ -55,8 +55,7 @@ class EventOrderEditView implements ViewModelInterface
         /** @var EventOrder $item */
         $item = $this->repository->mustGetItem($id);
 
-        // $event = $this->orm->mustFindOne(Event::class, $item->getEventId());
-        // $eventStage = $this->orm->mustFindOne(EventStage::class, $item->getStageId());
+        $stage = $this->orm->mustFindOne(EventStage::class, $item->getStageId());
 
         $attends = $this->orm->from(EventAttend::class)
             ->leftJoin(
@@ -78,7 +77,7 @@ class EventOrderEditView implements ViewModelInterface
                 ]
             );
 
-        return compact('form', 'id', 'item', 'attends');
+        return compact('form', 'id', 'item', 'stage', 'attends');
     }
 
     #[ViewMetadata]

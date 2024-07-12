@@ -145,8 +145,10 @@ $mig->up(
                 $schema->json('details')->nullable(true);
                 $schema->json('histories')->nullable(true);
                 $schema->varchar('state')->comment('OrderState: pending, paid, done');
+                $schema->integer('attends');
                 $schema->integer('alternates');
                 $schema->varchar('payment');
+                $schema->json('payment_data');
                 $schema->datetime('expired_at');
                 $schema->datetime('paid_at');
                 $schema->datetime('done_at');

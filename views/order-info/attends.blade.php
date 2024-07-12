@@ -55,7 +55,7 @@ $priceFormatter = $app->retrieve(PriceFormatter::class);
         <th>姓名</th>
         <th>方案</th>
         <th>聯絡方式</th>
-        <th>候補</th>
+        {{--<th>候補</th>--}}
         <th class="text-end">價格</th>
     </tr>
     </thead>
@@ -109,9 +109,9 @@ $priceFormatter = $app->retrieve(PriceFormatter::class);
                     </div>
                 @endif
             </td>
-            <td>
-                -
-            </td>
+            {{--<td>--}}
+            {{--    ---}}
+            {{--</td>--}}
             <td class="text-end">
                 {{ $priceFormatter->format($attend->getPrice()) }}
             </td>

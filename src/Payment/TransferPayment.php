@@ -39,7 +39,7 @@ class TransferPayment implements EventPaymentInterface
         return null;
     }
 
-    public function receiveNotify(AppContext $app, EventOrder $order): mixed
+    public function runTask(AppContext $app, EventOrder $order): mixed
     {
         return '';
     }
@@ -58,8 +58,14 @@ class TransferPayment implements EventPaymentInterface
 
     public function orderInfo(EventOrder $order, iterable $attends): string
     {
+        $handler = $this->getRenderHandler();
+
+        if (!$handler) {
+            return '';
+        }
+
         return $this->app->call(
-            $this->getRenderHandler(...),
+            $handler,
             [
                 EventOrder::class => $order,
                 'order' => $order,

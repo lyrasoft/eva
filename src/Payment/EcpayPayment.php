@@ -43,7 +43,7 @@ class EcpayPayment implements EventPaymentInterface
         return 'Process Payment';
     }
 
-    public function receiveNotify(AppContext $app, EventOrder $order): mixed
+    public function runTask(AppContext $app, EventOrder $order): mixed
     {
         return 'OK|1';
     }

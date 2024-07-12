@@ -7,6 +7,7 @@ namespace App\Module\Admin\EventOrder;
 use App\Entity\EventOrder;
 use App\Module\Admin\EventOrder\Form\GridForm;
 use App\Repository\EventOrderRepository;
+use Lyrasoft\Luna\User\UserService;
 use Unicorn\View\FormAwareViewModelTrait;
 use Unicorn\View\ORMAwareViewModelTrait;
 use Windwalker\Core\Application\AppContext;
@@ -103,8 +104,9 @@ class EventOrderListView implements ViewModelInterface, FilterAwareViewModelInte
     {
         return [
             'event_order.id',
-            'event_order.title',
-            'event_order.alias',
+            'event_order.name',
+            'event_order.nick',
+            'event_order.email',
         ];
     }
 
@@ -112,7 +114,7 @@ class EventOrderListView implements ViewModelInterface, FilterAwareViewModelInte
     protected function prepareMetadata(HtmlFrame $htmlFrame): void
     {
         $htmlFrame->setTitle(
-            $this->trans('unicorn.title.grid', title: 'EventOrder')
+            '我的訂單'
         );
     }
 }

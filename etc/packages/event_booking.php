@@ -76,11 +76,11 @@ return [
             'gateways' => [
                 'transfer' => \Windwalker\DI\create(
                     TransferPayment::class,
-                    renderHandler: function () {
-                        return <<<TEXT
+                    renderHandler: \Windwalker\raw(
+                        fn() => <<<TEXT
                         銀行帳戶: (800) 123123123
-                        TEXT;
-                    }
+                        TEXT
+                    )
                 )
             ]
         ]

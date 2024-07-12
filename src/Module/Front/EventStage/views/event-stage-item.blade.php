@@ -99,7 +99,7 @@ $priceFormatter = $app->retrieve(PriceFormatter::class);
                 $canAttend = false;
                 @endphp
 
-                <form id="attend-form" action="{{ $nav->to('event_attending')->var('stageId', $item->getId()) }}" method="post">
+                <form id="attend-form" action="{{ $nav->to('event_attending_save')->var('stageId', $item->getId()) }}" method="post">
                     <table class="table table-striped">
                         <thead>
                         <tr>
