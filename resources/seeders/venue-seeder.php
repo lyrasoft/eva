@@ -4,9 +4,8 @@ declare(strict_types=1);
 
 namespace App\Seeder;
 
-use App\Entity\Venue;
-use App\EventBookingPackage;
-use Faker\Provider\Company;
+use Lyrasoft\EventBooking\Entity\Venue;
+use Lyrasoft\EventBooking\EventBookingPackage;
 use Windwalker\Core\Seed\Seeder;
 use Windwalker\Database\DatabaseAdapter;
 use Windwalker\ORM\EntityMapper;

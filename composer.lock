@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8b67beac14447ff958990015569cd8a3",
+    "content-hash": "71e830330587e479097e7247a8c418bb",
     "packages": [
         {
             "name": "asika/cross-env",
@@ -375,16 +375,16 @@
         },
         {
             "name": "composer/ca-bundle",
-            "version": "1.5.0",
+            "version": "1.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/ca-bundle.git",
-                "reference": "0c5ccfcfea312b5c5a190a21ac5cef93f74baf99"
+                "reference": "063d9aa8696582f5a41dffbbaf3c81024f0a604a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/ca-bundle/zipball/0c5ccfcfea312b5c5a190a21ac5cef93f74baf99",
-                "reference": "0c5ccfcfea312b5c5a190a21ac5cef93f74baf99",
+                "url": "https://api.github.com/repos/composer/ca-bundle/zipball/063d9aa8696582f5a41dffbbaf3c81024f0a604a",
+                "reference": "063d9aa8696582f5a41dffbbaf3c81024f0a604a",
                 "shasum": ""
             },
             "require": {
@@ -394,7 +394,7 @@
             },
             "require-dev": {
                 "phpstan/phpstan": "^1.10",
-                "psr/log": "^1.0",
+                "psr/log": "^1.0 || ^2.0 || ^3.0",
                 "symfony/phpunit-bridge": "^4.2 || ^5",
                 "symfony/process": "^4.0 || ^5.0 || ^6.0 || ^7.0"
             },
@@ -431,7 +431,7 @@
             "support": {
                 "irc": "irc://irc.freenode.org/composer",
                 "issues": "https://github.com/composer/ca-bundle/issues",
-                "source": "https://github.com/composer/ca-bundle/tree/1.5.0"
+                "source": "https://github.com/composer/ca-bundle/tree/1.5.1"
             },
             "funding": [
                 {
@@ -447,20 +447,20 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-03-15T14:00:32+00:00"
+            "time": "2024-07-08T15:28:20+00:00"
         },
         {
             "name": "composer/semver",
-            "version": "3.4.0",
+            "version": "3.4.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/semver.git",
-                "reference": "35e8d0af4486141bc745f23a29cc2091eb624a32"
+                "reference": "c51258e759afdb17f1fd1fe83bc12baaef6309d6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/semver/zipball/35e8d0af4486141bc745f23a29cc2091eb624a32",
-                "reference": "35e8d0af4486141bc745f23a29cc2091eb624a32",
+                "url": "https://api.github.com/repos/composer/semver/zipball/c51258e759afdb17f1fd1fe83bc12baaef6309d6",
+                "reference": "c51258e759afdb17f1fd1fe83bc12baaef6309d6",
                 "shasum": ""
             },
             "require": {
@@ -512,7 +512,7 @@
             "support": {
                 "irc": "ircs://irc.libera.chat:6697/composer",
                 "issues": "https://github.com/composer/semver/issues",
-                "source": "https://github.com/composer/semver/tree/3.4.0"
+                "source": "https://github.com/composer/semver/tree/3.4.2"
             },
             "funding": [
                 {
@@ -528,7 +528,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-08-31T09:50:34+00:00"
+            "time": "2024-07-12T11:35:52+00:00"
         },
         {
             "name": "doctrine/lexer",
@@ -1318,16 +1318,16 @@
         },
         {
             "name": "lyrasoft/backup",
-            "version": "2.0.2",
+            "version": "2.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/lyrasoft/backup-package.git",
-                "reference": "25ff3b406375c13a24d826c5ee81c216dfce6b18"
+                "reference": "137eeffeb8865b6f582527e5e160ff1cda23e401"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/lyrasoft/backup-package/zipball/25ff3b406375c13a24d826c5ee81c216dfce6b18",
-                "reference": "25ff3b406375c13a24d826c5ee81c216dfce6b18",
+                "url": "https://api.github.com/repos/lyrasoft/backup-package/zipball/137eeffeb8865b6f582527e5e160ff1cda23e401",
+                "reference": "137eeffeb8865b6f582527e5e160ff1cda23e401",
                 "shasum": ""
             },
             "require": {
@@ -1358,9 +1358,9 @@
             ],
             "support": {
                 "issues": "https://github.com/lyrasoft/backup-package/issues",
-                "source": "https://github.com/lyrasoft/backup-package/tree/2.0.2"
+                "source": "https://github.com/lyrasoft/backup-package/tree/2.0.3"
             },
-            "time": "2024-01-26T08:11:14+00:00"
+            "time": "2024-07-10T16:51:23+00:00"
         },
         {
             "name": "lyrasoft/banner",
@@ -1427,16 +1427,16 @@
         },
         {
             "name": "lyrasoft/contact",
-            "version": "1.0.3",
+            "version": "1.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/lyrasoft/luna-contact.git",
-                "reference": "6dde943226530109f72b6ae836bf3fd4a71d5633"
+                "reference": "d23c7990e0aaedb7da5ce5d455de0e684f8ced4e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/lyrasoft/luna-contact/zipball/6dde943226530109f72b6ae836bf3fd4a71d5633",
-                "reference": "6dde943226530109f72b6ae836bf3fd4a71d5633",
+                "url": "https://api.github.com/repos/lyrasoft/luna-contact/zipball/d23c7990e0aaedb7da5ce5d455de0e684f8ced4e",
+                "reference": "d23c7990e0aaedb7da5ce5d455de0e684f8ced4e",
                 "shasum": ""
             },
             "require": {
@@ -1472,9 +1472,59 @@
             "description": "LYRASOFT contact package",
             "support": {
                 "issues": "https://github.com/lyrasoft/luna-contact/issues",
-                "source": "https://github.com/lyrasoft/luna-contact/tree/1.0.3"
+                "source": "https://github.com/lyrasoft/luna-contact/tree/1.1.1"
             },
-            "time": "2023-11-12T09:11:37+00:00"
+            "time": "2024-07-12T07:02:58+00:00"
+        },
+        {
+            "name": "lyrasoft/event-booking",
+            "version": "dev-main",
+            "dist": {
+                "type": "path",
+                "url": "./vendor/lyrasoft/event-booking",
+                "reference": "6c0b700e6e5dc9a78ca5478bad83b9b9a9bb2d99"
+            },
+            "require": {
+                "brick/math": "^0.11.0",
+                "chillerlan/php-qrcode": "^5.0",
+                "lyrasoft/attachment": "^1.0",
+                "lyrasoft/luna": "^2.1",
+                "lyrasoft/member": "^1.0",
+                "lyrasoft/sequence": "^1.0",
+                "php": ">=8.2"
+            },
+            "type": "windwalker-package",
+            "extra": {
+                "windwalker": {
+                    "packages": [
+                        "Lyrasoft\\EventBooking\\EventBookingPackage"
+                    ],
+                    "modules": [
+                        "src/Module"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Lyrasoft\\EventBooking\\": "src/"
+                },
+                "files": [
+                    "src/bootstrap.php"
+                ]
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Simon Asika",
+                    "email": "asika32764@gmail.com"
+                }
+            ],
+            "description": "LYRASOFT Event Booking Package",
+            "transport-options": {
+                "relative": true
+            }
         },
         {
             "name": "lyrasoft/luna",
@@ -6868,7 +6918,9 @@
     ],
     "aliases": [],
     "minimum-stability": "beta",
-    "stability-flags": [],
+    "stability-flags": {
+        "lyrasoft/event-booking": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

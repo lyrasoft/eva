@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace App\Migration;
 
-use App\Entity\EventAttend;
-use App\Entity\EventOrder;
-use App\Entity\EventPlan;
-use App\Entity\EventMemberMap;
-use App\Entity\EventStage;
-use App\Entity\Event;
-use App\Entity\Venue;
+use Lyrasoft\EventBooking\Entity\Event;
+use Lyrasoft\EventBooking\Entity\EventAttend;
+use Lyrasoft\EventBooking\Entity\EventMemberMap;
+use Lyrasoft\EventBooking\Entity\EventOrder;
+use Lyrasoft\EventBooking\Entity\EventPlan;
+use Lyrasoft\EventBooking\Entity\EventStage;
+use Lyrasoft\EventBooking\Entity\Venue;
 use Windwalker\Core\Console\ConsoleApplication;
 use Windwalker\Core\Migration\Migration;
 use Windwalker\Database\Schema\Schema;

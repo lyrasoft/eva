@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace App\Routes;
 
 use App\Module\Admin\AdminMiddleware;
+use Lyrasoft\EventBooking\EventBookingPackage;
 use Lyrasoft\Luna\Middleware\AdminAccessMiddleware;
 use Lyrasoft\Luna\Middleware\LoginRequireMiddleware;
 use Windwalker\Core\Middleware\CsrfMiddleware;
@@ -39,6 +40,8 @@ $router->group('admin')
         $router->load(__DIR__ . '/admin/*.php');
 
         $router->load(__DIR__ . '/packages/admin/*.route.php');
+
+        $router->load(EventBookingPackage::path('routes/admin/*.php'));
 
         $router->load(__DIR__ . '/custom/admin/*.route.php');
     });

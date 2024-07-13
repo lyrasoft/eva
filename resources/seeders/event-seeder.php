@@ -4,19 +4,17 @@ declare(strict_types=1);
 
 namespace App\Seeder;
 
-use App\Entity\Event;
-use App\Entity\EventPlan;
-use App\Entity\EventStage;
-use App\Entity\Venue;
-use App\EventBookingPackage;
+use Lyrasoft\EventBooking\Entity\Event;
+use Lyrasoft\EventBooking\Entity\EventPlan;
+use Lyrasoft\EventBooking\Entity\EventStage;
+use Lyrasoft\EventBooking\Entity\Venue;
+use Lyrasoft\EventBooking\EventBookingPackage;
 use Lyrasoft\Luna\Entity\Category;
 use Unicorn\Utilities\SlugHelper;
 use Windwalker\Core\Seed\Seeder;
 use Windwalker\Database\DatabaseAdapter;
 use Windwalker\ORM\EntityMapper;
 use Windwalker\ORM\ORM;
-
-use function Windwalker\chronos;
 
 /**
  * Event Seeder

@@ -14,6 +14,7 @@ namespace App\Routes;
 use App\Module\Front\FrontMiddleware;
 use App\Module\Front\Home\HomeController;
 use App\Module\Front\Home\HomeView;
+use Lyrasoft\EventBooking\EventBookingPackage;
 use Lyrasoft\Luna\Middleware\LocaleMiddleware;
 use Windwalker\Core\Middleware\CsrfMiddleware;
 use Windwalker\Core\Middleware\MaintenanceMiddleware;
@@ -47,6 +48,7 @@ $router->group('front')
         $router->load(__DIR__ . '/front/*.php');
 
         $router->load(__DIR__ . '/packages/front/*.route.php');
+        $router->load(EventBookingPackage::path('routes/front/*.php'));
 
         $router->load(__DIR__ . '/custom/front/*.route.php');
     });

@@ -17,7 +17,7 @@ return [
         'widget' => [
             'upload_profile' => 'image'
         ],
-        'type_enum' => \App\Enum\BannerType::class,
+        'type_enum' => \Lyrasoft\EventBooking\Enum\BannerType::class,
         'video_enabled' => true,
         'types' => [
             '_default' => [
