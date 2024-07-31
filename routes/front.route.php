@@ -11,6 +11,8 @@ declare(strict_types=1);
 
 namespace App\Routes;
 
+use App\Middleware\IpBlockMiddleware;
+use App\Middleware\RedirectMiddleware;
 use App\Module\Front\FrontMiddleware;
 use App\Module\Front\Home\HomeController;
 use App\Module\Front\Home\HomeView;
@@ -24,6 +26,9 @@ use Windwalker\Core\Router\RouteCreator;
 
 $router->group('front')
     ->namespace('front')
+    ->middleware(
+        IpBlockMiddleware::class,
+    )
     ->middleware(MaintenanceMiddleware::class)
     ->middleware(
         CsrfMiddleware::class,

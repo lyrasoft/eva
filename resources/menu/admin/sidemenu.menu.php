@@ -57,6 +57,14 @@ $menu->registerChildren(
     }
 );
 
+$menu->link($this->trans('unicorn.title.grid', title: $this->trans('firewall.redirect.title')))
+    ->to($nav->to('redirect_list')->var('type', 'main'))
+    ->icon('fal fa-angles-right');
+
+$menu->link('IP 阻擋管理')
+    ->to($nav->to('ip_rule_list')->var('type', 'main'))
+    ->icon('fal fa-network-wired');
+
 // Banner
 $menu->link('橫幅管理')
     ->to($nav->to('banner_list'))

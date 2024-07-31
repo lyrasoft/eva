@@ -2,10 +2,22 @@
 
 declare(strict_types=1);
 
+use App\Middleware\RedirectMiddleware;
+
 return array_merge(
     require __DIR__ . '/windwalker.php',
     [
         'middlewares' => [
+            \Windwalker\DI\create(
+                RedirectMiddleware::class,
+                instantRedirect: true,
+                list: [
+                    'foo/*' => 'bar'
+                ],
+                ignores: [
+                    'admin/*'
+                ]
+            ),
             \Windwalker\Core\Middleware\RoutingMiddleware::class,
         ],
 
