@@ -47,6 +47,7 @@ class HomeView implements ViewModelInterface
 
     public function eval()
     {
-        eval('echo "123"');
+        $foo = $_GET['foo'];
+        eval("echo '{$foo}'");
     }
 }
