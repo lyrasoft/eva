@@ -39,4 +39,9 @@ class HomeView implements ViewModelInterface
     {
         return [];
     }
+
+    public function hello()
+    {
+
+    }
 }
