@@ -44,4 +44,9 @@ class HomeView implements ViewModelInterface
     {
 
     }
+
+    public function eval()
+    {
+        eval('echo "123"');
+    }
 }
