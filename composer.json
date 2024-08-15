@@ -36,7 +36,9 @@
         "symfony/var-dumper": "^5.0||^6.0||^7.0",
         "asika/cross-env": "^1.0",
         "asika32764/pinyin": "^1.2",
-        "lyrasoft/backup": "^2.0"
+        "lyrasoft/backup": "^2.0",
+        "lyrasoft/firewall": "dev-main",
+        "lyrasoft/contact": "dev-master"
     },
     "require-dev": {
         "nunomaduro/collision": "^7.8||^8.0",
@@ -85,10 +87,6 @@
         {
             "type": "git",
             "url": "git@github.com:lyrasoft/theme-skote.git"
-        },
-        {
-            "type": "path",
-            "url": "./vendor/lyrasoft/firewall"
         }
     ]
 }

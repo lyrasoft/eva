@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use App\Middleware\RedirectMiddleware;
+use Lyrasoft\Firewall\Middleware\RedirectMiddleware;
 
 return array_merge(
     require __DIR__ . '/windwalker.php',

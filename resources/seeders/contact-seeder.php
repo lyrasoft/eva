@@ -53,6 +53,11 @@ $seeder->import(
                     'zip' => $faker->postcode()
                 ]
             );
+            $item->setParams(
+                [
+                    'ip' => $faker->ipv4(),
+                ]
+            );
 
             $mapper->createOne($item);
 

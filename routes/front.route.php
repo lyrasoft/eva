@@ -11,11 +11,10 @@ declare(strict_types=1);
 
 namespace App\Routes;
 
-use App\Middleware\IpBlockMiddleware;
-use App\Middleware\RedirectMiddleware;
 use App\Module\Front\FrontMiddleware;
 use App\Module\Front\Home\HomeController;
 use App\Module\Front\Home\HomeView;
+use Lyrasoft\Firewall\Middleware\FirewallMiddleware;
 use Lyrasoft\Luna\Middleware\LocaleMiddleware;
 use Windwalker\Core\Middleware\CsrfMiddleware;
 use Windwalker\Core\Middleware\MaintenanceMiddleware;
@@ -27,7 +26,7 @@ use Windwalker\Core\Router\RouteCreator;
 $router->group('front')
     ->namespace('front')
     ->middleware(
-        IpBlockMiddleware::class,
+        FirewallMiddleware::class,
     )
     ->middleware(MaintenanceMiddleware::class)
     ->middleware(

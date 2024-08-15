@@ -44,6 +44,7 @@ class AdminMiddleware extends AbstractLifecycleMiddleware
         $this->lang->loadAllFromVendor(LunaPackage::class, 'ini');
         $this->lang->loadAllFromVendor(ContactPackage::class, 'ini');
         $this->lang->loadAllFromVendor(BannerPackage::class, 'ini');
+        $this->lang->loadAllFromVendor(ContactPackage::class, 'ini');
 
         $this->lang->loadAll('ini');
 

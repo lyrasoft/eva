@@ -61,9 +61,14 @@ $menu->link($this->trans('unicorn.title.grid', title: $this->trans('firewall.red
     ->to($nav->to('redirect_list')->var('type', 'main'))
     ->icon('fal fa-angles-right');
 
-$menu->link('IP 阻擋管理')
+$menu->link($this->trans('unicorn.title.grid', title: $this->trans('firewall.ip.rule.title')))
     ->to($nav->to('ip_rule_list')->var('type', 'main'))
     ->icon('fal fa-network-wired');
+
+// Contact
+$menu->link('聯絡單')
+    ->to($nav->to('contact_list', ['type' => 'main']))
+    ->icon('fal fa-phone-volume');
 
 // Banner
 $menu->link('橫幅管理')
