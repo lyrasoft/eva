@@ -42,7 +42,8 @@
     },
     "require-dev": {
         "nunomaduro/collision": "^7.8||^8.0",
-        "mlocati/ip-lib": "^1.18"
+        "mlocati/ip-lib": "^1.18",
+        "phpoffice/phpspreadsheet": "^2.2"
     },
     "scripts": {
         "post-create-project-cmd": [
