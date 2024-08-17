@@ -1,6 +1,16 @@
 
-import fusion, { sass, babel, parallel, wait, ts, src, symlink } from '@windwalker-io/fusion';
+import fusion, {
+  sass,
+  babel,
+  parallel,
+  wait,
+  ts,
+  src,
+  symlink,
+  webpackVueBundle
+} from '@windwalker-io/fusion';
 import { syncModuleScripts, installVendors, findModules } from '@windwalker-io/core';
+import path from 'path';
 
 export async function mainCSS() {
   // Watch start
@@ -162,4 +172,26 @@ export async function install() {
     });
 }
 
-export default parallel(css, js, images);
+// compile vue
+export const vue = parallel(
+  vueFormkitEdit
+);
+export function vueFormkitEdit() {
+  return webpackVueBundle(
+    'resources/assets/vue/entries/formkit-edit.ts',
+    'www/assets/js/formkit-edit/index.js',
+    (config) => {
+      config.resolve.alias = {
+        '@': path.resolve(path.resolve(), './resources/assets/'),
+        '@vue': path.resolve(path.resolve(), './resources/assets/vue/'),
+      };
+      // Exclude Vue
+      config.externals = { vue: 'Vue' };
+      // Use tsconfig.vue.json if exists, default is tsconfig.json
+      config.module.rules[4].options.configFile = 'tsconfig.vue.json';
+      // Override if you need
+    }
+  );
+}
+
+export default parallel(css, js, images, vue);

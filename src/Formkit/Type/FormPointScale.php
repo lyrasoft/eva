@@ -1,0 +1,83 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Formkit\Type;
+
+/**
+ * The FormsetText class.
+ *
+ * @since  __DEPLOY_VERSION__
+ */
+class FormPointScale extends AbstractFormType
+{
+    use LayoutFormsetTrait;
+
+    /**
+     * getIcon
+     *
+     * @return  string
+     *
+     * @since  __DEPLOY_VERSION__
+     */
+    public static function getIcon(): string
+    {
+        return 'far fa-ellipsis-h-alt';
+    }
+
+    /**
+     * getName
+     *
+     * @return  string
+     *
+     * @since  __DEPLOY_VERSION__
+     */
+    public static function getName(): string
+    {
+        return '分數量表';
+    }
+
+    /**
+     * getName
+     *
+     * @return  string
+     *
+     * @since  __DEPLOY_VERSION__
+     */
+    public static function getId(): string
+    {
+        return 'point-scale';
+    }
+
+    /**
+     * getDescription
+     *
+     * @return  string
+     *
+     * @since  __DEPLOY_VERSION__
+     */
+    public static function getDescription(): string
+    {
+        return '分數單選量表';
+    }
+
+    /**
+     * getDefaultParams
+     *
+     * @return  array
+     *
+     * @since  __DEPLOY_VERSION__
+     */
+    public static function getDefaultParams(): array
+    {
+        return array_merge(
+            parent::getDefaultParams(),
+            [
+                'min' => '1',
+                'max' => '5',
+                'start' => '',
+                'end' => '',
+            ]
+        );
+    }
+}

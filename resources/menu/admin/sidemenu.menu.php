@@ -57,6 +57,10 @@ $menu->registerChildren(
     }
 );
 
+$menu->link($this->trans('unicorn.title.grid', title: $this->trans('formkit.formkit.title')))
+    ->to($nav->to('formkit_list'))
+    ->icon('fal fa-layers');
+
 $menu->link($this->trans('unicorn.title.grid', title: $this->trans('firewall.redirect.title')))
     ->to($nav->to('redirect_list')->var('type', 'main'))
     ->icon('fal fa-angles-right');

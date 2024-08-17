@@ -1,0 +1,115 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Formkit\Type;
+
+use Windwalker\Core\DateTime\Chronos;
+use Windwalker\Form\Field\AbstractField;
+use Windwalker\Form\Field\DatetimeLocalField;
+use Windwalker\Form\Field\TextField;
+
+/**
+ * The FormsetText class.
+ *
+ * @since  __DEPLOY_VERSION__
+ */
+class FormDate extends AbstractFormType
+{
+    /**
+     * getIcon
+     *
+     * @return  string
+     *
+     * @since  __DEPLOY_VERSION__
+     */
+    public static function getIcon(): string
+    {
+        return 'far fa-calendar';
+    }
+
+    /**
+     * getName
+     *
+     * @return  string
+     *
+     * @since  __DEPLOY_VERSION__
+     */
+    public static function getName(): string
+    {
+        return '日期';
+    }
+
+    /**
+     * getName
+     *
+     * @return  string
+     *
+     * @since  __DEPLOY_VERSION__
+     */
+    public static function getId(): string
+    {
+        return 'date';
+    }
+
+    /**
+     * getDescription
+     *
+     * @return  string
+     *
+     * @since  __DEPLOY_VERSION__
+     */
+    public static function getDescription(): string
+    {
+        return '日期選擇器';
+    }
+
+    /**
+     * getDefaultParams
+     *
+     * @return  array
+     *
+     * @since  __DEPLOY_VERSION__
+     */
+    public static function getDefaultParams(): array
+    {
+        return array_merge(
+            parent::getDefaultParams(),
+            [
+                //
+            ]
+        );
+    }
+
+    /**
+     * getFormField
+     *
+     * @return  AbstractField
+     *
+     * @since  __DEPLOY_VERSION__
+     */
+    public function getFormField(): AbstractField
+    {
+        return (new TextField($this->getLabel(), $this->getLabel()))->type('date');
+    }
+
+    /**
+     * prepareView
+     *
+     * @param array $data
+     * @param array $content
+     *
+     * @return  array
+     *
+     * @throws \Exception
+     * @since  __DEPLOY_VERSION__
+     */
+    public function prepareView(array $data, array $content): array
+    {
+        $data = parent::prepareView($data, $content);
+
+        $data[$this->getLabel()] = Chronos::toFormat($data[$this->getLabel()], 'Y/m/d');
+
+        return $data;
+    }
+}

@@ -2,4 +2,4 @@
 
 declare(strict_types=1);
 
-return ['db:excel' => \App\Command\DbExcelCommand::class];
+return ['db:excel' => \Lyrasoft\Security\Command\DbExcelCommand::class];

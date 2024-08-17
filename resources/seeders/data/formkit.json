@@ -1,0 +1,264 @@
+[
+    {
+        "uid": "5db30c811c563",
+        "type": "text",
+        "label": "文字欄位",
+        "description": "已不成一條龍的樣子，現在小戶已負擔不起，丙驚疑地問，我們有這雙腕，哈哈笑笑弄著一條香龍",
+        "help": "",
+        "required": "",
+        "validation": "",
+        "readonly": false,
+        "disabled": false,
+        "class": "",
+        "subtype": "text",
+        "placeholder": "請填寫此欄位",
+        "grid_preview": true
+    },
+    {
+        "type": "textarea",
+        "label": "多行文字",
+        "description": "過年，因為這是親戚間，不像現時剝奪得淨盡，乙接著嘴說，透過了衣衫，手一插進衣袋，兄弟們來！",
+        "help": "",
+        "required": "",
+        "validation": "",
+        "readonly": false,
+        "disabled": false,
+        "class": "",
+        "height": "5",
+        "placeholder": "請填寫此欄位",
+        "uid": "5db30caa1c564",
+        "subtype": "text",
+        "grid_preview": true
+    },
+    {
+        "type": "radio",
+        "label": "單選題",
+        "description": "在他們當然早就看明，在這被黑暗所充塞的地上，草繩上插的香條，也不知立的四周是否危險，和狺狺的狗吠，握著有很大權威",
+        "help": "",
+        "required": "",
+        "validation": "",
+        "readonly": false,
+        "disabled": false,
+        "class": "",
+        "options": [
+            {
+                "uid": "5db30e62ca67b",
+                "text": "選項A"
+            },
+            {
+                "uid": "5db30e63ca67c",
+                "text": "選項B"
+            }
+        ],
+        "enable_other": "1",
+        "uid": "5db30e39ca677",
+        "subtype": "text",
+        "placeholder": "請填寫此欄位"
+    },
+    {
+        "type": "checkboxes",
+        "label": "多選題",
+        "description": "由著裊裊的晚風，就說不關什麼，現在想沒得再一個，去啊！好，和電柱上路燈，任打任踢也只自忍痛",
+        "help": "",
+        "required": "",
+        "validation": "",
+        "readonly": false,
+        "disabled": false,
+        "class": "",
+        "options": [
+            {
+                "uid": "5db30e8bca67d",
+                "text": "由著裊裊的晚風"
+            },
+            {
+                "uid": "5db30e8bca67e",
+                "text": "就說不關什麼"
+            },
+            {
+                "uid": "5db30e8cca67f",
+                "text": "現在想沒得再一個"
+            }
+        ],
+        "enable_other": "1",
+        "uid": "5db30e3bca678",
+        "subtype": "text",
+        "placeholder": "請填寫此欄位"
+    },
+    {
+        "type": "select",
+        "label": "下拉選單",
+        "description": "也分得出處處瀦留的水光，不斷地逝去，現在可把我以前的思想，雨太太的好意，阻斷爭論",
+        "help": "",
+        "required": "",
+        "validation": "",
+        "readonly": false,
+        "disabled": false,
+        "class": "",
+        "grid_preview": true,
+        "options": [
+            {
+                "uid": "5db30eb2d8231",
+                "text": "也分得出處處瀦留的水光"
+            },
+            {
+                "uid": "5db30eb3d8233",
+                "text": "現在可把我以前的思想"
+            },
+            {
+                "uid": "5db30eb2d8232",
+                "text": "不斷地逝去"
+            }
+        ],
+        "enable_other": "1",
+        "uid": "5db30e3bca679",
+        "subtype": "text",
+        "placeholder": "請填寫此欄位"
+    },
+    {
+        "type": "file",
+        "label": "檔案上傳",
+        "description": "不知談論些什麼，阻斷爭論，是一曲極盡悲壯的進行曲，橋柱是否有傾斜，不趕他出去，所以窮的人",
+        "help": "",
+        "required": "",
+        "validation": "",
+        "readonly": false,
+        "disabled": false,
+        "class": "",
+        "accept": "zip,png",
+        "max": "1",
+        "max_size": "",
+        "uid": "5db30e3cca67a",
+        "subtype": "text",
+        "placeholder": "請填寫此欄位"
+    },
+    {
+        "type": "point-scale",
+        "label": "分數量表",
+        "description": "前回不是因得到勝利（他一人的批判），老人說，看他有多大力量能夠反對",
+        "help": "",
+        "required": "",
+        "validation": "",
+        "readonly": false,
+        "disabled": false,
+        "class": "",
+        "min": "1",
+        "max": "8",
+        "start": "開始",
+        "end": "結束",
+        "uid": "5db30fce64ed7",
+        "subtype": "text",
+        "placeholder": "請填寫此欄位"
+    },
+    {
+        "type": "grid-radio-scale",
+        "label": "矩陣單選",
+        "description": "過年，這呼聲，失了以前互相扶倚的伴侶，這邊門口幾人，波湧似的，何故世上的人類們，到最後亦無一人降志",
+        "help": "",
+        "required": "",
+        "validation": "",
+        "readonly": false,
+        "disabled": false,
+        "class": "",
+        "rows": [
+            {
+                "uid": "5db31001b0465",
+                "text": "過年，這呼聲"
+            },
+            {
+                "uid": "5db31001b0466",
+                "text": "失了以前互相扶倚的伴侶"
+            },
+            {
+                "uid": "5db31002b0467",
+                "text": "這邊門口幾人"
+            }
+        ],
+        "columns": [
+            {
+                "uid": "5db31002b0468",
+                "text": "波湧似"
+            },
+            {
+                "uid": "5db31003b0469",
+                "text": "何故世"
+            },
+            {
+                "uid": "5db31003b046a",
+                "text": "到最後"
+            }
+        ],
+        "uid": "5db30fefb0464",
+        "subtype": "text",
+        "placeholder": "請填寫此欄位"
+    },
+    {
+        "type": "grid-box-scale",
+        "label": "矩陣勾選",
+        "description": "過年，這呼聲，失了以前互相扶倚的伴侶，這邊門口幾人，波湧似的，何故世上的人類們，到最後亦無一人降志",
+        "help": "",
+        "required": "",
+        "validation": "",
+        "readonly": false,
+        "disabled": false,
+        "class": "",
+        "rows": [
+            {
+                "uid": "5db31001b0465",
+                "text": "過年，這呼聲"
+            },
+            {
+                "uid": "5db31001b0466",
+                "text": "失了以前互相扶倚的伴侶"
+            },
+            {
+                "uid": "5db31002b0467",
+                "text": "這邊門口幾人"
+            }
+        ],
+        "columns": [
+            {
+                "uid": "5db31002b0468",
+                "text": "波湧似"
+            },
+            {
+                "uid": "5db31003b0469",
+                "text": "何故世"
+            },
+            {
+                "uid": "5db31003b046a",
+                "text": "到最後"
+            }
+        ],
+        "subtype": "text",
+        "placeholder": "請填寫此欄位",
+        "uid": "5db31017b046b"
+    },
+    {
+        "type": "date",
+        "label": "日期",
+        "description": "過年，這呼聲，失了以前互相扶倚的伴侶，這邊門口幾人，波湧似的，何故世上的人類們，到最後亦無一人降志",
+        "help": "",
+        "required": "",
+        "validation": "",
+        "readonly": false,
+        "disabled": false,
+        "class": "",
+        "uid": "5db31024b046c",
+        "subtype": "text",
+        "placeholder": "請填寫此欄位"
+    },
+    {
+        "type": "time",
+        "label": "時間",
+        "description": "過年，這呼聲，失了以前互相扶倚的伴侶，這邊門口幾人，波湧似的，何故世上的人類們，到最後亦無一人降志",
+        "help": "",
+        "required": "",
+        "validation": "",
+        "readonly": false,
+        "disabled": false,
+        "class": "",
+        "uid": "5db31029b046d",
+        "subtype": "text",
+        "placeholder": "請填寫此欄位"
+    }
+]
