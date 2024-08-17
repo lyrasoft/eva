@@ -1,7 +1,9 @@
 <script setup lang="ts">
+import FieldCard from '@vue/components/FieldCard.vue';
 import { prepareList, prepareListItem } from '@vue/services/utilities';
 import type { Formkit, FormType } from '@vue/types';
 import { computed, nextTick, onMounted, provide, ref } from 'vue';
+import { VueDraggable } from 'vue-draggable-plus'
 
 const props = defineProps<{
   fields: any[];
@@ -62,20 +64,24 @@ const content = computed(() => {
 <template>
   <div class="l-form-builder">
     <div class="l-form-builder__content">
-      <!--<draggable :options="{ handle: '.h-handle', animation: 150 }" v-model="fields">-->
-      <!--  <TransitionGroup name="fade">-->
-      <!--    <div v-for="(field, i) of fields" class="c-field" :key="field.uid"-->
-      <!--      style="animation-duration: .3s">-->
-      <!--      <field-card v-model="fields[i]"-->
-      <!--        :is-focused="focus === field.uid"-->
-      <!--        @focus="focus = field.uid"-->
-      <!--        @copy="copy($event, i)"-->
-      <!--        @remove="remove($event, i)"-->
-      <!--        @add="addField(i)"-->
-      <!--      ></field-card>-->
-      <!--    </div>-->
-      <!--  </TransitionGroup>-->
-      <!--</draggable>-->
+      <VueDraggable
+        v-model="fields"
+        handle=".h-handle"
+        :animation="150"
+      >
+        <TransitionGroup name="fade">
+          <div v-for="(field, i) of fields" class="c-field" :key="field.uid"
+            style="animation-duration: .3s">
+            <FieldCard :is-focused="focus === field.uid"
+              v-model="fields[i]"
+              @focus="focus = field.uid"
+              @copy="copy($event, i)"
+              @remove="remove($event, i)"
+              @add="addField(i)"
+            />
+          </div>
+        </TransitionGroup>
+      </VueDraggable>
     </div>
 
     <div class="l-form-builder__bottom text-center">

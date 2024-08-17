@@ -39,7 +39,7 @@ class Formkit implements EntityInterface
     protected string $description = '';
 
     #[Column('content')]
-    #[Cast(JsonCast::class, 'array')]
+    #[Cast(JsonCast::class)]
     protected array $content = [];
 
     #[Column('image')]
@@ -244,13 +244,16 @@ class Formkit implements EntityInterface
 
         return $this;
     }
+
     public function getContent(): array
     {
         return $this->content;
     }
+
     public function setContent(array $content): static
     {
         $this->content = $content;
+
         return $this;
     }
 }

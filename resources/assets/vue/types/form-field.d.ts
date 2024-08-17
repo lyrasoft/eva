@@ -6,3 +6,7 @@ export interface FormType {
   description: string;
 }
 
+export interface FormTypeParams {
+  type: string;
+  [name: string]: any;
+}

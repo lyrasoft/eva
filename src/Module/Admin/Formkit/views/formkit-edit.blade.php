@@ -41,7 +41,6 @@ $formkitService = $app->retrieve(FormkitService::class);
 
 $vueScript->vue();
 $vueScript->animate();
-$vueScript->draggable();
 
 $asset->js('js/formkit-edit/index.js');
 

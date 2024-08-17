@@ -38,12 +38,10 @@
         "asika32764/pinyin": "^1.2",
         "lyrasoft/backup": "^2.0",
         "lyrasoft/firewall": "dev-main",
-        "lyrasoft/contact": "dev-master",
-        "lyrasoft/security": "dev-main"
+        "lyrasoft/security": "^0.1.2"
     },
     "require-dev": {
         "nunomaduro/collision": "^7.8||^8.0",
-        "mlocati/ip-lib": "^1.18",
         "phpoffice/phpspreadsheet": "^2.2"
     },
     "scripts": {
@@ -89,10 +87,6 @@
         {
             "type": "git",
             "url": "git@github.com:lyrasoft/theme-skote.git"
-        },
-        {
-            "type": "path",
-            "url": "./vendor/lyrasoft/security"
         }
     ]
 }
