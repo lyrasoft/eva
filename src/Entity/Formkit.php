@@ -6,6 +6,7 @@ namespace App\Entity;
 
 use Lyrasoft\Luna\Attributes\Author;
 use Lyrasoft\Luna\Attributes\Modifier;
+use Lyrasoft\Luna\Attributes\Slugify;
 use Unicorn\Enum\BasicState;
 use Windwalker\Core\DateTime\Chronos;
 use Windwalker\Core\DateTime\ServerTimeCast;
@@ -35,6 +36,10 @@ class Formkit implements EntityInterface
     #[Column('title')]
     protected string $title = '';
 
+    #[Column('alias')]
+    #[Slugify]
+    protected string $alias = '';
+
     #[Column('description')]
     protected string $description = '';
 
@@ -44,6 +49,9 @@ class Formkit implements EntityInterface
 
     #[Column('image')]
     protected string $image = '';
+
+    #[Column('extends')]
+    protected string $extends = '';
 
     #[Column('state')]
     #[Cast('int')]
@@ -253,6 +261,30 @@ class Formkit implements EntityInterface
     public function setContent(array $content): static
     {
         $this->content = $content;
+
+        return $this;
+    }
+
+    public function getExtends(): string
+    {
+        return $this->extends;
+    }
+
+    public function setExtends(string $extends): static
+    {
+        $this->extends = $extends;
+
+        return $this;
+    }
+
+    public function getAlias(): string
+    {
+        return $this->alias;
+    }
+
+    public function setAlias(string $alias): static
+    {
+        $this->alias = $alias;
 
         return $this;
     }

@@ -7,6 +7,7 @@ namespace App\Seeder;
 use App\Entity\Formkit;
 use App\Entity\FormkitResponse;
 use App\Enum\ResState;
+use App\FormkitPackage;
 use Jenssegers\Agent\Agent;
 use Lyrasoft\Luna\Entity\User;
 use Windwalker\Core\Seed\Seeder;
@@ -22,7 +23,7 @@ use Windwalker\ORM\ORM;
  * @var DatabaseAdapter $db
  */
 $seeder->import(
-    static function () use ($seeder, $orm, $db) {
+    static function (FormkitPackage $formkitPackage) use ($seeder, $orm, $db) {
         $faker = $seeder->faker('en_US');
 
         /** @var EntityMapper<Formkit> $mapper */
@@ -40,9 +41,12 @@ $seeder->import(
             $item->setTitle(
                 $faker->sentence(2)
             );
+
+            $item->setAlias($item->getTitle());
             $item->setImage($faker->unsplashImage(1600, 900));
             $item->setContent($content);
             $item->setState(1);
+            $item->setExtends($formkitPackage->getDefaultExtends());
             $item->setPublishUp(
                 random_int(0, 3) ? null : $published
             );

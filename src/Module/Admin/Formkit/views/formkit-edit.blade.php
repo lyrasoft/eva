@@ -74,6 +74,8 @@ $uniScript->data(
         action="{{ $nav->to('formkit_edit') }}"
         method="POST" enctype="multipart/form-data">
 
+        <x-title-bar :form="$form" ns="item"></x-title-bar>
+
         <div class="row">
             <div class="col-lg-8">
                 <formkit-edit-app id="formkit-edit-app" />

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Module\Admin\Formkit\Form;
 
+use App\FormkitPackage;
 use Lyrasoft\Luna\Field\UserModalField;
 use Unicorn\Field\CalendarField;
 use Unicorn\Field\SwitcherField;
@@ -23,10 +24,23 @@ class EditForm
 {
     use TranslatorTrait;
 
+    public function __construct(protected FormkitPackage $formkit)
+    {
+    }
+
     #[FormDefine]
     #[NS('item')]
     public function main(Form $form): void
     {
+        $form->add('title', TextField::class)
+            ->label($this->trans('unicorn.field.title'))
+            ->addFilter('trim')
+            ->required(true);
+
+        $form->add('alias', TextField::class)
+            ->label($this->trans('unicorn.field.alias'))
+            ->addFilter('trim');
+
         $form->add('id', HiddenField::class);
     }
 
@@ -35,11 +49,6 @@ class EditForm
     #[NS('item')]
     public function basic(Form $form): void
     {
-        $form->add('title', TextField::class)
-            ->label($this->trans('unicorn.field.title'))
-            ->addFilter('trim')
-            ->required(true);
-
         $form->add('state', SwitcherField::class)
             ->label($this->trans('unicorn.field.published'))
             ->circle(true)
@@ -63,10 +72,17 @@ class EditForm
     public function meta(Form $form): void
     {
         $form->add('publish_up', CalendarField::class)
-            ->label('Publish Up');
+            ->label('開始發佈');
 
         $form->add('publish_down', CalendarField::class)
-            ->label('Publish Down');
+            ->label('結束發佈');
+
+        $form->add('extends', ListField::class)
+            ->label('版面')
+            ->defaultValue($this->formkit->getDefaultExtends() ?: null)
+            ->registerOptions(
+                $this->formkit->getExtendsOptions($this->lang)
+            );
 
         $form->add('created', CalendarField::class)
             ->label($this->trans('unicorn.field.created'))

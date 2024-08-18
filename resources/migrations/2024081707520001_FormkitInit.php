@@ -23,9 +23,11 @@ $mig->up(
             function (Schema $schema) {
                 $schema->primary('id')->comment('Primary Key');
                 $schema->varchar('title')->comment('Title');
+                $schema->varchar('alias')->comment('Alias');
                 $schema->longtext('description')->comment('Desc');
                 $schema->json('content')->comment('Content');
                 $schema->varchar('image')->comment('Main Image');
+                $schema->varchar('extends')->comment('Extends');
                 $schema->bool('state');
                 $schema->datetime('publish_up');
                 $schema->datetime('publish_down');

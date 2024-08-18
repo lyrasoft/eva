@@ -25,6 +25,13 @@ return [
             FormkitPackage::class,
         ],
 
+        'view' => [
+            'default_extends' => 'global.body',
+            'extends' => [
+                'global.body' => 'Default Layout',
+            ]
+        ],
+
         'types' => [
             FormText::getId() => FormText::class,
             FormTextarea::getId() => FormTextarea::class,
