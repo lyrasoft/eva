@@ -6,6 +6,7 @@ namespace App\Formkit\Type;
 
 use Windwalker\Form\Field\AbstractField;
 use Windwalker\Form\Field\TextField;
+use Windwalker\Utilities\Contract\LanguageInterface;
 
 /**
  * The FormsetText class.
@@ -33,9 +34,14 @@ class FormText extends AbstractFormType
      *
      * @since  __DEPLOY_VERSION__
      */
-    public static function getName(): string
+    public static function getTitle(): string
     {
         return '文字欄位';
+    }
+
+    public static function getGroup(LanguageInterface $lang): string
+    {
+        return '文字輸入';
     }
 
     /**
@@ -75,7 +81,8 @@ class FormText extends AbstractFormType
             parent::getDefaultParams(),
             [
                 'subtype' => 'text',
-                'placeholder' => '請填寫此欄位'
+                'placeholder' => '請填寫此欄位',
+                'pattern',
             ]
         );
     }

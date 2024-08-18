@@ -31,12 +31,12 @@ return [
             FormRadio::getId() => FormRadio::class,
             FormCheckboxes::getId() => FormCheckboxes::class,
             FormSelect::getId() => FormSelect::class,
-            FormFile::getId() => FormFile::class,
             FormPointScale::getId() => FormPointScale::class,
             FormGridRadioScale::getId() => FormGridRadioScale::class,
             FormGridBoxScale::getId() => FormGridBoxScale::class,
             FormDate::getId() => FormDate::class,
             FormTime::getId() => FormTime::class,
+            FormFile::getId() => FormFile::class,
         ]
     ]
 ];

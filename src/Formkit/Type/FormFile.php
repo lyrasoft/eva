@@ -17,6 +17,7 @@ use Windwalker\Http\Helper\HeaderHelper;
 use Windwalker\Http\Helper\UploadedFileHelper;
 use Windwalker\Http\UploadedFile;
 use Windwalker\IO\Input;
+use Windwalker\Utilities\Contract\LanguageInterface;
 
 /**
  * The FormsetText class.
@@ -53,9 +54,14 @@ class FormFile extends AbstractFormType
      *
      * @since  __DEPLOY_VERSION__
      */
-    public static function getName(): string
+    public static function getTitle(): string
     {
         return '檔案上傳';
+    }
+
+    public static function getGroup(LanguageInterface $lang): string
+    {
+        return '其他';
     }
 
     /**

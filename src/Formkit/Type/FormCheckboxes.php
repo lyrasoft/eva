@@ -9,6 +9,8 @@ use Windwalker\Form\Field\AbstractField;
 use Windwalker\Form\Field\CheckboxesField;
 use Windwalker\IO\Input;
 use Windwalker\Utilities\Arr;
+use Windwalker\Utilities\Contract\LanguageInterface;
+
 use function Windwalker\h;
 
 /**
@@ -39,9 +41,14 @@ class FormCheckboxes extends FormSelect
      *
      * @since  __DEPLOY_VERSION__
      */
-    public static function getName(): string
+    public static function getTitle(): string
     {
         return '勾選方塊';
+    }
+
+    public static function getGroup(LanguageInterface $lang): string
+    {
+        return '選擇';
     }
 
     /**

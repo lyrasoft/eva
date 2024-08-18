@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import TypeSelector from '@vue/components/TypeSelector.vue';
 import vTextareaAutoResize from '@vue/directives/v-textarea-auto-resize';
 import type { FormType, FormTypeParams } from '@vue/types';
 import { BFormCheckbox, vBTooltip } from 'bootstrap-vue-next';
@@ -30,7 +31,11 @@ watch(() => item.value.type, (type) => {
   };
 });
 
-const fieldForm = computed(() => `${item.value.type}-field`);
+const fieldForm = computed(() => {
+  const type = types[item.value.type];
+
+  return type.componentName;
+});
 </script>
 
 <template>
@@ -42,13 +47,13 @@ const fieldForm = computed(() => `${item.value.type}-field`);
     </div>
 
     <div class="card-body">
-      <div class="form-row mb-2">
+      <div class="row mb-2">
         <div class="col-lg-8">
           <input type="text" v-model="item.label" class="form-control form-control-lg"
             placeholder="欄位標題" />
         </div>
         <div class="col">
-          <!--<type-selector v-model="item.type"></type-selector>-->
+          <TypeSelector v-model="item.type"></TypeSelector>
         </div>
       </div>
 
@@ -59,7 +64,7 @@ const fieldForm = computed(() => `${item.value.type}-field`);
         placeholder="描述"></textarea>
       </div>
 
-      <!--<component v-if="isFocused" :is="fieldForm" v-model="item"></component>-->
+      <component v-if="isFocused" :is="fieldForm" v-model="item"></component>
     </div>
 
     <div class="card-footer" v-if="isFocused">

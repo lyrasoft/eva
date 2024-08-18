@@ -1,4 +1,3 @@
-import '@windwalker-io/unicorn/src/types';
 import useFormkitFieldFunc from '@vue/services/form-mixin';
 
 declare global {

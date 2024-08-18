@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Formkit\Type;
 
+use Windwalker\Utilities\Contract\LanguageInterface;
+
 /**
  * The FormsetText class.
  *
@@ -32,9 +34,14 @@ class FormPointScale extends AbstractFormType
      *
      * @since  __DEPLOY_VERSION__
      */
-    public static function getName(): string
+    public static function getTitle(): string
     {
         return '分數量表';
+    }
+
+    public static function getGroup(LanguageInterface $lang): string
+    {
+        return '量表';
     }
 
     /**

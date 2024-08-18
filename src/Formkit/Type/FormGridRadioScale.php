@@ -7,6 +7,7 @@ namespace App\Formkit\Type;
 use Windwalker\Core\Application\Context\AppRequestInterface;
 use Windwalker\IO\Input;
 use Windwalker\Utilities\Arr;
+use Windwalker\Utilities\Contract\LanguageInterface;
 
 /**
  * The FormsetText class.
@@ -36,9 +37,14 @@ class FormGridRadioScale extends AbstractFormType
      *
      * @since  __DEPLOY_VERSION__
      */
-    public static function getName(): string
+    public static function getTitle(): string
     {
         return '矩陣單選量表';
+    }
+
+    public static function getGroup(LanguageInterface $lang): string
+    {
+        return '量表';
     }
 
     /**

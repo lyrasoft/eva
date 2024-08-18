@@ -46,16 +46,8 @@ $asset->js('js/formkit-edit/index.js');
 
 $types = $formkitService->getFormTypes()
     ->map(
-        function ($formType) {
-            /** @var class-string<AbstractFormType> $formType */
-            return [
-                'id' => $formType::getId(),
-                'name' => $formType::getName(),
-                'icon' => $formType::getIcon(),
-                'params' => $formType::getDefaultParams(),
-                'description' => $formType::getDescription(),
-            ];
-        }
+        /** @var class-string<AbstractFormType> $formType */
+        fn ($formType) => $formType::getTypeMeta($app, $asset, $lang)
     );
 
 $uniScript->data(

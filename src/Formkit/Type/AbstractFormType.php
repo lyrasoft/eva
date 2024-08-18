@@ -4,10 +4,13 @@ declare(strict_types=1);
 
 namespace App\Formkit\Type;
 
+use Windwalker\Core\Application\AppContext;
 use Windwalker\Core\Application\Context\AppRequestInterface;
+use Windwalker\Core\Asset\AssetService;
 use Windwalker\Data\Collection;
 use Windwalker\Form\Field\AbstractField;
 use Windwalker\Form\Field\TextField;
+use Windwalker\Utilities\Contract\LanguageInterface;
 
 use function Windwalker\collect;
 
@@ -20,7 +23,7 @@ abstract class AbstractFormType
         $this->data = collect($data);
     }
 
-    abstract public static function getName(): string;
+    abstract public static function getTitle(): string;
 
     abstract public static function getId(): string;
 
@@ -28,9 +31,9 @@ abstract class AbstractFormType
 
     abstract public static function getDescription(): string;
 
-    public function getTitle(): string
+    public static function getGroup(LanguageInterface $lang): string
     {
-        return static::getName();
+        return '';
     }
 
     public function getLabel(): string
@@ -81,5 +84,29 @@ abstract class AbstractFormType
         $this->data = $data;
 
         return $this;
+    }
+
+    public static function getTypeMeta(AppContext $app, AssetService $asset, LanguageInterface $lang): array
+    {
+        return [
+            'id' => static::getId(),
+            'title' => static::getTitle($lang),
+            'group' => static::getGroup($lang),
+            'icon' => static::getIcon(),
+            'params' => static::getDefaultParams(),
+            'description' => static::getDescription($lang),
+            'componentName' => static::getVueComponentName(),
+            'componentModuleUrl' => static::loadVueComponent($app, $asset),
+        ];
+    }
+
+    public static function getVueComponentName(): string
+    {
+        return 'form-' . static::getId();
+    }
+
+    public static function loadVueComponent(AppContext $app, AssetService $asset): ?string
+    {
+        return $asset->path('js/fields/form-' . static::getId() . '.js');
     }
 }

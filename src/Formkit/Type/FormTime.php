@@ -6,6 +6,7 @@ namespace App\Formkit\Type;
 
 use Windwalker\Form\Field\AbstractField;
 use Windwalker\Form\Field\TimeField;
+use Windwalker\Utilities\Contract\LanguageInterface;
 
 /**
  * The FormsetText class.
@@ -33,7 +34,7 @@ class FormTime extends AbstractFormType
      *
      * @since  __DEPLOY_VERSION__
      */
-    public static function getName(): string
+    public static function getTitle(): string
     {
         return '時間';
     }
@@ -48,6 +49,11 @@ class FormTime extends AbstractFormType
     public static function getId(): string
     {
         return 'time';
+    }
+
+    public static function getGroup(LanguageInterface $lang): string
+    {
+        return '文字輸入';
     }
 
     /**

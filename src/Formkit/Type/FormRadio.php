@@ -6,6 +6,8 @@ namespace App\Formkit\Type;
 
 use Windwalker\Form\Field\AbstractField;
 use Windwalker\Form\Field\RadioField;
+use Windwalker\Utilities\Contract\LanguageInterface;
+
 use function Windwalker\h;
 
 /**
@@ -36,9 +38,14 @@ class FormRadio extends FormSelect
      *
      * @since  __DEPLOY_VERSION__
      */
-    public static function getName(): string
+    public static function getTitle(): string
     {
         return '單選題';
+    }
+
+    public static function getGroup(LanguageInterface $lang): string
+    {
+        return '選擇';
     }
 
     /**

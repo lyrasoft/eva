@@ -3,7 +3,6 @@ import FieldCard from '@vue/components/FieldCard.vue';
 import { prepareList, prepareListItem } from '@vue/services/utilities';
 import type { Formkit, FormType } from '@vue/types';
 import { computed, nextTick, onMounted, provide, ref } from 'vue';
-import { VueDraggable } from 'vue-draggable-plus'
 
 const props = defineProps<{
   fields: any[];
@@ -64,7 +63,7 @@ const content = computed(() => {
 <template>
   <div class="l-form-builder">
     <div class="l-form-builder__content">
-      <VueDraggable
+      <draggable
         v-model="fields"
         handle=".h-handle"
         :animation="150"
@@ -81,7 +80,7 @@ const content = computed(() => {
             />
           </div>
         </TransitionGroup>
-      </VueDraggable>
+      </draggable>
     </div>
 
     <div class="l-form-builder__bottom text-center">
