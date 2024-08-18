@@ -1,3 +1,4 @@
+import GridOptions from '@vue/components/form/GridOptions.vue';
 import SelectOptions from '@vue/components/form/SelectOptions.vue';
 import type { FormType } from '@vue/types';
 import Vue, { createApp } from 'vue';
@@ -24,6 +25,7 @@ const app = createApp(
 app.use(createBootstrap());
 app.component('draggable', VueDraggable);
 app.component('SelectOptions', SelectOptions);
+app.component('GridOptions', GridOptions);
 
 // Init all fields
 const types: Record<string, FormType> = props.types;

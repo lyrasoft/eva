@@ -8,10 +8,12 @@ use App\Module\Admin\Formkit\Form\EditForm;
 use App\Repository\FormkitRepository;
 use Unicorn\Controller\CrudController;
 use Unicorn\Controller\GridController;
+use Unicorn\Repository\Event\PrepareSaveEvent;
 use Windwalker\Core\Application\AppContext;
 use Windwalker\Core\Attributes\Controller;
 use Windwalker\Core\Router\Navigator;
 use Windwalker\DI\Attributes\Autowire;
+use Windwalker\ORM\Event\BeforeSaveEvent;
 
 #[Controller()]
 class FormkitController
@@ -23,6 +25,19 @@ class FormkitController
         #[Autowire] FormkitRepository $repository,
     ): mixed {
         $form = $app->make(EditForm::class);
+
+        $controller->prepareSave(
+            function (PrepareSaveEvent $event) use ($app) {
+                $data = &$event->getData();
+                $data['content'] = json_decode($app->input('item')['content'], true);
+            }
+        );
+
+        $controller->beforeSave(
+            function (BeforeSaveEvent $event) {
+                $data = $event->getData();
+            }
+        );
 
         $uri = $app->call($controller->saveWithNamespace(...), compact('repository', 'form'));
 

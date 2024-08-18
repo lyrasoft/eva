@@ -75,6 +75,16 @@ $workflow = $app->service(BasicStateWorkflow::class);
                         </x-sort>
                     </th>
 
+                    <th class="text-nowrap" style="width: 5%">
+                        觀看提交
+                    </th>
+
+                    <th class="text-nowrap" style="width: 5%">
+                        <x-sort field="formkit.modified">
+                            @lang('unicorn.field.modified')
+                        </x-sort>
+                    </th>
+
                     {{-- Delete --}}
                     <th style="width: 1%" class="text-nowrap">
                         @lang('unicorn.field.delete')
@@ -99,13 +109,18 @@ $workflow = $app->service(BasicStateWorkflow::class);
 
                         {{-- State --}}
                         <td>
-                            <x-state-dropdown color-on="text"
+                            <x-publishing-dropdown color-on="text"
                                 button-style="width: 100%"
                                 use-states
                                 :workflow="$workflow"
                                 :id="$item->getId()"
                                 :value="$item->state"
-                            ></x-state-dropdown>
+                                :publish-up="$item->getPublishUp()"
+                                :publish-down="$item->getPublishDown()"
+                                data-foo="123"
+                            >
+
+                            </x-publishing-dropdown>
                         </td>
 
                         {{-- Title --}}
@@ -115,6 +130,18 @@ $workflow = $app->service(BasicStateWorkflow::class);
                                     {{ $item->getTitle() }}
                                 </a>
                             </div>
+                        </td>
+
+                        <td class="text-nowrap">
+                            <a href="{{ $nav->to('formkit_response_list')->var('formkit_id', $item->getId()) }}"
+                                class="btn btn-sm btn-outline-primary">
+                                <i class="far fa-list"></i>
+                                觀看提交
+                            </a>
+                        </td>
+
+                        <td class="text-nowrap">
+                            {{ $chronos->toLocalFormat($item->getModified()) }}
                         </td>
 
                         {{-- Delete --}}

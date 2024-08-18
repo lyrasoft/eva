@@ -18,8 +18,10 @@ function copy(item: any) {
   emits('copy', item);
 }
 
-function remove(item: any, i: number) {
-  emits('remove', item, i);
+async function remove(item: any, i: number) {
+  if (await u.confirm('您確定要刪除嗎？')) {
+    emits('remove', item, i);
+  }
 }
 
 const types = inject<Record<string, FormType>>('form.types')!;
@@ -69,7 +71,7 @@ const fieldForm = computed(() => {
 
     <div class="card-footer" v-if="isFocused">
       <div class="d-flex align-items-center gap-3">
-        <div class="mr-auto">
+        <div class="me-auto">
           <button type="button" class="btn btn-outline-secondary btn-sm"
             @click.stop="$emit('add')">
             <span class="far fa-plus"></span>
