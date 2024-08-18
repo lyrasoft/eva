@@ -13,7 +13,7 @@ use Windwalker\Utilities\Contract\LanguageInterface;
  */
 class FormPointScale extends AbstractFormType
 {
-    use LayoutFormsetTrait;
+    use LayoutFormkitTrait;
 
     /**
      * getIcon

@@ -4,20 +4,18 @@ declare(strict_types=1);
 
 namespace App\Formkit\Type;
 
+use Windwalker\Core\Application\ServiceAwareInterface;
+use Windwalker\Core\Language\TranslatorTrait;
 use Windwalker\Form\Field\AbstractField;
 use Windwalker\Form\Field\ListField;
-use Windwalker\Form\Field\RadioField;
 use Windwalker\Utilities\Contract\LanguageInterface;
 
 use function Windwalker\h;
 
-/**
- * The FormsetText class.
- *
- * @since  __DEPLOY_VERSION__
- */
 class FormSelect extends AbstractFormType
 {
+    use TranslatorTrait;
+
     /**
      * getIcon
      *
@@ -92,22 +90,26 @@ class FormSelect extends AbstractFormType
     /**
      * getFormField
      *
+     * @param  ServiceAwareInterface  $app  *
+     *
      * @return  AbstractField
      *
      * @since  __DEPLOY_VERSION__
      */
-    public function getFormField(): AbstractField
+    public function toFormField(ServiceAwareInterface $app): AbstractField
     {
         return (new ListField($this->getLabel(), $this->getLabel()))
-            ->register(function (ListField $field) {
-                $field->option(
-                    __('tigcr.formset.option.select'),
-                    ''
-                );
+            ->register(
+                function (ListField $field) {
+                    $field->option(
+                        $this->trans('tigcr.formset.option.select'),
+                        ''
+                    );
 
-                foreach ($this->data->options as $opt) {
-                    $field->option($opt['text'], $opt['text']);
+                    foreach ($this->data->options as $opt) {
+                        $field->option($opt['text'], $opt['text']);
+                    }
                 }
-            });
+            );
     }
 }

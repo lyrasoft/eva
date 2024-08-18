@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Formkit\Type;
 
+use Windwalker\Core\Application\ServiceAwareInterface;
 use Windwalker\Form\Field\AbstractField;
 use Windwalker\Form\Field\TimeField;
 use Windwalker\Utilities\Contract\LanguageInterface;
@@ -88,11 +89,13 @@ class FormTime extends AbstractFormType
     /**
      * getFormField
      *
+     * @param  ServiceAwareInterface  $app  *
+     *
      * @return  AbstractField
      *
      * @since  __DEPLOY_VERSION__
      */
-    public function getFormField(): AbstractField
+    public function toFormField(ServiceAwareInterface $app): AbstractField
     {
         return (new TimeField($this->getLabel(), $this->getLabel()));
     }

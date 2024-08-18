@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Formkit\Type;
 
+use Windwalker\Core\Application\ServiceAwareInterface;
 use Windwalker\Form\Field\AbstractField;
 use Windwalker\Form\Field\TextareaField;
 use Windwalker\Utilities\Contract\LanguageInterface;
@@ -86,16 +87,11 @@ class FormTextarea extends AbstractFormType
         );
     }
 
-    /**
-     * getFormField
-     *
-     * @return  AbstractField
-     *
-     * @since  __DEPLOY_VERSION__
-     */
-    public function getFormField(): AbstractField
+    public function toFormField(ServiceAwareInterface $app): AbstractField
     {
-        return (new TextareaField($this->getLabel(), $this->getLabel()))
-            ->rows($this->data->height);
+        return $app->make(TextareaField::class)
+            ->label($this->getLabel())
+            ->placeholder($this->data->placeholder)
+            ->rows((int) $this->data->height);
     }
 }

@@ -17,6 +17,7 @@ namespace App\View;
  */
 
 use App\Entity\Formkit;
+use App\Formkit\FormkitService;
 use App\Module\Front\Formkit\FormkitItemView;
 use Windwalker\Core\Application\AppContext;
 use Windwalker\Core\Asset\AssetService;
@@ -29,6 +30,7 @@ use Windwalker\Core\Router\SystemUri;
  * @var $item Formkit
  */
 
+$formkitService = $app->retrieve(FormkitService::class);
 ?>
 
 @extends('global.body')
@@ -39,6 +41,6 @@ use Windwalker\Core\Router\SystemUri;
             <h2>{{ $item->getTitle() }}</h2>
         </header>
 
-
+        {!! $formkitService->render($item) !!}
     </div>
 @stop

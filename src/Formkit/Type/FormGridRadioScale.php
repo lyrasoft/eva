@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Formkit\Type;
 
 use Windwalker\Core\Application\Context\AppRequestInterface;
-use Windwalker\IO\Input;
 use Windwalker\Utilities\Arr;
 use Windwalker\Utilities\Contract\LanguageInterface;
 
@@ -16,7 +15,7 @@ use Windwalker\Utilities\Contract\LanguageInterface;
  */
 class FormGridRadioScale extends AbstractFormType
 {
-    use LayoutFormsetTrait;
+    use LayoutFormkitTrait;
 
     /**
      * getIcon

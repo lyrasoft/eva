@@ -8,8 +8,10 @@ use App\Entity\Formkit;
 use App\FormkitPackage;
 use App\Formkit\Exception\FormkitUnpublishedException;
 use App\Formkit\Type\AbstractFormType;
+use Windwalker\Core\Application\ApplicationInterface;
 use Windwalker\Core\Form\FormFactory;
 use Windwalker\Core\Renderer\RendererService;
+use Windwalker\Core\Router\Exception\RouteNotFoundException;
 use Windwalker\Data\Collection;
 use Windwalker\DI\Attributes\Service;
 use Windwalker\DI\Container;
@@ -26,7 +28,7 @@ class FormkitService
     use InstanceCacheTrait;
 
     public function __construct(
-        protected Container $container,
+        protected ApplicationInterface $app,
         protected ORM $orm,
         protected RendererService $rendererService,
         protected FormkitPackage $formkit,
@@ -56,100 +58,90 @@ class FormkitService
             throw new \OutOfRangeException("FormType '$type' not found");
         }
 
-        return $this->container->newInstance($className, [$data]);
+        return $this->app->make($className, [$data]);
     }
 
-    /**
-     * render
-     *
-     * @param  int    $id
-     * @param  array  $options
-     *
-     * @return  string
-     *
-     * @throws \Psr\Cache\InvalidArgumentException
-     * @since  __DEPLOY_VERSION__
-     */
-    public function render(int $id, array $options = []): string
+    public function render(int|Formkit $item, array $options = []): string
     {
         /**
-         * @var Data       $formset
+         * @var Formkit    $item
          * @var Collection $fields
          * @var Form       $form
          */
-        [$formset, $fields, $form] = $this->getFormkitMeta($id, $options);
+        [$item, $fields, $form] = $this->getFormkitMeta($item, $options);
 
-        $formsetService = $this;
+        $formkitService = $this;
+
+        $id = $item->getId();
 
         return $this->rendererService->render(
-            '_widget.formkit.formkit',
+            'formkit.formkit',
             compact(
                 'id',
                 'options',
                 'fields',
-                'formset',
-                'formsetService',
+                'item',
+                'formkitService',
                 'form'
             ),
         );
     }
 
     /**
-     * @param  int    $id
-     * @param  array  $options
+     * @param  int|Formkit  $item
+     * @param  array        $options
      *
      * @return  array{ 0: Formkit, 1: Collection<AbstractField>, 2: Form }
      *
-     * @throws \Psr\Container\ContainerExceptionInterface
-     * @throws \Psr\Container\NotFoundExceptionInterface
-     * @throws \ReflectionException
-     * @throws \Windwalker\DI\Exception\DependencyResolutionException
      */
-    public function getFormkitMeta(int $id, array $options = []): array
+    public function getFormkitMeta(int|Formkit $item, array $options = []): array
     {
-        return $this->once(
-            'formkit.meta.' . $id,
-            function () use ($id, $options) {
-                $formkit = $this->orm->mustFindOne(Formkit::class, $id);
+        if (!$item instanceof Formkit) {
+            $item = $this->orm->mustFindOne(Formkit::class, $item);
+        }
 
-                // Check published
-                $up = $formkit->getPublishUp();
-                $down = $formkit->getPublishDown();
+        // Check published
+        if (!$item->getState()->isPublished()) {
+            throw new FormkitUnpublishedException();
+        }
 
-                if ($up !== null && $up->isFuture()) {
-                    throw new FormkitUnpublishedException('Formkit unpublished');
-                }
+        $up = $item->getPublishUp();
+        $down = $item->getPublishDown();
 
-                if ($down !== null && $down->isPast()) {
-                    throw new FormkitUnpublishedException('Formkit end published');
-                }
+        if ($up !== null && $up->isFuture()) {
+            throw new FormkitUnpublishedException('Formkit unpublished');
+        }
 
-                $fields = $formkit->getContent();
-                $formFactory = $this->container->get(FormFactory::class);
-                $form = $formFactory->create();
-                $form->setNamespace($options['control'] ?? 'formkit');
+        if ($down !== null && $down->isPast()) {
+            throw new FormkitUnpublishedException('Formkit end published');
+        }
 
-                $fields = $fields->map(
-                    function (array $field) use ($form) {
-                        $fieldInstance = $this->getFormInstance($field['type'], $field);
+        $fields = collect($item->getContent());
+        $formFactory = $this->app->retrieve(FormFactory::class);
+        $form = $formFactory->create();
+        $form->setNamespace($options['control'] ?? 'formkit');
 
-                        $form->addField($fieldInstance->getFormField())
-                            ->required((bool) $field['required'])
-                            ->help($field['description'])
-                            ->setAttribute('id', 'input-' . $field['uid'])
-                            ->set('uid', $field['uid']);
+        $fields = $fields->map(
+            function (array $field) use ($form) {
+                $data = collect($field);
 
-                        return $fieldInstance;
-                    }
-                );
+                $fieldInstance = $this->getFormInstance($data['type'], $data);
 
-                // $form->add('catpcha', CaptchaField::class)
-                //     ->autoValidate(true)
-                //     ->jsVerify(true);
+                $form->addField($fieldInstance->toFormField($this->app))
+                    ->required((bool) $data->required)
+                    ->help((string) $data->description)
+                    ->setAttribute('id', 'input-' . $data->uid)
+                    ->set('uid', $data->uid);
 
-                return [$formkit, $fields, $form];
+                return $fieldInstance;
             }
         );
+
+        // $form->add('catpcha', CaptchaField::class)
+        //     ->autoValidate(true)
+        //     ->jsVerify(true);
+
+        return [$item, $fields, $form];
     }
 
     public function getForm(int $id, array $options = []): Form

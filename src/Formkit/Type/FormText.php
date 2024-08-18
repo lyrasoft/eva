@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Formkit\Type;
 
+use Windwalker\Core\Application\ServiceAwareInterface;
 use Windwalker\Form\Field\AbstractField;
 use Windwalker\Form\Field\TextField;
 use Windwalker\Utilities\Contract\LanguageInterface;
@@ -87,16 +88,8 @@ class FormText extends AbstractFormType
         );
     }
 
-    /**
-     * getFormField
-     *
-     * @return  AbstractField
-     *
-     * @since  __DEPLOY_VERSION__
-     */
-    public function getFormField(): AbstractField
+    public function toFormField(ServiceAwareInterface $app): AbstractField
     {
-        return (new TextField($this->data->label, $this->data->label))
-            ->type($this->data->subtype);
+        return parent::toFormField($app)->attr('type', $this->data->subtype);
     }
 }

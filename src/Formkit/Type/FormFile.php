@@ -4,19 +4,15 @@ declare(strict_types=1);
 
 namespace App\Formkit\Type;
 
-use Lyrasoft\Unidev\S3\S3Service;
-use Phoenix\Field\DragFileField;
 use Psr\Http\Message\UploadedFileInterface;
-use Psr\Http\Message\UriInterface;
+use Unicorn\Field\FileDragField;
 use Windwalker\Core\Application\Context\AppRequestInterface;
-use Windwalker\Core\Repository\Exception\ValidateFailException;
-use Windwalker\DI\Annotation\Inject;
-use Windwalker\Filesystem\File;
+use Windwalker\Core\Application\ServiceAwareInterface;
+use Windwalker\Core\Form\Exception\ValidateFailException;
+use Windwalker\Filesystem\Path;
 use Windwalker\Form\Field\AbstractField;
 use Windwalker\Http\Helper\HeaderHelper;
 use Windwalker\Http\Helper\UploadedFileHelper;
-use Windwalker\Http\UploadedFile;
-use Windwalker\IO\Input;
 use Windwalker\Utilities\Contract\LanguageInterface;
 
 /**
@@ -26,13 +22,6 @@ use Windwalker\Utilities\Contract\LanguageInterface;
  */
 class FormFile extends AbstractFormType
 {
-    /**
-     * Property s3.
-     *
-     * @Inject()
-     * 
-     * @var S3Service
-     */
     protected $s3;
     
     /**
@@ -110,27 +99,30 @@ class FormFile extends AbstractFormType
     /**
      * getFormField
      *
+     * @param  ServiceAwareInterface  $app  *
+     *
      * @return  AbstractField
      *
      * @since  __DEPLOY_VERSION__
      */
-    public function getFormField(): AbstractField
+    public function toFormField(ServiceAwareInterface $app): AbstractField
     {
-        $field = (new DragFileField($this->getLabel(), $this->getLabel()));
+        $field = $app->make(FileDragField::class)
+            ->label($this->getLabel());
 
-        if ($accept = trim($this->data->accept)) {
+        if ($accept = trim((string) $this->data->accept)) {
             $field->accept($accept);
             $field->attr('data-accepted', $accept);
         }
 
-        $size = $this->data->max_size ?: 10;
+        $size = (int) ($this->data->max_size ?: 10);
 
         if ($size) {
             $field->maxSize($size);
         }
 
         if ($this->data->max > 1) {
-            $field->multiple(true)->maxFiles($this->data->max);
+            $field->multiple(true)->maxFiles((int) $this->data->max);
         }
 
         return $field;
@@ -207,10 +199,10 @@ class FormFile extends AbstractFormType
         }
 
         $filename = $file->getClientFilename();
-        $ext = File::getExtension($filename);
-        $path = 'formset/files/' . md5(uniqid('F', true)) . '.' . $ext;
+        $ext = Path::getExtension($filename);
+        $path = 'formkit/files/' . md5(uniqid('F', true)) . '.' . $ext;
 
-        $contentDisposition = strpos($file->getClientMediaType(), 'image') === 0
+        $contentDisposition = str_starts_with($file->getClientMediaType(), 'image')
             ? null
             : HeaderHelper::attachmentContentDisposition($filename);
 

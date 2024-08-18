@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Formkit\Type;
 
+use Windwalker\Core\Application\ServiceAwareInterface;
 use Windwalker\Core\DateTime\Chronos;
 use Windwalker\Form\Field\AbstractField;
 use Windwalker\Form\Field\DatetimeLocalField;
@@ -90,11 +91,13 @@ class FormDate extends AbstractFormType
     /**
      * getFormField
      *
+     * @param  ServiceAwareInterface  $app  *
+     *
      * @return  AbstractField
      *
      * @since  __DEPLOY_VERSION__
      */
-    public function getFormField(): AbstractField
+    public function toFormField(ServiceAwareInterface $app): AbstractField
     {
         return (new TextField($this->getLabel(), $this->getLabel()))->type('date');
     }

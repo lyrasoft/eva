@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Formkit\Type;
 
 use Windwalker\Core\Application\Context\AppRequestInterface;
+use Windwalker\Core\Application\ServiceAwareInterface;
 use Windwalker\Form\Field\AbstractField;
 use Windwalker\Form\Field\CheckboxesField;
 use Windwalker\IO\Input;
@@ -95,11 +96,13 @@ class FormCheckboxes extends FormSelect
     /**
      * getFormField
      *
+     * @param  ServiceAwareInterface  $app  *
+     *
      * @return  AbstractField
      *
      * @since  __DEPLOY_VERSION__
      */
-    public function getFormField(): AbstractField
+    public function toFormField(ServiceAwareInterface $app): AbstractField
     {
         return (new CheckboxesField($this->getLabel(), $this->getLabel()))
             ->register(function (CheckboxesField $field) {

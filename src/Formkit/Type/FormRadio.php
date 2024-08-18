@@ -4,17 +4,13 @@ declare(strict_types=1);
 
 namespace App\Formkit\Type;
 
+use Windwalker\Core\Application\ServiceAwareInterface;
 use Windwalker\Form\Field\AbstractField;
 use Windwalker\Form\Field\RadioField;
 use Windwalker\Utilities\Contract\LanguageInterface;
 
-use function Windwalker\h;
+use function Windwalker\uid;
 
-/**
- * The FormsetText class.
- *
- * @since  __DEPLOY_VERSION__
- */
 class FormRadio extends FormSelect
 {
     use ListFormsetTrait;
@@ -92,21 +88,25 @@ class FormRadio extends FormSelect
     /**
      * getFormField
      *
+     * @param  ServiceAwareInterface  $app  *
+     *
      * @return  AbstractField
      *
      * @since  __DEPLOY_VERSION__
      */
-    public function getFormField(): AbstractField
+    public function toFormField(ServiceAwareInterface $app): AbstractField
     {
         return (new RadioField($this->getLabel(), $this->getLabel()))
-            ->register(function (RadioField $field) {
-                foreach ($this->data->options as $opt) {
-                    $field->option($opt['text'], $opt['text'], ['id' => uniqid('option', true)]);
-                }
+            ->register(
+                function (RadioField $field) {
+                    foreach ($this->data->options as $opt) {
+                        $field->option($opt['text'], $opt['text'], ['id' => uid('option')]);
+                    }
 
-                if ($this->data->enable_other) {
-                    $this->getOtherOption($field);
+                    if ($this->data->enable_other) {
+                        $this->getOtherOption($field);
+                    }
                 }
-            });
+            );
     }
 }

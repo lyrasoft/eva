@@ -44,17 +44,6 @@ class FormkitItemView implements ViewModelInterface
         /** @var Formkit $item */
         $item = $this->repository->mustGetItem(compact('alias'));
 
-        if (!$item->getState()->isPublished()) {
-            throw new RouteNotFoundException();
-        }
-
-        if (
-            ($item->getPublishUp() && $item->getPublishUp()->isFuture())
-            || ($item->getPublishDown() && $item->getPublishUp()->isPast())
-        ) {
-            throw new RouteNotFoundException('Not in published time.');
-        }
-
         $view[$item::class] = $item;
 
         return compact('item');

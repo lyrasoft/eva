@@ -6,6 +6,7 @@ namespace App\Formkit\Type;
 
 use Windwalker\Core\Application\AppContext;
 use Windwalker\Core\Application\Context\AppRequestInterface;
+use Windwalker\Core\Application\ServiceAwareInterface;
 use Windwalker\Core\Asset\AssetService;
 use Windwalker\Data\Collection;
 use Windwalker\Form\Field\AbstractField;
@@ -41,9 +42,12 @@ abstract class AbstractFormType
         return $this->data->label;
     }
 
-    public function getFormField(): AbstractField
+    public function toFormField(ServiceAwareInterface $app): AbstractField
     {
-        return new TextField($this->getLabel(), $this->getLabel());
+        return $app->make(TextField::class)
+            ->label($this->getLabel())
+            ->setName($this->getLabel())
+            ->placeholder((string) $this->data->placeholder);
     }
 
     public function prepareStore(array $data, AppRequestInterface $request, string $control): array
