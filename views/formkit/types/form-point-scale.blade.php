@@ -19,6 +19,7 @@ namespace App\view;
 use App\Entity\Formkit;
 use App\Formkit\FormkitService;
 use App\Formkit\Type\AbstractFormType;
+use App\Formkit\Type\FormPointScale;
 use Windwalker\Core\Application\AppContext;
 use Windwalker\Core\Asset\AssetService;
 use Windwalker\Core\DateTime\ChronosService;
@@ -30,15 +31,50 @@ use Windwalker\Form\Field\AbstractField;
 use Windwalker\Form\Form;
 
 /**
-* @var $item           Formkit
-* @var $form           Form
-* @var $fields         Collection<AbstractFormType>
-* @var $options        array
-* @var $formkitService FormkitService
-* @var $field          AbstractFormType
-* @var $formField      AbstractField
+ * @var $item           Formkit
+ * @var $form           Form
+ * @var $fields         Collection<AbstractFormType>
+ * @var $options        array
+ * @var $formkitService FormkitService
+ * @var $field          FormPointScale
+ * @var $formField      AbstractField
  */
 
+$data = $field->getData();
 ?>
 
-<x-field :field="$formField"></x-field>
+<x-field :field="$formField">
+    <x-slot name="defaultSlot">
+        <div class="c-point-scale d-flex align-items-center gap-3">
+            @if ($data->start)
+                <div class="c-point-scale__start">
+                    {{ $data->start }}
+                </div>
+            @endif
+
+            @foreach (range((int) $data->min, (int) $data->max) as $i)
+                <div class="c-point-scale__option mx-3">
+                    <label for="input-{{ $data->uid }}-option-{{ $i }}" class="pb-2 mb-0">
+                        {{ $i }}
+                    </label>
+                    <div class="mb-2">
+                        <input id="input-{{ $data->uid }}-option-{{ $i }}"
+                            type="radio"
+                            class="form-check-input"
+                            name="{{ $formField->getInputName() }}"
+                            value="{{ $i }}"
+                        />
+                    </div>
+                </div>
+            @endforeach
+
+            @if ($data->end)
+                <div class="c-point-scale__end">
+                    {{ $data->end }}
+                </div>
+            @endif
+
+        </div>
+    </x-slot>
+</x-field>
+

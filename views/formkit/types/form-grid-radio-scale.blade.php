@@ -19,6 +19,7 @@ namespace App\view;
 use App\Entity\Formkit;
 use App\Formkit\FormkitService;
 use App\Formkit\Type\AbstractFormType;
+use App\Formkit\Type\FormGridRadioScale;
 use Windwalker\Core\Application\AppContext;
 use Windwalker\Core\Asset\AssetService;
 use Windwalker\Core\DateTime\ChronosService;
@@ -30,15 +31,56 @@ use Windwalker\Form\Field\AbstractField;
 use Windwalker\Form\Form;
 
 /**
-* @var $item           Formkit
-* @var $form           Form
-* @var $fields         Collection<AbstractFormType>
-* @var $options        array
-* @var $formkitService FormkitService
-* @var $field          AbstractFormType
-* @var $formField      AbstractField
+ * @var $item           Formkit
+ * @var $form           Form
+ * @var $fields         Collection<AbstractFormType>
+ * @var $options        array
+ * @var $formkitService FormkitService
+ * @var $field          FormGridRadioScale
+ * @var $formField      AbstractField
  */
 
+$data = $field->getData();
 ?>
 
-<x-field :field="$formField"></x-field>
+<x-field :field="$formField">
+    <x-slot name="defaultSlot">
+        <div class="c-grid-scale">
+
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th width="40%"></th>
+                    @foreach ($data->columns as $column)
+                        <th>
+                            {{ $column['text'] }}
+                        </th>
+                    @endforeach
+                </tr>
+                </thead>
+
+                <tbody>
+                @foreach ($data->rows as $i => $row)
+                    <tr>
+                        <td>
+                            <div class="c-row-text">
+                                {{ $row['text'] }}
+                            </div>
+                        </td>
+
+
+                        @foreach ($data->columns as $column)
+                            <td class="">
+                                <input type="radio"
+                                    class="form-check-input"
+                                    name="{{ $formField->getInputName("[{$row['text']}]") }}"
+                                    value="{{ $column['text'] }}" />
+                            </td>
+                        @endforeach
+                    </tr>
+                @endforeach
+                </tbody>
+            </table>
+        </div>
+    </x-slot>
+</x-field>

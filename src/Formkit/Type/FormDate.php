@@ -7,6 +7,7 @@ namespace App\Formkit\Type;
 use Windwalker\Core\Application\ServiceAwareInterface;
 use Windwalker\Core\DateTime\Chronos;
 use Windwalker\Form\Field\AbstractField;
+use Windwalker\Form\Field\DateField;
 use Windwalker\Form\Field\DatetimeLocalField;
 use Windwalker\Form\Field\TextField;
 use Windwalker\Utilities\Contract\LanguageInterface;
@@ -99,7 +100,9 @@ class FormDate extends AbstractFormType
      */
     public function toFormField(ServiceAwareInterface $app): AbstractField
     {
-        return (new TextField($this->getLabel(), $this->getLabel()))->type('date');
+        return $app->make(DateField::class)
+            ->label($this->getLabel())
+            ->setName($this->getLabel());
     }
 
     /**

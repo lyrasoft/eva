@@ -109,10 +109,6 @@ class FormCheckboxes extends FormSelect
                 foreach ($this->data->options as $opt) {
                     $field->option($opt['text'], $opt['text'], ['id' => uniqid('option', true)]);
                 }
-
-                if ($this->data->enable_other) {
-                    $this->getOtherOption($field);
-                }
             });
     }
 

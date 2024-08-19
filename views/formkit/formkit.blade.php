@@ -59,8 +59,10 @@ $uniScript->addRoute(
 );
 
 ?>
-<div id="{{ $formId }}-wrapper" class="l-formkit-wrapper mb-5 mt-5" data-role="formkit">
-    <form id="{{ $formId }}" method="post" enctype="multipart/form-data">
+<div id="{{ $formId }}-wrapper" class="l-formkit-wrapper mb-5 mt-5" data-role="formkit"
+    uni-formkit="{{ $uid }}">
+    <form id="{{ $formId }}" method="post" enctype="multipart/form-data"
+        uni-form-validate='{"scroll": true}'>
         <div class="l-formkit-content mb-5">
             @if (trim($item->getDescription()))
                 <div class="l-formkit-content__desc">

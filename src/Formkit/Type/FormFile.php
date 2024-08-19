@@ -23,7 +23,7 @@ use Windwalker\Utilities\Contract\LanguageInterface;
 class FormFile extends AbstractFormType
 {
     protected $s3;
-    
+
     /**
      * getIcon
      *
@@ -108,7 +108,8 @@ class FormFile extends AbstractFormType
     public function toFormField(ServiceAwareInterface $app): AbstractField
     {
         $field = $app->make(FileDragField::class)
-            ->label($this->getLabel());
+            ->label($this->getLabel())
+            ->setName($this->getLabel());
 
         if ($accept = trim((string) $this->data->accept)) {
             $field->accept($accept);

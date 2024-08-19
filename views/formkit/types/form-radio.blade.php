@@ -43,8 +43,6 @@ use function Windwalker\DOM\h;
  * @var $formField      ListField
  */
 
-$formField = clone $formField;
-
 if ($field->hasOther()) {
     $formField->option(
         $field->getOptionText($formField),

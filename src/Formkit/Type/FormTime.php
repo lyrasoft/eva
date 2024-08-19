@@ -16,37 +16,16 @@ use Windwalker\Utilities\Contract\LanguageInterface;
  */
 class FormTime extends AbstractFormType
 {
-    /**
-     * getIcon
-     *
-     * @return  string
-     *
-     * @since  __DEPLOY_VERSION__
-     */
     public static function getIcon(): string
     {
         return 'far fa-clock';
     }
 
-    /**
-     * getName
-     *
-     * @return  string
-     *
-     * @since  __DEPLOY_VERSION__
-     */
     public static function getTitle(): string
     {
         return '時間';
     }
 
-    /**
-     * getName
-     *
-     * @return  string
-     *
-     * @since  __DEPLOY_VERSION__
-     */
     public static function getId(): string
     {
         return 'time';
@@ -57,25 +36,11 @@ class FormTime extends AbstractFormType
         return '文字輸入';
     }
 
-    /**
-     * getDescription
-     *
-     * @return  string
-     *
-     * @since  __DEPLOY_VERSION__
-     */
     public static function getDescription(): string
     {
         return '時間選擇器';
     }
 
-    /**
-     * getDefaultParams
-     *
-     * @return  array
-     *
-     * @since  __DEPLOY_VERSION__
-     */
     public static function getDefaultParams(): array
     {
         return array_merge(
@@ -86,17 +51,10 @@ class FormTime extends AbstractFormType
         );
     }
 
-    /**
-     * getFormField
-     *
-     * @param  ServiceAwareInterface  $app  *
-     *
-     * @return  AbstractField
-     *
-     * @since  __DEPLOY_VERSION__
-     */
     public function toFormField(ServiceAwareInterface $app): AbstractField
     {
-        return (new TimeField($this->getLabel(), $this->getLabel()));
+        return $app->make(TimeField::class)
+            ->label($this->getLabel())
+            ->setName($this->getLabel());
     }
 }
