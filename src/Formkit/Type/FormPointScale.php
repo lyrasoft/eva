@@ -6,15 +6,8 @@ namespace App\Formkit\Type;
 
 use Windwalker\Utilities\Contract\LanguageInterface;
 
-/**
- * The FormsetText class.
- *
- * @since  __DEPLOY_VERSION__
- */
 class FormPointScale extends AbstractFormType
 {
-    use LayoutFormkitTrait;
-
     /**
      * getIcon
      *

@@ -16,7 +16,9 @@ namespace App\View;
  * @var  $lang      LangService     The language translation service.
  */
 
+use App\Entity\Formkit;
 use App\Module\Admin\Formkit\FormkitEditView;
+use Lyrasoft\Luna\PageBuilder\PageService;
 use Windwalker\Core\Application\AppContext;
 use Windwalker\Core\Asset\AssetService;
 use Windwalker\Core\DateTime\ChronosService;
@@ -24,6 +26,11 @@ use Windwalker\Core\Language\LangService;
 use Windwalker\Core\Router\Navigator;
 use Windwalker\Core\Router\SystemUri;
 
+/**
+ * @var $item Formkit
+ */
+
+$pageService = $app->retrieve(PageService::class);
 ?>
 
 <div x-title="toolbar" x-data="{ form: $store.form }" class="l-toolbar">
@@ -44,6 +51,16 @@ use Windwalker\Core\Router\SystemUri;
         <span class="fa fa-check"></span>
         @lang('unicorn.toolbar.save2close')
     </button>
+
+    @if ($item)
+        @php($s = $pageService->genPreviewSecret($item->getId()))
+        <a href="{{ $item->makeLink($nav)->var('s', $s) }}"
+            class="btn btn-sm btn-outline-info"
+            target="_blank">
+            <i class="far fa-eye"></i>
+            預覽
+        </a>
+    @endif
 
     {{-- Cancel --}}
     <a class="btn btn-default btn-outline-secondary btn-sm uni-btn-cancel"

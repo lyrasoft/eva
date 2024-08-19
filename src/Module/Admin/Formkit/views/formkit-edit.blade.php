@@ -86,6 +86,31 @@ $uniScript->data(
                     class="mb-4"
                     is="card"
                 >
+                    <x-slot name="start">
+                        @if ($item)
+                            <div class="form-group mb-4">
+                                <label class="form-label">前台網址</label>
+                                <div class="input-group ">
+                                    <input type="text" class="form-control" disabled
+                                        value="{{ $item->makeLink($nav)->full() }}"
+                                    />
+                                    <a href="{{ $item->makeLink($nav)->full() }}"
+                                        target="_blank"
+                                        class="btn btn-outline-info">
+                                        <i class="far fa-external-link"></i>
+                                        打開
+                                    </a>
+                                    <button type="button"
+                                        class="btn btn-outline-info"
+                                        onclick="navigator.clipboard.writeText('{{ $item->makeLink($nav)->full() }}')"
+                                    >
+                                        <i class="far fa-copy"></i>
+                                        複製
+                                    </button>
+                                </div>
+                            </div>
+                        @endif
+                    </x-slot>
                 </x-fieldset>
 
                 <x-fieldset name="meta" :title="$lang('unicorn.fieldset.meta')"

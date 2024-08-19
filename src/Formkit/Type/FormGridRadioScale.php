@@ -15,8 +15,6 @@ use Windwalker\Utilities\Contract\LanguageInterface;
  */
 class FormGridRadioScale extends AbstractFormType
 {
-    use LayoutFormkitTrait;
-
     /**
      * getIcon
      *

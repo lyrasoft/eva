@@ -71,6 +71,12 @@ class EditForm
     #[NS('item')]
     public function meta(Form $form): void
     {
+        $form->add('public', SwitcherField::class)
+            ->label('可使用公開網址')
+            ->circle(true)
+            ->color('primary')
+            ->defaultValue('0');
+
         $form->add('publish_up', CalendarField::class)
             ->label('開始發佈');
 

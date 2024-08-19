@@ -13,7 +13,7 @@ use function Windwalker\uid;
 
 class FormRadio extends FormSelect
 {
-    use ListFormsetTrait;
+    use ListFormkitTrait;
 
     /**
      * getIcon
@@ -103,9 +103,9 @@ class FormRadio extends FormSelect
                         $field->option($opt['text'], $opt['text'], ['id' => uid('option')]);
                     }
 
-                    if ($this->data->enable_other) {
-                        $this->getOtherOption($field);
-                    }
+                    // if ($this->data->enable_other) {
+                    //     $this->getOtherOption($field);
+                    // }
                 }
             );
     }

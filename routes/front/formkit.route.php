@@ -16,4 +16,7 @@ $router->group('formkit')
         $router->any('formkit_item', '/form/{alias}')
             ->controller(FormkitController::class)
             ->view(FormkitItemView::class);
+
+        $router->post('formkit_submit', '/form/{id}/submit')
+            ->controller(FormkitController::class, 'submit');
     });

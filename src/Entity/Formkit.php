@@ -10,6 +10,8 @@ use Lyrasoft\Luna\Attributes\Slugify;
 use Unicorn\Enum\BasicState;
 use Windwalker\Core\DateTime\Chronos;
 use Windwalker\Core\DateTime\ServerTimeCast;
+use Windwalker\Core\Router\Navigator;
+use Windwalker\Core\Router\RouteUri;
 use Windwalker\ORM\Attributes\AutoIncrement;
 use Windwalker\ORM\Attributes\Cast;
 use Windwalker\ORM\Attributes\CastNullable;
@@ -58,6 +60,10 @@ class Formkit implements EntityInterface
     #[Cast(BasicState::class)]
     protected BasicState $state;
 
+    #[Column('public')]
+    #[Cast('bool', 'int')]
+    protected bool $public = false;
+
     #[Column('publish_up')]
     #[CastNullable(ServerTimeCast::class)]
     protected ?Chronos $publishUp = null;
@@ -95,6 +101,11 @@ class Formkit implements EntityInterface
     public static function setup(EntityMetadata $metadata): void
     {
         //
+    }
+
+    public function makeLink(Navigator $nav): RouteUri
+    {
+        return $nav->to('front::formkit_item')->alias($this->getAlias());
     }
 
     public function getId(): ?int
@@ -285,6 +296,18 @@ class Formkit implements EntityInterface
     public function setAlias(string $alias): static
     {
         $this->alias = $alias;
+
+        return $this;
+    }
+
+    public function isPublic(): bool
+    {
+        return $this->public;
+    }
+
+    public function setPublic(bool $public): static
+    {
+        $this->public = $public;
 
         return $this;
     }

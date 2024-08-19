@@ -10,11 +10,12 @@ use Windwalker\Form\Field\AbstractField;
 use Windwalker\Form\Field\ListField;
 use Windwalker\Utilities\Contract\LanguageInterface;
 
-use function Windwalker\h;
+use function Windwalker\uid;
 
 class FormSelect extends AbstractFormType
 {
     use TranslatorTrait;
+    use ListFormkitTrait;
 
     /**
      * getIcon
@@ -107,7 +108,7 @@ class FormSelect extends AbstractFormType
                     );
 
                     foreach ($this->data->options as $opt) {
-                        $field->option($opt['text'], $opt['text']);
+                        $field->option($opt['text'], $opt['text'], ['id' => uid('option')]);
                     }
                 }
             );

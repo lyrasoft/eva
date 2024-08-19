@@ -21,7 +21,7 @@ use function Windwalker\h;
  */
 class FormCheckboxes extends FormSelect
 {
-    use ListFormsetTrait;
+    use ListFormkitTrait;
 
     /**
      * getIcon

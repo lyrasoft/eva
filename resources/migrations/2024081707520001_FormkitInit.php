@@ -29,6 +29,7 @@ $mig->up(
                 $schema->varchar('image')->comment('Main Image');
                 $schema->varchar('extends')->comment('Extends');
                 $schema->bool('state');
+                $schema->bool('public');
                 $schema->datetime('publish_up');
                 $schema->datetime('publish_down');
                 $schema->datetime('created')->comment('Created Date');

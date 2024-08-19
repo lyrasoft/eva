@@ -5,19 +5,19 @@ declare(strict_types=1);
 namespace App\Formkit;
 
 use App\Entity\Formkit;
-use App\FormkitPackage;
 use App\Formkit\Exception\FormkitUnpublishedException;
 use App\Formkit\Type\AbstractFormType;
+use App\FormkitPackage;
 use Windwalker\Core\Application\ApplicationInterface;
 use Windwalker\Core\Form\FormFactory;
 use Windwalker\Core\Renderer\RendererService;
-use Windwalker\Core\Router\Exception\RouteNotFoundException;
+use Windwalker\Core\Router\SystemUri;
 use Windwalker\Data\Collection;
 use Windwalker\DI\Attributes\Service;
-use Windwalker\DI\Container;
 use Windwalker\Form\Field\AbstractField;
 use Windwalker\Form\Form;
 use Windwalker\ORM\ORM;
+use Windwalker\Renderer\CompositeRenderer;
 use Windwalker\Utilities\Cache\InstanceCacheTrait;
 
 use function Windwalker\collect;
@@ -61,6 +61,11 @@ class FormkitService
         return $this->app->make($className, [$data]);
     }
 
+    public function getFieldLayout(AbstractFormType $field): string
+    {
+        return 'types/form-' . $field::getId();
+    }
+
     public function render(int|Formkit $item, array $options = []): string
     {
         /**
@@ -70,11 +75,13 @@ class FormkitService
          */
         [$item, $fields, $form] = $this->getFormkitMeta($item, $options);
 
+        $this->checkAvailable($item);
+
         $formkitService = $this;
 
         $id = $item->getId();
 
-        return $this->rendererService->render(
+        return $this->getRenderer()->render(
             'formkit.formkit',
             compact(
                 'id',
@@ -91,7 +98,7 @@ class FormkitService
      * @param  int|Formkit  $item
      * @param  array        $options
      *
-     * @return  array{ 0: Formkit, 1: Collection<AbstractField>, 2: Form }
+     * @return  array{ 0: Formkit, 1: Collection<AbstractFormType>, 2: Form }
      *
      */
     public function getFormkitMeta(int|Formkit $item, array $options = []): array
@@ -99,22 +106,7 @@ class FormkitService
         if (!$item instanceof Formkit) {
             $item = $this->orm->mustFindOne(Formkit::class, $item);
         }
-
-        // Check published
-        if (!$item->getState()->isPublished()) {
-            throw new FormkitUnpublishedException();
-        }
-
-        $up = $item->getPublishUp();
-        $down = $item->getPublishDown();
-
-        if ($up !== null && $up->isFuture()) {
-            throw new FormkitUnpublishedException('Formkit unpublished');
-        }
-
-        if ($down !== null && $down->isPast()) {
-            throw new FormkitUnpublishedException('Formkit end published');
-        }
+        $this->checkAvailable($item);
 
         $fields = collect($item->getContent());
         $formFactory = $this->app->retrieve(FormFactory::class);
@@ -188,5 +180,45 @@ class FormkitService
         }
 
         return $content;
+    }
+
+    public function checkAvailable(Formkit $item): void
+    {
+        // Check published
+        if (!$item->getState()->isPublished()) {
+            throw new FormkitUnpublishedException('Not enabled');
+        }
+
+        $up = $item->getPublishUp();
+        $down = $item->getPublishDown();
+
+        if ($up !== null && $up->isFuture()) {
+            throw new FormkitUnpublishedException('Formkit not publish up yet');
+        }
+
+        if ($down !== null && $down->isPast()) {
+            throw new FormkitUnpublishedException('Formkit end publish');
+        }
+    }
+
+    protected function getRenderer(): CompositeRenderer
+    {
+        return $this->once(
+            'renderer',
+            function () {
+                /** @var CompositeRenderer $renderer */
+                $renderer = $this->rendererService->createRenderer();
+
+                $renderer->addPath(
+                    FormkitPackage::path('views')
+                );
+
+                $renderer->addPath(
+                    WINDWALKER_VIEWS . '/formkit'
+                );
+
+                return $renderer;
+            }
+        );
     }
 }
