@@ -8,6 +8,7 @@ use Windwalker\Core\Application\AppContext;
 use Windwalker\Core\Application\Context\AppRequestInterface;
 use Windwalker\Core\Application\ServiceAwareInterface;
 use Windwalker\Core\Asset\AssetService;
+use Windwalker\Core\Http\AppRequest;
 use Windwalker\Data\Collection;
 use Windwalker\Form\Field\AbstractField;
 use Windwalker\Form\Field\TextField;
@@ -18,11 +19,6 @@ use function Windwalker\collect;
 abstract class AbstractFormType
 {
     protected Collection $data;
-
-    public function __construct(mixed $data)
-    {
-        $this->data = collect($data);
-    }
 
     abstract public static function getTitle(): string;
 
@@ -50,7 +46,7 @@ abstract class AbstractFormType
             ->placeholder((string) $this->data->placeholder);
     }
 
-    public function prepareStore(array $data, AppRequestInterface $request, string $control): array
+    public function prepareStore(array $data, AppRequest $request, string $ns): array
     {
         return $data;
     }
@@ -83,9 +79,9 @@ abstract class AbstractFormType
         return $this->data;
     }
 
-    public function setData($data): static
+    public function setData(mixed $data): static
     {
-        $this->data = $data;
+        $this->data = collect($data);
 
         return $this;
     }

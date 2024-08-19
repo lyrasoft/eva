@@ -41,11 +41,14 @@ use Windwalker\Form\Form;
  */
 
 $data = $field->getData();
+
+$input = $formField->getPreparedInput();
+$input->addClass('c-point-scale d-flex align-items-center gap-3');
 ?>
 
 <x-field :field="$formField">
     <x-slot name="defaultSlot">
-        <div class="c-point-scale d-flex align-items-center gap-3">
+        <div {!! $input::buildAttributes($input) !!}>
             @if ($data->start)
                 <div class="c-point-scale__start">
                     {{ $data->start }}
@@ -53,7 +56,8 @@ $data = $field->getData();
             @endif
 
             @foreach (range((int) $data->min, (int) $data->max) as $i)
-                <div class="c-point-scale__option mx-3">
+                <div class="c-point-scale__option mx-3" data-radio-item-wrapper
+                    data-input-option>
                     <label for="input-{{ $data->uid }}-option-{{ $i }}" class="pb-2 mb-0">
                         {{ $i }}
                     </label>
@@ -61,6 +65,7 @@ $data = $field->getData();
                         <input id="input-{{ $data->uid }}-option-{{ $i }}"
                             type="radio"
                             class="form-check-input"
+                            data-radio-item-input
                             name="{{ $formField->getInputName() }}"
                             value="{{ $i }}"
                         />

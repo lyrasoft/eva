@@ -6,6 +6,7 @@ namespace App\Formkit\Type;
 
 use Windwalker\Core\Application\Context\AppRequestInterface;
 use Windwalker\Core\Application\ServiceAwareInterface;
+use Windwalker\Core\Http\AppRequest;
 use Windwalker\Form\Field\AbstractField;
 use Windwalker\Form\Field\CheckboxesField;
 use Windwalker\IO\Input;
@@ -13,6 +14,7 @@ use Windwalker\Utilities\Arr;
 use Windwalker\Utilities\Contract\LanguageInterface;
 
 use function Windwalker\h;
+use function Windwalker\uid;
 
 /**
  * The FormsetText class.
@@ -104,10 +106,12 @@ class FormCheckboxes extends FormSelect
      */
     public function toFormField(ServiceAwareInterface $app): AbstractField
     {
-        return (new CheckboxesField($this->getLabel(), $this->getLabel()))
+        return $app->make(CheckboxesField::class)
+            ->label($this->getLabel())
+            ->setName($this->getLabel())
             ->register(function (CheckboxesField $field) {
                 foreach ($this->data->options as $opt) {
-                    $field->option($opt['text'], $opt['text'], ['id' => uniqid('option', true)]);
+                    $field->option($opt['text'], $opt['text'], ['id' => uid('option', true)]);
                 }
             });
     }
@@ -115,18 +119,16 @@ class FormCheckboxes extends FormSelect
     /**
      * prepareStore
      *
-     * @param array                 $data
-     * @param  AppRequestInterface  $request
-     * @param string                $control
+     * @param array        $data
+     * @param  AppRequest  $request
+     * @param string       $ns
      *
      * @return  array
      *
      * @since  __DEPLOY_VERSION__
      */
-    public function prepareStore(array $data, AppRequestInterface $request, string $control): array
+    public function prepareStore(array $data, AppRequest $request, string $ns): array
     {
-        $data[$this->getLabel()] = implode(',', $data[$this->getLabel()] ?? []);
-
         return $data;
     }
 }

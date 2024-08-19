@@ -58,7 +58,11 @@ class FormkitService
             throw new \OutOfRangeException("FormType '$type' not found");
         }
 
-        return $this->app->make($className, [$data]);
+        /** @var AbstractFormType $field */
+        $field = $this->app->make($className);
+        $field->setData($data);
+
+        return $field;
     }
 
     public function getFieldLayout(AbstractFormType $field): string
@@ -136,23 +140,19 @@ class FormkitService
         return [$item, $fields, $form];
     }
 
-    public function getForm(int $id, array $options = []): Form
+    public function getForm(int|Formkit $id, array $options = []): Form
     {
         return $this->getFormkitMeta($id, $options)[2];
     }
 
     /**
-     * @param  int    $id
-     * @param  array  $options
+     * @param  int|Formkit  $id
+     * @param  array        $options
      *
      * @return  Collection<AbstractField>
      *
-     * @throws \Psr\Container\ContainerExceptionInterface
-     * @throws \Psr\Container\NotFoundExceptionInterface
-     * @throws \ReflectionException
-     * @throws \Windwalker\DI\Exception\DependencyResolutionException
      */
-    public function getFields(int $id, array $options = []): Collection
+    public function getFields(int|Formkit $id, array $options = []): Collection
     {
         return $this->getFormkitMeta($id, $options)[1];
     }
@@ -160,18 +160,17 @@ class FormkitService
     /**
      * getFormattedContent
      *
-     * @param  int    $formsetId
-     * @param  array  $rawContent
+     * @param  int|Formkit  $item
+     * @param  array        $rawContent
      *
      * @return  array
      *
-     * @throws \Psr\Cache\InvalidArgumentException
      * @since  __DEPLOY_VERSION__
      */
-    public function getFormattedContent(int $formsetId, array $rawContent): array
+    public function getFormattedContent(int|Formkit $item, array $rawContent): array
     {
         /** @var Collection|AbstractFormType[] $fields */
-        $fields = $this->getFields($formsetId);
+        $fields = $this->getFields($item);
 
         $content = [];
 

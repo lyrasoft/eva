@@ -37,10 +37,12 @@ $formkitService = $app->retrieve(FormkitService::class);
 
 @section('content')
     <div class="container my-4">
-        <header class="text-center mb-5">
-            <h2>{{ $item->getTitle() }}</h2>
-        </header>
+        <div class="mx-auto" style="max-width: 850px">
+            <header class="text-center mb-5">
+                <h2>{{ $item->getTitle() }}</h2>
+            </header>
 
-        {!! $formkitService->render($item) !!}
+            {!! $formkitService->render($item) !!}
+        </div>
     </div>
 @stop

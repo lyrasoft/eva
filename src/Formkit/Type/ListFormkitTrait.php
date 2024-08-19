@@ -20,15 +20,6 @@ trait ListFormkitTrait
         return (bool) $this->data->enable_other;
     }
 
-    /**
-     * getOtherOption
-     *
-     * @param  ListField  $field
-     *
-     * @return void
-     *
-     * @since  __DEPLOY_VERSION__
-     */
     protected function getOtherOption(ListField $field): void
     {
         $field->option(
@@ -56,7 +47,7 @@ trait ListFormkitTrait
 
         return h('input', [
             'class' => 'c-other-input form-control form-control-sm js-other-text',
-            'name' => $newField->setName($field->getInputName() . '_other')->getName(),
+            'name' => $newField->setName($field->getName() . '_other')->getInputName(),
         ]);
     }
 }

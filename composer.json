@@ -29,7 +29,7 @@
         "lyrasoft/toolkit": "^1.0",
         "lyrasoft/theme-skote": "^3.2",
         "lyrasoft/banner": "^1.0",
-        "lyrasoft/contact": "^1.0",
+        "lyrasoft/contact": "^1.1",
         "symfony/mailer": "^5.4||^6.0||^7.0",
         "dragonmantank/cron-expression": "^3.3",
         "masterminds/html5": "^2.8",

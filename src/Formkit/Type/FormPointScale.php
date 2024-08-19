@@ -4,7 +4,12 @@ declare(strict_types=1);
 
 namespace App\Formkit\Type;
 
+use Windwalker\Core\Application\ServiceAwareInterface;
+use Windwalker\Form\Field\AbstractField;
+use Windwalker\Form\Field\RadioField;
 use Windwalker\Utilities\Contract\LanguageInterface;
+
+use function Windwalker\uid;
 
 class FormPointScale extends AbstractFormType
 {
@@ -59,6 +64,13 @@ class FormPointScale extends AbstractFormType
     public static function getDescription(): string
     {
         return '分數單選量表';
+    }
+
+    public function toFormField(ServiceAwareInterface $app): AbstractField
+    {
+        return $app->make(RadioField::class)
+            ->label($this->getLabel())
+            ->setName($this->getLabel());
     }
 
     /**

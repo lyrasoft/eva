@@ -62,6 +62,7 @@ $mig->up(
                 $schema->datetime('modified')->comment('Modified Date');
                 $schema->integer('created_by')->comment('Author');
                 $schema->integer('modified_by')->comment('Modified User');
+                $schema->json('params');
 
                 $schema->addIndex('formket_id');
                 $schema->addIndex('created_by');

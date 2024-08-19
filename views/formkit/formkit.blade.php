@@ -40,6 +40,8 @@ use function Windwalker\uid;
  * @var $formkitService FormkitService
  */
 
+$asset->js('js/formkit.js');
+
 $uid = uid();
 $formId = $options['id'] ?? 'formkit-' . $uid;
 
@@ -84,11 +86,14 @@ $uniScript->addRoute(
         <div class="py-5 text-center">
             <button type="reset" class="btn btn-lg btn-outline-secondary"
                 style="min-width: 150px">
-                @lang('tigcr.formkit.button.clear')
+                @lang('formkit.button.clear')
             </button>
-            <button type="submit" class="btn btn-lg btn-secondary disable-on-submit"
-                style="min-width: 250px">
-                @lang('tigcr.formkit.button.submit')
+            <button type="button" class="btn btn-lg btn-primary"
+                data-task="submit"
+                style="min-width: 250px"
+                data-dos
+            >
+                @lang('formkit.button.submit')
             </button>
         </div>
 

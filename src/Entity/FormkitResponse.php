@@ -79,6 +79,10 @@ class FormkitResponse implements EntityInterface
     #[Modifier]
     protected int $modifiedBy = 0;
 
+    #[Column('params')]
+    #[Cast(JsonCast::class)]
+    protected array $params = [];
+
     #[EntitySetup]
     public static function setup(EntityMetadata $metadata): void
     {
@@ -249,6 +253,18 @@ class FormkitResponse implements EntityInterface
     public function setContent(array $content): static
     {
         $this->content = $content;
+
+        return $this;
+    }
+
+    public function getParams(): array
+    {
+        return $this->params;
+    }
+
+    public function setParams(array $params): static
+    {
+        $this->params = $params;
 
         return $this;
     }

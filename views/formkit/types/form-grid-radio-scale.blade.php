@@ -41,11 +41,16 @@ use Windwalker\Form\Form;
  */
 
 $data = $field->getData();
+
+$formField->set('validate', ['inputOptions' => true]);
+
+$input = $formField->getPreparedInput();
+$input->classList->add('c-grid-scale');
 ?>
 
 <x-field :field="$formField">
     <x-slot name="defaultSlot">
-        <div class="c-grid-scale">
+        <div class="c-grid-scale c-grid-scale--radio" @attr('required', $formField->isRequired())>
 
             <table class="table table-striped">
                 <thead>
@@ -61,7 +66,8 @@ $data = $field->getData();
 
                 <tbody>
                 @foreach ($data->rows as $i => $row)
-                    <tr>
+                    <tr uni-field-validate='{"inputOptions": true}' data-field-input
+                        @attr('required', $formField->isRequired())>
                         <td>
                             <div class="c-row-text">
                                 {{ $row['text'] }}
