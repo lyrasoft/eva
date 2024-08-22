@@ -38,7 +38,8 @@
         "asika32764/pinyin": "^1.2",
         "lyrasoft/backup": "^2.0",
         "lyrasoft/firewall": "dev-main",
-        "lyrasoft/security": "^0.1.2"
+        "lyrasoft/security": "^0.1.2",
+        "lyrasoft/formkit": "dev-main"
     },
     "require-dev": {
         "nunomaduro/collision": "^7.8||^8.0",

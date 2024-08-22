@@ -14,7 +14,10 @@ namespace App\Routes;
 use App\Module\Front\FrontMiddleware;
 use App\Module\Front\Home\HomeController;
 use App\Module\Front\Home\HomeView;
+use Lyrasoft\Contact\ContactPackage;
 use Lyrasoft\Firewall\Middleware\FirewallMiddleware;
+use Lyrasoft\Formkit\FormkitPackage;
+use Lyrasoft\Luna\LunaPackage;
 use Lyrasoft\Luna\Middleware\LocaleMiddleware;
 use Windwalker\Core\Middleware\CsrfMiddleware;
 use Windwalker\Core\Middleware\MaintenanceMiddleware;
@@ -53,4 +56,8 @@ $router->group('front')
         $router->load(__DIR__ . '/packages/front/*.route.php');
 
         $router->load(__DIR__ . '/custom/front/*.route.php');
+
+        $router->load(LunaPackage::path('routes/front/*.route.php'));
+        $router->load(ContactPackage::path('routes/front/*.route.php'));
+        $router->load(FormkitPackage::path('routes/front/*.route.php'));
     });
