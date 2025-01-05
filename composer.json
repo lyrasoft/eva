@@ -41,7 +41,8 @@
         "lyrasoft/backup": "^2.0",
         "lyrasoft/firewall": "dev-main",
         "lyrasoft/security": "^0.1.2",
-        "lyrasoft/formkit": "dev-main"
+        "lyrasoft/formkit": "dev-main",
+        "lyrasoft/faq": "dev-master"
     },
     "require-dev": {
         "nunomaduro/collision": "^7.8||^8.0",
