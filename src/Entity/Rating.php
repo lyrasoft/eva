@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
+use App\Service\RatingService;
 use Windwalker\Core\DateTime\Chronos;
 use Windwalker\Core\DateTime\ServerTimeCast;
 use Windwalker\ORM\Attributes\AutoIncrement;
@@ -18,6 +19,7 @@ use Windwalker\ORM\Attributes\Table;
 use Windwalker\ORM\Cast\JsonCast;
 use Windwalker\ORM\EntityInterface;
 use Windwalker\ORM\EntityTrait;
+use Windwalker\ORM\Event\EnergizeEvent;
 use Windwalker\ORM\Metadata\EntityMetadata;
 
 use function Windwalker\unwrap_enum;
@@ -64,6 +66,26 @@ class Rating implements EntityInterface
     public static function setup(EntityMetadata $metadata): void
     {
         //
+    }
+
+    #[EnergizeEvent]
+    public static function energize(EnergizeEvent $event): void
+    {
+        $event->storeCallback(
+            'rating.service',
+            fn (RatingService $ratingService) => $ratingService
+        );
+    }
+
+    public function count(): int
+    {
+        /** @var RatingService $ratingService */
+        $ratingService = $this->retrieveMeta('rating.service')();
+
+        return $ratingService->countRatings(
+            $this->getType(),
+            $this->getTargetId(),
+        );
     }
 
     public function getId(): ?int

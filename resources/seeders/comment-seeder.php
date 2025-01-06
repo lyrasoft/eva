@@ -33,7 +33,7 @@ $seeder->import(
         $userIds = $orm->findColumn(User::class, 'id')->map('intval')->dump();
 
         foreach ($articleIds as $articleId) {
-            foreach (range(1, random_int(3, 7)) as $i) {
+            foreach (range(1, random_int(2, 5)) as $i) {
                 $userId = $faker->randomElement($userIds);
 
                 $item = $commentService->addComment(

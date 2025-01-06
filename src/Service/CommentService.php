@@ -19,7 +19,7 @@ class CommentService
     {
     }
 
-    public function createComment(
+    public function createCommentItem(
         string|\BackedEnum $type,
         mixed $targetId,
         string $content,
@@ -45,7 +45,7 @@ class CommentService
         mixed $user = null,
         \Closure|array|null $extra = null,
     ): Comment {
-        $item = $this->createComment(
+        $item = $this->createCommentItem(
             $type,
             $targetId,
             $content,
@@ -92,7 +92,7 @@ class CommentService
 
         $userId = $this->toUserId($user);
 
-        $reply = $this->createComment(
+        $reply = $this->createCommentItem(
             $parent->getType(),
             $parent->getTargetId(),
             $replyContent,

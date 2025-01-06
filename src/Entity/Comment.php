@@ -22,6 +22,7 @@ use Windwalker\ORM\Attributes\Table;
 use Windwalker\ORM\Cast\JsonCast;
 use Windwalker\ORM\EntityInterface;
 use Windwalker\ORM\EntityTrait;
+use Windwalker\ORM\Event\AfterDeleteEvent;
 use Windwalker\ORM\Event\EnergizeEvent;
 use Windwalker\ORM\Metadata\EntityMetadata;
 
@@ -113,6 +114,17 @@ class Comment implements EntityInterface
             'comment.service',
             fn (CommentService $commentService) => $commentService
         );
+    }
+
+    #[AfterDeleteEvent]
+    public static function afterDelete(AfterDeleteEvent $event): void
+    {
+        $orm = $event->getORM();
+        /** @var static $item */
+        $item = $event->getEntity();
+
+        $orm->deleteWhere(static::class, ['parent_id' => $item->getId()]);
+        $orm->deleteWhere(Rating::class, ['type' => 'comment', 'target_id' => $item->getId()]);
     }
 
     public function count(): int
