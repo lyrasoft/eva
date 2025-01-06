@@ -74,24 +74,24 @@ $imgPlaceholder = $app->retrieve(ImagePlaceholder::class);
                     </th>
 
                     <th style="width: 1%" class="text-nowrap">
-                        編輯
+                        @lang('feedback.text.edit')
                     </th>
 
                     {{-- User --}}
                     <th class="text-nowrap">
-                        使用者
+                        @lang('feedback.field.user')
                     </th>
 
                     {{-- Content --}}
                     <th class="text-nowrap">
                         <x-sort field="comment.content">
-                            內容
+                            @lang('feedback.field.content')
                         </x-sort>
                     </th>
 
                     {{-- Reply --}}
                     <th class="text-nowrap">
-                        回覆
+                        @lang('feedback.comment.field.reply')
                     </th>
 
                     {{-- Delete --}}
@@ -132,7 +132,7 @@ $imgPlaceholder = $app->retrieve(ImagePlaceholder::class);
                             <a href="{{ $nav->to('comment_edit')->id($item->getId()) }}"
                                 class="btn btn-sm btn-primary">
                                 <i class="fa fa-edit"></i>
-                                編輯
+                                @lang('feedback.text.edit')
                             </a>
                         </td>
 
@@ -140,7 +140,7 @@ $imgPlaceholder = $app->retrieve(ImagePlaceholder::class);
                         <td class="text-nowrap">
                             @php
                                 $avatar = $item->user?->avatar ?: $item->getAvatar() ?: $imgPlaceholder->avatar();
-                                $nickName = $item->user?->name ?: $item->getNickname() ?: '匿名';
+                                $nickName = $item->user?->name ?: $item->getNickname() ?: $lang('feedback.text.anonymous');
                             @endphp
 
                             <div class="d-flex align-items-center gap-2">

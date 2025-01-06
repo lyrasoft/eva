@@ -42,11 +42,11 @@ class EditForm
     public function basic(Form $form): void
     {
         $form->add('content', TextareaField::class)
-            ->label('Content')
+            ->label($this->trans('feedback.field.content'))
             ->rows(7);
 
         $form->add('reply', TextareaField::class)
-            ->label('Reply')
+            ->label($this->trans('feedback.field.comment.reply'))
             ->rows(7);
     }
 

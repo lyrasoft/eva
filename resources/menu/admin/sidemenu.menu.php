@@ -95,7 +95,7 @@ $menu->link($lang('contact.list.title', title: $lang('contact.main.title')))
     ->icon('fal fa-phone-volume');
 
 // Comment
-$menu->link('Comments')
+$menu->link($lang('feedback.comment.list.title', title: $lang('luna.article.title')))
     ->to($nav->to('comment_list', ['type' => 'article']))
     ->icon('fal fa-comments');
 
