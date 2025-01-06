@@ -25,13 +25,23 @@ class CommentService
         string $content,
         mixed $user = null,
     ): Comment {
-        $userId = $this->toUserId($user);
+        $user = $this->toUser($user);
 
         $item = $this->orm->createEntity(Comment::class);
 
         $item->setType($type);
         $item->setTargetId($targetId);
-        $item->setUserId($userId);
+        $item->setUserId($user->getId());
+        $item->setNickname($user->getName());
+
+        if (method_exists($user, 'getEmail')) {
+            $item->setEmail($user->getEmail());
+        }
+
+        if (method_exists($user, 'getAvatar')) {
+            $item->setAvatar($user->getAvatar());
+        }
+
         $item->setContent($content);
         $item->setState(1);
 
@@ -69,9 +79,9 @@ class CommentService
             $comment = $this->orm->mustFindOne(Comment::class, $comment);
         }
 
-        $userId = $this->toUserId($user);
+        $user = $this->toUser($user);
 
-        $comment->setReplyUserId($userId);
+        $comment->setReplyUserId($user->getId());
         $comment->setReply($replyContent);
         $comment->setLastReplyAt($time);
 
@@ -90,13 +100,13 @@ class CommentService
             $parent = $this->orm->mustFindOne(Comment::class, $parent);
         }
 
-        $userId = $this->toUserId($user);
+        $user = $this->toUser($user);
 
         $reply = $this->createCommentItem(
             $parent->getType(),
             $parent->getTargetId(),
             $replyContent,
-            $userId,
+            $user,
         );
         $reply->setParentId($parent->getId());
 
@@ -106,7 +116,7 @@ class CommentService
         $reply = $this->orm->createOne($reply);
 
         // Update parent
-        $parent->setReplyUserId($userId);
+        $parent->setReplyUserId($user->getId());
         $parent->setLastReplyAt($reply->getCreated());
         $parent->setLastReplyId($reply->getId());
 
@@ -115,17 +125,13 @@ class CommentService
         return $reply;
     }
 
-    protected function toUserId(mixed $user): mixed
+    protected function toUser(mixed $user): UserEntityInterface
     {
-        $user ??= $this->userService->getCurrentUser();
-
         if ($user instanceof UserEntityInterface) {
-            $userId = $user->getId();
-        } else {
-            $userId = $user;
+            return $user;
         }
 
-        return $userId;
+        return $this->userService->getUser($user);
     }
 
     protected function handleExtraData(array|\Closure|null $extra, Comment $item): Comment

@@ -55,6 +55,15 @@ class Comment implements EntityInterface
     #[Column('content')]
     protected string $content = '';
 
+    #[Column('avatar')]
+    protected string $avatar = '';
+
+    #[Column('nickname')]
+    protected string $nickname = '';
+
+    #[Column('email')]
+    protected string $email = '';
+
     #[Column('reply')]
     protected string $reply = '';
 
@@ -112,7 +121,7 @@ class Comment implements EntityInterface
     {
         $event->storeCallback(
             'comment.service',
-            fn (CommentService $commentService) => $commentService
+            fn(CommentService $commentService) => $commentService
         );
     }
 
@@ -363,6 +372,42 @@ class Comment implements EntityInterface
     public function setLastReplyId(int $lastReplyId): static
     {
         $this->lastReplyId = $lastReplyId;
+
+        return $this;
+    }
+
+    public function getNickname(): string
+    {
+        return $this->nickname;
+    }
+
+    public function setNickname(string $nickname): static
+    {
+        $this->nickname = $nickname;
+
+        return $this;
+    }
+
+    public function getEmail(): string
+    {
+        return $this->email;
+    }
+
+    public function setEmail(string $email): static
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    public function getAvatar(): string
+    {
+        return $this->avatar;
+    }
+
+    public function setAvatar(string $avatar): static
+    {
+        $this->avatar = $avatar;
 
         return $this;
     }

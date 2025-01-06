@@ -27,6 +27,9 @@ $mig->up(
                 $schema->varchar('type');
                 $schema->varchar('title');
                 $schema->longtext('content');
+                $schema->varchar('avatar');
+                $schema->varchar('nickname');
+                $schema->varchar('email');
                 $schema->longtext('reply');
                 $schema->integer('reply_user_id');
                 $schema->datetime('last_reply_at');
@@ -46,6 +49,7 @@ $mig->up(
                 $schema->addIndex('type');
                 $schema->addIndex('rating');
                 $schema->addIndex('created_by');
+                $schema->addIndex('email');
                 $schema->addIndex('reply_user_id');
                 $schema->addIndex('last_reply_at');
                 $schema->addIndex('last_reply_id');

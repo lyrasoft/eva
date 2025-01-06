@@ -94,6 +94,11 @@ $menu->link($lang('contact.list.title', title: $lang('contact.main.title')))
     ->to($nav->to('contact_list', ['type' => 'main']))
     ->icon('fal fa-phone-volume');
 
+// Comment
+$menu->link('Comments')
+    ->to($nav->to('comment_list', ['type' => 'article']))
+    ->icon('fal fa-comments');
+
 // Configs
 $menu->link('設定檔', '#')
     ->icon('fal fa-cogs');
