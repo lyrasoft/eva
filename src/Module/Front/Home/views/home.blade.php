@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\View;
 
+use Lyrasoft\Feedback\Script\FeedbackScript;
 use Windwalker\Core\Asset\AssetService;
 use Windwalker\Core\DateTime\ChronosService;
 use Windwalker\Core\Language\LangService;
@@ -25,6 +26,7 @@ use Windwalker\Core\Router\SystemUri;
  * @var $lang      LangService     The lang service.
  */
 
+$app->retrieve(FeedbackScript::class)->ratingButton();
 ?>
 
 @extends('global.body')
@@ -37,6 +39,17 @@ use Windwalker\Core\Router\SystemUri;
             <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
             <p><a href="#" class="btn btn-primary btn-lg" role="button">Learn more &raquo;</a></p>
         </div>
+    </div>
+
+    <div>
+        <x-rating-button
+            type="comment"
+            id="1"
+        >
+            <x-slot name="text">
+                SDG
+            </x-slot>
+        </x-rating-button>
     </div>
 
     <div class="container">
@@ -60,7 +73,7 @@ use Windwalker\Core\Router\SystemUri;
         </div>
     </div> <!-- /container -->
 
-{{--    {!! $pagin->render() !!}--}}
+    {{--    {!! $pagin->render() !!}--}}
 
-{{--    @include('layout.pagination.basic-pagination', ['pagination' => $pagin])--}}
+    {{--    @include('layout.pagination.basic-pagination', ['pagination' => $pagin])--}}
 @stop
