@@ -18,6 +18,8 @@
         "animate.css": "^4.1.1",
         "bootstrap": "^5.0.0",
         "codemirror": "^5.63.3",
+        "cross-env": "^7.0.3",
+        "gulp": "^4.0",
         "jarallax": "^1.12.8",
         "jquery": "^3.6.0",
         "sortablejs": "^1.14.0",
@@ -36,5 +38,8 @@
             "vendor/windwalker/unicorn/*",
             "vendor/windwalker/core/assets/*"
         ]
+    },
+    "devDependencies": {
+        "@types/gulp": "^4"
     }
 }
