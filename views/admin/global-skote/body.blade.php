@@ -24,33 +24,21 @@ use Windwalker\Core\Router\SystemUri;
 
 $htmlFrame = $app->service(\Windwalker\Core\Html\HtmlFrame::class);
 
+$htmlFrame->getBodyElement()->setAttribute('data-sidebar', 'dark');
 ?>
 
-<!-- start page title -->
-<div class="page-title-box d-flex align-items-center justify-content-between position-sticky py-2 mb-3"
-    style="background-color: var(--bs-body-bg); top: 0; z-index: 4;">
-    <h2 class="mb-sm-0 font-size-18">
-        {{ $htmlFrame->getTitle() }}
-    </h2>
+@extends('admin.global.body-wrapper')
 
-    <div class="d-inline-block d-lg-none">
-        <button class="btn btn-sm btn-primary"
-            type="button"
-            data-bs-toggle="offcanvas"
-            data-bs-target="#toolbar-offcanvas"
-            aria-controls="toolbar-offcanvas">
-            <i class="fa fa-bars"></i>
-            Toolbar
-        </button>
-    </div>
+@section('body')
+    @section('banner')
+        @include('admin.global.layout.banner')
+    @show
 
-    <div id="toolbar-offcanvas" class="offcanvas-lg offcanvas-end"
-        style="top: 70px">
-        <div class="offcanvas-body">
-            @section('admin-toolbar')
-                @include('admin.global.layout.toolbar')
-            @show
-        </div>
-    </div>
-</div>
-<!-- end page title -->
+    <section id="content-container" class="">
+        @section('content-container')
+            @include('@messages')
+
+            @yield('content', 'Admin Content')
+        @show
+    </section>
+@stop

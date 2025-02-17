@@ -22,29 +22,14 @@ use Windwalker\Core\Language\LangService;
 use Windwalker\Core\Router\Navigator;
 use Windwalker\Core\Router\SystemUri;
 
-$htmlFrame = $app->service(\Windwalker\Core\Html\HtmlFrame::class);
-
-$body = $htmlFrame->getBodyElement();
-
-$body->addClass('layout-fluid');
+$app->service(\Windwalker\Core\Html\HtmlFrame::class)
+    ->addBodyClass('vertical-collpsed');
 ?>
 
-@extends('admin.global.body-wrapper')
+@extends('admin.global.body')
 
-@section('body')
-    @section('banner')
-        @include('admin.global.layout.banner')
-    @show
+@section('content-container')
+    @include('@messages')
 
-    @yield('page-start')
-
-    <section id="content-container" class="">
-        @section('content-container')
-            @include('@messages')
-
-            @yield('content', 'Admin Content')
-        @show
-    </section>
-
-    @yield('page-end')
+    @yield('content', 'Admin Edit Content')
 @stop

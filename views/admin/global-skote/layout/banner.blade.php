@@ -28,10 +28,10 @@ $htmlFrame = $app->service(\Windwalker\Core\Html\HtmlFrame::class);
 
 <!-- start page title -->
 <div class="page-title-box d-flex align-items-center justify-content-between position-sticky py-2 mb-3"
-    style="background-color: var(--bs-body-bg); top: 0; z-index: 4;">
-    <h2 class="mb-sm-0 font-size-18">
+    style="background-color: var(--bs-body-bg); top: 70px; z-index: 4; margin-top: -1rem">
+    <h4 class="mb-sm-0 font-size-18">
         {{ $htmlFrame->getTitle() }}
-    </h2>
+    </h4>
 
     <div class="d-inline-block d-lg-none">
         <button class="btn btn-sm btn-primary"

@@ -22,29 +22,9 @@ use Windwalker\Core\Language\LangService;
 use Windwalker\Core\Router\Navigator;
 use Windwalker\Core\Router\SystemUri;
 
-$htmlFrame = $app->service(\Windwalker\Core\Html\HtmlFrame::class);
-
-$body = $htmlFrame->getBodyElement();
-
-$body->addClass('layout-fluid');
 ?>
-
-@extends('admin.global.body-wrapper')
-
-@section('body')
-    @section('banner')
-        @include('admin.global.layout.banner')
-    @show
-
-    @yield('page-start')
-
-    <section id="content-container" class="">
-        @section('content-container')
-            @include('@messages')
-
-            @yield('content', 'Admin Content')
-        @show
-    </section>
-
-    @yield('page-end')
-@stop
+<aside id="admin-toolbar" class="">
+    <div class="admin-toolbar-buttons">
+        @yield('toolbar-buttons')
+    </div>
+</aside>

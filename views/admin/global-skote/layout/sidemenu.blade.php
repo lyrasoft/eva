@@ -30,34 +30,32 @@ $root = $app->service(\Lyrasoft\Luna\Services\MenuService::class)
 
 @foreach ($root->getChildren() as $menuItem)
     @if ($menuItem->getLayout() === 'placeholder.header')
-        <li class="nav-header px-3 small mb-2 text-secondary">
+        <li class="menu-title" key="t-menu">
             {{ $menuItem->getTitle() }}
         </li>
     @else
         @if ($menuItem->hasChildren())
-            <li class="nav-item dropdown">
-                <a href="javascript: void(0);" class="nav-link gap-2 dropdown-toggle {{ $menuItem->isActive(true) ? 'active show' : '' }}"
-                    data-bs-toggle="dropdown"
-                    data-bs-auto-close="false"
-                    role="button"
-                    aria-expanded="false">
+            <li class="{{ $menuItem->isActive(true) ? 'mm-active' : '' }}">
+                <a href="javascript: void(0);" class="has-arrow waves-effect" aria-expanded="false">
                     <i class="{{ $menuItem->getIcon() }} fa-fw" style="font-size: 1rem"></i>
                     <span>{{ $menuItem->getTitle() }}</span>
                 </a>
-                <ul class="dropdown-menu {{ $menuItem->isActive(true) ? 'show' : '' }}" aria-expanded="false" style="">
+                <ul class="sub-menu mm-collapse" aria-expanded="false" style="">
                     @foreach ($menuItem->getChildren() as $childItem)
-                        <a href="{{ $childItem->route($nav) }}"
-                            class="dropdown-item gap-2 {{ $childItem->isActive(true) ? 'active' : '' }}">
-                            <span class="{{ $childItem->getIcon() }} fa-fw"></span>
-                            <span>{{ $childItem->getTitle() }}</span>
-                        </a>
+                        <li class="{{ $childItem->isActive(true) ? 'active' : '' }}">
+                            <a href="{{ $childItem->route($nav) }}"
+                                class="{{ $childItem->isActive(true) ? 'active' : '' }}">
+                                <span class="{{ $childItem->getIcon() }} fa-fw"></span>
+                                <span>{{ $childItem->getTitle() }}</span>
+                            </a>
+                        </li>
                     @endforeach
                 </ul>
             </li>
         @else
-            <li class="nav-item">
+            <li class="{{ $menuItem->isActive(true) ? 'mm-active' : '' }}">
                 <a href="{{ $menuItem->route($nav) }}"
-                    class="nav-link gap-2 {{ $menuItem->isActive(true) ? 'active' : '' }}">
+                    class="{{ $menuItem->isActive(true) ? 'active' : '' }}">
                     <i class="{{ $menuItem->getIcon() }} fa-fw" style="font-size: 1rem"></i>
                     <span>{{ $menuItem->getTitle() }}</span>
                 </a>

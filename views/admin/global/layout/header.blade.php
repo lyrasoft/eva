@@ -26,76 +26,55 @@ $user = $app->service(\Lyrasoft\Luna\User\UserService::class)->getUser();
 ?>
 
 @section('header')
-    <header id="page-topbar">
-        <div class="navbar-header">
-            <div class="d-flex">
-                <!-- LOGO -->
-                <div class="navbar-brand-box text-start">
-                    {{--<a href="{{ $nav->to('home') }}" class="logo logo-dark">--}}
-                    {{--    <span class="logo-sm">--}}
-                    {{--        <img class="img-fluid" src="{{ $asset->path('images/logo-cw-h.svg') }}" alt="" height="22">--}}
-                    {{--    </span>--}}
-                    {{--    <span class="logo-lg">--}}
-                    {{--        <img class="img-fluid" src="{{ $asset->path('images/logo-cw-h.svg') }}" alt="" height="17">--}}
-                    {{--    </span>--}}
-                    {{--</a>--}}
+    <header class="navbar navbar-expand-md d-none d-lg-flex d-print-none">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-menu" aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-                    <a href="{{ $nav->to('home') }}" class="logo logo-light">
-                        <span class="logo-sm">
-                            <img src="{{ $asset->path('images/icon.svg') }}" alt="" height="45"
-                                style="margin-left: -12px">
-                        </span>
-                        <span class="logo-lg">
-                            <img  src="{{ $asset->path('images/logo-cw-h.svg') }}" alt="" height="35">
-                        </span>
-                    </a>
+            <div class="collapse navbar-collapse" id="navbar-menu">
+                <div class="d-flex flex-column flex-md-row flex-fill align-items-stretch align-items-md-center">
+                    {{-- Menu Start --}}
+                    <ul class="navbar-nav">
+                        {{-- Dashboard --}}
+                        <li class="nav-item">
+                            <a class="nav-link gap-2" href="./">
+                                <i class="far fa-dashboard"></i>
+                                <span class="nav-link-title">
+                                    Dashboard
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
                 </div>
-
-                <button type="button" class="btn btn-sm px-3 font-size-16 header-item waves-effect"
-                    id="vertical-menu-btn">
-                    <i class="fa fa-fw fa-bars"></i>
-                </button>
-
-                @section('nav')
-                    @include('admin.global.layout.mainmenu')
-                @show
             </div>
 
-            <div class="d-flex">
-                <div class="ms-1" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Fullscreen">
-                    <button type="button" class="btn header-item noti-icon waves-effect d-flex align-items-center" data-bs-toggle="fullscreen">
-                        <i class="fa-regular fa-expand"></i>
-                    </button>
-                </div>
-
-                <div class="ms-1" data-bs-toggle="tooltip" data-bs-placement="bottom" title="See Frontend">
-                    <a class="btn header-item noti-icon waves-effect d-flex align-items-center"
-                        href="{{ $nav->to('front::home') }}"
-                        target="_blank"
-                    >
+            <div class="navbar-nav flex-row order-md-last gap-2">
+                <div class="d-none d-lg-flex gap-2">
+                    {{-- Preview Button --}}
+                    <a href="?theme=dark" class="nav-link" data-bs-toggle="tooltip" data-bs-placement="bottom" title="See Frontend">
                         <i class="fa-regular fa-eye"></i>
                     </a>
                 </div>
-
                 @if ($user->isLogin())
-                    <div class="dropdown d-inline-block">
-                        <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown"
-                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <img class="rounded-circle header-profile-user" src="{{ $user->getAvatar() }}"
-                                alt="Header Avatar">
-                            <span class="d-none d-xl-inline-block ms-1">{{ $user->getName() }}</span>
-                            <i class="fa-regular fa-angle-down d-none d-xl-inline-block"></i>
-                        </button>
-                        <div class="dropdown-menu dropdown-menu-end">
-                            <!-- item-->
-                            <a class="dropdown-item" href="{{ $nav->to('user_edit')->id($user->getId()) }}">
-                                <i class="fa-regular fa-user font-size-16 align-middle me-1"></i>
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle="dropdown" aria-label="Open user menu">
+                            <img class="avatar avatar-sm" src="{{ $user->getAvatar() }}" alt="Avatar">
+                            <div class="d-none d-xl-block ps-2">
+                                <div>{{ $user->getName() }}</div>
+                            </div>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                            <a href="{{ $nav->to('user_edit')->id($user->getId()) }}" class="dropdown-item gap-2">
+                                <i class="far fa-user"></i>
                                 <span>My Profile</span>
                             </a>
-                            <a class="dropdown-item text-danger" href="javascript://"
+
+                            <a href="javascript:void(0)" class="dropdown-item link-danger gap-2"
                                 onclick="u.form().post('{{ $nav->to('logout') }}')">
-                                <i class="fa-regular fa-power-off font-size-16 align-middle me-1 text-danger"></i>
-                                <span key="t-logout">Logout</span></a>
+                                <i class="far fa-power-off"></i>
+                                <span>Logout</span>
+                            </a>
                         </div>
                     </div>
                 @endif

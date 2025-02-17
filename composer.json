@@ -42,7 +42,8 @@
         "lyrasoft/security": "^0.1.2",
         "lyrasoft/formkit": "dev-main",
         "lyrasoft/faq": "dev-master",
-        "lyrasoft/feedback": "dev-main"
+        "lyrasoft/feedback": "dev-main",
+        "lyrasoft/theme-nexus": "dev-main"
     },
     "require-dev": {
         "nunomaduro/collision": "^7.8||^8.0",
@@ -91,6 +92,10 @@
         {
             "type": "git",
             "url": "git@github.com:lyrasoft/theme-skote.git"
+        },
+        {
+            "type": "path",
+            "url": "./vendor/lyrasoft/theme-nexus"
         }
     ]
 }

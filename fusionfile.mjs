@@ -153,6 +153,34 @@ export async function admin() {
   );
 }
 
+export async function nexus() {
+  fusion.watch([
+    'vendor/lyrasoft/theme-nexus/src/**/*',
+    'resources/assets/scss/admin/**/*.scss'
+  ]);
+
+  return wait(
+    sass(
+      'resources/assets/scss/admin/nexus.scss',
+      'www/assets/css/admin/nexus.css',
+      {
+        sass: {
+          includePaths: 'node_modules'
+        }
+      }
+    ),
+    sass(
+      'resources/assets/scss/admin/bootstrap.scss',
+      'www/assets/css/admin/bootstrap.css',
+      {
+        sass: {
+          includePaths: 'node_modules'
+        }
+      }
+    ),
+  );
+}
+
 export async function install() {
   installVendors(
     [
@@ -170,6 +198,8 @@ export async function install() {
       src('theme/admin/dist/assets/libs/').pipe(symlink('www/assets/vendor/admin/'));
       src('theme/admin/dist/assets/fonts/').pipe(symlink('www/assets/css/fonts/'));
     });
+
+  src('vendor/lyrasoft/theme-nexus/').pipe(symlink('theme/nexus'));
 }
 
 // compile vue

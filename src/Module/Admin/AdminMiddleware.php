@@ -57,17 +57,17 @@ class AdminMiddleware extends AbstractLifecycleMiddleware
         );
 
         // Bootstrap
-        $this->asset->css('css/admin/bootstrap.min.css');
+        // $this->asset->css('css/admin/bootstrap.min.css');
         $this->asset->js('vendor/bootstrap/dist/js/bootstrap.bundle.min.js');
 
         // Theme
-        $this->asset->js('vendor/jquery/dist/jquery.min.js');
-        $this->asset->js('vendor/admin/metismenu/metisMenu.min.js');
-        $this->asset->js('vendor/admin/simplebar/simplebar.min.js');
-        $this->asset->js('vendor/admin/node-waves/waves.min.js');
-        $this->asset->js('js/admin/app.min.js');
-        $this->asset->css('css/admin/app.min.css');
-        $this->asset->css('css/admin/icons.min.css');
+        // $this->asset->js('vendor/jquery/dist/jquery.min.js');
+        // $this->asset->js('vendor/admin/metismenu/metisMenu.min.js');
+        // $this->asset->js('vendor/admin/simplebar/simplebar.min.js');
+        // $this->asset->js('vendor/admin/node-waves/waves.min.js');
+        // $this->asset->js('js/admin/app.min.js');
+        $this->asset->css('css/admin/nexus.min.css');
+        // $this->asset->css('css/admin/icons.min.css');
 
         // Main
         $this->asset->css('css/admin/main.css');
