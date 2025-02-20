@@ -53,7 +53,7 @@ use Windwalker\Core\Router\SystemUri;
 
                 {{-- Sidemenu --}}
                 <div class="collapse navbar-collapse l-sidebar-menu" id="sidebar-menu">
-                    <ul class="navbar-nav pt-lg-3">
+                    <ul class="navbar-nav nav-pills pt-lg-3">
                         @include('global.layout.sidemenu')
                     </ul>
                 </div>
