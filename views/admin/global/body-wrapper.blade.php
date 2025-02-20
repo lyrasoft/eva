@@ -29,7 +29,7 @@ use Windwalker\Core\Router\SystemUri;
 <div class="page" uni-cloak>
     {{-- Sidebar --}}
     @section('sidebar')
-        <aside class="navbar navbar-vertical navbar-expand-lg" data-bs-theme="dark">
+        <aside class="l-sidebar navbar navbar-vertical navbar-expand-lg" data-bs-theme="light">
             <div class="container-fluid">
                 <button
                     class="navbar-toggler"
@@ -46,13 +46,13 @@ use Windwalker\Core\Router\SystemUri;
                 {{-- LOGO --}}
                 <div class="navbar-brand navbar-brand-autodark">
                     <a href="{{ $nav->to('home') }}">
-                        <img  src="{{ $asset->path('images/logo-cw-h.svg') }}"
+                        <img class="navbar-brand-image" src="{{ $asset->path('images/logo-cb-h.svg') }}"
                             alt="LOGO" style="width: auto; height: 35px;">
                     </a>
                 </div>
 
                 {{-- Sidemenu --}}
-                <div class="collapse navbar-collapse" id="sidebar-menu">
+                <div class="collapse navbar-collapse l-sidebar-menu" id="sidebar-menu">
                     <ul class="navbar-nav pt-lg-3">
                         @include('global.layout.sidemenu')
                     </ul>

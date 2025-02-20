@@ -29,9 +29,19 @@ $htmlFrame = $app->service(\Windwalker\Core\Html\HtmlFrame::class);
 <!-- start page title -->
 <div class="page-title-box d-flex align-items-center justify-content-between position-sticky py-2 mb-3"
     style="background-color: var(--bs-body-bg); top: 0; z-index: 4;">
-    <h2 class="mb-sm-0 font-size-18">
-        {{ $htmlFrame->getTitle() }}
-    </h2>
+    @yield('banner-start')
+
+    <div class="page-title-box__title">
+        @yield('title-start')
+
+        <h2 class="page-title h4">
+            {{ $htmlFrame->getTitle() }}
+        </h2>
+
+        @yield('title-end')
+    </div>
+
+    @yield('banner-end')
 
     <div class="d-inline-block d-lg-none">
         <button class="btn btn-sm btn-primary"

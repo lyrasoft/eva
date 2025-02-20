@@ -7,7 +7,8 @@
         "build:prod": "cross-env NODE_ENV=production gulp",
         "watch": "cross-env NODE_ENV=development gulp --watching=1",
         "watch:reload": "cross-env NODE_ENV=development gulp --watching=1 --livereload=1",
-        "postinstall": "yarn build install"
+        "postinstall": "yarn build install",
+        "upgrade": "yarn up '**' -R"
     },
     "dependencies": {
         "@fortawesome/fontawesome-pro": "^6.0",

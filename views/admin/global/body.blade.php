@@ -38,7 +38,7 @@ $body->addClass('layout-fluid');
 
     @yield('page-start')
 
-    <section id="content-container" class="">
+    <section id="content-container" class="page-body">
         @section('content-container')
             @include('@messages')
 
