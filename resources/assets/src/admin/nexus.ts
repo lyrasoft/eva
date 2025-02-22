@@ -58,14 +58,26 @@ import '@main';
 
         if (el) {
           el.requestFullscreen?.()
-            ?? el.mozRequestFullscreen?.()
-            ?? el.webkitRequestFullscreen?.();
+            || el.mozRequestFullscreen?.()
+            || el.webkitRequestFullscreen?.();
         }
       } else {
         document.cancelFullscreen?.()
-          ?? document.mozCancelFullScreen?.()
-          ?? document.webkitCancelFullScreen?.();
+          || document.mozCancelFullScreen?.()
+          || document.webkitCancelFullScreen?.();
       }
     })
   }
 })();
+
+declare global {
+  interface HTMLElement {
+    mozRequestFullscreen?: Function;
+    webkitRequestFullscreen?: Function;
+  }
+  interface Document {
+    cancelFullscreen?: Function;
+    mozCancelFullScreen?: Function;
+    webkitCancelFullScreen?: Function;
+  }
+}
