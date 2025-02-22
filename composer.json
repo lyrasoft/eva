@@ -43,7 +43,8 @@
         "lyrasoft/formkit": "dev-main",
         "lyrasoft/faq": "dev-master",
         "lyrasoft/feedback": "dev-main",
-        "lyrasoft/theme-nexus": "dev-main"
+        "lyrasoft/theme-nexus": "dev-main",
+        "windwalker/framework": "dev-master"
     },
     "require-dev": {
         "nunomaduro/collision": "^7.8||^8.0",
