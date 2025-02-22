@@ -41,14 +41,14 @@ $root = $app->service(\Lyrasoft\Luna\Services\MenuService::class)
                     role="button"
                     aria-expanded="false"
                 >
-                    <i class="{{ $menuItem->getIcon() }} fa-fw" style="font-size: 1rem"></i>
+                    <i class="nav-icon {{ $menuItem->getIcon() }} fa-fw" style="font-size: 1rem"></i>
                     <span>{{ $menuItem->getTitle() }}</span>
                 </a>
                 <ul class="dropdown-menu collapse {{ $menuItem->isActive(true) ? 'show' : '' }}" aria-expanded="false" style="">
                     @foreach ($menuItem->getChildren() as $childItem)
                         <a href="{{ $childItem->route($nav) }}"
                             class="dropdown-item {{ $childItem->isActive(true) ? 'active' : '' }}">
-                            <span class="{{ $childItem->getIcon() }} fa-fw"></span>
+                            <i class="nav-icon {{ $childItem->getIcon() }} fa-fw"></i>
                             <span>{{ $childItem->getTitle() }}</span>
                         </a>
                     @endforeach
@@ -58,7 +58,7 @@ $root = $app->service(\Lyrasoft\Luna\Services\MenuService::class)
             <li class="nav-item {{ $menuItem->isActive(true) ? 'active' : '' }}">
                 <a href="{{ $menuItem->route($nav) }}"
                     class="nav-link {{ $menuItem->isActive(true) ? 'active' : '' }}">
-                    <i class="{{ $menuItem->getIcon() }} fa-fw" style="font-size: 1rem"></i>
+                    <i class="nav-icon {{ $menuItem->getIcon() }} fa-fw" style="font-size: 1rem"></i>
                     <span>{{ $menuItem->getTitle() }}</span>
                 </a>
             </li>

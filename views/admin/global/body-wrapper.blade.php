@@ -29,48 +29,7 @@ use Windwalker\Core\Router\SystemUri;
 <div class="page" uni-cloak>
     {{-- Sidebar --}}
     @section('sidebar')
-        <aside class="l-sidebar navbar navbar-vertical navbar-expand-lg" data-bs-theme="light">
-            <div class="container-fluid">
-                <button
-                    class="navbar-toggler"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#sidebar-menu"
-                    aria-controls="sidebar-menu"
-                    aria-expanded="false"
-                    aria-label="Toggle navigation"
-                >
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                {{-- LOGO --}}
-                <div class="navbar-brand navbar-brand-autodark">
-                    <a href="{{ $nav->to('home') }}">
-                        <img class="navbar-brand-image" src="{{ $asset->path('images/logo-cb-h.svg') }}"
-                            alt="LOGO" style="width: auto; height: 35px;">
-                    </a>
-                </div>
-
-                {{-- Sidemenu --}}
-                <div class="collapse navbar-collapse l-sidebar-menu" id="sidebar-menu">
-                    <ul class="navbar-nav nav-pills pt-lg-3">
-                        @include('global.layout.sidemenu')
-                    </ul>
-                </div>
-            </div>
-        </aside>
-
-        {{--<div class="vertical-menu">--}}
-        {{--    <div data-simplebar class="h-100">--}}
-        {{--        <!--- Sidemenu -->--}}
-        {{--        <div id="sidebar-menu">--}}
-        {{--            <!-- Left Menu Start -->--}}
-        {{--            <ul class="metismenu list-unstyled" id="side-menu">--}}
-        {{--                @include('global.layout.sidemenu')--}}
-        {{--            </ul>--}}
-        {{--        </div>--}}
-        {{--    </div>--}}
-        {{--</div>--}}
+        @include('admin.global.layout.sidebar')
     @show
 
     <div class="page-wrapper">

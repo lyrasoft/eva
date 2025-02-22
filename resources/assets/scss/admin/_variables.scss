@@ -464,7 +464,7 @@ $negative-spacers: if($enable-negative-margins, negativify-map($spacers), null);
 
 // Position
 //
-// Define the edge positioning anchors of the position utilities.
+// Define the edge positioning anchors of the position base.
 
 // scss-docs-start position-map
 $position-values: (
@@ -485,14 +485,14 @@ $body-text-align:           null;
 
 // Utilities maps
 //
-// Extends the default `$theme-colors` maps to help create our utilities.
+// Extends the default `$theme-colors` maps to help create our base.
 
 // Come v6, we'll de-dupe these variables. Until then, for backward compatibility, we keep them to reassign.
-// scss-docs-start utilities-colors
+// scss-docs-start base-colors
 $utilities-colors: $theme-colors-rgb;
-// scss-docs-end utilities-colors
+// scss-docs-end base-colors
 
-// scss-docs-start utilities-text-colors
+// scss-docs-start base-text-colors
 $utilities-text: map-merge(
   $utilities-colors,
   (
@@ -502,9 +502,9 @@ $utilities-text: map-merge(
   )
 );
 $utilities-text-colors: map-loop($utilities-text, rgba-css-var, "$key", "text");
-// scss-docs-end utilities-text-colors
+// scss-docs-end base-text-colors
 
-// scss-docs-start utilities-bg-colors
+// scss-docs-start base-bg-colors
 $utilities-bg: map-merge(
   $utilities-colors,
   (
@@ -514,7 +514,7 @@ $utilities-bg: map-merge(
   )
 );
 $utilities-bg-colors: map-loop($utilities-bg, rgba-css-var, "$key", "bg");
-// scss-docs-end utilities-bg-colors
+// scss-docs-end base-bg-colors
 
 // Links
 //
