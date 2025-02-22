@@ -199,7 +199,11 @@ export async function install() {
       src('theme/admin/dist/assets/fonts/').pipe(symlink('www/assets/css/fonts/'));
     });
 
-  src('vendor/lyrasoft/theme-nexus/').pipe(symlink('theme/nexus'));
+  src('vendor/lyrasoft/theme-nexus/').pipe(symlink('theme/nexus'))
+    .on('end', () => {
+      src('theme/nexus/src/js/').pipe(symlink('www/assets/vendor/nexus/'));
+      // src('theme/admin/dist/assets/fonts/').pipe(symlink('www/assets/css/fonts/'));
+    });
 }
 
 // compile vue

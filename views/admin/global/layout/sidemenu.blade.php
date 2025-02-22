@@ -35,16 +35,16 @@ $root = $app->service(\Lyrasoft\Luna\Services\MenuService::class)
         </li>
     @else
         @if ($menuItem->hasChildren())
-            <li class="nav-item dropdown">
+            <li class="nav-item dropdown {{ $menuItem->isActive(true) ? 'active' : '' }}">
                 <a href="javascript: void(0);" class="nav-link dropdown-toggle {{ $menuItem->isActive(true) ? 'active show' : '' }}"
-                    data-bs-toggle="dropdown"
-                    data-bs-auto-close="false"
+                    uni-ripple
                     role="button"
-                    aria-expanded="false">
+                    aria-expanded="false"
+                >
                     <i class="{{ $menuItem->getIcon() }} fa-fw" style="font-size: 1rem"></i>
                     <span>{{ $menuItem->getTitle() }}</span>
                 </a>
-                <ul class="dropdown-menu {{ $menuItem->isActive(true) ? 'show' : '' }}" aria-expanded="false" style="">
+                <ul class="dropdown-menu collapse {{ $menuItem->isActive(true) ? 'show' : '' }}" aria-expanded="false" style="">
                     @foreach ($menuItem->getChildren() as $childItem)
                         <a href="{{ $childItem->route($nav) }}"
                             class="dropdown-item {{ $childItem->isActive(true) ? 'active' : '' }}">
@@ -55,7 +55,7 @@ $root = $app->service(\Lyrasoft\Luna\Services\MenuService::class)
                 </ul>
             </li>
         @else
-            <li class="nav-item {{ $childItem->isActive(true) ? 'active' : '' }}">
+            <li class="nav-item {{ $menuItem->isActive(true) ? 'active' : '' }}">
                 <a href="{{ $menuItem->route($nav) }}"
                     class="nav-link {{ $menuItem->isActive(true) ? 'active' : '' }}">
                     <i class="{{ $menuItem->getIcon() }} fa-fw" style="font-size: 1rem"></i>

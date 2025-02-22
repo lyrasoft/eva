@@ -63,7 +63,8 @@ $user = $app->service(\Lyrasoft\Luna\User\UserService::class)->getUser();
 
             <div class="d-flex">
                 <div class="ms-1" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Fullscreen">
-                    <button type="button" class="btn header-item noti-icon waves-effect d-flex align-items-center" data-bs-toggle="fullscreen">
+                    <button type="button" class="btn header-item noti-icon waves-effect d-flex align-items-center"
+                        data-bs-toggle="fullscreen">
                         <i class="fa-regular fa-expand"></i>
                     </button>
                 </div>

@@ -38,12 +38,27 @@ $user = $app->service(\Lyrasoft\Luna\User\UserService::class)->getUser();
                     <ul class="navbar-nav">
                         {{-- Dashboard --}}
                         <li class="nav-item">
-                            <a class="nav-link gap-2" href="./">
+                            <a class="nav-link" href="./">
                                 <i class="far fa-dashboard"></i>
                                 <span class="nav-link-title">
                                     Dashboard
                                 </span>
                             </a>
+                        </li>
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#"
+                                data-bs-toggle="dropdown">
+                                <i class="far fa-dashboard"></i>
+                                <span class="nav-link-title">
+                                    Foo
+                                </span>
+                            </a>
+                            <div class="dropdown-menu">
+                                <a href="#" class="dropdown-item">
+                                    Hello
+                                </a>
+                            </div>
                         </li>
                     </ul>
                 </div>
@@ -51,10 +66,31 @@ $user = $app->service(\Lyrasoft\Luna\User\UserService::class)->getUser();
 
             <div class="navbar-nav flex-row order-md-last gap-2">
                 <div class="d-none d-lg-flex gap-2">
+                    {{-- Fullscreen --}}
+                    <div class="nav-item">
+                        <button type="button"
+                            uni-ripple
+                            class="nav-link"
+                            data-bs-toggle="fullscreen"
+                            data-bs-placement="bottom"
+                            title="Fullscreen"
+                        >
+                            <i class="fa-regular fa-expand"></i>
+                        </button>
+                    </div>
+
                     {{-- Preview Button --}}
-                    <a href="?theme=dark" class="nav-link" data-bs-toggle="tooltip" data-bs-placement="bottom" title="See Frontend">
-                        <i class="fa-regular fa-eye"></i>
-                    </a>
+                    <div class="nav-item">
+                        <a href="{{ $nav->to('home') }}"
+                            uni-ripple
+                            class="nav-link"
+                            data-bs-toggle="tooltip"
+                            data-bs-placement="bottom"
+                            title="See Frontend"
+                        >
+                            <i class="fa-regular fa-eye"></i>
+                        </a>
+                    </div>
                 </div>
                 @if ($user->isLogin())
                     <div class="nav-item dropdown">
@@ -64,7 +100,7 @@ $user = $app->service(\Lyrasoft\Luna\User\UserService::class)->getUser();
                                 <div>{{ $user->getName() }}</div>
                             </div>
                         </a>
-                        <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                        <div class="dropdown-menu dropdown-menu-end">
                             <a href="{{ $nav->to('user_edit')->id($user->getId()) }}" class="dropdown-item gap-2">
                                 <i class="far fa-user"></i>
                                 <span>My Profile</span>

@@ -66,6 +66,8 @@ class AdminMiddleware extends AbstractLifecycleMiddleware
         // $this->asset->js('vendor/admin/simplebar/simplebar.min.js');
         // $this->asset->js('vendor/admin/node-waves/waves.min.js');
         // $this->asset->js('js/admin/app.min.js');
+        $this->asset->js('vendor/nexus/libs/ribble/dist/ribble.js');
+        $this->asset->js('js/admin/nexus.js');
         $this->asset->css('css/admin/nexus.min.css');
         // $this->asset->css('css/admin/icons.min.css');
 
