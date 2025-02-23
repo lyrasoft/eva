@@ -119,27 +119,23 @@ export async function images() {
 
 export async function admin() {
   fusion.watch([
-    'vendor/lyrasoft/theme-skote/src/**/*',
+    'vendor/lyrasoft/theme-nexus/src/**/*',
     'resources/assets/scss/admin/**/*.scss'
   ]);
 
   return wait(
     sass(
-      'resources/assets/scss/admin/app.scss',
-      'www/assets/css/admin/app.css'
+      'resources/assets/scss/admin/nexus.scss',
+      'www/assets/css/admin/nexus.css',
+      {
+        sass: {
+          includePaths: [
+            'node_modules',
+            'vendor/lyrasoft/theme-nexus'
+          ]
+        }
+      }
     ),
-    sass(
-      'resources/assets/scss/admin/bootstrap.scss',
-      'www/assets/css/admin/bootstrap.css'
-    ),
-    sass(
-      'resources/assets/scss/admin/icons.scss',
-      'www/assets/css/admin/icons.css'
-    ),
-    babel(
-      'theme/admin/src/assets/js/app.js',
-      'www/assets/js/admin/app.js'
-    )
   );
 }
 
@@ -155,10 +151,9 @@ export async function install() {
     ]
   );
 
-  src('vendor/lyrasoft/theme-skote/').pipe(symlink('theme/admin'))
+  src('vendor/lyrasoft/theme-nexus/').pipe(symlink('theme/nexus'))
     .on('end', () => {
-      src('theme/admin/dist/assets/libs/').pipe(symlink('www/assets/vendor/admin/'));
-      src('theme/admin/dist/assets/fonts/').pipe(symlink('www/assets/css/fonts/'));
+      src('theme/nexus/src/js/').pipe(symlink('www/assets/vendor/nexus/'));
     });
 }
 

@@ -21,12 +21,22 @@ use Windwalker\Core\Language\LangService;
 use Windwalker\Core\Router\Navigator;
 use Windwalker\Core\Router\SystemUri;
 
+// $body = $app->retrieve(\Windwalker\Core\Html\HtmlFrame::class)
+//     ->getBodyElement();
+//
+// $body->setAttribute('data-bs-theme', null);
 ?>
 
 @extends('global.html')
 
 @section('superbody')
-<div id="layout-wrapper" uni-cloak>
+<div class="page" uni-cloak>
+    {{-- Sidebar --}}
+    @section('sidebar')
+        @include('admin.global.layout.sidebar')
+    @show
+
+    <div class="page-wrapper">
     {{-- Header --}}
     @section('header')
         @include('admin.global.layout.header')
@@ -34,25 +44,10 @@ use Windwalker\Core\Router\SystemUri;
 
     {{-- Main Container --}}
     @section('container')
-        {{-- Sidebar --}}
-        @section('sidebar')
-            <div class="vertical-menu">
-                <div data-simplebar class="h-100">
-                    <!--- Sidemenu -->
-                    <div id="sidebar-menu">
-                        <!-- Left Menu Start -->
-                        <ul class="metismenu list-unstyled" id="side-menu">
-                            @include('global.layout.sidemenu')
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        @show
-
     <div class="main-content" style="overflow: visible">
 
         <div class="page-content">
-            <div class="container-fluid">
+            <div class="container-fluid pt-3">
                 @yield('body', 'Body Section')
             </div> <!-- container-fluid -->
         </div>
@@ -62,5 +57,6 @@ use Windwalker\Core\Router\SystemUri;
             @include('admin.global.layout.footer')
         @show
     @show
+    </div>
 </div>
 @stop

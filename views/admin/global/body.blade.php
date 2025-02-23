@@ -24,7 +24,9 @@ use Windwalker\Core\Router\SystemUri;
 
 $htmlFrame = $app->service(\Windwalker\Core\Html\HtmlFrame::class);
 
-$htmlFrame->getBodyElement()->setAttribute('data-sidebar', 'dark');
+$body = $htmlFrame->getBodyElement();
+
+$body->addClass('layout-fluid');
 ?>
 
 @extends('admin.global.body-wrapper')
@@ -34,11 +36,15 @@ $htmlFrame->getBodyElement()->setAttribute('data-sidebar', 'dark');
         @include('admin.global.layout.banner')
     @show
 
-    <section id="content-container" class="">
+    @yield('page-start')
+
+    <section id="content-container" class="page-body">
         @section('content-container')
             @include('@messages')
 
             @yield('content', 'Admin Content')
         @show
     </section>
+
+    @yield('page-end')
 @stop
