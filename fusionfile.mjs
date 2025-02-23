@@ -41,7 +41,15 @@ export async function adminCSS() {
         ...findModules('Admin/**/assets/*.scss'),
         'src/Module/Admin/**/assets/*.scss'
       ],
-      'www/assets/css/admin/main.css'
+      'www/assets/css/admin/main.css',
+      {
+        sass: {
+          includePaths: [
+            'node_modules',
+            'vendor/lyrasoft/theme-nexus'
+          ]
+        }
+      }
     )
   );
 }
