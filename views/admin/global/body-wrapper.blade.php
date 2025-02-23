@@ -21,6 +21,10 @@ use Windwalker\Core\Language\LangService;
 use Windwalker\Core\Router\Navigator;
 use Windwalker\Core\Router\SystemUri;
 
+// $body = $app->retrieve(\Windwalker\Core\Html\HtmlFrame::class)
+//     ->getBodyElement();
+//
+// $body->setAttribute('data-bs-theme', null);
 ?>
 
 @extends('global.html')

@@ -28,7 +28,7 @@ $htmlFrame = $app->service(\Windwalker\Core\Html\HtmlFrame::class);
 
 <!-- start page title -->
 <div class="page-title-box d-flex align-items-center justify-content-between position-sticky py-2 mb-3"
-    style="background-color: var(--bs-body-bg); top: 0; z-index: 4;">
+    style="background-color: var(--bs-body-bg); top: var(--nx-header-height); z-index: 4;">
     @yield('banner-start')
 
     <div class="page-title-box__title">
@@ -55,7 +55,7 @@ $htmlFrame = $app->service(\Windwalker\Core\Html\HtmlFrame::class);
     </div>
 
     <div id="toolbar-offcanvas" class="offcanvas-lg offcanvas-end"
-        style="top: 70px">
+        style="top: var(--nx-header-height);">
         <div class="offcanvas-body">
             @section('admin-toolbar')
                 @include('admin.global.layout.toolbar')

@@ -24,7 +24,7 @@ use Windwalker\Core\Router\Navigator;
 use Windwalker\Core\Router\SystemUri;
 
 ?>
-<aside class="l-sidebar navbar navbar-vertical navbar-expand-lg" data-bs-theme="dark">
+<aside class="l-sidebar navbar navbar-vertical navbar-expand" data-bs-theme="light">
     <div class="container-fluid">
         <button
             class="navbar-toggler"
@@ -39,26 +39,31 @@ use Windwalker\Core\Router\SystemUri;
         </button>
 
         {{-- LOGO --}}
-        <div class="navbar-brand">
+        <div class="navbar-brand" style="height: var(--nx-header-height)">
             {{-- Dark Mode --}}
-            <div class="d-none d-dark-block">
+            <div class="d-light-none d-dark-block">
                 <a href="{{ $nav->to('home') }}">
                     <img class="navbar-brand-image" src="{{ $asset->path('images/logo-cw-h.svg') }}"
-                        alt="LOGO" style="width: auto; height: 35px;">
+                        alt="LOGO" style="width: auto; height: 30px;">
+                    <img class="navbar-brand-icon" src="{{ $asset->path('images/icon.svg') }}"
+                        alt="LOGO" style="width: auto; height: 40px;">
                 </a>
             </div>
 
             {{-- Light Mode --}}
-            <div class="d-none d-light-block">
+            <div class="d-dark-none d-light-block">
                 <a href="{{ $nav->to('home') }}">
                     <img class="navbar-brand-image" src="{{ $asset->path('images/logo-cb-h.svg') }}"
                         alt="LOGO" style="width: auto; height: 35px;">
+                    <img class="navbar-brand-icon" src="{{ $asset->path('images/icon.svg') }}"
+                        alt="LOGO" style="width: auto; height: 45px;">
                 </a>
             </div>
         </div>
 
         {{-- Sidemenu --}}
-        <div class="collapse navbar-collapse l-sidebar-menu" id="sidebar-menu">
+        <div class="collapse navbar-collapse l-sidebar-menu" id="sidebar-menu"
+            data-bs-theme="dark">
             <ul class="navbar-nav nav-pills pt-lg-3">
                 @include('global.layout.sidemenu')
             </ul>

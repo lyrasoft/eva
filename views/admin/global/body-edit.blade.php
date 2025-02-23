@@ -1,5 +1,9 @@
 <?php
 
+declare(strict_types=1);
+
+namespace App\View;
+
 /**
  * Global variables
  * --------------------------------------------------------------
@@ -12,15 +16,16 @@
  * @var $lang      LangService     The language translation service.
  */
 
-declare(strict_types=1);
-
 use Windwalker\Core\Application\AppContext;
 use Windwalker\Core\Asset\AssetService;
 use Windwalker\Core\Attributes\ViewModel;
 use Windwalker\Core\DateTime\ChronosService;
+use Windwalker\Core\Html\HtmlFrame;
 use Windwalker\Core\Language\LangService;
 use Windwalker\Core\Router\Navigator;
 use Windwalker\Core\Router\SystemUri;
+
+$app->retrieve(HtmlFrame::class)->addBodyClass('sidebar-collapsed');
 
 ?>
 

@@ -27,33 +27,41 @@ use Windwalker\Core\Router\SystemUri;
 @extends('global.html')
 
 @section('superbody')
-    <div class="account-pages my-5 pt-sm-5">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-md-8 col-lg-6 col-xl-5">
-                    <div class="card overflow-hidden">
-                        <div class="card-body">
-                            @section('header')
-                                <div class="auth-logo text-center p-4">
-                                    <img style="height: 45px" src="{{ $asset->path('images/logo-cb-h.svg') }}" alt="LOGO">
+    <div class="page">
+        <div class="container container-tight py-5 mt-5">
+            @yield('header')
 
-                                    <h4 class="mt-3 mb-0">後台管理</h4>
-                                </div>
-                            @show
-                            <div class="p-2">
+            <div class="card card-md">
+                @yield('card-start')
 
-                                @section('message')
-                                    @include('@messages')
-                                @show
-
-                                @yield('container', 'Container')
-                            </div>
-
+                <div class="card-body">
+                    @section('logo')
+                        <div class="text-center mb-4">
+                            <a href="{{ $uri->root() }}" target="_blank">
+                                <img style="height: 45px" src="{{ $asset->path('images/logo-cb-h.svg') }}" alt="LOGO">
+                            </a>
                         </div>
-                    </div>
+                    @show
 
+                    @section('card-title')
+                        <div class="text-center mb-4">
+                            <h2 class="h2">
+                                後台管理
+                            </h2>
+                        </div>
+                    @show
+
+                    @section('message')
+                        @include('@messages')
+                    @show
+
+                    @yield('container', 'Container')
                 </div>
+
+                @yield('card-end')
             </div>
+
+            @yield('footer')
         </div>
     </div>
 @stop

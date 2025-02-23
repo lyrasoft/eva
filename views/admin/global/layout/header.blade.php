@@ -26,54 +26,48 @@ $user = $app->service(\Lyrasoft\Luna\User\UserService::class)->getUser();
 ?>
 
 @section('header')
-    <header class="navbar navbar-expand-md d-none d-lg-flex d-print-none">
+    <header class="navbar navbar-expand-md d-print-none position-sticky" style="top: 0; z-index: 5; min-height: var(--nx-header-height)">
         <div class="container-fluid">
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-menu" aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+            {{-- Sidebar Toggler --}}
+            <div class="navbar-nav">
+                <div class="nav-item">
+                    <button class="nav-link" uni-ripple type="button" aria-controls="sidebar-menu" aria-expanded="false" aria-label="Sidebar Toggler"
+                        data-nx-toggle="sidebar">
+                        <i class="far fa-bars"></i>
+                    </button>
+                </div>
+            </div>
 
+            {{-- Collapse Menu --}}
             <div class="collapse navbar-collapse" id="navbar-menu">
                 <div class="d-flex flex-column flex-md-row flex-fill align-items-stretch align-items-md-center">
                     {{-- Menu Start --}}
                     <ul class="navbar-nav">
                         {{-- Dashboard --}}
                         <li class="nav-item">
-                            <a class="nav-link" href="./">
+                            <a class="nav-link" uni-ripple href="{{ $nav->to('home') }}">
                                 <i class="far fa-dashboard"></i>
                                 <span class="nav-link-title">
-                                    Dashboard
+                                    儀表板
                                 </span>
                             </a>
-                        </li>
-
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#"
-                                data-bs-toggle="dropdown">
-                                <i class="far fa-dashboard"></i>
-                                <span class="nav-link-title">
-                                    Foo
-                                </span>
-                            </a>
-                            <div class="dropdown-menu">
-                                <a href="#" class="dropdown-item">
-                                    Hello
-                                </a>
-                            </div>
                         </li>
                     </ul>
                 </div>
             </div>
 
-            <div class="navbar-nav flex-row order-md-last gap-2">
+            <div class="navbar-nav ms-auto flex-row gap-2">
                 <div class="d-none d-lg-flex gap-2">
                     {{-- Fullscreen --}}
-                    <div class="nav-item">
+                    <div class="nav-item"
+                        data-bs-toggle="tooltip"
+                        data-bs-placement="bottom"
+                        title="Fullscreen"
+                    >
                         <button type="button"
                             uni-ripple
                             class="nav-link"
-                            data-bs-toggle="fullscreen"
-                            data-bs-placement="bottom"
-                            title="Fullscreen"
+                            data-nx-toggle="fullscreen"
                         >
                             <i class="fa-regular fa-expand"></i>
                         </button>
@@ -81,12 +75,13 @@ $user = $app->service(\Lyrasoft\Luna\User\UserService::class)->getUser();
 
                     {{-- Preview Button --}}
                     <div class="nav-item">
-                        <a href="{{ $nav->to('home') }}"
+                        <a href="{{ $uri->root() }}"
                             uni-ripple
                             class="nav-link"
                             data-bs-toggle="tooltip"
                             data-bs-placement="bottom"
                             title="See Frontend"
+                            target="_blank"
                         >
                             <i class="fa-regular fa-eye"></i>
                         </a>
@@ -94,7 +89,7 @@ $user = $app->service(\Lyrasoft\Luna\User\UserService::class)->getUser();
                 </div>
                 @if ($user->isLogin())
                     <div class="nav-item dropdown">
-                        <a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle="dropdown" aria-label="Open user menu">
+                        <a href="#" class="nav-link d-flex gap-1 py-0" data-bs-toggle="dropdown" aria-label="Open user menu">
                             <img class="avatar avatar-sm" src="{{ $user->getAvatar() }}" alt="Avatar">
                             <div class="d-none d-xl-block ps-2">
                                 <div>{{ $user->getName() }}</div>
@@ -115,6 +110,11 @@ $user = $app->service(\Lyrasoft\Luna\User\UserService::class)->getUser();
                     </div>
                 @endif
             </div>
+
+            {{-- Toggler --}}
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-menu" aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
         </div>
     </header>
 @show
