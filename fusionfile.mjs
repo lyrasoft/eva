@@ -168,25 +168,6 @@ export async function install() {
 }
 
 // compile vue
-export const vue = parallel(
-  vueFormkitEdit
-);
-export function vueFormkitEdit() {
-  return webpackVueBundle(
-    'resources/assets/vue/entries/formkit-edit.ts',
-    'www/assets/js/formkit-edit/index.js',
-    (config) => {
-      config.resolve.alias = {
-        '@': path.resolve(path.resolve(), './resources/assets/'),
-        '@vue': path.resolve(path.resolve(), './resources/assets/vue/'),
-      };
-      // Exclude Vue
-      config.externals = { vue: 'Vue' };
-      // Use tsconfig.vue.json if exists, default is tsconfig.json
-      config.module.rules[4].options.configFile = 'tsconfig.vue.json';
-      // Override if you need
-    }
-  );
-}
+// export const vue = parallel();
 
-export default parallel(css, js, images, vue);
+export default parallel(css, js, images);
