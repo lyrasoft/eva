@@ -1,0 +1,115 @@
+@import "bootstrap/scss/functions";
+
+$prefix: "bs-";
+
+// Colors
+$blue: #4774f4 !default;
+$indigo: #6610f2 !default;
+$purple: #6f42c1 !default;
+$pink: #d63384 !default;
+$red: #e45b37 !default;
+$orange: #fd7e14 !default;
+$yellow: #ffae1f !default;
+$green: #06b560 !default;
+$cyan: #539bff !default;
+
+// Main Colors
+$primary: $blue !default;
+$info: $cyan !default;
+$warning: $yellow;
+
+// Typography
+$font-google: "Roboto";
+$font-size-base: 1rem;
+$font-size-sm: $font-size-base * .875;
+$font-size-lg: $font-size-base * 1.25;
+
+$line-height-base: 1.5;
+$line-height-sm: 1.25;
+$line-height-lg: 2;
+
+$h1-font-size: $font-size-base * 1.75 !default;
+$h2-font-size: $font-size-base * 1.5 !default;
+$h3-font-size: $font-size-base * 1.25 !default;
+$h4-font-size: $font-size-base * 1.15 !default;
+$h5-font-size: $font-size-base * 1 !default;
+$h6-font-size: $font-size-base * .875 !default;
+
+// Header
+$header-height: 56px;
+
+// Navbar
+$navbar-brand-font-size: $font-size-lg;
+
+// Cards
+$card-border-width: 0;
+$card-box-shadow: 0 0.75rem 1.5rem rgba(18, 38, 63, 0.03);
+$card-spacer-x: 1.25rem;
+$card-spacer-y: 1.25rem;
+
+// Buttons
+$input-btn-font-size-sm: $font-size-sm;
+$input-btn-font-size-lg: $font-size-lg;
+$input-btn-line-height-sm: $line-height-base;
+$input-btn-line-height-lg: $line-height-base;
+
+// Badge
+$badge-color: white;
+
+// Form
+$input-btn-padding-y: .47rem;
+$input-btn-padding-x: .75rem;
+
+$input-btn-padding-y-sm: .25rem;
+$input-btn-padding-x-sm: .5rem;
+
+$input-btn-padding-y-lg: .5rem;
+$input-btn-padding-x-lg: 1rem;
+
+$form-label-font-size: $font-size-base;
+
+// Pagination
+$pagination-padding-x: .75rem;
+
+// Modal
+$modal-header-padding: 1rem;
+
+// Tables
+//$table-th-border-color: var(--#{$prefix}border-color-translucent) !default;
+$table-th-padding-x: .75rem;
+$table-th-padding-y: 0.75rem;
+
+@import "src/tabler/scss/config";
+@import "bootstrap/scss/variables";
+@import "bootstrap/scss/variables-dark";
+
+// Fonts
+$font-family-sans-serif: 'Roboto', 'Inter Var', Inter,  "PingFang TC", "Heiti TC", "微軟正黑體", -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif;
+
+// Badge
+$badge-bg-color: $secondary;
+
+// Sidebar
+$sidebar-width: 250px;
+$sidebar-bg: white;
+$sidebar-nav-item-color: $dark;
+$sidebar-nav-item-active-bg: $primary;
+$sidebar-nav-item-hover-color: $sidebar-nav-item-color;
+$sidebar-nav-item-active-color: color-contrast($sidebar-nav-item-active-bg, $white, $white);
+$sidebar-sub-item-color: $dark;
+$sidebar-sub-item-active-color: $primary;
+$sidebar-sub-item-hover-color: $primary;
+
+// Sidebar - Dark
+$sidebar-dark-bg: #2a3042;
+$sidebar-dark-nav-item-color: #bbc5e8;
+$sidebar-dark-nav-item-hover-color: white;
+$sidebar-dark-nav-item-active-bg: shade-color(#2a3042, 15%);
+$sidebar-dark-nav-item-active-color: color-contrast($sidebar-dark-nav-item-active-bg);
+$sidebar-dark-sub-item-color: #a6b0cf;
+$sidebar-dark-sub-item-active-color: white;
+$sidebar-dark-sub-item-hover-color: white;
+
+:root {
+  --nx-header-height: #{$header-height};
+}
