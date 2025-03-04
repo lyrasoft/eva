@@ -92,13 +92,23 @@ $badge-bg-color: $secondary;
 // Sidebar
 $sidebar-width: 250px;
 $sidebar-bg: white;
+$sidebar-nav-item-color: $dark;
 $sidebar-nav-item-active-bg: $primary;
+$sidebar-nav-item-hover-color: $sidebar-nav-item-color;
+$sidebar-nav-item-active-color: color-contrast($sidebar-nav-item-active-bg, $white, $white);
+$sidebar-sub-item-color: $dark;
+$sidebar-sub-item-active-color: $primary;
+$sidebar-sub-item-hover-color: $primary;
 
 // Sidebar - Dark
 $sidebar-dark-bg: #2a3042;
+$sidebar-dark-nav-item-color: #bbc5e8;
+$sidebar-dark-nav-item-hover-color: white;
 $sidebar-dark-nav-item-active-bg: shade-color(#2a3042, 15%);
-$sidebar-dark-menu-item-color: #a6b0cf;
-$sidebar-dark-menu-item-color: #a6b0cf;
+$sidebar-dark-nav-item-active-color: color-contrast($sidebar-dark-nav-item-active-bg);
+$sidebar-dark-sub-item-color: #a6b0cf;
+$sidebar-dark-sub-item-active-color: white;
+$sidebar-dark-sub-item-hover-color: white;
 
 :root {
   --nx-header-height: #{$header-height};
