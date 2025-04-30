@@ -6,6 +6,9 @@ namespace App\Seeder;
 
 use Lyrasoft\Luna\Access\AccessService;
 use Lyrasoft\Luna\Entity\User;
+use Lyrasoft\TokenCoin\Entity\TokenCoinHistory;
+use Lyrasoft\TokenCoin\Enum\TokenCoinAction;
+use Lyrasoft\TokenCoin\Service\TokenCoinService;
 use Windwalker\Core\Seed\Seeder;
 use Windwalker\Crypt\Hasher\PasswordHasherInterface;
 use Windwalker\Database\DatabaseAdapter;
@@ -20,7 +23,7 @@ use Windwalker\ORM\ORM;
  * @var DatabaseAdapter $db
  */
 $seeder->import(
-    static function (PasswordHasherInterface $password, AccessService $accessService) use ($seeder, $orm, $db) {
+    static function (PasswordHasherInterface $password, AccessService $accessService, TokenCoinService $tokenCoinService) use ($seeder, $orm, $db) {
         $faker = $seeder->faker('zh_TW');
 
         /** @var EntityMapper<User> $mapper */
@@ -47,6 +50,17 @@ $seeder->import(
             $accessService->addRolesToUser($item, $basicRoles);
 
             $seeder->outCounting();
+
+            $tokenCoinService->modifyAndAddHistory(
+                type: 'main',
+                targetId: $item->getId(),
+                action: TokenCoinAction::PLUS,
+                value: 500,
+                // You can modify TokenCoinHistory entity here
+                beforeSave: function (TokenCoinHistory $history) use ($item) {
+                    $history->setNote('init');
+                },
+            );
         }
     }
 );

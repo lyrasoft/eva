@@ -79,6 +79,11 @@ $menu->link('橫幅管理')
     ->to($nav->to('banner_list'))
     ->icon('fal fa-gallery-thumbnails');
 
+// Token Coins
+$menu->link('點數歷史')
+    ->to($nav->to('token_coin_history_list'))
+    ->icon('fa-light fa-ticket');
+
 // Widget
 $menu->link($lang('unicorn.title.grid', title: $lang('luna.widget.title')))
     ->to($nav->to('widget_list'))
