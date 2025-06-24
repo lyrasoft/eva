@@ -30,17 +30,33 @@ $seeder->import(
                 'max_level' => 3,
                 'number' => 30
             ],
+
+            // Portfolio
             'portfolio' => [
                 'max_level' => 1,
                 'number' => 7
             ],
+
+            // Member
             'member' => [
                 'max_level' => 1,
                 'number' => 7
             ],
+
+            // Banner
             'banner' => [
                 'max_level' => 1,
                 'number' => 3
+            ],
+
+            // Events
+            'event' => [
+                'max_level' => 1,
+                'number' => 10,
+            ],
+            'venue' => [
+                'max_level' => 1,
+                'number' => 5,
             ],
         ];
 

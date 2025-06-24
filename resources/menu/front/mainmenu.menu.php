@@ -46,3 +46,6 @@ $menu->registerChildren(
         );
     }
 );
+
+$menu->link('活動', $nav->to('event_stage_list'))
+    ->icon('fal fa-calendar');

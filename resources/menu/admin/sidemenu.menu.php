@@ -84,6 +84,33 @@ $menu->link('點數歷史')
     ->to($nav->to('token_coin_history_list'))
     ->icon('fa-light fa-ticket');
 
+$menu->link('活動', '#')
+    ->icon('fal fa-calendar');
+
+$menu->registerChildren(
+    function (MenuBuilder $menu) use ($nav, $lang) {
+        $menu->link('場館管理')
+            ->to($nav->to('venue_list'))
+            ->icon('fal fa-house-flag');
+
+        $menu->link('活動分類')
+            ->to($nav->to('category_list')->var('type', 'event'))
+            ->icon('fal fa-sitemap');
+
+        $menu->link('活動管理')
+            ->to($nav->to('event_list'))
+            ->icon('fal fa-calendar-days');
+
+        $menu->link('報名者管理')
+            ->to($nav->to('event_attend_list'))
+            ->icon('fal fa-users');
+
+        $menu->link('報名訂單管理')
+            ->to($nav->to('event_order_list'))
+            ->icon('fal fa-files');
+    }
+);
+
 // Widget
 $menu->link($lang('unicorn.title.grid', title: $lang('luna.widget.title')))
     ->to($nav->to('widget_list'))

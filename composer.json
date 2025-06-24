@@ -44,7 +44,8 @@
         "lyrasoft/feedback": "dev-main",
         "windwalker/framework": "dev-master",
         "lyrasoft/theme-nexus": "^1.0",
-        "lyrasoft/token-coin": "dev-main"
+        "lyrasoft/token-coin": "dev-main",
+        "lyrasoft/event-booking": "dev-main"
     },
     "require-dev": {
         "nunomaduro/collision": "^7.8||^8.0",
