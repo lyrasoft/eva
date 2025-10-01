@@ -1,5 +1,6 @@
 import { useFusion } from '@windwalker-io/fusion-next';
 import { defineConfig } from 'vite';
+import { resolve } from 'node:path';
 
 export default defineConfig(({ mode }) => {
   return {
@@ -12,7 +13,10 @@ export default defineConfig(({ mode }) => {
     css: {
       preprocessorOptions: {
         scss: {
-          silenceDeprecations: ['mixed-decls', 'color-functions', 'global-builtin', 'import']
+          silenceDeprecations: ['mixed-decls', 'color-functions', 'global-builtin', 'import'],
+          loadPaths: [
+            resolve('./vendor/lyrasoft/theme-nexus/'),
+          ],
         },
       }
     },

@@ -2,18 +2,18 @@
 @import "src/tabler/scss/core";
 
 // Override
-@import "vendor/lyrasoft/theme-nexus/src/scss/base/colors";
+@import "src/scss/base/colors";
 
-@import "vendor/lyrasoft/theme-nexus/src/scss/layout/body";
-@import "vendor/lyrasoft/theme-nexus/src/scss/layout/header";
-@import "vendor/lyrasoft/theme-nexus/src/scss/layout/sidebar";
-@import "vendor/lyrasoft/theme-nexus/src/scss/layout/banner";
-@import "vendor/lyrasoft/theme-nexus/src/scss/layout/footer";
+@import "src/scss/layout/body";
+@import "src/scss/layout/header";
+@import "src/scss/layout/sidebar";
+@import "src/scss/layout/banner";
+@import "src/scss/layout/footer";
 
-@import "vendor/lyrasoft/theme-nexus/src/scss/components/alert";
-@import "vendor/lyrasoft/theme-nexus/src/scss/components/navbar";
-@import "vendor/lyrasoft/theme-nexus/src/scss/components/buttons";
-@import "vendor/lyrasoft/theme-nexus/src/scss/components/dropdown";
-@import "vendor/lyrasoft/theme-nexus/src/scss/components/tables";
-@import "vendor/lyrasoft/theme-nexus/src/scss/components/nav";
-@import "vendor/lyrasoft/theme-nexus/src/scss/components/modal";
+@import "src/scss/components/alert";
+@import "src/scss/components/navbar";
+@import "src/scss/components/buttons";
+@import "src/scss/components/dropdown";
+@import "src/scss/components/tables";
+@import "src/scss/components/nav";
+@import "src/scss/components/modal";

@@ -36,7 +36,8 @@
         "symfony/var-dumper": "^6.0||^7.0||^8.0",
         "asika32764/pinyin": "^1.2",
         "lyrasoft/backup": "^2.0",
-        "lyrasoft/theme-nexus": "^1.0"
+        "lyrasoft/theme-nexus": "^1.0",
+        "symfony/polyfill-php85": "^1.33"
     },
     "require-dev": {
         "windwalker/framework": "dev-master"
@@ -54,7 +55,7 @@
         ],
         "post-autoload-dump": [
             "@php windwalker pkg:postinstall || true",
-            "@php windwalker pkg:install lyrasoft/toolkit --tag ide -f --no-details || true",
+            "@php windwalker pkg:install lyrasoft/toolkit --tag ide -f --details 2 || true",
             "@php windwalker cache:clear renderer"
         ],
         "env": [

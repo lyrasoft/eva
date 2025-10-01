@@ -57,7 +57,9 @@ export function css() {
       .parseBlades(
         findModules('Admin/**/*.blade.php'),
         findModules('views/**/*.blade.php'),
-      )
+      ),
+    //Nexus
+    fusion.css('resources/assets/scss/admin/nexus.scss', 'css/admin/nexus.css'),
   ];
 }
 
@@ -97,7 +99,12 @@ export function images() {
 export function install() {
   return installVendors(
     [
-      '@fortawesome/fontawesome-free'
+      '@fortawesome/fontawesome-pro',
+      'wowjs',
+      'animate.css',
+      'jarallax',
+      'swiper',
+      'youtube-background',
     ]
   );
 }

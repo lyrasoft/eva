@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Module\Admin;
 
+use Lyrasoft\Banner\BannerPackage;
+use Lyrasoft\Contact\ContactPackage;
 use Lyrasoft\Luna\LunaPackage;
 use Lyrasoft\Luna\Script\FontAwesomeScript;
 use Psr\Http\Message\ResponseInterface;
@@ -40,7 +42,6 @@ class AdminMiddleware extends AbstractLifecycleMiddleware
 
         // Unicorn
         $this->unicornScript->init('@vite/src/admin/main.ts');
-        // $this->unicornScript->systemJS();
 
         // Font Awesome
         $this->fontAwesomeScript->cssFont(
@@ -51,7 +52,7 @@ class AdminMiddleware extends AbstractLifecycleMiddleware
         // Theme
         $this->asset->js('vendor/nexus/libs/ribble/dist/ribble.js');
         $this->asset->js('vendor/nexus/nexus.js');
-        $this->asset->css('css/admin/nexus.min.css');
+        $this->asset->css('@vite/scss/admin/nexus.scss');
 
         // Main
         $this->asset->css('@vite/scss/admin/main.scss');
