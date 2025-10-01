@@ -5,19 +5,16 @@ declare(strict_types=1);
 namespace App\Migration;
 
 use Lyrasoft\Luna\Entity\Article;
-use Windwalker\Core\Console\ConsoleApplication;
-use Windwalker\Core\Migration\Migration;
+use Windwalker\Core\Migration\AbstractMigration;
+use Windwalker\Core\Migration\MigrateDown;
+use Windwalker\Core\Migration\MigrateUp;
 use Windwalker\Database\Schema\Schema;
 
-/**
- * Migration UP: 2021110708050001_ArticleInit.
- *
- * @var Migration $mig
- * @var ConsoleApplication $app
- */
-$mig->up(
-    static function () use ($mig) {
-        $mig->createTable(
+return new /** 2021110708050001_ArticleInit */ class extends AbstractMigration {
+    #[MigrateUp]
+    public function up(): void
+    {
+        $this->createTable(
             Article::class,
             function (Schema $schema) {
                 $schema->primary('id')->comment('Primary Key');
@@ -47,13 +44,10 @@ $mig->up(
             }
         );
     }
-);
 
-/**
- * Migration DOWN.
- */
-$mig->down(
-    static function () use ($mig) {
-        $mig->dropTables(Article::class);
+    #[MigrateDown]
+    public function down(): void
+    {
+        $this->dropTables(Article::class);
     }
-);
+};

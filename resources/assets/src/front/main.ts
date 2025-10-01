@@ -1,6 +1,15 @@
-import '@unicorn/unicorn.js';
-import '@unicorn/ui/ui-bootstrap5.js';
+import ('bootstrap');
+import { App, defineJsModules } from '@windwalker-io/core/app';
+import { pushUnicornToGlobal, useUIBootstrap5, useUnicorn, useUnicornPhpAdapter } from '@windwalker-io/unicorn-next';
 
-u.use(UIBootstrap5.UIBootstrap5);
+const app = new App(defineJsModules());
 
-export default u;
+const u = useUnicorn();
+
+await useUIBootstrap5(true, true);
+
+useUnicornPhpAdapter();
+
+pushUnicornToGlobal();
+
+export { app as default, u };

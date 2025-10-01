@@ -53,7 +53,7 @@ class FrontMiddleware extends AbstractLifecycleMiddleware
         $this->lang->loadAll('ini');
 
         // Unicorn
-        $this->unicornScript->init('js/front/main.js');
+        $this->unicornScript->init('@vite/src/front/main.ts');
 
         // Font Awesome
         $this->fontAwesomeScript->cssFont(
@@ -61,16 +61,16 @@ class FrontMiddleware extends AbstractLifecycleMiddleware
         );
 
         // Bootstrap
-        $this->asset->css('css/front/bootstrap.min.css');
-        $this->asset->js('vendor/bootstrap/dist/js/bootstrap.bundle.min.js');
+        $this->asset->css('@vite/scss/front/main.scss');
+        // $this->asset->js('vendor/bootstrap/dist/js/bootstrap.bundle.min.js');
 
         // Main
-        $this->asset->css('css/front/main.css');
+        // $this->asset->css('css/front/main.css');
 
         // Metadata
         $coreConfig = $this->app->service(ConfigService::class)->getConfig('core');
 
-        $this->htmlFrame->setFavicon($this->asset->path('images/favicon.png'));
+        $this->htmlFrame->setFavicon('@vite/images/favicon.png');
         $this->htmlFrame->setSiteName('Windwalker');
         $this->htmlFrame->setDescription('Windwalker Site Description.');
         // $this->htmlFrame->setCoverImages($this->asset->root('...'));
@@ -80,13 +80,6 @@ class FrontMiddleware extends AbstractLifecycleMiddleware
         }
     }
 
-    /**
-     * postExecute
-     *
-     * @param ResponseInterface $response
-     *
-     * @return  mixed
-     */
     protected function postProcess(ResponseInterface $response): void
     {
     }

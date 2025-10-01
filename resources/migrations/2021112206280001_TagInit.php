@@ -6,19 +6,16 @@ namespace App\Migration;
 
 use Lyrasoft\Luna\Entity\Tag;
 use Lyrasoft\Luna\Entity\TagMap;
-use Windwalker\Core\Console\ConsoleApplication;
-use Windwalker\Core\Migration\Migration;
+use Windwalker\Core\Migration\AbstractMigration;
+use Windwalker\Core\Migration\MigrateDown;
+use Windwalker\Core\Migration\MigrateUp;
 use Windwalker\Database\Schema\Schema;
 
-/**
- * Migration UP: 2021112206280001_TagInit.
- *
- * @var Migration          $mig
- * @var ConsoleApplication $app
- */
-$mig->up(
-    static function () use ($mig) {
-        $mig->createTable(
+return new /** 2021112206280001_TagInit */ class extends AbstractMigration {
+    #[MigrateUp]
+    public function up(): void
+    {
+        $this->createTable(
             Tag::class,
             function (Schema $schema) {
                 $schema->primary('id')->comment('Primary Key');
@@ -37,26 +34,25 @@ $mig->up(
                 $schema->addIndex('created_by');
             }
         );
-        $mig->createTable(
+
+        $this->createTable(
             TagMap::class,
             function (Schema $schema) {
-                $schema->integer('tag_id')->comment('Tag ID');
-                $schema->integer('target_id')->comment('Target ID');
                 $schema->varchar('type')->comment('Type');
+                $schema->integer('target_id');
+                $schema->integer('tag_id');
 
-                $schema->addIndex('tag_id');
                 $schema->addIndex('target_id');
                 $schema->addIndex('type');
+                $schema->addIndex('tag_id');
+                $schema->addPrimaryKey(['target_id', 'type', 'tag_id']);
             }
         );
     }
-);
 
-/**
- * Migration DOWN.
- */
-$mig->down(
-    static function () use ($mig) {
-        $mig->dropTables(Tag::class, TagMap::class);
+    #[MigrateDown]
+    public function down(): void
+    {
+        $this->dropTables(Tag::class, TagMap::class);
     }
-);
+};
