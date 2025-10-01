@@ -58,6 +58,16 @@ $seeder->import(
                 'max_level' => 1,
                 'number' => 5,
             ],
+
+            // ShopGO
+            'product' => [
+                'max_level' => 2,
+                'number' => 30,
+            ],
+            'attribute' => [
+                'max_level' => 1,
+                'number' => 10,
+            ],
         ];
 
         /** @var NestedSetMapper<Category> $mapper */

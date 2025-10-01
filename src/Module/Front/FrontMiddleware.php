@@ -7,6 +7,7 @@ namespace App\Module\Front;
 use Lyrasoft\Banner\BannerPackage;
 use Lyrasoft\Contact\ContactPackage;
 use Lyrasoft\EventBooking\EventBookingPackage;
+use Lyrasoft\Favorite\FavoritePackage;
 use Lyrasoft\Luna\LunaPackage;
 use Lyrasoft\Luna\Script\FontAwesomeScript;
 use Lyrasoft\Luna\Services\ConfigService;
@@ -52,6 +53,7 @@ class FrontMiddleware extends AbstractLifecycleMiddleware
         $this->lang->loadAllFromVendor(BannerPackage::class, 'ini');
         $this->lang->loadAllFromVendor(ContactPackage::class, 'ini');
         $this->lang->loadAllFromVendor(EventBookingPackage::class, 'ini');
+        $this->lang->loadAllFromVendor(FavoritePackage::class, 'ini');
 
         $this->lang->loadAll('ini');
 
