@@ -36,7 +36,7 @@
         "symfony/var-dumper": "^6.0||^7.0||^8.0",
         "asika32764/pinyin": "^1.2",
         "lyrasoft/backup": "^2.0",
-        "lyrasoft/theme-nexus": "^1.0",
+        "lyrasoft/theme-nexus": "dev-main",
         "symfony/polyfill-php85": "^1.33"
     },
     "require-dev": {

@@ -1,4 +1,3 @@
-import 'bootstrap';
 import { App, defineJsModules } from '@windwalker-io/core/app';
 import {
   pushUnicornToGlobal,
@@ -6,6 +5,7 @@ import {
   useUnicorn,
   useUnicornPhpAdapter
 } from '@windwalker-io/unicorn-next';
+import { useNexusTheme } from '~theme/nexus/src/ts/nexus';
 
 const app = new App(defineJsModules());
 
@@ -16,5 +16,7 @@ await useUIBootstrap5(true, true);
 useUnicornPhpAdapter();
 
 pushUnicornToGlobal();
+
+useNexusTheme();
 
 export { app as default, u };

@@ -10,7 +10,7 @@
         "upgrade": "yarn up '**' -R"
     },
     "dependencies": {
-        "@fortawesome/fontawesome-pro": "^6.0",
+        "@fortawesome/fontawesome-pro": "^7.0",
         "@popperjs/core": "^2.11.8",
         "@windwalker-io/core": "^4.0",
         "@windwalker-io/fusion-next": "^0.1.0",
@@ -19,11 +19,13 @@
         "animate.css": "^4.1.1",
         "bootstrap": "^5.0.0",
         "jarallax": "^1.12.8",
+        "sass-embedded": "^1.93.2",
         "swiper": "^8.3.2",
         "vite": "^7.1.7",
         "wowjs": "^1.1.3"
     },
     "devDependencies": {
+        "@types/bootstrap": "^5.2.10",
         "@types/node": "^24.6.1",
         "@types/sortablejs": "^1",
         "axios": "^1.12.2",

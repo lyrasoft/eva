@@ -1,4 +1,4 @@
-import fusion from '@windwalker-io/fusion-next';
+import fusion, { callbackAfterBuild, symlink } from '@windwalker-io/fusion-next';
 import {
   cloneAssets,
   cssModulize,
@@ -13,12 +13,14 @@ import { resolve } from 'node:path';
 fusion.outDir('www/assets/');
 
 // Aliases
-fusion.alias('~/', resolve('./resources/assets/src/'));
+fusion.alias('~', resolve('./resources/assets/src'));
+fusion.alias('~vendor', resolve('./www/assets/vendor'));
+fusion.alias('~theme', resolve('./theme'));
 fusion.alias('vue', 'vue/dist/vue.esm-bundler.js');
 
 // Fusion Options
 fusion.overrideOptions({
-  chunkNameObfuscation: false
+  chunkNameObfuscation: true
 });
 
 // Watch all blade files for changes
@@ -97,16 +99,22 @@ export function images() {
 }
 
 export function install() {
-  return installVendors(
-    [
-      '@fortawesome/fontawesome-pro',
-      'wowjs',
-      'animate.css',
-      'jarallax',
-      'swiper',
-      'youtube-background',
-    ]
-  );
+  return [
+    installVendors(
+      [
+        '@fortawesome/fontawesome-pro',
+        'wowjs',
+        'animate.css',
+        'jarallax',
+        'swiper',
+        'youtube-background',
+      ],
+    ),
+    callbackAfterBuild(async () => {
+      await symlink('vendor/lyrasoft/theme-nexus/', 'theme/nexus/');
+      await symlink('theme/nexus/src/js/', 'www/assets/vendor/nexus/');
+    })
+  ];
 }
 
 export default [js, css, images];

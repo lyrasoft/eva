@@ -18,10 +18,10 @@ export default defineConfig(({ mode }) => {
             resolve('./vendor/lyrasoft/theme-nexus/'),
           ],
         },
-      }
+      },
     },
     plugins: [
       useFusion(() => import('./fusionfile')),
-    ]
+    ],
   };
 });

@@ -48,10 +48,8 @@ class AdminMiddleware extends AbstractLifecycleMiddleware
             FontAwesomeScript::PRO | FontAwesomeScript::DEFAULT_SET | FontAwesomeScript::LIGHT
         );
 
-        // Bootstrap
         // Theme
         $this->asset->js('vendor/nexus/libs/ribble/dist/ribble.js');
-        $this->asset->js('vendor/nexus/nexus.js');
         $this->asset->css('@vite/scss/admin/nexus.scss');
 
         // Main
