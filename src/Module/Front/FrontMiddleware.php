@@ -60,7 +60,7 @@ class FrontMiddleware extends AbstractLifecycleMiddleware
             FontAwesomeScript::PRO | FontAwesomeScript::DEFAULT_SET | FontAwesomeScript::LIGHT
         );
 
-        // Main CSS
+        // Main
         $this->asset->css('@vite/scss/front/main.scss');
 
         // Metadata

@@ -3,8 +3,9 @@ import {
   cloneAssets,
   cssModulize,
   findModules,
-  installVendors,
+  findPackages,
   globalAssets,
+  installVendors,
   jsModulize
 } from '@windwalker-io/core/next';
 import { resolve } from 'node:path';
@@ -49,7 +50,7 @@ export function css() {
       )
       .parseBlades(
         findModules('Front/**/*.blade.php'),
-        findModules('views/**/*.blade.php'),
+        findPackages('views/**/*.blade.php'),
       ),
     // Admin
     cssModulize('resources/assets/scss/admin/main.scss', 'css/admin/main.css')
@@ -58,7 +59,7 @@ export function css() {
       )
       .parseBlades(
         findModules('Admin/**/*.blade.php'),
-        findModules('views/**/*.blade.php'),
+        findPackages('views/**/*.blade.php'),
       ),
     //Nexus
     fusion.css('resources/assets/scss/admin/nexus.scss', 'css/admin/nexus.css'),
@@ -76,7 +77,7 @@ export function js() {
       )
       .parseBlades(
         findModules('Front/**/*.blade.php'),
-        findModules('views/**/*.blade.php'),
+        findPackages('views/**/*.blade.php'),
       ),
     jsModulize('resources/assets/src/admin/main.ts', 'js/admin/main.js')
       .stage('admin')
@@ -85,7 +86,7 @@ export function js() {
       )
       .parseBlades(
         findModules('Admin/**/*.blade.php'),
-        findModules('views/**/*.blade.php'),
+        findPackages('views/**/*.blade.php'),
       ),
   ];
 }

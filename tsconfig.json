@@ -10,13 +10,23 @@
     "exclude": [
         "node_modules/**/*"
     ],
-    "types": ["reflect-metadata"],
+    "types": [
+        "reflect-metadata"
+    ],
     "compilerOptions": {
         "paths": {
-            "~/*": ["./resources/assets/src/*"],
-            "~vue/*": ["./resources/assets/src/vue/*"],
-            "~vendor/*": ["./www/assets/vendor/*"],
-            "~theme/*": ["./theme/*"],
+            "~/*": [
+                "./resources/assets/src/*"
+            ],
+            "~vue/*": [
+                "./resources/assets/src/vue/*"
+            ],
+            "~vendor/*": [
+                "./www/assets/vendor/*"
+            ],
+            "~theme/*": [
+                "./theme/*"
+            ]
         }
     }
 }
