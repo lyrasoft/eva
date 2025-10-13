@@ -32,7 +32,6 @@
         "lyrasoft/contact": "^1.0",
         "symfony/mailer": "^6.0||^7.0||^8.0",
         "dragonmantank/cron-expression": "^3.3",
-        "masterminds/html5": "^2.8",
         "symfony/var-dumper": "^6.0||^7.0||^8.0",
         "asika32764/pinyin": "^1.2",
         "lyrasoft/backup": "^2.0",

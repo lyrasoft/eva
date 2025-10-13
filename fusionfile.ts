@@ -64,11 +64,6 @@ export function install() {
     installVendors(
       [
         '@fortawesome/fontawesome-pro',
-        'wowjs',
-        'animate.css',
-        'jarallax',
-        'swiper',
-        'youtube-background',
       ],
     ),
     callbackAfterBuild(async () => {
