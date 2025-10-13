@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use Symfony\Component\Dotenv\Dotenv;
 
 define('WINDWALKER_ROOT', dirname(__DIR__));
@@ -20,8 +22,12 @@ const WINDWALKER_LANGUAGES  = WINDWALKER_RESOURCES . DIRECTORY_SEPARATOR . 'lang
 
 $dotenv = new Dotenv();
 
+if (is_file($env = WINDWALKER_ROOT . '/.env.base')) {
+    $dotenv->overload($env);
+}
+
 if (is_file($env = WINDWALKER_ROOT . '/.env')) {
-    $dotenv->load($env);
+    $dotenv->overload($env);
 }
 
 if (is_file($env = WINDWALKER_ROOT . '/.env.local')) {

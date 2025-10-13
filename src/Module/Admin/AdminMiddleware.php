@@ -33,13 +33,6 @@ class AdminMiddleware extends AbstractLifecycleMiddleware
     ) {
     }
 
-    /**
-     * prepareExecute
-     *
-     * @param ServerRequestInterface $request
-     *
-     * @return  mixed
-     */
     protected function preprocess(ServerRequestInterface $request): void
     {
         $this->lang->loadAllFromVendor(UnicornPackage::class, 'ini');
@@ -53,35 +46,24 @@ class AdminMiddleware extends AbstractLifecycleMiddleware
         $this->lang->loadAll('ini');
 
         // Unicorn
-        $this->unicornScript->init('js/admin/main.js');
+        $this->unicornScript->init('@vite/src/admin/main.ts');
 
         // Font Awesome
         $this->fontAwesomeScript->cssFont(
             FontAwesomeScript::PRO | FontAwesomeScript::DEFAULT_SET | FontAwesomeScript::LIGHT
         );
 
-        // Bootstrap
-        $this->asset->js('vendor/bootstrap/dist/js/bootstrap.bundle.min.js');
-
         // Theme
         $this->asset->js('vendor/nexus/libs/ribble/dist/ribble.js');
-        $this->asset->js('vendor/nexus/nexus.js');
-        $this->asset->css('css/admin/nexus.min.css');
+        $this->asset->css('@vite/scss/admin/nexus.scss');
 
         // Main
-        $this->asset->css('css/admin/main.css');
+        $this->asset->css('@vite/scss/admin/main.scss');
 
-        // Meta
-        $this->htmlFrame->setFavicon($this->asset->path('images/admin/favicon.png'));
+        // HtmlFrame
+        $this->htmlFrame->setFavicon('@vite/images/admin/favicon.png');
     }
 
-    /**
-     * postExecute
-     *
-     * @param ResponseInterface $response
-     *
-     * @return  mixed
-     */
     protected function postProcess(ResponseInterface $response): void
     {
     }

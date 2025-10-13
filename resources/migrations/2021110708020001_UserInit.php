@@ -11,22 +11,20 @@ use Lyrasoft\Luna\Entity\UserRoleMap;
 use Lyrasoft\Luna\Entity\UserSocial;
 use Lyrasoft\Luna\User\UserService;
 use Unicorn\Enum\BasicState;
-use Windwalker\Core\Console\ConsoleApplication;
-use Windwalker\Core\Migration\Migration;
+use Windwalker\Core\Migration\AbstractMigration;
+use Windwalker\Core\Migration\MigrateDown;
+use Windwalker\Core\Migration\MigrateUp;
+use Windwalker\Crypt\Hasher\PasswordHasherInterface;
 use Windwalker\Database\Schema\Schema;
 use Windwalker\ORM\NestedSetMapper;
 use Windwalker\ORM\ORM;
 
-/**
- * Migration UP: 2021110708010001_UserInit.
- *
- * @var Migration          $mig
- * @var ConsoleApplication $app
- */
-$mig->up(
-    static function (UserService $userService, ORM $orm) use ($mig) {
+return new /** 2021110708020001_UserInit */ class extends AbstractMigration {
+    #[MigrateUp]
+    public function up(UserService $userService, ORM $orm, PasswordHasherInterface $hasher): void
+    {
         // User
-        $mig->createTable(
+        $this->createTable(
             User::class,
             function (Schema $schema) {
                 $schema->primary('id');
@@ -35,8 +33,8 @@ $mig->up(
                 $schema->varchar('name')->comment('Name');
                 $schema->varchar('avatar')->comment('Avatar');
                 $schema->varchar('password')->length(1024)->comment('Password');
-                $schema->tinyint('enabled')->comment('0: disabled, 1: enabled');
-                $schema->tinyint('verified')->comment('0: unverified, 1: verified');
+                $schema->bool('enabled')->comment('0: disabled, 1: enabled');
+                $schema->bool('verified')->comment('0: unverified, 1: verified');
                 $schema->varchar('activation')->comment('Activation code.');
                 $schema->tinyint('receive_mail')->defaultValue(0)->length(1);
                 $schema->varchar('reset_token')->comment('Reset Token');
@@ -52,7 +50,7 @@ $mig->up(
         );
 
         // User Group
-        $mig->createTable(
+        $this->createTable(
             UserRole::class,
             function (Schema $schema) {
                 $schema->primary('id')->comment('Primary Key');
@@ -74,7 +72,7 @@ $mig->up(
             }
         );
 
-        $mig->createTable(
+        $this->createTable(
             UserRoleMap::class,
             function (Schema $schema) {
                 $schema->integer('user_id');
@@ -88,7 +86,7 @@ $mig->up(
         );
 
         // User Social
-        $mig->createTable(
+        $this->createTable(
             UserSocial::class,
             function (Schema $schema) {
                 $schema->integer('user_id')->comment('User ID');
@@ -102,7 +100,7 @@ $mig->up(
         );
 
         // Session
-        $mig->createTable(
+        $this->createTable(
             Session::class,
             function (Schema $schema) {
                 $schema->varchar('id')->length(192);
@@ -122,40 +120,37 @@ $mig->up(
         $root = $roleMapper->createRootIfNotExist();
 
         $role = new UserRole();
-        $role->setTitle('Super User');
-        $role->setState(BasicState::PUBLISHED);
+        $role->title = 'Super User';
+        $role->state = BasicState::PUBLISHED;
 
         $roleMapper->setPosition($role, $root->getPrimaryKeyValue());
         $roleMapper->createOne($role);
 
         $user = new User();
 
-        $user->setUsername('admin');
-        $user->setEmail('webadmin@simular.co');
-        $user->setName('Simular');
-        $user->setPassword(password_hash('1234', PASSWORD_DEFAULT));
-        $user->setAvatar('https://avatars.githubusercontent.com/u/13175487#.jpg');
-        $user->setEnabled(true);
-        $user->setVerified(true);
-        $user->setReceiveMail(true);
+        $user->username = 'admin';
+        $user->email = 'webadmin@simular.co';
+        $user->name = 'Simular';
+        $user->password = $hasher->hash('1234');
+        $user->avatar = 'https://avatars.githubusercontent.com/u/13175487#.jpg';
+        $user->enabled = true;
+        $user->verified = true;
+        $user->receiveMail = true;
 
         /** @var User $user */
         $user = $orm->createOne(User::class, $user);
 
         $map = new UserRoleMap();
-        $map->setUserId($user->getId());
-        $map->setRoleId('superuser');
+        $map->userId = $user->getId();
+        $map->roleId = 'superuser';
 
         $orm->createOne($map::class, $map);
     }
-);
 
-/**
- * Migration DOWN.
- */
-$mig->down(
-    static function () use ($mig) {
-        $mig->dropTables(
+    #[MigrateDown]
+    public function down(): void
+    {
+        $this->dropTables(
             User::class,
             UserSocial::class,
             UserRole::class,
@@ -163,4 +158,4 @@ $mig->down(
             Session::class
         );
     }
-);
+};

@@ -6,19 +6,16 @@ namespace App\Migration;
 
 use Lyrasoft\Luna\Entity\Page;
 use Lyrasoft\Luna\Entity\PageTemplate;
-use Windwalker\Core\Console\ConsoleApplication;
-use Windwalker\Core\Migration\Migration;
+use Windwalker\Core\Migration\AbstractMigration;
+use Windwalker\Core\Migration\MigrateDown;
+use Windwalker\Core\Migration\MigrateUp;
 use Windwalker\Database\Schema\Schema;
 
-/**
- * Migration UP: 2021111715240001_PageInit.
- *
- * @var Migration          $mig
- * @var ConsoleApplication $app
- */
-$mig->up(
-    static function () use ($mig) {
-        $mig->createTable(
+return new /** 2021111715240001_PageInit */ class extends AbstractMigration {
+    #[MigrateUp]
+    public function up(): void
+    {
+        $this->createTable(
             Page::class,
             function (Schema $schema) {
                 $schema->primary('id')->comment('Primary Key');
@@ -46,7 +43,7 @@ $mig->up(
             }
         );
 
-        $mig->createTable(
+        $this->createTable(
             PageTemplate::class,
             function (Schema $schema) {
                 $schema->primary('id')->comment('Primary Key');
@@ -63,13 +60,10 @@ $mig->up(
             }
         );
     }
-);
 
-/**
- * Migration DOWN.
- */
-$mig->down(
-    static function () use ($mig) {
-        $mig->dropTables(Page::class, PageTemplate::class);
+    #[MigrateDown]
+    public function down(): void
+    {
+        $this->dropTables(Page::class, PageTemplate::class);
     }
-);
+};

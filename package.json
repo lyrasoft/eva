@@ -2,37 +2,26 @@
     "name": "windwalker",
     "private": true,
     "scripts": {
-        "build": "cross-env gulp",
-        "build:dev": "cross-env NODE_ENV=development gulp",
-        "build:prod": "cross-env NODE_ENV=production gulp",
-        "watch": "cross-env NODE_ENV=development gulp --watching=1",
-        "watch:reload": "cross-env NODE_ENV=development gulp --watching=1 --livereload=1",
-        "postinstall": "yarn build install",
+        "dev": "vite",
+        "build": "vite build --mode development",
+        "build:prod": "vite build",
+        "watch": "vite build --watch --mode development",
+        "postinstall": "yarn build -- install",
         "upgrade": "yarn up '**' -R"
     },
     "dependencies": {
-        "@fortawesome/fontawesome-pro": "^6.0",
+        "@fortawesome/fontawesome-pro": "^7.0",
+        "@lyrasoft/luna": "file:./vendor/lyrasoft/luna/assets",
+        "@popperjs/core": "^2.11.8",
         "@windwalker-io/core": "^4.0",
-        "@windwalker-io/fusion": "^1.0",
+        "@windwalker-io/fusion-next": "^0.1.0",
         "@windwalker-io/srp": "^1.0",
-        "@windwalker-io/unicorn": "^1.0",
+        "@windwalker-io/unicorn-next": "^0.1.0",
         "animate.css": "^4.1.1",
         "bootstrap": "^5.0.0",
-        "codemirror": "^5.63.3",
         "cross-env": "^7.0.3",
-        "gulp": "^4.0",
-        "jarallax": "^1.12.8",
-        "jquery": "^3.6.0",
-        "sortablejs": "^1.14.0",
-        "swiper": "^8.3.2",
-        "tinymce-i18n": "^22.5.2",
-        "wowjs": "^1.1.3",
-        "youtube-background": "^1.0.14"
-    },
-    "resolutions": {
-        "micromatch": "^4.0.8",
-        "postcss": "^8.4.31",
-        "sass": "1.77.6"
+        "swiper": "^8.0||^9.0||^10.0||^11.0||^12.0",
+        "vite": "^7.1.7"
     },
     "//": {
         "workspaces": [
@@ -40,26 +29,5 @@
             "vendor/windwalker/core/assets/*"
         ]
     },
-    "devDependencies": {
-        "@types/gulp": "^4",
-        "@types/systemjs": "^6.13.5",
-        "@vue/compiler-sfc": "^3.4.38",
-        "@vue/tsconfig": "^0.5.1",
-        "babel-loader": "^9.1.3",
-        "bootstrap-vue-next": "^0.24.8",
-        "css-loader": "^7.1.2",
-        "file-loader": "^6.2.0",
-        "postcss-loader": "^8.1.1",
-        "sass-loader": "^16.0.0",
-        "style-loader": "^4.0.0",
-        "ts-loader": "^9.5.1",
-        "typescript": "^5.5.4",
-        "vue": "^3.0",
-        "vue-draggable-plus": "^0.5.3",
-        "vue-loader": "^16.0",
-        "vue-style-loader": "^4.1.3",
-        "webpack": "^5.93.0",
-        "webpack-comment-remover-loader": "^0.0.3"
-    },
-    "packageManager": "yarn@4.6.0+sha512.5383cc12567a95f1d668fbe762dfe0075c595b4bfff433be478dbbe24e05251a8e8c3eb992a986667c1d53b6c3a9c85b8398c35a960587fbd9fa3a0915406728"
+    "packageManager": "yarn@4.9.4+sha512.7b1cb0b62abba6a537b3a2ce00811a843bea02bcf53138581a6ae5b1bf563f734872bd47de49ce32a9ca9dcaff995aa789577ffb16811da7c603dcf69e73750b"
 }

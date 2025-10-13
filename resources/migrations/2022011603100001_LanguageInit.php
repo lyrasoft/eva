@@ -5,22 +5,18 @@ declare(strict_types=1);
 namespace App\Migration;
 
 use Lyrasoft\Luna\Entity\Language;
-use Windwalker\Core\Console\ConsoleApplication;
-use Windwalker\Core\Migration\Migration;
+use Windwalker\Core\Migration\AbstractMigration;
+use Windwalker\Core\Migration\MigrateDown;
+use Windwalker\Core\Migration\MigrateUp;
 use Windwalker\Database\Schema\Schema;
-use Windwalker\ORM\ORM;
 
 use function Windwalker\fs;
 
-/**
- * Migration UP: 2022011603100001_LanguageInit.
- *
- * @var Migration $mig
- * @var ConsoleApplication $app
- */
-$mig->up(
-    static function (ORM $orm) use ($mig) {
-        $mig->createTable(
+return new /** 2022011603100001_LanguageInit */ class extends AbstractMigration {
+    #[MigrateUp]
+    public function up(): void
+    {
+        $this->createTable(
             Language::class,
             function (Schema $schema) {
                 $schema->primary('id')->comment('Primary Key');
@@ -42,22 +38,19 @@ $mig->up(
             }
         );
 
-        $mapper = $orm->mapper(Language::class);
+        $mapper = $this->orm->mapper(Language::class);
         $languages = fs(__DIR__ . '/data/languages.json')->read()->jsonDecode();
 
         foreach ($languages as $language) {
             $mapper->createOne($language);
 
-            $mig->outCounting();
+            $this->printCounting();
         }
     }
-);
 
-/**
- * Migration DOWN.
- */
-$mig->down(
-    static function () use ($mig) {
-        $mig->dropTables(Language::class);
+    #[MigrateDown]
+    public function down(): void
+    {
+        $this->dropTables(Language::class);
     }
-);
+};
