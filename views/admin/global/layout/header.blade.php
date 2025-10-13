@@ -102,7 +102,7 @@ $user = $app->service(\Lyrasoft\Luna\User\UserService::class)->getUser();
                             </a>
 
                             <a href="javascript:void(0)" class="dropdown-item link-danger gap-2"
-                                onclick="u.form().post('{{ $nav->to('logout') }}')">
+                                onclick="u.logout('{{ $nav->to('logout') }}')">
                                 <i class="far fa-power-off"></i>
                                 <span>Logout</span>
                             </a>

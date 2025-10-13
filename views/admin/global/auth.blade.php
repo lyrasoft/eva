@@ -38,7 +38,7 @@ use Windwalker\Core\Router\SystemUri;
                     @section('logo')
                         <div class="text-center mb-4">
                             <a href="{{ $uri->root() }}" target="_blank">
-                                <img style="height: 45px" src="{{ $asset->path('images/logo-cb-h.svg') }}" alt="LOGO">
+                                <img style="height: 45px" src="{{ $asset->path('@vite/images/logo-cb-h.svg') }}" alt="LOGO">
                             </a>
                         </div>
                     @show
