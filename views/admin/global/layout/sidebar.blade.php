@@ -43,9 +43,9 @@ use Windwalker\Core\Router\SystemUri;
             {{-- Dark Mode --}}
             <div class="d-light-none d-dark-block">
                 <a href="{{ $nav->to('home') }}">
-                    <img class="navbar-brand-image" src="{{ $asset->path('images/logo-cw-h.svg') }}"
+                    <img class="navbar-brand-image" src="{{ $asset->path('@vite/images/logo-cw-h.svg') }}"
                         alt="LOGO" style="width: auto; height: 30px;">
-                    <img class="navbar-brand-icon" src="{{ $asset->path('images/icon.svg') }}"
+                    <img class="navbar-brand-icon" src="{{ $asset->path('@vite/images/icon.svg') }}"
                         alt="LOGO" style="width: auto; height: 40px;">
                 </a>
             </div>
@@ -53,9 +53,9 @@ use Windwalker\Core\Router\SystemUri;
             {{-- Light Mode --}}
             <div class="d-dark-none d-light-block">
                 <a href="{{ $nav->to('home') }}">
-                    <img class="navbar-brand-image" src="{{ $asset->path('images/logo-cb-h.svg') }}"
+                    <img class="navbar-brand-image" src="{{ $asset->path('@vite/images/logo-cb-h.svg') }}"
                         alt="LOGO" style="width: auto; height: 30px;">
-                    <img class="navbar-brand-icon" src="{{ $asset->path('images/icon.svg') }}"
+                    <img class="navbar-brand-icon" src="{{ $asset->path('@vite/images/icon.svg') }}"
                         alt="LOGO" style="width: auto; height: 40px;">
                 </a>
             </div>
