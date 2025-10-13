@@ -45,10 +45,11 @@
         "lyrasoft/event-booking": "dev-main",
         "lyrasoft/shopgo": "dev-master",
         "lyrasoft/sequence": "^1.0",
-        "lyrasoft/theme-nexus": "^1.1",
+        "lyrasoft/theme-nexus": "dev-main",
         "symfony/polyfill-php85": "^1.33"
     },
     "require-dev": {
+        "windwalker/framework": "dev-master",
         "phpoffice/phpspreadsheet": "^2.2",
         "myclabs/php-enum": "*"
     },

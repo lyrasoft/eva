@@ -1,5 +1,6 @@
 <?php
 
+use App\Enum\BannerType;
 use Lyrasoft\Banner\BannerPackage;
 use Windwalker\Core\Attributes\ConfigModule;
 
@@ -11,7 +12,7 @@ static fn() => [
     'widget' => [
         'upload_profile' => 'image',
     ],
-    'type_enum' => null,
+    'type_enum' => BannerType::class,
     'video_enabled' => true,
     'types' => [
         '_default' => [

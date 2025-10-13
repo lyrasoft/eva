@@ -11,19 +11,16 @@ use Lyrasoft\EventBooking\Entity\EventOrder;
 use Lyrasoft\EventBooking\Entity\EventPlan;
 use Lyrasoft\EventBooking\Entity\EventStage;
 use Lyrasoft\EventBooking\Entity\Venue;
-use Windwalker\Core\Console\ConsoleApplication;
-use Windwalker\Core\Migration\Migration;
+use Windwalker\Core\Migration\AbstractMigration;
+use Windwalker\Core\Migration\MigrateDown;
+use Windwalker\Core\Migration\MigrateUp;
 use Windwalker\Database\Schema\Schema;
 
-/**
- * Migration UP: 2024070509030001_EventInit.
- *
- * @var Migration          $mig
- * @var ConsoleApplication $app
- */
-$mig->up(
-    static function () use ($mig) {
-        $mig->createTable(
+return new /** 2024070509030001_EventInit */ class extends AbstractMigration {
+    #[MigrateUp]
+    public function up(): void
+    {
+        $this->createTable(
             Event::class,
             function (Schema $schema) {
                 $schema->primary('id');
@@ -51,7 +48,7 @@ $mig->up(
             }
         );
 
-        $mig->createTable(
+        $this->createTable(
             EventStage::class,
             function (Schema $schema) {
                 $schema->primary('id');
@@ -83,7 +80,7 @@ $mig->up(
             }
         );
 
-        $mig->createTable(
+        $this->createTable(
             EventMemberMap::class,
             function (Schema $schema) {
                 $schema->varchar('type');
@@ -96,7 +93,7 @@ $mig->up(
             }
         );
 
-        $mig->createTable(
+        $this->createTable(
             EventPlan::class,
             function (Schema $schema) {
                 $schema->primary('id');
@@ -123,7 +120,7 @@ $mig->up(
             }
         );
 
-        $mig->createTable(
+        $this->createTable(
             EventOrder::class,
             function (Schema $schema) {
                 $schema->primary('id');
@@ -166,7 +163,7 @@ $mig->up(
             }
         );
 
-        $mig->createTable(
+        $this->createTable(
             EventAttend::class,
             function (Schema $schema) {
                 $schema->primary('id');
@@ -204,7 +201,7 @@ $mig->up(
             }
         );
 
-        $mig->createTable(
+        $this->createTable(
             Venue::class,
             function (Schema $schema) {
                 $schema->primary('id');
@@ -228,19 +225,16 @@ $mig->up(
             }
         );
     }
-);
 
-/**
- * Migration DOWN.
- */
-$mig->down(
-    static function () use ($mig) {
-        $mig->dropTables(Event::class);
-        $mig->dropTables(EventStage::class);
-        $mig->dropTables(EventMemberMap::class);
-        $mig->dropTables(EventPlan::class);
-        $mig->dropTables(EventOrder::class);
-        $mig->dropTables(EventAttend::class);
-        $mig->dropTables(Venue::class);
+    #[MigrateDown]
+    public function down(): void
+    {
+        $this->dropTables(Event::class);
+        $this->dropTables(EventStage::class);
+        $this->dropTables(EventMemberMap::class);
+        $this->dropTables(EventPlan::class);
+        $this->dropTables(EventOrder::class);
+        $this->dropTables(EventAttend::class);
+        $this->dropTables(Venue::class);
     }
-);
+};

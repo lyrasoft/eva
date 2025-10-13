@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\View;
 
+use Lyrasoft\Banner\Entity\Banner;
+use Lyrasoft\Banner\Repository\BannerRepository;
 use Lyrasoft\Feedback\Script\FeedbackScript;
 use Windwalker\Core\Asset\AssetService;
 use Windwalker\Core\DateTime\ChronosService;
@@ -27,27 +29,25 @@ use Windwalker\Core\Router\SystemUri;
  */
 
 $app->retrieve(FeedbackScript::class)->ratingButton();
+
+$bannerRepo = $app->retrieve(BannerRepository::class);
+
+/** @var Banner[] $banners */
+$banners = $bannerRepo->getBannersByType('home')->all();
 ?>
 
 @extends('global.body')
 
 @push('macro')
-<style data-macro type="text/scss">
-</style>
+    <style data-macro type="text/scss">
+    </style>
 
-<script data-macro="home" lang="ts" type="module">
+    <script data-macro="home" lang="ts" type="module">
 </script>
 @endpush
 
 @section('content')
-    <!-- Main jumbotron for a primary marketing message or call to action -->
-    <div class="bg-light py-5">
-        <div class="container">
-            <h1>Hello, world!</h1>
-            <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
-            <p><a href="#" class="btn btn-primary btn-lg" role="button">Learn more &raquo;</a></p>
-        </div>
-    </div>
+    <x-swiper-banners :banners="$banners"></x-swiper-banners>
 
     <div>
         <x-rating-button

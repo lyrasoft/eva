@@ -11,7 +11,7 @@
     },
     "dependencies": {
         "@fortawesome/fontawesome-pro": "^7.0",
-        "@lyrasoft/luna": "file:./vendor/lyrasoft/luna/assets",
+        "@lyrasoft/luna": "portal:./vendor/lyrasoft/luna/assets",
         "@popperjs/core": "^2.11.8",
         "@windwalker-io/core": "^4.0",
         "@windwalker-io/fusion-next": "^0.1.0",
@@ -21,7 +21,8 @@
         "bootstrap": "^5.0.0",
         "cross-env": "^7.0.3",
         "swiper": "^8.0||^9.0||^10.0||^11.0||^12.0",
-        "vite": "^7.1.7"
+        "vite": "^7.1.7",
+        "youtube-background": "^1.1.8"
     },
     "//": {
         "workspaces": [

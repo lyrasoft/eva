@@ -12,19 +12,16 @@ declare(strict_types=1);
 namespace App\Migration;
 
 use Lyrasoft\Sequence\Entity\Sequence;
-use Windwalker\Core\Console\ConsoleApplication;
-use Windwalker\Core\Migration\Migration;
+use Windwalker\Core\Migration\AbstractMigration;
+use Windwalker\Core\Migration\MigrateDown;
+use Windwalker\Core\Migration\MigrateUp;
 use Windwalker\Database\Schema\Schema;
 
-/**
- * Migration UP: 2022030307270001_SequenceInit.
- *
- * @var Migration          $mig
- * @var ConsoleApplication $app
- */
-$mig->up(
-    static function () use ($mig) {
-        $mig->createTable(
+return new /** 2022030307270001_SequenceInit */ class extends AbstractMigration {
+    #[MigrateUp]
+    public function up(): void
+    {
+        $this->createTable(
             Sequence::class,
             function (Schema $schema) {
                 $schema->varchar('type');
@@ -37,13 +34,10 @@ $mig->up(
             }
         );
     }
-);
 
-/**
- * Migration DOWN.
- */
-$mig->down(
-    static function () use ($mig) {
-        $mig->dropTables(Sequence::class);
+    #[MigrateDown]
+    public function down(): void
+    {
+        $this->dropTables(Sequence::class);
     }
-);
+};

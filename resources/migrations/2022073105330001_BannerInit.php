@@ -12,19 +12,16 @@ declare(strict_types=1);
 namespace App\Migration;
 
 use Lyrasoft\Banner\Entity\Banner;
-use Windwalker\Core\Console\ConsoleApplication;
-use Windwalker\Core\Migration\Migration;
+use Windwalker\Core\Migration\AbstractMigration;
+use Windwalker\Core\Migration\MigrateDown;
+use Windwalker\Core\Migration\MigrateUp;
 use Windwalker\Database\Schema\Schema;
 
-/**
- * Migration UP: 2022073105330001_BannerInit.
- *
- * @var Migration          $mig
- * @var ConsoleApplication $app
- */
-$mig->up(
-    static function () use ($mig) {
-        $mig->createTable(
+return new /** 2022073105330001_BannerInit */ class extends AbstractMigration {
+    #[MigrateUp]
+    public function up(): void
+    {
+        $this->createTable(
             Banner::class,
             function (Schema $schema) {
                 $schema->primary('id');
@@ -52,13 +49,10 @@ $mig->up(
             }
         );
     }
-);
 
-/**
- * Migration DOWN.
- */
-$mig->down(
-    static function () use ($mig) {
-        $mig->dropTables(Banner::class);
+    #[MigrateDown]
+    public function down(): void
+    {
+        $this->dropTables(Banner::class);
     }
-);
+};
