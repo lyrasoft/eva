@@ -40,7 +40,6 @@
         "symfony/polyfill-php85": "^1.33"
     },
     "require-dev": {
-        "windwalker/framework": "dev-master"
     },
     "scripts": {
         "post-create-project-cmd": [

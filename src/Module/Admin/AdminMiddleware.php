@@ -54,7 +54,6 @@ class AdminMiddleware extends AbstractLifecycleMiddleware
 
         // Main
         $this->asset->css('@vite/scss/admin/main.scss');
-        // $this->asset->css('css/admin/main.css');
 
         // HtmlFrame
         $this->htmlFrame->setFavicon('@vite/images/admin/favicon.png');
