@@ -5,7 +5,7 @@ import {
   useUnicorn,
   useUnicornPhpAdapter
 } from '@windwalker-io/unicorn-next';
-import { useNexusTheme } from '~theme/nexus/src/ts/nexus';
+import { useNexusTheme } from '@lyrasoft/nexus';
 import { useLuna } from '@lyrasoft/luna';
 
 const app = new App(defineJsModules());
