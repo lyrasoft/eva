@@ -8,7 +8,6 @@ fusion.outDir('www/assets/');
 // Aliases
 fusion.alias('~', resolve('./resources/assets/src'));
 fusion.alias('~vendor', resolve('./www/assets/vendor'));
-fusion.alias('~theme', resolve('./theme'));
 fusion.alias('vue', 'vue/dist/vue.esm-bundler.js');
 
 // Fusion Options
