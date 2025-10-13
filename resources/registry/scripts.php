@@ -20,7 +20,7 @@ return [
     // Prepare assets and install dependencies
     'prepare' => [
         'yarn install',
-        'yarn build default admin',
+        'yarn build',
     ],
 
     // Prepare assets and install dependencies
