@@ -11,7 +11,7 @@
     },
     "dependencies": {
         "@fortawesome/fontawesome-pro": "^7.0",
-        "@lyrasoft/luna": "file:./vendor/lyrasoft/luna/assets",
+        "@lyrasoft/luna": "portal:./vendor/lyrasoft/luna/assets",
         "@lyrasoft/nexus": "portal:./vendor/lyrasoft/theme-nexus",
         "@popperjs/core": "^2.11.8",
         "@windwalker-io/core": "^4.0",
