@@ -31,7 +31,7 @@ $user = $app->service(UserService::class)->getUser();
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
         <div class="container">
             <a class="navbar-brand" href="{{ $uri->path() }}">
-                <img src="{{ $asset->path('images/logo-cw-h.svg') }}"
+                <img src="{{ $asset->path('@vite/images/logo-cw-h.svg') }}"
                     alt="LOGO"
                     style="height: 27px;"
                 />

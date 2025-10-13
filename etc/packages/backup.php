@@ -12,10 +12,11 @@ return [
                 'dump_database' => true,
 
                 'database' => [
-                    'host' => env('DATABASE_HOST'),
-                    'user' => env('DATABASE_USER'),
-                    'pass' => env('DATABASE_PASSWORD'),
-                    'dbname' => env('DATABASE_NAME'),
+                    'connection' => 'local',
+                    // 'host' => env('DATABASE_HOST'),
+                    // 'user' => env('DATABASE_USER'),
+                    // 'pass' => env('DATABASE_PASSWORD'),
+                    // 'dbname' => env('DATABASE_NAME'),
                 ],
 
                 'dump_files' => true,
