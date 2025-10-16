@@ -61,6 +61,7 @@ class FrontMiddleware extends AbstractLifecycleMiddleware
         );
 
         // Main
+        $this->asset->css('@vite/scss/front/bootstrap.scss');
         $this->asset->css('@vite/scss/front/main.scss');
 
         // Metadata

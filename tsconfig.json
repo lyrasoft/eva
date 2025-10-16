@@ -16,6 +16,9 @@
     "compilerOptions": {
         "paths": {
             "~/*": [
+                "./resources/assets/*"
+            ],
+            "~js/*": [
                 "./resources/assets/src/*"
             ],
             "~vendor/*": [
