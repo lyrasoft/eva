@@ -41,7 +41,7 @@ $seeder->import(
         $locations = $orm->findList(
             Location::class,
             [
-                'type' => [LocationType::STATE(), LocationType::CITY()]
+                'type' => [LocationType::STATE, LocationType::CITY]
             ]
         )->all()->dump();
 
@@ -51,27 +51,25 @@ $seeder->import(
             $location = $faker->randomElement($locations);
             [$country, $state, $city] = $locationService->getPathFromLocation($location);
 
-            $item->setUserId((int) $faker->randomElement($userIds));
-            $item->setLocationId($location->getId());
-            $item->setFirstname($faker->firstName());
-            $item->setLastname($faker->lastName());
-            $item->setName($item->getFirstname() . ' ' . $item->getLastname());
-            $item->setEmail($faker->email());
-            $item->setCountry($country->getTitle());
-            $item->setState($state->getTitle());
-            $item->setCompany($faker->company());
-            $item->setAddress1($faker->address());
-            $item->setAddress2('');
-            $item->setCity('');
-            $item->setPostcode((string) random_int(100, 9999));
-            $item->setPhone($faker->phoneNumber());
-            $item->setMobile('09' . random_int(10000000, 99999999));
-            $item->setVat((string) random_int(10000000, 99999999));
-            $item->setDetails([]);
-            $item->setEnabled(true);
-            $item->setFormatted(
-                $locationService->formatAddress($item, true)
-            );
+            $item->userId = (int) $faker->randomElement($userIds);
+            $item->locationId = $location->getId();
+            $item->firstname = $faker->firstName();
+            $item->lastname = $faker->lastName();
+            $item->name = $item->firstname . ' ' . $item->lastname;
+            $item->email = $faker->email();
+            $item->country = $country->title;
+            $item->state = $state->title;
+            $item->company = $faker->company();
+            $item->address1 = $faker->address();
+            $item->address2 = '';
+            $item->city = '';
+            $item->postcode = (string) random_int(100, 9999);
+            $item->phone = $faker->phoneNumber();
+            $item->mobile = '09' . random_int(10000000, 99999999);
+            $item->vat = (string) random_int(10000000, 99999999);
+            $item->details = [];
+            $item->enabled = true;
+            $item->formatted = $locationService->formatAddress($item, true);
 
             $mapper->createOne($item);
 

@@ -71,7 +71,7 @@ $mig->up(
         // $mapper = $orm->mapper(Location::class);
         // $mapper->createRootIfNotExist(
         //     [
-        //         'type' => LocationType::ROOT(),
+        //         'type' => LocationType::ROOT,
         //     ]
         // );
 

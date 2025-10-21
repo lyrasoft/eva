@@ -73,59 +73,55 @@ $seeder->import(
 
             $startDay = chronos($faker->randomElement(['-5 days', '-10 days', '-15 days', '-50days']));
 
-            $item->setCategoryId((int) $faker->randomElement($categoryIds));
+            $item->categoryId = (int) $faker->randomElement($categoryIds);
             // $item->setPrimaryVariantId();
-            $item->setModel('PD-' . Str::padLeft((string) $i, 7, '0'));
-            $item->setTitle(
-                Utf8String::ucwords(
+            $item->model = 'PD-' . Str::padLeft((string) $i, 7, '0');
+            $item->title = Utf8String::ucwords(
                     $faker->sentence(1)
-                )
-            );
-            $item->setAlias(SlugHelper::safe($item->getTitle()));
-            $item->setOriginPrice((float) $faker->randomElement([500, 1000, 1500, 2000, 2500, 3000, 3500]));
-            $item->setSafeStock(random_int(3, 5));
-            $item->setIntro($faker->paragraph(2));
-            $item->setDescription($faker->paragraph(5));
-            $item->setMeta(
-                [
-                    'title' => $item->getTitle(),
-                    'description' => $item->getDescription(),
+                );
+            $item->alias = SlugHelper::safe($item->title);
+            $item->originPrice = (float) $faker->randomElement([500, 1000, 1500, 2000, 2500, 3000, 3500]);
+            $item->safeStock = random_int(3, 5);
+            $item->intro = $faker->paragraph(2);
+            $item->description = $faker->paragraph(5);
+            $item->meta = [
+                    'title' => $item->title,
+                    'description' => $item->description,
                     'keywords' => implode(',', $faker->words()),
-                ]
-            );
-            $item->setCanAttach((bool) $faker->optional(0.1, 0)->passthrough(1));
+                ];
+            $item->canAttach = (bool) $faker->optional(0.1, 0)->passthrough(1);
             // $item->setVariants();
-            $item->setOrdering((int) $i);
+            $item->ordering = (int) $i;
             // $item->setHide();
-            $item->setState($faker->optional(0.7, 0)->passthrough(1));
+            $item->state = $faker->optional(0.7, 0)->passthrough(1);
             // $item->setSearchIndex();
             // $item->setShippings();
-            $item->setCreated($faker->dateTimeThisYear());
-            $item->setModified($item->getCreated()->modify('+10days'));
-            $item->setCreatedBy(1);
-            $item->setHits(random_int(1, 9999));
-            $item->setParams([]);
+            $item->created = $faker->dateTimeThisYear();
+            $item->modified = $item->created->modify('+10days');
+            $item->createdBy = 1;
+            $item->hits = random_int(1, 9999);
+            $item->params = [];
 
             if ($haveStartDay === 1) {
-                $item->setPublishUp($startDay);
-                $item->setPublishDown($startDay->modify('+25 days'));
+                $item->publishUp = $startDay;
+                $item->publishDown = $startDay->modify('+25 days');
             }
 
             $item = $mapper->createOne($item);
 
             $catelogIds = array_filter(
                 $categoryIds,
-                static fn($v) => $v !== $item->getCategoryId()
+                static fn($v) => $v !== $item->categoryId
             );
 
             // Primary category
             $map = $mapMapper->createEntity();
 
-            $map->setType('product');
-            $map->setTargetId($item->getId());
-            $map->setCategoryId($item->getCategoryId());
-            $map->setPrimary(true);
-            $map->setOrdering(1);
+            $map->type = 'product';
+            $map->targetId = $item->id;
+            $map->categoryId = $item->categoryId;
+            $map->primary = true;
+            $map->ordering = 1;
 
             $mapMapper->createOne($map);
 
@@ -133,33 +129,33 @@ $seeder->import(
             foreach ($faker->randomElements($catelogIds, 3) as $k => $catelogId) {
                 $map = $mapMapper->createEntity();
 
-                $map->setType('product');
-                $map->setTargetId($item->getId());
-                $map->setCategoryId((int) $catelogId);
-                $map->setOrdering($k + 2);
+                $map->type = 'product';
+                $map->targetId = $item->id;
+                $map->categoryId = (int) $catelogId;
+                $map->ordering = $k + 2;
 
                 $mapMapper->createOne($map);
             }
 
             // Attributes
-            [$attributes] = $productAttributeService->getAttributesAndGroupsByCategoryId($item->getCategoryId());
+            [$attributes] = $productAttributeService->getAttributesAndGroupsByCategoryId($item->categoryId);
 
             /** @var ProductAttribute[] $attributes */
             foreach ($attributes as $attribute) {
                 $attrMap = new ProductAttributeMap();
-                $attrMap->setAttributeId($attribute->getId());
-                $attrMap->setKey($attribute->getKey());
-                $attrMap->setProductId($item->getId());
-                $attrMap->setLocale('*');
+                $attrMap->attributeId = $attribute->id;
+                $attrMap->key = $attribute->key;
+                $attrMap->productId = $item->id;
+                $attrMap->locale = '*';
 
-                if ($attribute->getType() === ProductAttributeType::BOOL()) {
-                     $attrMap->setValue((string) random_int(0, 1));
-                } elseif ($attribute->getType() === ProductAttributeType::TEXT()) {
-                    $attrMap->setValue($faker->sentence());
-                } elseif ($attribute->getType() === ProductAttributeType::SELECT()) {
-                    $options = $attribute->getOptions()->dump();
+                if ($attribute->type === ProductAttributeType::BOOL) {
+                     $attrMap->value = (string) random_int(0, 1);
+                } elseif ($attribute->type === ProductAttributeType::TEXT) {
+                    $attrMap->value = $faker->sentence();
+                } elseif ($attribute->type === ProductAttributeType::SELECT) {
+                    $options = $attribute->options->dump();
                     $option = $faker->randomElement($options);
-                    $attrMap->setValue($option->value);
+                    $attrMap->value = $option->value;
                 }
 
                 $orm->createOne(ProductAttributeMap::class, $attrMap);
@@ -167,37 +163,35 @@ $seeder->import(
 
             // Main Variant
             $variant = new ProductVariant();
-            $variant->setProductId($item->getId());
-            $variant->setTitle($item->getTitle());
-            $variant->setHash('');
-            $variant->setPrimary(true);
-            $variant->setSku('PRD' . Str::padLeft((string) $i, 7, '0'));
-            $variant->setStockQuantity(random_int(1, 30));
-            $variant->setSubtract(true);
-            $variant->setPrice(random_int(1, 40) * 100);
-            $variant->getDimension()
+            $variant->productId = $item->id;
+            $variant->title = $item->title;
+            $variant->hash = '';
+            $variant->primary = true;
+            $variant->sku = 'PRD' . Str::padLeft((string) $i, 7, '0');
+            $variant->stockQuantity = random_int(1, 30);
+            $variant->subtract = true;
+            $variant->price = random_int(1, 40) * 100;
+            $variant->dimension
                 ->setWidth(random_int(20, 100))
                 ->setHeight(random_int(20, 100))
                 ->setLength(random_int(20, 100))
                 ->setWeight(random_int(20, 100));
-            $variant->setOutOfStockText('');
-            $variant->setCover($faker->unsplashImage(800, 800));
-            $variant->setImages(
-                array_map(
+            $variant->outOfStockText = '';
+            $variant->cover = $faker->unsplashImage(800, 800);
+            $variant->images = array_map(
                     static fn($image) => [
                         'url' => $image,
                         'uid' => uid(),
                     ],
                     $faker->unsplashImages(5, 800, 800)
-                )
-            );
-            $variant->setState(1);
+                );
+            $variant->state = 1;
 
             $searchIndexes = [];
 
             $mainVariant = $orm->createOne(ProductVariant::class, $variant);
 
-            $searchIndexes[] = $mainVariant->getSearchIndex();
+            $searchIndexes[] = $mainVariant->searchIndex;
 
             // Sub Variants
             $currentFeatures = [];
@@ -207,13 +201,13 @@ $seeder->import(
                 $feature = clone $feature;
 
                 /** @var ListOption[] $options */
-                $options = $faker->randomElements($feature->getOptions()->dump(), 3);
+                $options = $faker->randomElements($feature->options->dump(), 3);
 
                 foreach ($options as $option) {
-                    $option->setParentId($feature->getId());
+                    $option->setParentId($feature->id);
                 }
 
-                $feature->setOptions($options);
+                $feature->options = $options;
 
                 $currentFeatures[] = $feature;
             }
@@ -232,43 +226,39 @@ $seeder->import(
                     ->map(static fn ($option) => $option['uid'])
                     ->dump();
 
-                $variant->setProductId($item->getId());
-                $variant->setTitle((string) $options->as(Collection::class)->column('text')->implode(' / '));
-                $variant->setHash(VariantService::hash($optUids, $seed));
-                $variant->setPrimary(false);
-                $variant->setSku('PRD' . Str::padLeft((string) $i, 7, '0') . '-' . ($h + 1));
-                $variant->setStockQuantity(random_int(1, 30));
-                $variant->setSubtract(true);
-                $variant->setPrice(
-                    filter(
-                        $mainVariant->getPrice() + (random_int(-10, 10) * 100),
+                $variant->productId = $item->id;
+                $variant->title = (string) $options->as(Collection::class)->column('text')->implode(' / ');
+                $variant->hash = VariantService::hash($optUids, $seed);
+                $variant->primary = false;
+                $variant->sku = 'PRD' . Str::padLeft((string) $i, 7, '0') . '-' . ($h + 1);
+                $variant->stockQuantity = random_int(1, 30);
+                $variant->subtract = true;
+                $variant->price = filter(
+                        $mainVariant->price + (random_int(-10, 10) * 100),
                         'range(min: 0, max: 100)'
-                    )
-                );
-                $variant->getDimension()
+                    );
+                $variant->dimension
                     ->setWidth(random_int(20, 100))
                     ->setHeight(random_int(20, 100))
                     ->setLength(random_int(20, 100))
                     ->setWeight(random_int(20, 100));
-                $variant->setOutOfStockText('');
-                $variant->setCover($faker->unsplashImage(800, 800));
-                $variant->setImages(
-                    array_map(
+                $variant->outOfStockText = '';
+                $variant->cover = $faker->unsplashImage(800, 800);
+                $variant->images = array_map(
                         static fn($image) => [
                             'url' => $image,
                             'uid' => uid(),
                         ],
                         $faker->unsplashImages(3, 800, 800)
-                    )
-                );
-                $variant->setOptions($options);
-                $variant->setState(1);
+                    );
+                $variant->options = $options;
+                $variant->state = 1;
 
-                $variant->setParams(compact('seed'));
+                $variant->params = compact('seed');
 
                 $orm->createOne(ProductVariant::class, $variant);
 
-                $searchIndexes[] = $variant->getSearchIndex();
+                $searchIndexes[] = $variant->searchIndex;
 
                 $seeder->outCounting();
             }
@@ -276,10 +266,10 @@ $seeder->import(
             $mapper->updateWhere(
                 [
                     'variants' => count($variantGroups),
-                    'primary_variant_id' => $mainVariant->getId(),
+                    'primary_variant_id' => $mainVariant->id,
                     'search_index' => implode('|', array_filter($searchIndexes)),
                 ],
-                ['id' => $item->getId()]
+                ['id' => $item->id]
             );
         }
     }
@@ -305,13 +295,13 @@ $sortGroup = static function (array $features, array $parentGroup = []) use (&$s
         return [];
     }
 
-    $currentOptions = $feature->getOptions();
+    $currentOptions = $feature->options;
 
     $returnValue = [];
 
     foreach ($currentOptions as $option) {
         $group = $parentGroup;
-        $option['parentId'] = $feature->getId();
+        $option['parentId'] = $feature->id;
 
         $group[] = new ListOption($option);
 

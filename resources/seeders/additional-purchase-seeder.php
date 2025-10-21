@@ -44,7 +44,7 @@ $seeder->import(
         /** @var Collection<Product> $attachmentProducts */
         /** @var Collection<Product> $targetProducts */
         [$attachmentProducts, $targetProducts] = $products->partition(
-            fn (Product $product) => $product->canAttach()
+            fn (Product $product) => $product->canAttach
         );
 
         /** @var ProductVariant[][] $variantGroups */
@@ -55,14 +55,14 @@ $seeder->import(
         foreach ($attachmentProducts as $a => $attachmentProduct) {
             $item = $mapper->createEntity();
 
-            $item->setTitle($attachmentProduct->getTitle());
-            $item->setState(1);
-            $item->setOrdering($a);
+            $item->title = $attachmentProduct->title;
+            $item->state = 1;
+            $item->ordering = $a;
 
             $ap = $mapper->createOne($item);
 
             /** @var Collection<ProductVariant> $variants */
-            $variants = $variantGroups[$attachmentProduct->getId()];
+            $variants = $variantGroups[$attachmentProduct->id];
 
             /** @var ProductVariant[] $chosenVariants */
             $chosenVariants = $faker->randomElements($variants->dump(), random_int(1, count($variants)));
@@ -70,14 +70,14 @@ $seeder->import(
             foreach ($chosenVariants as $variant) {
                 $attachment = new AdditionalPurchaseAttachment();
 
-                $attachment->setAdditionalPurchaseId($ap->getId());
-                $attachment->setProductId($attachmentProduct->getId());
-                $attachment->setVariantId($variant->getId());
-                $attachment->setMethod(DiscountMethod::OFFSETS());
-                $attachment->setPrice(-200);
-                $attachment->setMaxQuantity(random_int(3, 7));
-                $attachment->setState(1);
-                $attachment->setOrdering($i);
+                $attachment->additionalPurchaseId = $ap->id;
+                $attachment->productId = $attachmentProduct->id;
+                $attachment->variantId = $variant->id;
+                $attachment->method = DiscountMethod::OFFSETS;
+                $attachment->price = -200;
+                $attachment->maxQuantity = random_int(3, 7);
+                $attachment->state = 1;
+                $attachment->ordering = $i;
 
                 $attachment = $orm->createOne(AdditionalPurchaseAttachment::class, $attachment);
 
@@ -92,8 +92,8 @@ $seeder->import(
             foreach ($chosenTargetProducts as $chosenTargetProduct) {
                 $map = new AdditionalPurchaseTarget();
 
-                $map->setAdditionalPurchaseId($ap->getId());
-                $map->setProductId($chosenTargetProduct->getId());
+                $map->additionalPurchaseId = $ap->id;
+                $map->productId = $chosenTargetProduct->id;
 
                 $orm->createOne(AdditionalPurchaseTarget::class, $map);
 

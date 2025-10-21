@@ -60,16 +60,16 @@ $mig->up(
         $item = $mapper->createEntity();
 
         // USD
-        $item->setTitle('USD');
-        $item->setCode('USD');
-        $item->setSign('$');
-        $item->setSignPosition(SignPosition::START());
-        $item->setDecimalPlace(2);
-        $item->setDecimalPoint('.');
-        $item->setNumSeparator(',');
-        $item->setExchangeRate(1);
-        $item->setSpace(false);
-        $item->setState(1);
+        $item->title = 'USD';
+        $item->code = 'USD';
+        $item->sign = '$';
+        $item->signPosition = SignPosition::START;
+        $item->decimalPlace = 2;
+        $item->decimalPoint = '.';
+        $item->numSeparator = ',';
+        $item->exchangeRate = 1;
+        $item->space = false;
+        $item->state = 1;
 
         $mapper->createOne($item);
 
@@ -78,16 +78,16 @@ $mig->up(
         // TWD
         $item = $mapper->createEntity();
 
-        $item->setTitle('TWD');
-        $item->setCode('TWD');
-        $item->setSign('$');
-        $item->setSignPosition(SignPosition::START());
-        $item->setDecimalPlace(0);
-        $item->setDecimalPoint('.');
-        $item->setNumSeparator(',');
-        $item->setExchangeRate(35);
-        $item->setSpace(false);
-        $item->setState(1);
+        $item->title = 'TWD';
+        $item->code = 'TWD';
+        $item->sign = '$';
+        $item->signPosition = SignPosition::START;
+        $item->decimalPlace = 0;
+        $item->decimalPoint = '.';
+        $item->numSeparator = ',';
+        $item->exchangeRate = 35;
+        $item->space = false;
+        $item->state = 1;
 
         $mapper->createOne($item);
 
@@ -96,16 +96,16 @@ $mig->up(
         // EUR
         $item = $mapper->createEntity();
 
-        $item->setTitle('EUR');
-        $item->setCode('EUR');
-        $item->setSign('€');
-        $item->setSignPosition(SignPosition::END());
-        $item->setDecimalPlace(0);
-        $item->setDecimalPoint(',');
-        $item->setNumSeparator('.');
-        $item->setExchangeRate(0.92);
-        $item->setSpace(false);
-        $item->setState(1);
+        $item->title = 'EUR';
+        $item->code = 'EUR';
+        $item->sign = '€';
+        $item->signPosition = SignPosition::END;
+        $item->decimalPlace = 0;
+        $item->decimalPoint = ',';
+        $item->numSeparator = '.';
+        $item->exchangeRate = 0.92;
+        $item->space = false;
+        $item->state = 1;
 
         $mapper->createOne($item);
 

@@ -50,24 +50,22 @@ $seeder->import(
             /** @var class-string<AbstractPayment> $type */
             $type = $faker->randomElement($types);
 
-            $item->setTitle(Utf8String::ucfirst($ufaker->word()) . ' Pay');
-            $item->setAlias(SlugHelper::safe($item->getTitle()));
-            $item->setSubtitle($faker->sentence());
-            $item->setType($type::getType());
-            $item->setClassname($type);
-            $item->setDescription($faker->paragraph());
-            $item->setImage($faker->unsplashImage(400, 400));
-            $item->setOrderStateId($state?->getId() ?? 0);
-            $item->setState(1);
-            $item->setOrdering($i);
-            $item->setNote($faker->sentence());
+            $item->title = Utf8String::ucfirst($ufaker->word()) . ' Pay';
+            $item->alias = SlugHelper::safe($item->title);
+            $item->subtitle = $faker->sentence();
+            $item->type = $type::getType();
+            $item->classname = $type;
+            $item->description = $faker->paragraph();
+            $item->image = $faker->unsplashImage(400, 400);
+            $item->orderStateId = $state?->id ?? 0;
+            $item->state = 1;
+            $item->ordering = $i;
+            $item->note = $faker->sentence();
 
             $instance = $paymentService->createTypeInstance($item);
             $defaultValues = $instance?->getDefaultFormValues();
 
-            $item->setParams(
-                $defaultValues['params'] ?? []
-            );
+            $item->params = $defaultValues['params'] ?? [];
 
             $mapper->createOne($item);
 

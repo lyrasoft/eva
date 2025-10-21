@@ -51,37 +51,33 @@ $seeder->import(
 
             $faker = $seeder->faker($langCode);
 
-            $item->setTitle(
-                Utf8String::ucwords(
+            $item->title = Utf8String::ucwords(
                     $faker->company()
-                )
-            );
-            $item->setAlias(SlugHelper::safe($item->getTitle()));
-            $item->setImage($faker->unsplashImage());
-            $item->setIntrotext($faker->paragraph(5));
-            $item->setState($faker->optional(0.7, 0)->passthrough(1));
-            $item->setOrdering($i);
-            $item->setMeta(
-                [
-                    'title' => $item->getTitle(),
+                );
+            $item->alias = SlugHelper::safe($item->title);
+            $item->image = $faker->unsplashImage();
+            $item->introtext = $faker->paragraph(5);
+            $item->state = $faker->optional(0.7, 0)->passthrough(1);
+            $item->ordering = $i;
+            $item->meta = [
+                    'title' => $item->title,
                     'description' => $faker->paragraph(),
                     'keywords' => implode(',', $faker->words()),
-                ]
-            );
-            $item->setCreated($faker->dateTimeThisYear());
-            $item->setModified($item->getCreated()->modify('+10days'));
-            $item->setCreatedBy((int) $faker->randomElement($userIds));
-            $item->setLanguage($langCode);
-            $item->setParams([]);
+                ];
+            $item->created = $faker->dateTimeThisYear();
+            $item->modified = $item->created->modify('+10days');
+            $item->createdBy = (int) $faker->randomElement($userIds);
+            $item->language = $langCode;
+            $item->params = [];
 
             $item = $mapper->createOne($item);
 
             foreach ($faker->randomElements($tagIds, 3) as $tagId) {
                 $tagMapItem = $tagMapMapper->createEntity();
 
-                $tagMapItem->setType('manufacturer');
-                $tagMapItem->setTargetId($item->getId());
-                $tagMapItem->setTagId((int) $tagId);
+                $tagMapItem->type = 'manufacturer';
+                $tagMapItem->targetId = $item->id;
+                $tagMapItem->tagId = (int) $tagId;
 
                 $tagMapMapper->createOne($tagMapItem);
             }

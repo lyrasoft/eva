@@ -27,6 +27,16 @@ return new /** Category Seeder */ class extends AbstractSeeder {
                 'max_level' => 3,
                 'number' => 30,
             ],
+
+            // ShopGo
+            'product' => [
+                'max_level' => 2,
+                'number' => 30,
+            ],
+            'attribute' => [
+                'max_level' => 1,
+                'number' => 10,
+            ],
         ];
 
         $faker = $this->faker('en_US');

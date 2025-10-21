@@ -89,9 +89,9 @@ $seeder->import(
             /** @var Product $product */
             foreach ($chosenProducts as $product) {
                 /** @var Collection<ProductVariant> $variants */
-                $variants = $variantGroups[$product->getId()] ?? [];
+                $variants = $variantGroups[$product->id] ?? [];
                 $variants = $variants->keyBy('id');
-                $mainVariant = $variants[$product->getPrimaryVariantId()];
+                $mainVariant = $variants[$product->primaryVariantId];
 
                 if (count($variants) > 0) {
                     $variant = $faker->randomElement($variants);
@@ -108,8 +108,8 @@ $seeder->import(
                     ->setVariant($productVariant)
                     ->setMainVariant($mainVariant)
                     ->setQuantity(random_int(1, 5))
-                    ->setPriceSet($productVariant->getPriceSet())
-                    ->setCover($productVariant->getCover())
+                    ->setPriceSet($productVariant->priceSet)
+                    ->setCover($productVariant->cover)
                     ->setLink('#');
 
                 $cartItems[] = $cartItem;
@@ -134,7 +134,7 @@ $seeder->import(
             // Start Create Order
             $item = $mapper->createEntity();
 
-            $item->setUserId($user->getId());
+            $item->userId = $user->id;
 
             // Payment
 
@@ -143,24 +143,24 @@ $seeder->import(
             /** @var Address $paymentAddress */
             $paymentAddress = $faker->randomElement($addresses);
 
-            $location = $orm->mustFindOne(Location::class, $paymentAddress->getLocationId());
+            $location = $orm->mustFindOne(Location::class, $paymentAddress->locationId);
             [$country, $state, $city] = $locationService->getPathFromLocation($location);
 
-            $item->setPaymentId($payment->getId());
+            $item->paymentId = (string) $payment->id;
 
-            $paymentData = $item->getPaymentData()
-                ->setName($user->getName())
-                ->setEmail($user->getEmail())
-                ->setAddress1($paymentAddress->getAddress1())
-                ->setAddress2($paymentAddress->getAddress2())
-                ->setAddressId($paymentAddress->getId())
-                ->setCountry($country?->getTitle() ?: '')
-                ->setState($state?->getTitle() ?: '')
-                ->setCity($city?->getTitle() ?: '')
-                ->setPhone($paymentAddress->getPhone())
-                ->setMobile($paymentAddress->getMobile())
-                ->setCompany($paymentAddress->getCompany())
-                ->setVat($paymentAddress->getVat());
+            $paymentData = $item->paymentData
+                ->setName($user->name)
+                ->setEmail($user->email)
+                ->setAddress1($paymentAddress->address1)
+                ->setAddress2($paymentAddress->address2)
+                ->setAddressId($paymentAddress->id)
+                ->setCountry($country?->title ?: '')
+                ->setState($state?->title ?: '')
+                ->setCity($city?->title ?: '')
+                ->setPhone($paymentAddress->phone)
+                ->setMobile($paymentAddress->mobile)
+                ->setCompany($paymentAddress->company)
+                ->setVat($paymentAddress->vat);
 
             // Shipping
 
@@ -169,36 +169,36 @@ $seeder->import(
             /** @var Address $shippingAddress */
             $shippingAddress = $faker->randomElement($addresses);
 
-            $location = $orm->mustFindOne(Location::class, $shippingAddress->getLocationId());
+            $location = $orm->mustFindOne(Location::class, $shippingAddress->locationId);
             [$country, $state, $city] = $locationService->getPathFromLocation($location);
 
-            $item->setShippingId($shipping->getId());
+            $item->shippingId = (string) $shipping->id;
 
-            $firstName = $shippingAddress->getFirstname();
-            $lastName = $shippingAddress->getLastname();
+            $firstName = $shippingAddress->firstname;
+            $lastName = $shippingAddress->lastname;
 
-            $item->getShippingData()
+            $item->shippingData
                 ->setName($firstName . ' ' . $lastName)
                 ->setFirstname($firstName)
                 ->setLastname($lastName)
-                ->setAddressId($shippingAddress->getId())
-                ->setAddress1($shippingAddress->getAddress1())
-                ->setAddress2($shippingAddress->getAddress2())
-                ->setCountry($country?->getTitle() ?: '')
-                ->setState($state?->getTitle() ?: '')
-                ->setCity($city?->getTitle() ?: '')
-                ->setPhone($shippingAddress->getPhone())
-                ->setMobile($shippingAddress->getMobile())
+                ->setAddressId($shippingAddress->id)
+                ->setAddress1($shippingAddress->address1)
+                ->setAddress2($shippingAddress->address2)
+                ->setCountry($country?->title ?: '')
+                ->setState($state?->title ?: '')
+                ->setCity($city?->title ?: '')
+                ->setPhone($shippingAddress->phone)
+                ->setMobile($shippingAddress->mobile)
                 ->setNote($faker->sentence());
 
             // Invoice
-            $item->setInvoiceType($faker->randomElement(InvoiceType::cases()));
+            $item->invoiceType = $faker->randomElement(InvoiceType::cases());
 
-            if ($item->getInvoiceType() === InvoiceType::COMPANY()) {
-                $item->getInvoiceData()
-                    ->setTitle($user->getName());
+            if ($item->invoiceType === InvoiceType::COMPANY) {
+                $item->invoiceData
+                    ->setTitle($user->name);
             } else {
-                $item->getInvoiceData()
+                $item->invoiceData
                     ->setTitle($paymentData->getCompany())
                     ->setVat($paymentData->getVat())
                     ->setMobile($paymentData->getMobile());
@@ -207,20 +207,20 @@ $seeder->import(
             // Date
             $hrOffsets = random_int(8, 36);
             $created = $created->modify("+{$hrOffsets}hours");
-            $item->setCreated($created);
+            $item->created = $created;
 
             // Create Order
             $order = $checkoutService->createOrder($item, $cartData);
 
             // A workaround to prevent relations create twice.
-            $order = $orm->findOne(Order::class, $order->getId());
+            $order = $orm->findOne(Order::class, $order->id);
 
             // Use State
 
             /** @var OrderState $state */
             $state = $faker->randomElement($states);
 
-            $order->setState($state);
+            $order->state = $state;
 
             $orderStateService->mutateOrderByState(
                 $order,

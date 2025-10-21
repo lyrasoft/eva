@@ -40,9 +40,9 @@ $seeder->import(
         foreach (range(1, 10) as $i) {
             $type = $faker->randomElement(
                 [
-                    ProductFeatureType::SELECT(),
-                    ProductFeatureType::SELECT(),
-                    ProductFeatureType::COLOR(),
+                    ProductFeatureType::SELECT,
+                    ProductFeatureType::SELECT,
+                    ProductFeatureType::COLOR,
                 ]
             );
 
@@ -57,19 +57,19 @@ $seeder->import(
                     ]
                 );
 
-                if ($type === ProductFeatureType::COLOR()) {
+                if ($type === ProductFeatureType::COLOR) {
                     $option->setColor($faker->safeHexColor());
                 }
             }
 
             $item = $mapper->createEntity();
-            $item->setType($type);
-            $item->setTitle($faker->sentence(1));
-            $item->setDefault($faker->randomElement($options)['value']);
-            $item->setOptions($options);
-            $item->setNote($faker->sentence());
-            $item->setOrdering($i);
-            $item->setState(1);
+            $item->type = $type;
+            $item->title = $faker->sentence(1);
+            $item->default = $faker->randomElement($options)['value'];
+            $item->options = $options;
+            $item->note = $faker->sentence();
+            $item->ordering = $i;
+            $item->state = 1;
 
             $mapper->createOne($item);
 

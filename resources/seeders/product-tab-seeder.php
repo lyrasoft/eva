@@ -44,20 +44,18 @@ $seeder->import(
 
             $contentType = $faker->randomElement(['article', 'page', 'content']);
 
-            $item->setTitle($faker->sentence(1));
+            $item->title = $faker->sentence(1);
 
             if ($contentType === 'article') {
-                $item->setArticleId((int) $faker->randomElement($articleIds));
+                $item->articleId = (int) $faker->randomElement($articleIds);
             } elseif ($contentType === 'page') {
-                $item->setPageId((int) $faker->randomElement($pageIds));
+                $item->pageId = (int) $faker->randomElement($pageIds);
             } else {
-                $item->setContent(
-                    $faker->paragraph(20)
-                );
+                $item->content = $faker->paragraph(20);
             }
 
-            $item->setOrdering($i);
-            $item->setState(1);
+            $item->ordering = $i;
+            $item->state = 1;
 
             $tab = $mapper->createOne($item);
 
@@ -70,10 +68,10 @@ $seeder->import(
 
                 foreach ($cids as $c => $cid) {
                     $map = new ShopCategoryMap();
-                    $map->setType('tab');
-                    $map->setCategoryId((int) $cid);
-                    $map->setTargetId($tab->getId());
-                    $map->setOrdering($c + 1);
+                    $map->type = 'tab';
+                    $map->categoryId = (int) $cid;
+                    $map->targetId = $tab->id;
+                    $map->ordering = $c + 1;
 
                     $orm->createOne(ShopCategoryMap::class, $map);
                 }
