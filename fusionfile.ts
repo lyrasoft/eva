@@ -6,7 +6,8 @@ import { resolve } from 'node:path';
 fusion.outDir('www/assets/');
 
 // Aliases
-fusion.alias('~', resolve('./resources/assets/src'));
+fusion.alias('~', resolve('./resources/assets'));
+fusion.alias('~js', resolve('./resources/assets/src'));
 fusion.alias('~vendor', resolve('./www/assets/vendor'));
 fusion.alias('vue', 'vue/dist/vue.esm-bundler.js');
 
@@ -34,6 +35,7 @@ export function css() {
   fusion.clean('*.css', '*.css.map', 'css/**/*');
 
   return [
+    fusion.css('resources/assets/scss/front/bootstrap.scss', 'css/front/bootstrap.css'),
     cssModulizeDeep('Front', 'resources/assets/scss/front/main.scss', 'css/front/main.css'),
     cssModulizeDeep('Admin', 'resources/assets/scss/admin/main.scss', 'css/admin/main.css'),
     //Nexus
