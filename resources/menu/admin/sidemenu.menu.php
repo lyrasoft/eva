@@ -57,6 +57,108 @@ $menu->registerChildren(
     }
 );
 
+$menu->link('ShopGo')
+    ->icon('fal fa-shop');
+
+$menu->registerChildren(
+    function (MenuBuilder $menu) use ($nav, $lang) {
+        $menu->link('商城管理', '#')
+            ->icon('fal fa-shop');
+
+        $menu->registerChildren(
+            function (MenuBuilder $menu) use ($nav, $lang) {
+                $menu->link($lang('shopgo.product.category.title'))
+                    ->to($nav->to('category_list', ['type' => 'product']))
+                    ->icon('fal fa-sitemap');
+
+                $menu->link($lang('unicorn.title.grid', title: $lang('shopgo.product.title')))
+                    ->to($nav->to('product_list'))
+                    ->icon('fal fa-box-open');
+
+                $menu->link($lang('unicorn.title.grid', title: $lang('shopgo.additional.purchase.title')))
+                    ->to($nav->to('additional_purchase_list'))
+                    ->icon('fal fa-cart-plus');
+
+                $menu->link($lang('unicorn.title.grid', title: $lang('shopgo.product.feature.title')))
+                    ->to($nav->to('product_feature_list'))
+                    ->icon('fal fa-object-ungroup');
+
+                $menu->link($lang('unicorn.title.grid', title: $lang('shopgo.product.attribute.group.title')))
+                    ->to($nav->to('product_attribute_group_list'))
+                    ->icon('fal fa-object-group');
+
+                $menu->link($lang('unicorn.title.grid', title: $lang('shopgo.product.attribute.title')))
+                    ->to($nav->to('product_attribute_list'))
+                    ->icon('fal fa-rectangle-list');
+
+                $menu->link($lang('unicorn.title.grid', title: $lang('shopgo.product.tab.title')))
+                    ->to($nav->to('product_tab_list'))
+                    ->icon('fal fa-pager');
+
+                $menu->link($lang('unicorn.title.grid', title: $lang('shopgo.manufacturer.title')))
+                    ->to($nav->to('manufacturer_list'))
+                    ->icon('fal fa-building');
+            }
+        );
+
+        $menu->link('優惠', '#')
+            ->icon('fal fa-cart-arrow-down');
+
+        $menu->registerChildren(
+            function (MenuBuilder $menu) use ($nav, $lang) {
+                $menu->link($lang('unicorn.title.grid', title: $lang('shopgo.discount.title')))
+                    ->to($nav->to('discount_list'))
+                    ->icon('fal fa-percent');
+            }
+        );
+
+        $menu->link('訂單', '#')
+            ->icon('fal fa-file-invoice-dollar');
+
+        $menu->registerChildren(
+            function (MenuBuilder $menu) use ($nav, $lang) {
+                $menu->link($lang('unicorn.title.grid', title: $lang('shopgo.order.title')))
+                    ->to($nav->to('order_list'))
+                    ->icon('fal fa-file-invoice-dollar');
+
+                $menu->link($lang('unicorn.title.grid', title: $lang('luna.order_state.title')))
+                    ->to($nav->to('order_state_list'))
+                    ->icon('fal fa-list');
+            }
+        );
+
+        $menu->link('商城設定', '#')
+            ->icon('fal fa-cogs');
+
+        $menu->registerChildren(
+            function (MenuBuilder $menu) use ($nav, $lang) {
+                $menu->link($lang('unicorn.title.grid', title: $lang('shopgo.currency.title')))
+                    ->to($nav->to('currency_list'))
+                    ->icon('fal fa-sterling-sign');
+
+                $menu->link($lang('unicorn.title.grid', title: $lang('luna.location.title')))
+                    ->to($nav->to('location_list'))
+                    ->icon('fa-solid fa-marker')
+                    ->icon('fal fa-earth-asia');
+
+                $menu->link($lang('unicorn.title.grid', title: $lang('luna.payment.title')))
+                    ->to($nav->to('payment_list'))
+                    ->icon('fa-solid fa-dollar')
+                    ->icon('fal fa-cash-register');
+
+                $menu->link($lang('unicorn.title.grid', title: $lang('luna.shipping.title')))
+                    ->to($nav->to('shipping_list'))
+                    ->icon('fal fa-truck');
+
+                $menu->link($lang('luna.config.title', $lang('shopgo.config.type.shop')))
+                    ->to($nav->to('config_shopgo_shop'))
+                    ->icon('fal fa-gear');
+            }
+        );
+
+    }
+);
+
 $menu->link('表單管理')
     ->to($nav->to('formkit_list'))
     ->icon('fal fa-layer-group');

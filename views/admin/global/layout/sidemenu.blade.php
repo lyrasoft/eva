@@ -46,11 +46,27 @@ $root = $app->service(\Lyrasoft\Luna\Services\MenuService::class)
                 </a>
                 <ul class="dropdown-menu collapse {{ $menuItem->isActive(true) ? 'show' : '' }}" aria-expanded="false" style="">
                     @foreach ($menuItem->getChildren() as $childItem)
-                        <a href="{{ $childItem->route($nav) }}"
-                            class="dropdown-item {{ $childItem->isActive(true) ? 'active' : '' }}">
-                            <i class="nav-icon fa-fw far fa-circle"></i>
-                            <span>{{ $childItem->getTitle() }}</span>
-                        </a>
+                        <div class="{{ $childItem->isActive(true) ? 'active' : '' }} dropdown">
+                            <a href="{{ $childItem->route($nav) }}"
+                                class="dropdown-item {{ $childItem->isActive(true) ? 'active' : '' }}">
+                                <i class="nav-icon fa-fw far fa-circle"></i>
+                                <span>{{ $childItem->getTitle() }}</span>
+                            </a>
+
+                            @if ($childItem->hasChildren())
+                                <div class="dropdown-menu">
+                                    @foreach ($childItem->getChildren() as $subChild)
+                                        <a href="{{ $subChild->route($nav) }}"
+                                            class="dropdown-item {{ $subChild->isActive(true) ? 'active' : '' }}"
+                                            style="padding-left: 2.5rem;"
+                                        >
+                                            <i class="nav-icon fa-fw far fa-circle"></i>
+                                            <span>{{ $subChild->getTitle() }}</span>
+                                        </a>
+                                    @endforeach
+                                </div>
+                            @endif
+                        </div>
                     @endforeach
                 </ul>
             </li>
