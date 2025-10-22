@@ -17,28 +17,23 @@ use Lyrasoft\ShopGo\Payment\AbstractPayment;
 use Lyrasoft\ShopGo\Payment\PaymentService;
 use Lyrasoft\ShopGo\ShopGoPackage;
 use Unicorn\Utilities\SlugHelper;
-use Windwalker\Core\Seed\Seeder;
-use Windwalker\Database\DatabaseAdapter;
+use Windwalker\Core\Seed\AbstractSeeder;
+use Windwalker\Core\Seed\SeedClear;
+use Windwalker\Core\Seed\SeedImport;
 use Windwalker\ORM\EntityMapper;
-use Windwalker\ORM\ORM;
 use Windwalker\Utilities\Utf8String;
 
-/**
- * Payment Seeder
- *
- * @var Seeder          $seeder
- * @var ORM             $orm
- * @var DatabaseAdapter $db
- */
-$seeder->import(
-    static function (ShopGoPackage $shopGo, PaymentService $paymentService) use ($seeder, $orm, $db) {
-        $faker = $seeder->faker($shopGo->config('fixtures.locale') ?: 'en_US');
+return new /** Payment Seeder */ class extends AbstractSeeder {
+    #[SeedImport]
+    public function import(ShopGoPackage $shopGo, PaymentService $paymentService): void
+    {
+        $faker = $this->faker($shopGo->config('fixtures.locale') ?: 'en_US');
 
         /** @var EntityMapper<Payment> $mapper */
-        $mapper = $orm->mapper(Payment::class);
+        $mapper = $this->orm->mapper(Payment::class);
 
         $handlingStateId = 5;
-        $state = $orm->findOne(OrderState::class, $handlingStateId);
+        $state = $this->orm->findOne(OrderState::class, $handlingStateId);
 
         $ufaker = $faker->unique();
 
@@ -69,13 +64,13 @@ $seeder->import(
 
             $mapper->createOne($item);
 
-            $seeder->outCounting();
+            $this->printCounting();
         }
     }
-);
 
-$seeder->clear(
-    static function () use ($seeder, $orm, $db) {
-        $seeder->truncate(Payment::class);
+    #[SeedClear]
+    public function clear(): void
+    {
+        $this->truncate(Payment::class);
     }
-);
+};

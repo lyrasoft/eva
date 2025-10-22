@@ -1,12 +1,5 @@
 <?php
 
-/**
- * Part of starter project.
- *
- * @copyright  Copyright (C) 2023 __ORGANIZATION__.
- * @license    __LICENSE__
- */
-
 declare(strict_types=1);
 
 namespace App\Seeder;
@@ -20,29 +13,26 @@ use Lyrasoft\ShopGo\Enum\DiscountType;
 use Lyrasoft\ShopGo\ShopGoPackage;
 use Lyrasoft\Luna\Entity\User;
 use Lyrasoft\Luna\User\Password;
-use Windwalker\Core\Seed\Seeder;
+use Windwalker\Core\Seed\AbstractSeeder;
+use Windwalker\Core\Seed\SeedClear;
+use Windwalker\Core\Seed\SeedImport;
 use Windwalker\Database\DatabaseAdapter;
 use Windwalker\ORM\EntityMapper;
 use Windwalker\ORM\ORM;
 
 use function Windwalker\chronos;
 
-/**
- * DiscountSeeder Seeder
- *
- * @var Seeder          $seeder
- * @var ORM             $orm
- * @var DatabaseAdapter $db
- */
-$seeder->import(
-    static function (ShopGoPackage $shopGo) use ($seeder, $orm, $db) {
-        $faker = $seeder->faker($shopGo->config('fixtures.locale') ?: 'en_US');
+return new /** DiscountSeeder Seeder */ class extends AbstractSeeder {
+    #[SeedImport]
+    public function import(ShopGoPackage $shopGo): void
+    {
+        $faker = $this->faker($shopGo->config('fixtures.locale') ?: 'en_US');
 
         /** @var EntityMapper<Discount> $mapper */
-        $mapper = $orm->mapper(Discount::class);
+        $mapper = $this->orm->mapper(Discount::class);
 
         /** @var Product[] $products */
-        $products = $orm->findList(Product::class)->all()->dump();
+        $products = $this->orm->findList(Product::class)->all()->dump();
 
         // Products
         foreach ($products as $p => $product) {
@@ -65,7 +55,7 @@ $seeder->import(
             $item->ordering = 1;
 
             $mapper->createOne($item);
-            $seeder->outCounting();
+            $this->printCounting();
 
             // Discount
             if ($p + 1 === count($products)) {
@@ -82,7 +72,7 @@ $seeder->import(
                     $item->ordering = $d + 1;
 
                     $mapper->createOne($item);
-                    $seeder->outCounting();
+                    $this->printCounting();
                 }
             }
         }
@@ -124,11 +114,11 @@ $seeder->import(
 
             $mapper->createOne($item);
 
-            $seeder->outCounting();
+            $this->printCounting();
         }
 
         // Coupons
-        $users = $orm->from(User::class)
+        $users = $this->orm->from(User::class)
             ->where('id', '<', 20)
             ->all(User::class)
             ->dump();
@@ -165,13 +155,13 @@ $seeder->import(
 
             $mapper->createOne($item);
 
-            $seeder->outCounting();
+            $this->printCounting();
         }
     }
-);
 
-$seeder->clear(
-    static function () use ($seeder, $orm, $db) {
-        $seeder->truncate(Discount::class, DiscountUsage::class);
+    #[SeedClear]
+    public function clear(): void
+    {
+        $this->truncate(Discount::class, DiscountUsage::class);
     }
-);
+};

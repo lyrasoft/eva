@@ -1,34 +1,25 @@
 <?php
 
-/**
- * Part of Windwalker project.
- *
- * @copyright  Copyright (C) 2022.
- * @license    __LICENSE__
- */
-
 declare(strict_types=1);
 
 namespace App\Migration;
 
 use Lyrasoft\ShopGo\Entity\Location;
 use Windwalker\Core\Console\ConsoleApplication;
-use Windwalker\Core\Migration\Migration;
+use Windwalker\Core\Migration\AbstractMigration;
+use Windwalker\Core\Migration\MigrateDown;
+use Windwalker\Core\Migration\MigrateUp;
 use Windwalker\Database\Schema\Schema;
 use Windwalker\ORM\NestedSetMapper;
 use Windwalker\ORM\ORM;
 
 use function Windwalker\fs;
 
-/**
- * Migration UP: 2022122708280011_LocationInit.
- *
- * @var Migration $mig
- * @var ConsoleApplication $app
- */
-$mig->up(
-    static function (ORM $orm) use ($mig, &$importLocations) {
-        $mig->createTable(
+return new /** 2022122708280011_LocationInit */ class extends AbstractMigration {
+    #[MigrateUp]
+    public function up(ORM $orm): void
+    {
+        $this->createTable(
             Location::class,
             function (Schema $schema) {
                 $schema->primary('id');
@@ -67,45 +58,35 @@ $mig->up(
             }
         );
 
-        /** @var NestedSetMapper $mapper */
-        // $mapper = $orm->mapper(Location::class);
-        // $mapper->createRootIfNotExist(
-        //     [
-        //         'type' => LocationType::ROOT,
-        //     ]
-        // );
-
-        $importLocations($orm);
+        $this->importLocations($orm);
     }
-);
 
-/**
- * Migration DOWN.
- */
-$mig->down(
-    static function () use ($mig) {
-        $mig->dropTables(Location::class);
+    #[MigrateDown]
+    public function down(): void
+    {
+        $this->dropTables(Location::class);
     }
-);
 
-$importLocations = static function (ORM $orm) use ($mig, $app) {
-    /** @var NestedSetMapper<Location> $mapper */
-    $mapper = $orm->mapper(Location::class);
+    private function importLocations(ORM $orm): void
+    {
+        /** @var NestedSetMapper<Location> $mapper */
+        $mapper = $orm->mapper(Location::class);
 
-    $lines = fs(__DIR__ . '/data/locations.csv')
-        ->read()
-        ->explode("\n")
-        ->filter('strlen');
+        $lines = fs(__DIR__ . '/data/locations.csv')
+            ->read()
+            ->explode("\n")
+            ->filter('strlen');
 
-    $keys = str_getcsv((string) $lines->shift());
-    $locations = $lines->map(
-        static fn(string $line) => array_combine($keys, str_getcsv($line))
-    );
+        $keys = str_getcsv((string) $lines->shift());
+        $locations = $lines->map(
+            static fn(string $line) => array_combine($keys, str_getcsv($line))
+        );
 
-    foreach ($locations->chunk(500) as $chunk) {
-        $mapper->insert()
-            ->columns(...$keys)
-            ->values(...$chunk)
-            ->execute();
+        foreach ($locations->chunk(500) as $chunk) {
+            $mapper->insert()
+                ->columns(...$keys)
+                ->values(...$chunk)
+                ->execute();
+        }
     }
 };

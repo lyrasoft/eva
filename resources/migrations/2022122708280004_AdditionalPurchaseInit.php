@@ -1,12 +1,5 @@
 <?php
 
-/**
- * Part of Windwalker project.
- *
- * @copyright  Copyright (C) 2022.
- * @license    __LICENSE__
- */
-
 declare(strict_types=1);
 
 namespace App\Migration;
@@ -15,18 +8,16 @@ use Lyrasoft\ShopGo\Entity\AdditionalPurchase;
 use Lyrasoft\ShopGo\Entity\AdditionalPurchaseAttachment;
 use Lyrasoft\ShopGo\Entity\AdditionalPurchaseTarget;
 use Windwalker\Core\Console\ConsoleApplication;
-use Windwalker\Core\Migration\Migration;
+use Windwalker\Core\Migration\AbstractMigration;
+use Windwalker\Core\Migration\MigrateDown;
+use Windwalker\Core\Migration\MigrateUp;
 use Windwalker\Database\Schema\Schema;
 
-/**
- * Migration UP: 2022122708280004_AdditionalInit.
- *
- * @var Migration          $mig
- * @var ConsoleApplication $app
- */
-$mig->up(
-    static function () use ($mig) {
-        $mig->createTable(
+return new /** 2022122708280004_AdditionalInit */ class extends AbstractMigration {
+    #[MigrateUp]
+    public function up(): void
+    {
+        $this->createTable(
             AdditionalPurchase::class,
             function (Schema $schema) {
                 $schema->primary('id');
@@ -44,7 +35,7 @@ $mig->up(
                 $schema->addIndex('ordering');
             }
         );
-        $mig->createTable(
+        $this->createTable(
             AdditionalPurchaseAttachment::class,
             function (Schema $schema) {
                 $schema->primary('id');
@@ -68,7 +59,7 @@ $mig->up(
                 $schema->addIndex('ordering');
             }
         );
-        $mig->createTable(
+        $this->createTable(
             AdditionalPurchaseTarget::class,
             function (Schema $schema) {
                 $schema->integer('additional_purchase_id');
@@ -79,17 +70,14 @@ $mig->up(
             }
         );
     }
-);
 
-/**
- * Migration DOWN.
- */
-$mig->down(
-    static function () use ($mig) {
-        $mig->dropTables(
+    #[MigrateDown]
+    public function down(): void
+    {
+        $this->dropTables(
             AdditionalPurchase::class,
             AdditionalPurchaseAttachment::class,
             AdditionalPurchaseTarget::class,
         );
     }
-);
+};

@@ -1,12 +1,5 @@
 <?php
 
-/**
- * Part of Windwalker project.
- *
- * @copyright  Copyright (C) 2022.
- * @license    __LICENSE__
- */
-
 declare(strict_types=1);
 
 namespace App\Migration;
@@ -14,20 +7,21 @@ namespace App\Migration;
 use Lyrasoft\ShopGo\Entity\Currency;
 use Lyrasoft\ShopGo\Enum\SignPosition;
 use Windwalker\Core\Console\ConsoleApplication;
-use Windwalker\Core\Migration\Migration;
+use Windwalker\Core\Migration\AbstractMigration;
+use Windwalker\Core\Migration\MigrateDown;
+use Windwalker\Core\Migration\MigrateUp;
 use Windwalker\Database\Schema\Schema;
 use Windwalker\ORM\EntityMapper;
 use Windwalker\ORM\ORM;
 
 /**
  * Migration UP: 2022122708280007_CurrencyInit.
- *
- * @var Migration          $mig
- * @var ConsoleApplication $app
  */
-$mig->up(
-    static function (ORM $orm) use ($mig) {
-        $mig->createTable(
+return new /** 2022122708280007_CurrencyInit */ class extends AbstractMigration {
+    #[MigrateUp]
+    public function up(ORM $orm): void
+    {
+        $this->createTable(
             Currency::class,
             function (Schema $schema) {
                 $schema->primary('id');
@@ -73,7 +67,7 @@ $mig->up(
 
         $mapper->createOne($item);
 
-        $mig->outCounting();
+        $this->outCounting();
 
         // TWD
         $item = $mapper->createEntity();
@@ -91,14 +85,14 @@ $mig->up(
 
         $mapper->createOne($item);
 
-        $mig->outCounting();
+        $this->outCounting();
 
         // EUR
         $item = $mapper->createEntity();
 
         $item->title = 'EUR';
         $item->code = 'EUR';
-        $item->sign = '€';
+        $item->sign = '\u20ac';
         $item->signPosition = SignPosition::END;
         $item->decimalPlace = 0;
         $item->decimalPoint = ',';
@@ -109,16 +103,12 @@ $mig->up(
 
         $mapper->createOne($item);
 
-        $mig->outCounting();
+        $this->outCounting();
     }
-);
 
-/**
- * Migration DOWN.
- */
-$mig->down(
-    static function () use ($mig) {
-        // $mig->dropTableColumns(Table::class, 'column');
-        $mig->dropTables(Currency::class);
+    #[MigrateDown]
+    public function down(): void
+    {
+        $this->dropTables(Currency::class);
     }
-);
+};

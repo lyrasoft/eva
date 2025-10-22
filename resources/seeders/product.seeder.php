@@ -25,11 +25,10 @@ use Lyrasoft\ShopGo\Service\ProductAttributeService;
 use Lyrasoft\ShopGo\Service\VariantService;
 use Lyrasoft\ShopGo\ShopGoPackage;
 use Unicorn\Utilities\SlugHelper;
-use Windwalker\Core\Seed\Seeder;
+use Windwalker\Core\Seed\AbstractSeeder;
+use Windwalker\Core\Seed\SeedClear;
 use Windwalker\Data\Collection;
-use Windwalker\Database\DatabaseAdapter;
 use Windwalker\ORM\EntityMapper;
-use Windwalker\ORM\ORM;
 use Windwalker\Utilities\Str;
 use Windwalker\Utilities\Utf8String;
 
@@ -37,35 +36,21 @@ use function Windwalker\chronos;
 use function Windwalker\filter;
 use function Windwalker\uid;
 
-/**
- * Product Seeder
- *
- * @var Seeder $seeder
- * @var ORM $orm
- * @var DatabaseAdapter $db
- */
-$seeder->import(
-    static function (
-        ShopGoPackage $shopGo,
-        ProductAttributeService $productAttributeService
-    ) use (
-        $seeder,
-        $orm,
-        $db,
-        &
-        $sortGroup
-    ) {
-        $faker = $seeder->faker($shopGo->config('fixtures.locale') ?: 'en_US');
+return new /** Product Seeder */ class extends AbstractSeeder {
+    #[\Windwalker\Core\Seed\SeedImport]
+    public function import(ShopGoPackage $shopGo, ProductAttributeService $productAttributeService): void
+    {
+        $faker = $this->faker($shopGo->config('fixtures.locale') ?: 'en_US');
 
         /** @var EntityMapper<Product> $mapper */
-        $mapper = $orm->mapper(Product::class);
+        $mapper = $this->orm->mapper(Product::class);
 
         /** @var EntityMapper<ShopCategoryMap> $mapMapper */
-        $mapMapper = $orm->mapper(ShopCategoryMap::class);
+        $mapMapper = $this->orm->mapper(ShopCategoryMap::class);
 
-        $categoryIds = $orm->findColumn(Category::class, 'id', ['type' => 'product'])->dump();
+        $categoryIds = $this->orm->findColumn(Category::class, 'id', ['type' => 'product'])->dump();
 
-        $features = $orm->findList(ProductFeature::class)->all();
+        $features = $this->orm->findList(ProductFeature::class)->all();
 
         foreach (range(1, 100) as $i) {
             $haveStartDay = $faker->randomElement([1, 0, 0, 0]);
@@ -77,18 +62,18 @@ $seeder->import(
             // $item->setPrimaryVariantId();
             $item->model = 'PD-' . Str::padLeft((string) $i, 7, '0');
             $item->title = Utf8String::ucwords(
-                    $faker->sentence(1)
-                );
+                $faker->sentence(1)
+            );
             $item->alias = SlugHelper::safe($item->title);
             $item->originPrice = (float) $faker->randomElement([500, 1000, 1500, 2000, 2500, 3000, 3500]);
             $item->safeStock = random_int(3, 5);
             $item->intro = $faker->paragraph(2);
             $item->description = $faker->paragraph(5);
             $item->meta = [
-                    'title' => $item->title,
-                    'description' => $item->description,
-                    'keywords' => implode(',', $faker->words()),
-                ];
+                'title' => $item->title,
+                'description' => $item->description,
+                'keywords' => implode(',', $faker->words()),
+            ];
             $item->canAttach = (bool) $faker->optional(0.1, 0)->passthrough(1);
             // $item->setVariants();
             $item->ordering = (int) $i;
@@ -109,7 +94,7 @@ $seeder->import(
 
             $item = $mapper->createOne($item);
 
-            $catelogIds = array_filter(
+            $categoryIds = array_filter(
                 $categoryIds,
                 static fn($v) => $v !== $item->categoryId
             );
@@ -126,12 +111,12 @@ $seeder->import(
             $mapMapper->createOne($map);
 
             // Sub categories
-            foreach ($faker->randomElements($catelogIds, 3) as $k => $catelogId) {
+            foreach ($faker->randomElements($categoryIds, 3) as $k => $categoryId) {
                 $map = $mapMapper->createEntity();
 
                 $map->type = 'product';
                 $map->targetId = $item->id;
-                $map->categoryId = (int) $catelogId;
+                $map->categoryId = (int) $categoryId;
                 $map->ordering = $k + 2;
 
                 $mapMapper->createOne($map);
@@ -149,7 +134,7 @@ $seeder->import(
                 $attrMap->locale = '*';
 
                 if ($attribute->type === ProductAttributeType::BOOL) {
-                     $attrMap->value = (string) random_int(0, 1);
+                    $attrMap->value = (string) random_int(0, 1);
                 } elseif ($attribute->type === ProductAttributeType::TEXT) {
                     $attrMap->value = $faker->sentence();
                 } elseif ($attribute->type === ProductAttributeType::SELECT) {
@@ -158,7 +143,7 @@ $seeder->import(
                     $attrMap->value = $option->value;
                 }
 
-                $orm->createOne(ProductAttributeMap::class, $attrMap);
+                $this->orm->createOne(ProductAttributeMap::class, $attrMap);
             }
 
             // Main Variant
@@ -179,17 +164,17 @@ $seeder->import(
             $variant->outOfStockText = '';
             $variant->cover = $faker->unsplashImage(800, 800);
             $variant->images = array_map(
-                    static fn($image) => [
-                        'url' => $image,
-                        'uid' => uid(),
-                    ],
-                    $faker->unsplashImages(5, 800, 800)
-                );
+                static fn($image) => [
+                    'url' => $image,
+                    'uid' => uid(),
+                ],
+                $faker->unsplashImages(5, 800, 800)
+            );
             $variant->state = 1;
 
             $searchIndexes = [];
 
-            $mainVariant = $orm->createOne(ProductVariant::class, $variant);
+            $mainVariant = $this->orm->createOne(ProductVariant::class, $variant);
 
             $searchIndexes[] = $mainVariant->searchIndex;
 
@@ -215,7 +200,7 @@ $seeder->import(
             $hasSubVariants = $faker->randomElement([true, true, false]);
 
             /** @var array<ListOption[]> $variantGroups */
-            $variantGroups = $hasSubVariants ? $sortGroup($currentFeatures) : [];
+            $variantGroups = $hasSubVariants ? $this->sortGroup($currentFeatures) : [];
 
             foreach ($variantGroups as $h => $options) {
                 $options = ListOptionCollection::wrap($options);
@@ -223,7 +208,7 @@ $seeder->import(
 
                 $optUids = ListOptionCollection::wrap($options)
                     ->as(Collection::class)
-                    ->map(static fn ($option) => $option['uid'])
+                    ->map(static fn($option) => $option['uid'])
                     ->dump();
 
                 $variant->productId = $item->id;
@@ -234,9 +219,9 @@ $seeder->import(
                 $variant->stockQuantity = random_int(1, 30);
                 $variant->subtract = true;
                 $variant->price = filter(
-                        $mainVariant->price + (random_int(-10, 10) * 100),
-                        'range(min: 0, max: 100)'
-                    );
+                    $mainVariant->price + (random_int(-10, 10) * 100),
+                    'range(min: 0, max: 100)'
+                );
                 $variant->dimension
                     ->setWidth(random_int(20, 100))
                     ->setHeight(random_int(20, 100))
@@ -245,22 +230,22 @@ $seeder->import(
                 $variant->outOfStockText = '';
                 $variant->cover = $faker->unsplashImage(800, 800);
                 $variant->images = array_map(
-                        static fn($image) => [
-                            'url' => $image,
-                            'uid' => uid(),
-                        ],
-                        $faker->unsplashImages(3, 800, 800)
-                    );
+                    static fn($image) => [
+                        'url' => $image,
+                        'uid' => uid(),
+                    ],
+                    $faker->unsplashImages(3, 800, 800)
+                );
                 $variant->options = $options;
                 $variant->state = 1;
 
                 $variant->params = compact('seed');
 
-                $orm->createOne(ProductVariant::class, $variant);
+                $this->orm->createOne(ProductVariant::class, $variant);
 
-                $searchIndexes[] = $variant->searchIndex;
+                $searchIndexes[] = $variant->getSearchIndex();
 
-                $seeder->outCounting();
+                $this->printCounting();
             }
 
             $mapper->updateWhere(
@@ -273,44 +258,45 @@ $seeder->import(
             );
         }
     }
-);
 
-$seeder->clear(
-    static function () use ($seeder, $orm, $db) {
-        $seeder->truncate(Product::class, ProductVariant::class);
-        $seeder->truncate(ShopCategoryMap::class);
-    }
-);
+    /**
+     * @param  array<ProductFeature>  $features
+     * @param  array<ListOption>  $parentGroup
+     *
+     * @return  array
+     */
+    protected function sortGroup(array $features, array $parentGroup = []): array
+    {
+        $feature = array_pop($features);
 
-/**
- * @param  array<ProductFeature>  $features
- * @param  array<ProductFeature>  $parentGroup
- *
- * @return  array<ListOption>
- */
-$sortGroup = static function (array $features, array $parentGroup = []) use (&$sortGroup, $seeder) {
-    $feature = array_pop($features);
-
-    if (!$feature) {
-        return [];
-    }
-
-    $currentOptions = $feature->options;
-
-    $returnValue = [];
-
-    foreach ($currentOptions as $option) {
-        $group = $parentGroup;
-        $option['parentId'] = $feature->id;
-
-        $group[] = new ListOption($option);
-
-        if (count($features)) {
-            $returnValue[] = $sortGroup($features, $group);
-        } else {
-            $returnValue[] = [$group];
+        if (!$feature) {
+            return [];
         }
+
+        $currentOptions = $feature->options;
+
+        $returnValue = [];
+
+        foreach ($currentOptions as $option) {
+            $group = $parentGroup;
+            $option['parentId'] = $feature->id;
+
+            $group[] = new ListOption($option);
+
+            if (count($features)) {
+                $returnValue[] = $this->sortGroup($features, $group);
+            } else {
+                $returnValue[] = [$group];
+            }
+        }
+
+        return array_merge(...$returnValue);
     }
 
-    return array_merge(...$returnValue);
+    #[SeedClear]
+    public function clear(): void
+    {
+        $this->truncate(Product::class, ProductVariant::class);
+        $this->truncate(ShopCategoryMap::class);
+    }
 };

@@ -31,17 +31,17 @@ return [
     // __DIR__ . '/contact.seeder.php',
 
     // ShopGo
-    __DIR__ . '/payment-seeder.php',
-    __DIR__ . '/shipping-seeder.php',
-    __DIR__ . '/manufacturer-seeder.php',
-    __DIR__ . '/product-feature-seeder.php',
-    __DIR__ . '/product-attribute-seeder.php',
-    __DIR__ . '/product-tab-seeder.php',
-    __DIR__ . '/product-seeder.php',
-    __DIR__ . '/discount-seeder.php',
-    __DIR__ . '/address-seeder.php',
-    __DIR__ . '/additional-purchase-seeder.php',
-    __DIR__ . '/order-seeder.php',
+    __DIR__ . '/payment.seeder.php',
+    __DIR__ . '/shipping.seeder.php',
+    __DIR__ . '/manufacturer.seeder.php',
+    __DIR__ . '/product-feature.seeder.php',
+    __DIR__ . '/product-attribute.seeder.php',
+    __DIR__ . '/product-tab.seeder.php',
+    __DIR__ . '/product.seeder.php',
+    __DIR__ . '/discount.seeder.php',
+    __DIR__ . '/address.seeder.php',
+    __DIR__ . '/additional-purchase.seeder.php',
+    __DIR__ . '/order.seeder.php',
 
     // Luna
     __DIR__ . '/page.seeder.php',

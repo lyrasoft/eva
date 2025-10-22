@@ -44,14 +44,14 @@
         "lyrasoft/token-coin": "dev-main",
         "lyrasoft/event-booking": "dev-main",
         "lyrasoft/shopgo": "dev-master",
+        "lyrasoft/favorite": "dev-master",
         "lyrasoft/sequence": "^1.0",
         "lyrasoft/theme-nexus": "dev-main",
         "symfony/polyfill-php85": "^1.33"
     },
     "require-dev": {
         "windwalker/framework": "dev-master",
-        "phpoffice/phpspreadsheet": "^2.2",
-        "myclabs/php-enum": "*"
+        "phpoffice/phpspreadsheet": "^2.2"
     },
     "scripts": {
         "post-create-project-cmd": [

@@ -16,25 +16,22 @@ use Lyrasoft\ShopGo\Shipping\AbstractShipping;
 use Lyrasoft\ShopGo\Shipping\ShippingService;
 use Lyrasoft\ShopGo\ShopGoPackage;
 use Unicorn\Utilities\SlugHelper;
-use Windwalker\Core\Seed\Seeder;
+use Windwalker\Core\Seed\AbstractSeeder;
+use Windwalker\Core\Seed\SeedClear;
+use Windwalker\Core\Seed\SeedImport;
 use Windwalker\Database\DatabaseAdapter;
 use Windwalker\ORM\EntityMapper;
 use Windwalker\ORM\ORM;
 use Windwalker\Utilities\Utf8String;
 
-/**
- * Shipping Seeder
- *
- * @var Seeder          $seeder
- * @var ORM             $orm
- * @var DatabaseAdapter $db
- */
-$seeder->import(
-    static function (ShopGoPackage $shopGo, ShippingService $shippingService) use ($seeder, $orm, $db) {
-        $faker = $seeder->faker($shopGo->config('fixtures.locale') ?: 'en_US');
+return new /** Shipping Seeder */ class extends AbstractSeeder {
+    #[SeedImport]
+    public function import(ShopGoPackage $shopGo, ShippingService $shippingService): void
+    {
+        $faker = $this->faker($shopGo->config('fixtures.locale') ?: 'en_US');
 
         /** @var EntityMapper<Shipping> $mapper */
-        $mapper = $orm->mapper(Shipping::class);
+        $mapper = $this->orm->mapper(Shipping::class);
 
         $ufaker = $faker->unique();
 
@@ -66,13 +63,13 @@ $seeder->import(
 
             $mapper->createOne($item);
 
-            $seeder->outCounting();
+            $this->printCounting();
         }
     }
-);
 
-$seeder->clear(
-    static function () use ($seeder, $orm, $db) {
-        $seeder->truncate(Shipping::class);
+    #[SeedClear]
+    public function clear(): void
+    {
+        $this->truncate(Shipping::class);
     }
-);
+};

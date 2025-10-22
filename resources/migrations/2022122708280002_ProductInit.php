@@ -1,12 +1,5 @@
 <?php
 
-/**
- * Part of Windwalker project.
- *
- * @copyright  Copyright (C) 2022.
- * @license    __LICENSE__
- */
-
 declare(strict_types=1);
 
 namespace App\Migration;
@@ -18,18 +11,16 @@ use Lyrasoft\ShopGo\Entity\ProductFeature;
 use Lyrasoft\ShopGo\Entity\ProductTab;
 use Lyrasoft\ShopGo\Entity\ProductVariant;
 use Windwalker\Core\Console\ConsoleApplication;
-use Windwalker\Core\Migration\Migration;
+use Windwalker\Core\Migration\AbstractMigration;
+use Windwalker\Core\Migration\MigrateDown;
+use Windwalker\Core\Migration\MigrateUp;
 use Windwalker\Database\Schema\Schema;
 
-/**
- * Migration UP: 2022122708280002_ProductInit.
- *
- * @var Migration          $mig
- * @var ConsoleApplication $app
- */
-$mig->up(
-    static function () use ($mig) {
-        $mig->createTable(
+return new /** 2022122708280002_ProductInit */ class extends AbstractMigration {
+    #[MigrateUp]
+    public function up(): void
+    {
+        $this->createTable(
             Product::class,
             function (Schema $schema) {
                 $schema->primary('id');
@@ -66,7 +57,7 @@ $mig->up(
                 $schema->addIndex('publish_down');
             }
         );
-        $mig->createTable(
+        $this->createTable(
             ProductVariant::class,
             function (Schema $schema) {
                 $schema->primary('id');
@@ -101,7 +92,7 @@ $mig->up(
                 $schema->addIndex('sku');
             }
         );
-        $mig->createTable(
+        $this->createTable(
             ProductFeature::class,
             function (Schema $schema) {
                 $schema->primary('id');
@@ -122,7 +113,7 @@ $mig->up(
                 $schema->addIndex('ordering');
             }
         );
-        $mig->createTable(
+        $this->createTable(
             ProductAttribute::class,
             function (Schema $schema) {
                 $schema->primary('id');
@@ -146,7 +137,7 @@ $mig->up(
                 $schema->addIndex('ordering');
             }
         );
-        $mig->createTable(
+        $this->createTable(
             ProductAttributeMap::class,
             function (Schema $schema) {
                 $schema->primary('id');
@@ -163,7 +154,7 @@ $mig->up(
                 $schema->addIndex('locale');
             }
         );
-        $mig->createTable(
+        $this->createTable(
             ProductTab::class,
             function (Schema $schema) {
                 $schema->primary('id');
@@ -185,19 +176,15 @@ $mig->up(
             }
         );
     }
-);
 
-/**
- * Migration DOWN.
- */
-$mig->down(
-    static function () use ($mig) {
-        // $mig->dropTableColumns(Table::class, 'column');
-        $mig->dropTables(Product::class);
-        $mig->dropTables(ProductVariant::class);
-        $mig->dropTables(ProductFeature::class);
-        $mig->dropTables(ProductAttribute::class);
-        $mig->dropTables(ProductAttributeMap::class);
-        $mig->dropTables(ProductTab::class);
+    #[MigrateDown]
+    public function down(): void
+    {
+        $this->dropTables(Product::class);
+        $this->dropTables(ProductVariant::class);
+        $this->dropTables(ProductFeature::class);
+        $this->dropTables(ProductAttribute::class);
+        $this->dropTables(ProductAttributeMap::class);
+        $this->dropTables(ProductTab::class);
     }
-);
+};

@@ -1,12 +1,5 @@
 <?php
 
-/**
- * Part of Windwalker project.
- *
- * @copyright  Copyright (C) 2022.
- * @license    __LICENSE__
- */
-
 declare(strict_types=1);
 
 namespace App\Migration;
@@ -18,21 +11,19 @@ use Lyrasoft\ShopGo\Entity\OrderState;
 use Lyrasoft\ShopGo\Entity\OrderTotal;
 use Lyrasoft\ShopGo\ShopGoPackage;
 use Windwalker\Core\Console\ConsoleApplication;
-use Windwalker\Core\Migration\Migration;
+use Windwalker\Core\Migration\AbstractMigration;
+use Windwalker\Core\Migration\MigrateDown;
+use Windwalker\Core\Migration\MigrateUp;
 use Windwalker\Database\Schema\Schema;
 use Windwalker\ORM\ORM;
 
 use function Windwalker\fs;
 
-/**
- * Migration UP: 2022122708280005_OrderInit.
- *
- * @var Migration          $mig
- * @var ConsoleApplication $app
- */
-$mig->up(
-    static function (ORM $orm, ShopGoPackage $shopGo) use ($mig) {
-        $mig->createTable(
+return new /** 2022122708280005_OrderInit */ class extends AbstractMigration {
+    #[MigrateUp]
+    public function up(ORM $orm, ShopGoPackage $shopGo): void
+    {
+        $this->createTable(
             Order::class,
             function (Schema $schema) {
                 $schema->primary('id');
@@ -80,7 +71,7 @@ $mig->up(
                 $schema->addIndex('shipping_no');
             }
         );
-        $mig->createTable(
+        $this->createTable(
             OrderItem::class,
             function (Schema $schema) {
                 $schema->primary('id');
@@ -111,7 +102,7 @@ $mig->up(
                 $schema->addIndex('attachment_id');
             }
         );
-        $mig->createTable(
+        $this->createTable(
             OrderTotal::class,
             function (Schema $schema) {
                 $schema->primary('id');
@@ -133,7 +124,7 @@ $mig->up(
                 $schema->addIndex('ordering');
             }
         );
-        $mig->createTable(
+        $this->createTable(
             OrderHistory::class,
             function (Schema $schema) {
                 $schema->primary('id');
@@ -151,7 +142,7 @@ $mig->up(
                 $schema->addIndex('state_id');
             }
         );
-        $mig->createTable(
+        $this->createTable(
             OrderState::class,
             function (Schema $schema) {
                 $schema->primary('id');
@@ -193,21 +184,17 @@ $mig->up(
 
             $orm->createOne(OrderState::class, $state);
 
-            $mig->outCounting();
+            $this->outCounting();
         }
     }
-);
 
-/**
- * Migration DOWN.
- */
-$mig->down(
-    static function () use ($mig) {
-        // $mig->dropTableColumns(Table::class, 'column');
-        $mig->dropTables(Order::class);
-        $mig->dropTables(OrderItem::class);
-        $mig->dropTables(OrderTotal::class);
-        $mig->dropTables(OrderHistory::class);
-        $mig->dropTables(OrderState::class);
+    #[MigrateDown]
+    public function down(): void
+    {
+        $this->dropTables(Order::class);
+        $this->dropTables(OrderItem::class);
+        $this->dropTables(OrderTotal::class);
+        $this->dropTables(OrderHistory::class);
+        $this->dropTables(OrderState::class);
     }
-);
+};

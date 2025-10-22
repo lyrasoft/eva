@@ -1,12 +1,5 @@
 <?php
 
-/**
- * Part of starter project.
- *
- * @copyright  Copyright (C) 2023 __ORGANIZATION__.
- * @license    __LICENSE__
- */
-
 declare(strict_types=1);
 
 namespace App\Seeder;
@@ -18,28 +11,24 @@ use Lyrasoft\ShopGo\Entity\Product;
 use Lyrasoft\ShopGo\Entity\ProductVariant;
 use Lyrasoft\ShopGo\Enum\DiscountMethod;
 use Lyrasoft\ShopGo\ShopGoPackage;
-use Windwalker\Core\Seed\Seeder;
+use Windwalker\Core\Seed\AbstractSeeder;
+use Windwalker\Core\Seed\SeedClear;
+use Windwalker\Core\Seed\SeedImport;
 use Windwalker\Data\Collection;
-use Windwalker\Database\DatabaseAdapter;
 use Windwalker\ORM\EntityMapper;
-use Windwalker\ORM\ORM;
 
-/**
- * Admin/additionalPurchase Seeder
- *
- * @var Seeder          $seeder
- * @var ORM             $orm
- * @var DatabaseAdapter $db
- */
-$seeder->import(
-    static function (ShopGoPackage $shopGo) use ($seeder, $orm, $db) {
-        $faker = $seeder->faker($shopGo->config('fixtures.locale') ?: 'en_US');
+return new /** AdditionalPurchase Seeder */ class extends AbstractSeeder {
+    #[SeedImport]
+    public function import(ShopGoPackage $shopGo): void
+    {
+        // Use package-configured locale if available.
+        $faker = $this->faker($shopGo->config('fixtures.locale') ?: 'en_US');
 
         /** @var EntityMapper<AdditionalPurchase> $mapper */
-        $mapper = $orm->mapper(AdditionalPurchase::class);
+        $mapper = $this->orm->mapper(AdditionalPurchase::class);
 
         /** @var Collection<Product> $products */
-        $products = $orm->findList(Product::class)->all();
+        $products = $this->orm->findList(Product::class)->all();
 
         /** @var Collection<Product> $attachmentProducts */
         /** @var Collection<Product> $targetProducts */
@@ -48,7 +37,7 @@ $seeder->import(
         );
 
         /** @var ProductVariant[][] $variantGroups */
-        $variantGroups = $orm->findList(ProductVariant::class)->all()->groupBy('productId');
+        $variantGroups = $this->orm->findList(ProductVariant::class)->all()->groupBy('productId');
 
         $i = 1;
 
@@ -79,11 +68,11 @@ $seeder->import(
                 $attachment->state = 1;
                 $attachment->ordering = $i;
 
-                $attachment = $orm->createOne(AdditionalPurchaseAttachment::class, $attachment);
+                $attachment = $this->orm->createOne(AdditionalPurchaseAttachment::class, $attachment);
 
                 $i++;
 
-                $seeder->outCounting();
+                $this->printCounting();
             }
 
             /** @var Product[] $chosenTargetProducts */
@@ -95,16 +84,16 @@ $seeder->import(
                 $map->additionalPurchaseId = $ap->id;
                 $map->productId = $chosenTargetProduct->id;
 
-                $orm->createOne(AdditionalPurchaseTarget::class, $map);
+                $this->orm->createOne(AdditionalPurchaseTarget::class, $map);
 
-                $seeder->outCounting();
+                $this->printCounting();
             }
         }
     }
-);
 
-$seeder->clear(
-    static function () use ($seeder, $orm, $db) {
-        //
+    #[SeedClear]
+    public function clear(): void
+    {
+        // No-op clear. If needed, use $this->db or $this->orm here.
     }
-);
+};

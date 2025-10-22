@@ -1,12 +1,5 @@
 <?php
 
-/**
- * Part of starter project.
- *
- * @copyright  Copyright (C) 2023 __ORGANIZATION__.
- * @license    __LICENSE__
- */
-
 declare(strict_types=1);
 
 namespace App\Seeder;
@@ -30,51 +23,41 @@ use Lyrasoft\ShopGo\Service\CheckoutService;
 use Lyrasoft\ShopGo\Service\LocationService;
 use Lyrasoft\ShopGo\Service\OrderStateService;
 use Lyrasoft\ShopGo\ShopGoPackage;
-use Windwalker\Core\Seed\Seeder;
+use Windwalker\Core\Seed\AbstractSeeder;
+use Windwalker\Core\Seed\SeedClear;
+use Windwalker\Core\Seed\SeedImport;
 use Windwalker\Data\Collection;
-use Windwalker\Database\DatabaseAdapter;
 use Windwalker\ORM\EntityMapper;
-use Windwalker\ORM\ORM;
 
 use function Windwalker\chronos;
 
-/**
- * Order Seeder
- *
- * @var Seeder          $seeder
- * @var ORM             $orm
- * @var DatabaseAdapter $db
- */
-$seeder->import(
-    static function (
+return new /** Order Seeder */ class extends AbstractSeeder {
+    #[SeedImport]
+    public function import(
         ShopGoPackage $shopGo,
         CheckoutService $checkoutService,
         CartService $cartService,
         OrderStateService $orderStateService,
-        LocationService $locationService,
-    ) use (
-        $seeder,
-        $orm,
-        $db
-    ) {
-        $faker = $seeder->faker('en_US');
+        LocationService $locationService
+    ): void {
+        $faker = $this->faker('en_US');
 
         /** @var EntityMapper<Order> $mapper */
-        $mapper = $orm->mapper(Order::class);
+        $mapper = $this->orm->mapper(Order::class);
 
-        $states = $orm->findList(OrderState::class)->all()->dump();
-        $addresses = $orm->findList(Address::class)->all()->dump();
-        $products = $orm->findList(Product::class)->all()->dump();
-        $payments = $orm->findList(Payment::class)->all()->dump();
-        $shippings = $orm->findList(Shipping::class)->all()->dump();
-        $variantGroups = $orm->findList(ProductVariant::class)->all()->groupBy('productId');
+        $states = $this->orm->findList(OrderState::class)->all()->dump();
+        $addresses = $this->orm->findList(Address::class)->all()->dump();
+        $products = $this->orm->findList(Product::class)->all()->dump();
+        $payments = $this->orm->findList(Payment::class)->all()->dump();
+        $shippings = $this->orm->findList(Shipping::class)->all()->dump();
+        $variantGroups = $this->orm->findList(ProductVariant::class)->all()->groupBy('productId');
 
         // $useFullName = $shopGo->useFullName();
         // $useFullAddress = $shopGo->useFullAddress();
 
         $created = chronos('-2months');
 
-        $users = $orm->findList(User::class)->all()->dump();
+        $users = $this->orm->findList(User::class)->all()->dump();
 
         foreach (range(1, 50) as $i) {
             /** @var User $user */
@@ -143,24 +126,24 @@ $seeder->import(
             /** @var Address $paymentAddress */
             $paymentAddress = $faker->randomElement($addresses);
 
-            $location = $orm->mustFindOne(Location::class, $paymentAddress->locationId);
+            $location = $this->orm->mustFindOne(Location::class, $paymentAddress->locationId);
             [$country, $state, $city] = $locationService->getPathFromLocation($location);
 
             $item->paymentId = (string) $payment->id;
 
-            $paymentData = $item->paymentData
-                ->setName($user->name)
-                ->setEmail($user->email)
-                ->setAddress1($paymentAddress->address1)
-                ->setAddress2($paymentAddress->address2)
-                ->setAddressId($paymentAddress->id)
-                ->setCountry($country?->title ?: '')
-                ->setState($state?->title ?: '')
-                ->setCity($city?->title ?: '')
-                ->setPhone($paymentAddress->phone)
-                ->setMobile($paymentAddress->mobile)
-                ->setCompany($paymentAddress->company)
-                ->setVat($paymentAddress->vat);
+            $paymentData = $item->paymentData;
+            $paymentData->name = $user->name;
+            $paymentData->email = $user->email;
+            $paymentData->address1 = $paymentAddress->address1;
+            $paymentData->address2 = $paymentAddress->address2;
+            $paymentData->addressId = $paymentAddress->id;
+            $paymentData->country = $country?->title ?: '';
+            $paymentData->state = $state?->title ?: '';
+            $paymentData->city = $city?->title ?: '';
+            $paymentData->phone = $paymentAddress->phone;
+            $paymentData->mobile = $paymentAddress->mobile;
+            $paymentData->company = $paymentAddress->company;
+            $paymentData->vat = $paymentAddress->vat;
 
             // Shipping
 
@@ -169,7 +152,7 @@ $seeder->import(
             /** @var Address $shippingAddress */
             $shippingAddress = $faker->randomElement($addresses);
 
-            $location = $orm->mustFindOne(Location::class, $shippingAddress->locationId);
+            $location = $this->orm->mustFindOne(Location::class, $shippingAddress->locationId);
             [$country, $state, $city] = $locationService->getPathFromLocation($location);
 
             $item->shippingId = (string) $shipping->id;
@@ -177,19 +160,19 @@ $seeder->import(
             $firstName = $shippingAddress->firstname;
             $lastName = $shippingAddress->lastname;
 
-            $item->shippingData
-                ->setName($firstName . ' ' . $lastName)
-                ->setFirstname($firstName)
-                ->setLastname($lastName)
-                ->setAddressId($shippingAddress->id)
-                ->setAddress1($shippingAddress->address1)
-                ->setAddress2($shippingAddress->address2)
-                ->setCountry($country?->title ?: '')
-                ->setState($state?->title ?: '')
-                ->setCity($city?->title ?: '')
-                ->setPhone($shippingAddress->phone)
-                ->setMobile($shippingAddress->mobile)
-                ->setNote($faker->sentence());
+            $shippingData = $item->shippingData;
+            $shippingData->name = $firstName . ' ' . $lastName;
+            $shippingData->firstname = $firstName;
+            $shippingData->lastname = $lastName;
+            $shippingData->addressId = $shippingAddress->id;
+            $shippingData->address1 = $shippingAddress->address1;
+            $shippingData->address2 = $shippingAddress->address2;
+            $shippingData->country = $country?->title ?: '';
+            $shippingData->state = $state?->title ?: '';
+            $shippingData->city = $city?->title ?: '';
+            $shippingData->phone = $shippingAddress->phone;
+            $shippingData->mobile = $shippingAddress->mobile;
+            $shippingData->note = $faker->sentence();
 
             // Invoice
             $item->invoiceType = $faker->randomElement(InvoiceType::cases());
@@ -199,9 +182,9 @@ $seeder->import(
                     ->setTitle($user->name);
             } else {
                 $item->invoiceData
-                    ->setTitle($paymentData->getCompany())
-                    ->setVat($paymentData->getVat())
-                    ->setMobile($paymentData->getMobile());
+                    ->setTitle($paymentData->company)
+                    ->setVat($paymentData->vat)
+                    ->setMobile($paymentData->mobile);
             }
 
             // Date
@@ -213,7 +196,7 @@ $seeder->import(
             $order = $checkoutService->createOrder($item, $cartData);
 
             // A workaround to prevent relations create twice.
-            $order = $orm->findOne(Order::class, $order->id);
+            $order = $this->orm->findOne(Order::class, $order->id);
 
             // Use State
 
@@ -228,15 +211,15 @@ $seeder->import(
                 $faker->dateTimeBetween('-1years', 'now')
             );
 
-            $orm->updateOne(Order::class, $order);
+            $this->orm->updateOne(Order::class, $order);
 
-            $seeder->outCounting();
+            $this->printCounting();
         }
     }
-);
 
-$seeder->clear(
-    static function () use ($seeder, $orm, $db) {
-        $seeder->truncate(Order::class, OrderItem::class, OrderTotal::class, OrderHistory::class);
+    #[SeedClear]
+    public function clear(): void
+    {
+        $this->truncate(Order::class, OrderItem::class, OrderTotal::class, OrderHistory::class);
     }
-);
+};

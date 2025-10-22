@@ -17,28 +17,25 @@ use Lyrasoft\ShopGo\Enum\LocationType;
 use Lyrasoft\ShopGo\Service\LocationService;
 use Lyrasoft\ShopGo\ShopGoPackage;
 use Lyrasoft\Luna\Entity\User;
-use Windwalker\Core\Seed\Seeder;
+use Windwalker\Core\Seed\AbstractSeeder;
+use Windwalker\Core\Seed\SeedClear;
+use Windwalker\Core\Seed\SeedImport;
 use Windwalker\Database\DatabaseAdapter;
 use Windwalker\ORM\EntityMapper;
 use Windwalker\ORM\ORM;
 
-/**
- * Address Seeder
- *
- * @var Seeder $seeder
- * @var ORM $orm
- * @var DatabaseAdapter $db
- */
-$seeder->import(
-    static function (ShopGoPackage $shopGo, LocationService $locationService) use ($seeder, $orm, $db) {
-        $faker = $seeder->faker($shopGo->config('fixtures.locale') ?: 'en_US');
+return new /** Address Seeder */ class extends AbstractSeeder {
+    #[SeedImport]
+    public function import(ShopGoPackage $shopGo, LocationService $locationService): void
+    {
+        $faker = $this->faker($shopGo->config('fixtures.locale') ?: 'en_US');
 
         /** @var EntityMapper<Address> $mapper */
-        $mapper = $orm->mapper(Address::class);
+        $mapper = $this->orm->mapper(Address::class);
 
-        $userIds = $orm->findColumn(User::class, 'id')->dump();
+        $userIds = $this->orm->findColumn(User::class, 'id')->dump();
 
-        $locations = $orm->findList(
+        $locations = $this->orm->findList(
             Location::class,
             [
                 'type' => [LocationType::STATE, LocationType::CITY]
@@ -73,13 +70,13 @@ $seeder->import(
 
             $mapper->createOne($item);
 
-            $seeder->outCounting();
+            $this->printCounting();
         }
     }
-);
 
-$seeder->clear(
-    static function () use ($seeder, $orm, $db) {
-        $seeder->truncate(Address::class);
+    #[SeedClear]
+    public function clear(): void
+    {
+        $this->truncate(Address::class);
     }
-);
+};

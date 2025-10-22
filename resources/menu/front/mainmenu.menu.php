@@ -49,3 +49,6 @@ $menu->registerChildren(
 
 $menu->link('活動', $nav->to('event_stage_list'))
     ->icon('fal fa-calendar');
+
+$menu->link('商城', $nav->to('product_list'))
+    ->icon('fal fa-shopping-cart');

@@ -1,12 +1,5 @@
 <?php
 
-/**
- * Part of starter project.
- *
- * @copyright  Copyright (C) 2023 __ORGANIZATION__.
- * @license    __LICENSE__
- */
-
 declare(strict_types=1);
 
 namespace App\Seeder;
@@ -17,29 +10,24 @@ use Lyrasoft\ShopGo\Entity\ProductAttribute;
 use Lyrasoft\ShopGo\Entity\ShopCategoryMap;
 use Lyrasoft\ShopGo\Enum\ProductAttributeType;
 use Lyrasoft\ShopGo\ShopGoPackage;
-use Windwalker\Core\Seed\Seeder;
-use Windwalker\Database\DatabaseAdapter;
+use Windwalker\Core\Seed\AbstractSeeder;
+use Windwalker\Core\Seed\SeedClear;
+use Windwalker\Core\Seed\SeedImport;
 use Windwalker\ORM\EntityMapper;
-use Windwalker\ORM\ORM;
 use Windwalker\Utilities\StrNormalize;
 
 use function Windwalker\tid;
 
-/**
- * ProductAttribute Seeder
- *
- * @var Seeder          $seeder
- * @var ORM             $orm
- * @var DatabaseAdapter $db
- */
-$seeder->import(
-    static function (ShopGoPackage $shopGo) use ($seeder, $orm, $db) {
-        $faker = $seeder->faker($shopGo->config('fixtures.locale') ?: 'en_US');
+return new /** ProductAttribute Seeder */ class extends AbstractSeeder {
+    #[SeedImport]
+    public function import(ShopGoPackage $shopGo): void
+    {
+        $faker = $this->faker($shopGo->config('fixtures.locale') ?: 'en_US');
 
         /** @var EntityMapper<ProductAttribute> $mapper */
-        $mapper = $orm->mapper(ProductAttribute::class);
-        $productCategoryIds = $orm->findColumn(Category::class, 'id', ['type' => 'product'])->dump();
-        $groupIds = $orm->findColumn(Category::class, 'id', ['type' => 'attribute'])->dump();
+        $mapper = $this->orm->mapper(ProductAttribute::class);
+        $productCategoryIds = $this->orm->findColumn(Category::class, 'id', ['type' => 'product'])->dump();
+        $groupIds = $this->orm->findColumn(Category::class, 'id', ['type' => 'attribute'])->dump();
 
         // Make Group Maps
         foreach ($groupIds as $groupId) {
@@ -49,7 +37,7 @@ $seeder->import(
                 $map->categoryId = (int) $productCategoryId;
                 $map->targetId = (int) $groupId;
 
-                $orm->createOne(ShopCategoryMap::class, $map);
+                $this->orm->createOne(ShopCategoryMap::class, $map);
             }
         }
 
@@ -76,7 +64,7 @@ $seeder->import(
                         [
                             'uid' => tid(),
                             'text' => $text = $faker->word(),
-                            'value' => strtolower($text)
+                            'value' => strtolower($text),
                         ]
                     );
                 }
@@ -86,13 +74,13 @@ $seeder->import(
 
             $mapper->createOne($item);
 
-            $seeder->outCounting();
+            $this->printCounting();
         }
     }
-);
 
-$seeder->clear(
-    static function () use ($seeder, $orm, $db) {
-        $seeder->truncate(ProductAttribute::class);
+    #[SeedClear]
+    public function clear(): void
+    {
+        $this->truncate(ProductAttribute::class);
     }
-);
+};

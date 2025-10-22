@@ -1,30 +1,20 @@
 <?php
 
-/**
- * Part of Windwalker project.
- *
- * @copyright  Copyright (C) 2022.
- * @license    __LICENSE__
- */
-
 declare(strict_types=1);
 
 namespace App\Migration;
 
 use Lyrasoft\ShopGo\Entity\Manufacturer;
-use Windwalker\Core\Console\ConsoleApplication;
-use Windwalker\Core\Migration\Migration;
+use Windwalker\Core\Migration\AbstractMigration;
+use Windwalker\Core\Migration\MigrateDown;
+use Windwalker\Core\Migration\MigrateUp;
 use Windwalker\Database\Schema\Schema;
 
-/**
- * Migration UP: 2022122708280001_ManufacturerInit.
- *
- * @var Migration          $mig
- * @var ConsoleApplication $app
- */
-$mig->up(
-    static function () use ($mig) {
-        $mig->createTable(
+return new /** 2022122708280001_ManufacturerInit */ class extends AbstractMigration {
+    #[MigrateUp]
+    public function up(): void
+    {
+        $this->createTable(
             Manufacturer::class,
             function (Schema $schema) {
                 $schema->primary('id');
@@ -50,14 +40,10 @@ $mig->up(
             }
         );
     }
-);
 
-/**
- * Migration DOWN.
- */
-$mig->down(
-    static function () use ($mig) {
-        // $mig->dropTableColumns(Table::class, 'column');
-        $mig->dropTables(Manufacturer::class);
+    #[MigrateDown]
+    public function down(): void
+    {
+        $this->dropTables(Manufacturer::class);
     }
-);
+};

@@ -1,12 +1,5 @@
 <?php
 
-/**
- * Part of starter project.
- *
- * @copyright  Copyright (C) 2023 __ORGANIZATION__.
- * @license    __LICENSE__
- */
-
 declare(strict_types=1);
 
 namespace App\Seeder;
@@ -15,27 +8,22 @@ use Lyrasoft\ShopGo\Data\ListOption;
 use Lyrasoft\ShopGo\Entity\ProductFeature;
 use Lyrasoft\ShopGo\Enum\ProductFeatureType;
 use Lyrasoft\ShopGo\ShopGoPackage;
-use Windwalker\Core\Seed\Seeder;
-use Windwalker\Database\DatabaseAdapter;
+use Windwalker\Core\Seed\AbstractSeeder;
+use Windwalker\Core\Seed\SeedClear;
+use Windwalker\Core\Seed\SeedImport;
 use Windwalker\ORM\EntityMapper;
-use Windwalker\ORM\ORM;
 use Windwalker\Utilities\Utf8String;
 
 use function Windwalker\tid;
 
-/**
- * ProductFeature Seeder
- *
- * @var Seeder          $seeder
- * @var ORM             $orm
- * @var DatabaseAdapter $db
- */
-$seeder->import(
-    static function (ShopGoPackage $shopGo) use ($seeder, $orm, $db) {
-        $faker = $seeder->faker($shopGo->config('fixtures.locale') ?: 'en_US');
+return new /** ProductFeature Seeder */ class extends AbstractSeeder {
+    #[SeedImport]
+    public function import(ShopGoPackage $shopGo): void
+    {
+        $faker = $this->faker($shopGo->config('fixtures.locale') ?: 'en_US');
 
         /** @var EntityMapper<ProductFeature> $mapper */
-        $mapper = $orm->mapper(ProductFeature::class);
+        $mapper = $this->orm->mapper(ProductFeature::class);
 
         foreach (range(1, 10) as $i) {
             $type = $faker->randomElement(
@@ -53,7 +41,7 @@ $seeder->import(
                     [
                         'uid' => tid(),
                         'text' => $text = Utf8String::ucwords($faker->word()),
-                        'value' => strtolower($text)
+                        'value' => strtolower($text),
                     ]
                 );
 
@@ -73,13 +61,13 @@ $seeder->import(
 
             $mapper->createOne($item);
 
-            $seeder->outCounting();
+            $this->printCounting();
         }
     }
-);
 
-$seeder->clear(
-    static function () use ($seeder, $orm, $db) {
-        $seeder->truncate(ProductFeature::class);
+    #[SeedClear]
+    public function clear(): void
+    {
+        $this->truncate(ProductFeature::class);
     }
-);
+};
