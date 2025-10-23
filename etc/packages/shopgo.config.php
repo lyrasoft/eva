@@ -12,7 +12,7 @@ use Lyrasoft\ShopGo\Subscriber\AdditionalPurchaseSubscriber;
 use Lyrasoft\ShopGo\Subscriber\DiscountSubscriber;
 use Windwalker\Core\Attributes\ConfigModule;
 
-return #[ConfigModule('formkit', enabled: true, priority: 100, belongsTo: ShopGoPackage::class)]
+return #[ConfigModule('shopgo', enabled: true, priority: 100, belongsTo: ShopGoPackage::class)]
 static fn() => [
     'providers' => [
         ShopGoPackage::class,
