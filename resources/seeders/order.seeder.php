@@ -86,14 +86,17 @@ return new /** Order Seeder */ class extends AbstractSeeder {
 
             /** @var ProductVariant $productVariant */
             foreach ($productVariants as [$product, $mainVariant, $productVariant]) {
-                $cartItem = new CartItem();
-                $cartItem->setProduct($product)
-                    ->setVariant($productVariant)
-                    ->setMainVariant($mainVariant)
-                    ->setQuantity(random_int(1, 5))
-                    ->setPriceSet($productVariant->priceSet)
-                    ->setCover($productVariant->cover)
-                    ->setLink('#');
+                $cartItem = new CartItem(
+                    variant: $productVariant,
+                    mainVariant: $mainVariant,
+                    product: $product,
+                    priceSet: $productVariant->priceSet,
+                    quantity: random_int(1, 5),
+                    cover: $productVariant->cover,
+                    link: '#'
+                );
+
+                // Use props set
 
                 $cartItems[] = $cartItem;
             }
@@ -102,7 +105,7 @@ return new /** Order Seeder */ class extends AbstractSeeder {
             $cartData = $cartService->createCartDataFromItems($cartItems, []);
 
             foreach ($cartData->getItems() as $orderItem) {
-                $finalTotal = $orderItem->getPriceSet()['final_total'];
+                $finalTotal = $orderItem->priceSet['final_total'];
 
                 if ($finalTotal->lt(0)) {
                     throw new \RuntimeException(
@@ -178,13 +181,11 @@ return new /** Order Seeder */ class extends AbstractSeeder {
             $item->invoiceType = $faker->randomElement(InvoiceType::cases());
 
             if ($item->invoiceType === InvoiceType::COMPANY) {
-                $item->invoiceData
-                    ->setTitle($user->name);
+                $item->invoiceData->title = $user->name;
             } else {
-                $item->invoiceData
-                    ->setTitle($paymentData->company)
-                    ->setVat($paymentData->vat)
-                    ->setMobile($paymentData->mobile);
+                $item->invoiceData->title = $paymentData->company;
+                $item->invoiceData->vat = $paymentData->vat;
+                $item->invoiceData->mobile = $paymentData->mobile;
             }
 
             // Date

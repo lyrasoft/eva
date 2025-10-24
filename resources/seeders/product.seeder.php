@@ -1,12 +1,5 @@
 <?php
 
-/**
- * Part of starter project.
- *
- * @copyright  Copyright (C) 2022 __ORGANIZATION__.
- * @license    __LICENSE__
- */
-
 declare(strict_types=1);
 
 namespace App\Seeder;
@@ -14,6 +7,7 @@ namespace App\Seeder;
 use Lyrasoft\Luna\Entity\Category;
 use Lyrasoft\ShopGo\Data\ListOption;
 use Lyrasoft\ShopGo\Data\ListOptionCollection;
+use Lyrasoft\ShopGo\Data\ProductDimension;
 use Lyrasoft\ShopGo\Entity\Product;
 use Lyrasoft\ShopGo\Entity\ProductAttribute;
 use Lyrasoft\ShopGo\Entity\ProductAttributeMap;
@@ -94,7 +88,7 @@ return new /** Product Seeder */ class extends AbstractSeeder {
 
             $item = $mapper->createOne($item);
 
-            $categoryIds = array_filter(
+            $catIds = array_filter(
                 $categoryIds,
                 static fn($v) => $v !== $item->categoryId
             );
@@ -111,7 +105,7 @@ return new /** Product Seeder */ class extends AbstractSeeder {
             $mapMapper->createOne($map);
 
             // Sub categories
-            foreach ($faker->randomElements($categoryIds, 3) as $k => $categoryId) {
+            foreach ($faker->randomElements($catIds, 3) as $k => $categoryId) {
                 $map = $mapMapper->createEntity();
 
                 $map->type = 'product';
@@ -156,11 +150,12 @@ return new /** Product Seeder */ class extends AbstractSeeder {
             $variant->stockQuantity = random_int(1, 30);
             $variant->subtract = true;
             $variant->price = random_int(1, 40) * 100;
-            $variant->dimension
-                ->setWidth(random_int(20, 100))
-                ->setHeight(random_int(20, 100))
-                ->setLength(random_int(20, 100))
-                ->setWeight(random_int(20, 100));
+            $variant->dimension = new ProductDimension(
+                width: random_int(20, 100),
+                height: random_int(20, 100),
+                length: random_int(20, 100),
+                weight: random_int(20, 100)
+            );
             $variant->outOfStockText = '';
             $variant->cover = $faker->unsplashImage(800, 800);
             $variant->images = array_map(
@@ -189,7 +184,7 @@ return new /** Product Seeder */ class extends AbstractSeeder {
                 $options = $faker->randomElements($feature->options->dump(), 3);
 
                 foreach ($options as $option) {
-                    $option->setParentId($feature->id);
+                    $option->parentId = $feature->id;
                 }
 
                 $feature->options = $options;
@@ -208,10 +203,10 @@ return new /** Product Seeder */ class extends AbstractSeeder {
 
                 $optUids = ListOptionCollection::wrap($options)
                     ->as(Collection::class)
-                    ->map(static fn($option) => $option['uid'])
+                    ->map(static fn(ListOption $option) => $option->uid)
                     ->dump();
 
-                $variant->productId = $item->id;
+                $variant->productId = (int) $item->id;
                 $variant->title = (string) $options->as(Collection::class)->column('text')->implode(' / ');
                 $variant->hash = VariantService::hash($optUids, $seed);
                 $variant->primary = false;
@@ -222,11 +217,12 @@ return new /** Product Seeder */ class extends AbstractSeeder {
                     $mainVariant->price + (random_int(-10, 10) * 100),
                     'range(min: 0, max: 100)'
                 );
-                $variant->dimension
-                    ->setWidth(random_int(20, 100))
-                    ->setHeight(random_int(20, 100))
-                    ->setLength(random_int(20, 100))
-                    ->setWeight(random_int(20, 100));
+                $variant->dimension = new ProductDimension(
+                    width: random_int(20, 100),
+                    height: random_int(20, 100),
+                    length: random_int(20, 100),
+                    weight: random_int(20, 100)
+                );
                 $variant->outOfStockText = '';
                 $variant->cover = $faker->unsplashImage(800, 800);
                 $variant->images = array_map(
@@ -281,7 +277,7 @@ return new /** Product Seeder */ class extends AbstractSeeder {
             $group = $parentGroup;
             $option['parentId'] = $feature->id;
 
-            $group[] = new ListOption($option);
+            $group[] = ListOption::wrap($option);
 
             if (count($features)) {
                 $returnValue[] = $this->sortGroup($features, $group);
