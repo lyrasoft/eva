@@ -1,3 +1,4 @@
+import vuePlugin from '@vitejs/plugin-vue';
 import { useFusion } from '@windwalker-io/fusion-next';
 import { defineConfig } from 'vite';
 import { resolve } from 'node:path';
@@ -21,6 +22,7 @@ export default defineConfig(({ mode }) => {
       },
     },
     plugins: [
+      vuePlugin({}),
       useFusion(() => import('./fusionfile')),
     ],
   };
