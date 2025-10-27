@@ -38,6 +38,10 @@ static fn() => [
         'locale' => 'en_US',
     ],
 
+    'product' => [
+        'variants_limit' => 100,
+    ],
+
     'address' => [
         'use_fullname' => false,
         'use_fulladdress' => false,

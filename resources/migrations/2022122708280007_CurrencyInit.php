@@ -14,9 +14,6 @@ use Windwalker\Database\Schema\Schema;
 use Windwalker\ORM\EntityMapper;
 use Windwalker\ORM\ORM;
 
-/**
- * Migration UP: 2022122708280007_CurrencyInit.
- */
 return new /** 2022122708280007_CurrencyInit */ class extends AbstractMigration {
     #[MigrateUp]
     public function up(ORM $orm): void
@@ -92,7 +89,7 @@ return new /** 2022122708280007_CurrencyInit */ class extends AbstractMigration 
 
         $item->title = 'EUR';
         $item->code = 'EUR';
-        $item->sign = '\u20ac';
+        $item->sign = '€';
         $item->signPosition = SignPosition::END;
         $item->decimalPlace = 0;
         $item->decimalPoint = ',';

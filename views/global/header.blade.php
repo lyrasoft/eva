@@ -42,6 +42,14 @@ $user = $app->service(UserService::class)->getUser();
                 <ul class="navbar-nav mb-2 mb-lg-0">
                     <x-locale-dropdown class="nav-item" />
 
+                    <li class="nav-item">
+                        <x-currency-dropdown button-class="nav-link" />
+                    </li>
+
+                    <li class="nav-item">
+                        <x-cart-button class="nav-link" />
+                    </li>
+
                     @if (!$user->isLogin())
                         <li class="nav-item">
                             <a class="nav-link" href="{{ $nav->to('login')->withReturn() }}">

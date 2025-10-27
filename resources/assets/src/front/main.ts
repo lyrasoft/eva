@@ -1,4 +1,5 @@
 import 'bootstrap';
+import { useShopGoCatalog } from '@lyrasoft/shopgo';
 import { App, defineJsModules } from '@windwalker-io/core/app';
 import { pushUnicornToGlobal, useUIBootstrap5, useUnicorn, useUnicornPhpAdapter } from '@windwalker-io/unicorn-next';
 import { useLuna } from '@lyrasoft/luna';
@@ -13,5 +14,6 @@ useUnicornPhpAdapter();
 
 pushUnicornToGlobal();
 useLuna();
+useShopGoCatalog();
 
 export { app as default, u };

@@ -11,6 +11,7 @@ use Lyrasoft\Favorite\FavoritePackage;
 use Lyrasoft\Luna\LunaPackage;
 use Lyrasoft\Luna\Script\FontAwesomeScript;
 use Lyrasoft\Luna\Services\ConfigService;
+use Lyrasoft\ShopGo\Script\ShopGoScript;
 use Lyrasoft\ShopGo\ShopGoPackage;
 use Psr\Cache\InvalidArgumentException;
 use Psr\Http\Message\ResponseInterface;
@@ -34,6 +35,7 @@ class FrontMiddleware extends AbstractLifecycleMiddleware
         protected HtmlFrame $htmlFrame,
         protected UnicornScript $unicornScript,
         protected FontAwesomeScript $fontAwesomeScript,
+        protected ShopGoScript $shopGoScript,
     ) {
     }
 
@@ -73,6 +75,9 @@ class FrontMiddleware extends AbstractLifecycleMiddleware
 
         // Metadata
         $coreConfig = $this->app->service(ConfigService::class)->getConfig('core');
+
+        // ShopGo
+        $this->shopGoScript->currencySwitcher();
 
         $this->htmlFrame->setFavicon('@vite/images/favicon.png');
         $this->htmlFrame->setSiteName('Windwalker');
