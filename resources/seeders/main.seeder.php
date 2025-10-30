@@ -15,6 +15,12 @@ return [
     // Banner
     __DIR__ . '/banner.seeder.php',
 
+    // Member
+    __DIR__ . '/member.seeder.php',
+
+    // Portfolio
+    __DIR__ . '/portfolio.seeder.php',
+
     // Events
     // __DIR__ . '/venue.seeder.php',
     // __DIR__ . '/event.seeder.php',

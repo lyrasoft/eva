@@ -10,6 +10,8 @@ use Lyrasoft\EventBooking\EventBookingPackage;
 use Lyrasoft\Favorite\FavoritePackage;
 use Lyrasoft\Luna\LunaPackage;
 use Lyrasoft\Luna\Script\FontAwesomeScript;
+use Lyrasoft\Member\MemberPackage;
+use Lyrasoft\Portfolio\PortfolioPackage;
 use Lyrasoft\ShopGo\ShopGoPackage;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -38,6 +40,8 @@ class AdminMiddleware extends AbstractLifecycleMiddleware
     {
         $this->lang->loadAllFromVendor(UnicornPackage::class, 'ini');
         $this->lang->loadAllFromVendor(LunaPackage::class, 'ini');
+        $this->lang->loadAllFromVendor(MemberPackage::class, 'ini');
+        $this->lang->loadAllFromVendor(PortfolioPackage::class, 'ini');
         $this->lang->loadAllFromVendor(ShopGoPackage::class, 'ini');
         $this->lang->loadAllFromVendor(ContactPackage::class, 'ini');
         $this->lang->loadAllFromVendor(BannerPackage::class, 'ini');

@@ -46,6 +46,8 @@
         "lyrasoft/favorite": "dev-master as 1.2.1",
         "lyrasoft/sequence": "^1.0",
         "lyrasoft/theme-nexus": "dev-main",
+        "lyrasoft/member": "dev-master",
+        "lyrasoft/portfolio": "dev-master",
         "symfony/polyfill-php85": "^1.33"
     },
     "require-dev": {

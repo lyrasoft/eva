@@ -11,6 +11,8 @@ use Lyrasoft\Favorite\FavoritePackage;
 use Lyrasoft\Luna\LunaPackage;
 use Lyrasoft\Luna\Script\FontAwesomeScript;
 use Lyrasoft\Luna\Services\ConfigService;
+use Lyrasoft\Member\MemberPackage;
+use Lyrasoft\Portfolio\PortfolioPackage;
 use Lyrasoft\ShopGo\Script\ShopGoScript;
 use Lyrasoft\ShopGo\ShopGoPackage;
 use Psr\Cache\InvalidArgumentException;
@@ -52,6 +54,8 @@ class FrontMiddleware extends AbstractLifecycleMiddleware
     {
         $this->lang->loadAllFromVendor(UnicornPackage::class, 'ini');
         $this->lang->loadAllFromVendor(LunaPackage::class, 'ini');
+        $this->lang->loadAllFromVendor(MemberPackage::class, 'ini');
+        $this->lang->loadAllFromVendor(PortfolioPackage::class, 'ini');
         $this->lang->loadAllFromVendor(ShopGoPackage::class, 'ini');
         $this->lang->loadAllFromVendor(ContactPackage::class, 'ini');
         $this->lang->loadAllFromVendor(BannerPackage::class, 'ini');

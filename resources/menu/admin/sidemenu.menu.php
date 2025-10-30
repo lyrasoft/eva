@@ -213,6 +213,36 @@ $menu->registerChildren(
     }
 );
 
+$menu->link('成員', '#')
+    ->icon('fal fa-users');
+
+$menu->registerChildren(
+    function (MenuBuilder $menu) use ($nav, $lang) {
+        // Category
+        $menu->link('成員分類')
+            ->to($nav->to('category_list', ['type' => 'member']))
+            ->icon('fal fa-sitemap');
+
+        $menu->link('成員管理')
+            ->to($nav->to('member_list'))
+            ->icon('fal fa-person');
+    }
+);
+$menu->link('作品集', '#')
+    ->icon('fal fa-images');
+
+$menu->registerChildren(
+    function (MenuBuilder $menu) use ($nav, $lang) {
+        $menu->link('作品分類')
+            ->to($nav->to('category_list', ['type' => 'portfolio']))
+            ->icon('fal fa-sitemap');
+
+        $menu->link('作品管理')
+            ->to($nav->to('portfolio_list'))
+            ->icon('fal fa-images');
+    }
+);
+
 // Widget
 $menu->link($lang('unicorn.title.grid', title: $lang('luna.widget.title')))
     ->to($nav->to('widget_list'))

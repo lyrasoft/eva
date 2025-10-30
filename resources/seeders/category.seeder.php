@@ -36,6 +36,10 @@ return new /** Category Seeder */ class extends AbstractSeeder {
     {
         /** @var array<string, array{ number: int, max_level: int }|\Closure> $types */
         $types = [
+            'member' => [
+                'number' => 15,
+                'max_level' => 1,
+            ],
             ...include_glob(__DIR__ . '/categories/*.categories.php', merge: true),
         ];
 
