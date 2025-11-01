@@ -163,14 +163,6 @@ $menu->link('表單管理')
     ->to($nav->to('formkit_list'))
     ->icon('fal fa-layer-group');
 
-$menu->link($this->trans('unicorn.title.grid', title: $this->trans('firewall.redirect.title')))
-    ->to($nav->to('redirect_list')->var('type', 'main'))
-    ->icon('fal fa-angles-right');
-
-$menu->link($this->trans('unicorn.title.grid', title: $this->trans('firewall.ip.rule.title')))
-    ->to($nav->to('ip_rule_list')->var('type', 'main'))
-    ->icon('fal fa-network-wired');
-
 // Contact
 $menu->link('聯絡單')
     ->to($nav->to('contact_list', ['type' => 'main']))
@@ -262,6 +254,22 @@ $menu->link($lang('contact.list.title', title: $lang('contact.main.title')))
 $menu->link($lang('feedback.comment.list.title', title: $lang('luna.article.title')))
     ->to($nav->to('comment_list', ['type' => 'article']))
     ->icon('fal fa-comments');
+
+$menu->link('網路設定')
+    ->to('#')
+    ->icon('fal fa-network-wired');
+
+$menu->registerChildren(
+    function (MenuBuilder $menu) use ($nav, $lang) {
+        $menu->link($this->trans('unicorn.title.grid', title: $this->trans('firewall.redirect.title')))
+            ->to($nav->to('redirect_list')->var('type', 'main'))
+            ->icon('fal fa-angles-right');
+
+        $menu->link($this->trans('unicorn.title.grid', title: $this->trans('firewall.ip.rule.title')))
+            ->to($nav->to('ip_rule_list')->var('type', 'main'))
+            ->icon('fal fa-network-wired');
+    }
+);
 
 // Configs
 $menu->link('設定檔', '#')

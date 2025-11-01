@@ -12,19 +12,16 @@ declare(strict_types=1);
 namespace App\Migration;
 
 use Lyrasoft\Favorite\Entity\Favorite;
-use Windwalker\Core\Console\ConsoleApplication;
-use Windwalker\Core\Migration\Migration;
+use Windwalker\Core\Migration\AbstractMigration;
+use Windwalker\Core\Migration\MigrateUp;
+use Windwalker\Core\Migration\MigrateDown;
 use Windwalker\Database\Schema\Schema;
 
-/**
- * Migration UP: 2022102708280008_FavoriteInit.
- *
- * @var Migration          $mig
- * @var ConsoleApplication $app
- */
-$mig->up(
-    static function () use ($mig) {
-        $mig->createTable(
+return new /** 2022102708280008_FavoriteInit */ class extends AbstractMigration {
+    #[MigrateUp]
+    public function up(): void
+    {
+        $this->createTable(
             Favorite::class,
             function (Schema $schema) {
                 $schema->primary('id');
@@ -40,13 +37,10 @@ $mig->up(
             }
         );
     }
-);
 
-/**
- * Migration DOWN.
- */
-$mig->down(
-    static function () use ($mig) {
-        $mig->dropTables(Favorite::class);
+    #[MigrateDown]
+    public function down(): void
+    {
+        $this->dropTables(Favorite::class);
     }
-);
+};

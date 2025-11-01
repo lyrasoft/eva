@@ -69,7 +69,7 @@ static fn() => [
 
     'checkout' => [
         'allow_anonymous' => false,
-        'partial_checkout' => false,
+        'partial_checkout' => true,
         'default_expiry' => '+7days',
     ],
 

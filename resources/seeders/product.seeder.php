@@ -21,6 +21,7 @@ use Lyrasoft\ShopGo\ShopGoPackage;
 use Unicorn\Utilities\SlugHelper;
 use Windwalker\Core\Seed\AbstractSeeder;
 use Windwalker\Core\Seed\SeedClear;
+use Windwalker\Core\Seed\SeedImport;
 use Windwalker\Data\Collection;
 use Windwalker\ORM\EntityMapper;
 use Windwalker\Utilities\Str;
@@ -31,7 +32,7 @@ use function Windwalker\filter;
 use function Windwalker\uid;
 
 return new /** Product Seeder */ class extends AbstractSeeder {
-    #[\Windwalker\Core\Seed\SeedImport]
+    #[SeedImport]
     public function import(ShopGoPackage $shopGo, ProductAttributeService $productAttributeService): void
     {
         $faker = $this->faker($shopGo->config('fixtures.locale') ?: 'en_US');
@@ -275,7 +276,7 @@ return new /** Product Seeder */ class extends AbstractSeeder {
 
         foreach ($currentOptions as $option) {
             $group = $parentGroup;
-            $option['parentId'] = $feature->id;
+            $option->parentId = $feature->id;
 
             $group[] = ListOption::wrap($option);
 

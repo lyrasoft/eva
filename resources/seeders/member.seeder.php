@@ -47,7 +47,7 @@ return new /** Member Seeder */ class extends AbstractSeeder {
 
             foreach ($faker->randomElements($tagIds, random_int(3, 5)) as $tagId) {
                 $map = new TagMap();
-                $map->targetId = $item->getId();
+                $map->targetId = $item->id;
                 $map->tagId = (int) $tagId;
                 $map->type = 'member';
 

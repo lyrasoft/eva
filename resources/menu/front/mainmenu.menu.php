@@ -22,7 +22,7 @@ use Windwalker\Core\Language\LangService;
 $menu->link('首頁', $nav->to('home'))
     ->icon('fal fa-home');
 
-$menu->link('分類', $nav->to('article_category'))
+$menu->link('文章', $nav->to('article_category'))
     ->icon('fal fa-files');
 
 $menu->registerChildren(
@@ -47,8 +47,51 @@ $menu->registerChildren(
     }
 );
 
+$menu->link('功能', '#');
+
+$menu->registerChildren(
+    function (MenuBuilder $menu) use ($app, $nav) {
+        $menu->link('團隊成員', '#');
+
+        $menu->registerChildren(
+            function (MenuBuilder $menu) use ($app, $nav) {
+                $categories = $app->make(CategoryRepository::class)
+                    ->getAvailableListSelector()
+                    ->where('category.type', 'member')
+                    ->ordering('category.lft', 'ASC');
+
+                foreach ($categories as $category) {
+                    $menu->link(
+                        $category->title,
+                        $nav->to('member_category')->var('path', $category->path)
+                    );
+                }
+            }
+        );
+
+        $menu->link('作品', '#');
+
+        $menu->registerChildren(
+            function (MenuBuilder $menu) use ($app, $nav) {
+                $categories = $app->make(CategoryRepository::class)
+                    ->getAvailableListSelector()
+                    ->where('category.type', 'portfolio')
+                    ->ordering('category.lft', 'ASC');
+
+                foreach ($categories as $category) {
+                    $menu->link(
+                        $category->title,
+                        $nav->to('portfolio_category')->var('path', $category->path)
+                    );
+                }
+            }
+        );
+    }
+);
+
 $menu->link('活動', $nav->to('event_stage_list'))
     ->icon('fal fa-calendar');
 
 $menu->link('商城', $nav->to('product_list'))
     ->icon('fal fa-shopping-cart');
+

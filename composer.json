@@ -48,7 +48,8 @@
         "lyrasoft/theme-nexus": "dev-main",
         "lyrasoft/member": "dev-master",
         "lyrasoft/portfolio": "dev-master",
-        "symfony/polyfill-php85": "^1.33"
+        "symfony/polyfill-php85": "^1.33",
+        "lyrasoft/action-log": "dev-master"
     },
     "require-dev": {
         "windwalker/framework": "dev-master",

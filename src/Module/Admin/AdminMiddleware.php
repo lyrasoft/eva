@@ -8,6 +8,8 @@ use Lyrasoft\Banner\BannerPackage;
 use Lyrasoft\Contact\ContactPackage;
 use Lyrasoft\EventBooking\EventBookingPackage;
 use Lyrasoft\Favorite\FavoritePackage;
+use Lyrasoft\Feedback\FeedbackPackage;
+use Lyrasoft\Firewall\FirewallPackage;
 use Lyrasoft\Luna\LunaPackage;
 use Lyrasoft\Luna\Script\FontAwesomeScript;
 use Lyrasoft\Member\MemberPackage;
@@ -48,6 +50,8 @@ class AdminMiddleware extends AbstractLifecycleMiddleware
         $this->lang->loadAllFromVendor(ContactPackage::class, 'ini');
         $this->lang->loadAllFromVendor(EventBookingPackage::class, 'ini');
         $this->lang->loadAllFromVendor(FavoritePackage::class, 'ini');
+        $this->lang->loadAllFromVendor(FirewallPackage::class, 'ini');
+        $this->lang->loadAllFromVendor(FeedbackPackage::class, 'ini');
 
         $this->lang->loadAll('ini');
 
