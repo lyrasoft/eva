@@ -1,0 +1,22 @@
+// SCSS file for Cart
+
+.view-cart {
+  [v-cloak] {
+    [data-cloak], &[data-cloak] {
+      display: none !important;
+    }
+
+    [data-loading] {
+      display: block;
+    }
+  }
+
+  [data-loading] {
+    display: none;
+  }
+
+  .l-cart-sidebar {
+    overflow-y: auto;
+    height: calc(100vh - var(--sidebar-offsets-top, 90px) - var(--sidebar-offsets-bottom, 30px));
+  }
+}

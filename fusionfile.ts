@@ -10,6 +10,7 @@ fusion.alias('~', resolve('./resources/assets'));
 fusion.alias('~js', resolve('./resources/assets/src'));
 fusion.alias('~vendor', resolve('./www/assets/vendor'));
 fusion.alias('vue', 'vue/dist/vue.esm-bundler.js');
+fusion.alias('~shopgo', resolve('./resources/assets/src/shopgo'));
 
 // Fusion Options
 fusion.overrideOptions({

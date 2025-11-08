@@ -24,6 +24,9 @@
             "~vendor/*": [
                 "./www/assets/vendor/*"
             ],
+            "~shopgo": [
+                "./resources/assets/src/shopgo/*"
+            ]
         }
     }
 }

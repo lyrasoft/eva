@@ -24,6 +24,8 @@
         "bootstrap": "^5.0.0",
         "cross-env": "^7.0.3",
         "swiper": "^8.0||^9.0||^10.0||^11.0||^12.0",
+        "ts-md5": "^2.0.1",
+        "tw-city-selector": "^2.1.2",
         "vite": "^7.1.7",
         "vite-plugin-vue-component-override": "^0.1.1",
         "youtube-background": "^1.1.8"

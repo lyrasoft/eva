@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Routes;
 
-use Lyrasoft\ShopGo\Module\Front\Cart\CartController;
-use Lyrasoft\ShopGo\Module\Front\Cart\CartView;
+use App\Module\Front\Cart\CartController;
+use App\Module\Front\Cart\CartView;
 use Windwalker\Core\Middleware\JsonApiMiddleware;
 use Windwalker\Core\Router\RouteCreator;
 
