@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Config;
 
+use App\Subscriber\TaiwanCheckoutSubscriber;
 use Lyrasoft\ShopGo\Ecpay\EcpayShipping;
 use Lyrasoft\ShopGo\Enum\OrderNoMode;
 use Lyrasoft\ShopGo\Payment\Transfer\TransferPayment;
@@ -23,6 +24,7 @@ static fn() => [
         ShopGoPackage::class => [
             AdditionalPurchaseSubscriber::class,
             DiscountSubscriber::class,
+            TaiwanCheckoutSubscriber::class,
         ],
     ],
 
