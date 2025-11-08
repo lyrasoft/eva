@@ -15,6 +15,7 @@
         "@lyrasoft/luna": "portal:./vendor/lyrasoft/luna/assets",
         "@lyrasoft/nexus": "portal:./vendor/lyrasoft/theme-nexus",
         "@lyrasoft/shopgo": "portal:./vendor/lyrasoft/shopgo/assets",
+        "@lyrasoft/shopgo-ecpay": "portal:./vendor/lyrasoft/shopgo-ecpay/assets",
         "@popperjs/core": "^2.11.8",
         "@windwalker-io/core": "^4.0",
         "@windwalker-io/fusion-next": "^0.1.0",

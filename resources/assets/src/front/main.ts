@@ -1,6 +1,7 @@
 import 'bootstrap';
 import { useFavoriteButton } from '@lyrasoft/favorite';
 import { useShopGoCatalog } from '@lyrasoft/shopgo';
+import { useShopGoEcpay } from '@lyrasoft/shopgo-ecpay';
 import { App, defineJsModules } from '@windwalker-io/core/app';
 import { pushUnicornToGlobal, useUIBootstrap5, useUnicorn, useUnicornPhpAdapter } from '@windwalker-io/unicorn-next';
 import { useLuna } from '@lyrasoft/luna';
@@ -16,6 +17,7 @@ useUnicornPhpAdapter();
 pushUnicornToGlobal();
 useLuna();
 useShopGoCatalog();
+useShopGoEcpay();
 useFavoriteButton();
 
 export { app as default, u };
