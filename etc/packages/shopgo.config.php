@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Config;
 
+use Lyrasoft\ShopGo\Ecpay\EcpayShipping;
 use Lyrasoft\ShopGo\Enum\OrderNoMode;
 use Lyrasoft\ShopGo\Payment\Transfer\TransferPayment;
 use Lyrasoft\ShopGo\Shipping\Basic\BasicShipping;
@@ -78,6 +79,7 @@ static fn() => [
         'location_labels' => null,
         'types' => [
             'basic' => BasicShipping::class,
+            'ecpay' => EcpayShipping::class,
         ],
     ],
 

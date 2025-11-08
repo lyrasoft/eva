@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Module\Admin;
 
+use Lyrasoft\ActionLog\ActionLogPackage;
 use Lyrasoft\Banner\BannerPackage;
 use Lyrasoft\Contact\ContactPackage;
 use Lyrasoft\EventBooking\EventBookingPackage;
@@ -52,6 +53,7 @@ class AdminMiddleware extends AbstractLifecycleMiddleware
         $this->lang->loadAllFromVendor(FavoritePackage::class, 'ini');
         $this->lang->loadAllFromVendor(FirewallPackage::class, 'ini');
         $this->lang->loadAllFromVendor(FeedbackPackage::class, 'ini');
+        $this->lang->loadAllFromVendor(ActionLogPackage::class, 'ini');
 
         $this->lang->loadAll('ini');
 

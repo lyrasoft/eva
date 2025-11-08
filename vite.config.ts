@@ -6,6 +6,9 @@ import { resolve } from 'node:path';
 export default defineConfig(({ mode }) => {
   return {
     base: './',
+    resolve: {
+      dedupe: ['@lyrasoft/shopgo', 'vue', '@windwalker-io/unicorn-next'],
+    },
     build: {
       sourcemap: false,
       minify: mode === 'production',

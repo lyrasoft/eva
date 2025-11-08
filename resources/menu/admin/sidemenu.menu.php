@@ -255,9 +255,9 @@ $menu->link($lang('feedback.comment.list.title', title: $lang('luna.article.titl
     ->to($nav->to('comment_list', ['type' => 'article']))
     ->icon('fal fa-comments');
 
-$menu->link('網路設定')
+$menu->link('安全性')
     ->to('#')
-    ->icon('fal fa-network-wired');
+    ->icon('fal fa-shield-halved');
 
 $menu->registerChildren(
     function (MenuBuilder $menu) use ($nav, $lang) {
@@ -268,6 +268,11 @@ $menu->registerChildren(
         $menu->link($this->trans('unicorn.title.grid', title: $this->trans('firewall.ip.rule.title')))
             ->to($nav->to('ip_rule_list')->var('type', 'main'))
             ->icon('fal fa-network-wired');
+
+        // Action Log
+        $menu->link('操作記錄')
+            ->to($nav->to('action_log_list'))
+            ->icon('fal fa-shoe-prints');
     }
 );
 

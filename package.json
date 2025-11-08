@@ -27,6 +27,9 @@
         "vite-plugin-vue-component-override": "^0.1.1",
         "youtube-background": "^1.1.8"
     },
+    "workspaces": [
+        "vendor/windwalker/unicorn/*"
+    ],
     "//": {
         "workspaces": [
             "vendor/windwalker/unicorn/*",

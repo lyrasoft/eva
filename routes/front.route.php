@@ -34,10 +34,9 @@ $router->group('front')
     ->middleware(MaintenanceMiddleware::class)
     ->middleware(
         CsrfMiddleware::class,
-        options: [
-            'excludes' => [
-                'front::backup',
-            ]
+        excludes: [
+            'front::backup',
+            'front::shipping_task'
         ]
     )
     ->middleware(LocaleMiddleware::class)

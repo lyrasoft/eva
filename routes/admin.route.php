@@ -12,12 +12,17 @@ declare(strict_types=1);
 namespace App\Routes;
 
 use App\Module\Admin\AdminMiddleware;
+use App\Module\Admin\Dashboard\DashboardController;
+use App\Module\Admin\Dashboard\DashboardView;
+use Lyrasoft\ActionLog\Middleware\ActionLogMiddleware;
 use Lyrasoft\Contact\ContactPackage;
 use Lyrasoft\Firewall\FirewallPackage;
 use Lyrasoft\Formkit\FormkitPackage;
 use Lyrasoft\Luna\LunaPackage;
 use Lyrasoft\Luna\Middleware\AdminAccessMiddleware;
 use Lyrasoft\Luna\Middleware\LoginRequireMiddleware;
+use Unicorn\Aws\S3MultipartUploader;
+use Unicorn\Controller\S3MultipartUploadController;
 use Windwalker\Core\Middleware\CsrfMiddleware;
 use Windwalker\Core\Middleware\MetadataMiddleware;
 use Windwalker\Core\Router\RouteCreator;
@@ -29,6 +34,10 @@ $router->group('admin')
     ->namespace('admin')
     ->middleware(CsrfMiddleware::class)
     ->middleware(MetadataMiddleware::class, meta: ['robots' => 'noindex'])
+    ->middleware(
+        ActionLogMiddleware::class,
+        enabled: (bool) env('ACTION_LOG_ENABLE', '1')
+    )
     ->middleware(
         LoginRequireMiddleware::class,
         excludes: [
@@ -50,4 +59,7 @@ $router->group('admin')
         $router->load(FirewallPackage::path('routes/admin/*.route.php'));
         $router->load(ContactPackage::path('routes/admin/*.route.php'));
         $router->load(FormkitPackage::path('routes/admin/*.route.php'));
+
+        $router->any('multipart_upload', '/upload/s3/multipart[/{task}]')
+            ->controller(S3MultipartUploadController::class, 'ajax');
     });

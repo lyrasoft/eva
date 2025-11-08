@@ -21,8 +21,5 @@ $router->group('config')
 
             $router->any('config_ajax', '/config/ajax[/{task}]')
                 ->controller(ConfigController::class, 'ajax');
-
-            $router->any('config_upload', '/config/upload[/{task}]')
-                ->controller(S3MultipartUploadController::class, 'ajax');
         }
     );

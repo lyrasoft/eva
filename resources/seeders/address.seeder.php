@@ -45,6 +45,7 @@ return new /** Address Seeder */ class extends AbstractSeeder {
             $item->locationId = $location->getId();
             $item->firstname = $faker->firstName();
             $item->lastname = $faker->lastName();
+            $item->type = 'address';
             $item->name = $item->firstname . ' ' . $item->lastname;
             $item->email = $faker->email();
             $item->country = $country->title;

@@ -21,6 +21,7 @@ return new /** 2022122708280006_AddressInit */ class extends AbstractMigration {
                 $schema->primary('id');
                 $schema->integer('user_id');
                 $schema->integer('location_id');
+                $schema->varchar('type');
                 $schema->varchar('firstname');
                 $schema->varchar('lastname');
                 $schema->varchar('name');

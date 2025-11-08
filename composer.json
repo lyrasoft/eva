@@ -49,7 +49,10 @@
         "lyrasoft/member": "dev-master",
         "lyrasoft/portfolio": "dev-master",
         "symfony/polyfill-php85": "^1.33",
-        "lyrasoft/action-log": "dev-master"
+        "lyrasoft/action-log": "dev-master",
+        "lyrasoft/shopgo-ecpay": "dev-master",
+        "aws/aws-sdk-php": "^3.359",
+        "symfony/mime": "^8.0@beta"
     },
     "require-dev": {
         "windwalker/framework": "dev-master",

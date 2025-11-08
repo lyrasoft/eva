@@ -7,6 +7,7 @@ namespace App\Routes;
 use Lyrasoft\ShopGo\Module\Admin\Config\Form\ShopgoShopForm;
 use Lyrasoft\Luna\Module\Admin\Config\ConfigController;
 use Lyrasoft\Luna\Module\Admin\Config\ConfigEditView;
+use Lyrasoft\ShopGo\ShopGoPackage;
 use Windwalker\Core\Router\RouteCreator;
 
 /** @var RouteCreator $router */
@@ -19,6 +20,6 @@ $router->group('shopgo-config')
             ->var('type', 'shopgo_shop')
             ->var('form', ShopgoShopForm::class)
             ->layoutPaths(
-                WINDWALKER_SOURCE . '/Module/Admin/Config/views'
+                ShopGoPackage::path('src/Module/Admin/Config/views')
             );
     });
