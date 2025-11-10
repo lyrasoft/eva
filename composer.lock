@@ -6615,12 +6615,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/windwalker-io/framework.git",
-                "reference": "3fe04c132a5f4e42f59fa5988469ee82b3e9d553"
+                "reference": "b117319010451d9a379e0bae5975b9f9c5a4c7a4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/windwalker-io/framework/zipball/3fe04c132a5f4e42f59fa5988469ee82b3e9d553",
-                "reference": "3fe04c132a5f4e42f59fa5988469ee82b3e9d553",
+                "url": "https://api.github.com/repos/windwalker-io/framework/zipball/b117319010451d9a379e0bae5975b9f9c5a4c7a4",
+                "reference": "b117319010451d9a379e0bae5975b9f9c5a4c7a4",
                 "shasum": ""
             },
             "require": {
@@ -6851,7 +6851,7 @@
                 "issues": "https://github.com/windwalker-io/framework/issues",
                 "source": "https://github.com/windwalker-io/framework/tree/master"
             },
-            "time": "2025-11-09T15:34:19+00:00"
+            "time": "2025-11-10T04:47:55+00:00"
         },
         {
             "name": "windwalker/srp",
