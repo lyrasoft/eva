@@ -22,19 +22,19 @@ return [
     __DIR__ . '/portfolio.seeder.php',
 
     // Events
-    // __DIR__ . '/venue.seeder.php',
-    // __DIR__ . '/event.seeder.php',
-    // __DIR__ . '/event-order.seeder.php',
-    //
-    // // Feedback
-    // __DIR__ . '/comment-seeder.php',
-    // __DIR__ . '/rating-seeder.php',
-    //
-    // // Formkit
-    // __DIR__ . '/formkit-seeder.php',
-    //
-    // // Contact
-    // __DIR__ . '/contact.seeder.php',
+    __DIR__ . '/venue.seeder.php',
+    __DIR__ . '/event.seeder.php',
+    __DIR__ . '/event-order.seeder.php',
+
+    // Feedback
+    __DIR__ . '/comment-seeder.php',
+    __DIR__ . '/rating-seeder.php',
+
+    // Formkit
+    __DIR__ . '/formkit-seeder.php',
+
+    // Contact
+    __DIR__ . '/contact.seeder.php',
 
     // ShopGo
     __DIR__ . '/payment.seeder.php',
