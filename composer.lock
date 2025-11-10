@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "165b5c1c220fe4af6b7971186e636b61",
+    "content-hash": "9b455390851acca461a6fe52307e7c0f",
     "packages": [
         {
             "name": "asika/agent",
@@ -233,16 +233,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.359.6",
+            "version": "3.359.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "8d2ab3687196f15209c316080a431911f2e02bb5"
+                "reference": "a5be7ed5efd25d70a74275daeff896b896d9c286"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/8d2ab3687196f15209c316080a431911f2e02bb5",
-                "reference": "8d2ab3687196f15209c316080a431911f2e02bb5",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/a5be7ed5efd25d70a74275daeff896b896d9c286",
+                "reference": "a5be7ed5efd25d70a74275daeff896b896d9c286",
                 "shasum": ""
             },
             "require": {
@@ -324,9 +324,9 @@
             "support": {
                 "forum": "https://github.com/aws/aws-sdk-php/discussions",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.359.6"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.359.8"
             },
-            "time": "2025-11-05T19:08:10+00:00"
+            "time": "2025-11-07T19:48:19+00:00"
         },
         {
             "name": "brick/math",
@@ -549,16 +549,16 @@
         },
         {
             "name": "composer/ca-bundle",
-            "version": "1.5.8",
+            "version": "1.5.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/ca-bundle.git",
-                "reference": "719026bb30813accb68271fee7e39552a58e9f65"
+                "reference": "1905981ee626e6f852448b7aaa978f8666c5bc54"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/ca-bundle/zipball/719026bb30813accb68271fee7e39552a58e9f65",
-                "reference": "719026bb30813accb68271fee7e39552a58e9f65",
+                "url": "https://api.github.com/repos/composer/ca-bundle/zipball/1905981ee626e6f852448b7aaa978f8666c5bc54",
+                "reference": "1905981ee626e6f852448b7aaa978f8666c5bc54",
                 "shasum": ""
             },
             "require": {
@@ -605,7 +605,7 @@
             "support": {
                 "irc": "irc://irc.freenode.org/composer",
                 "issues": "https://github.com/composer/ca-bundle/issues",
-                "source": "https://github.com/composer/ca-bundle/tree/1.5.8"
+                "source": "https://github.com/composer/ca-bundle/tree/1.5.9"
             },
             "funding": [
                 {
@@ -617,7 +617,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-08-20T18:49:47+00:00"
+            "time": "2025-11-06T11:46:17+00:00"
         },
         {
             "name": "composer/pcre",
@@ -1860,16 +1860,16 @@
         },
         {
             "name": "lyrasoft/action-log",
-            "version": "dev-master",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/lyrasoft/luna-action-log.git",
-                "reference": "c8bbc4d0f16cd7ee3f2ad8916d6407af07c84909"
+                "reference": "b04add31978a95b5d50cd900f593337a522e163e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/lyrasoft/luna-action-log/zipball/c8bbc4d0f16cd7ee3f2ad8916d6407af07c84909",
-                "reference": "c8bbc4d0f16cd7ee3f2ad8916d6407af07c84909",
+                "url": "https://api.github.com/repos/lyrasoft/luna-action-log/zipball/b04add31978a95b5d50cd900f593337a522e163e",
+                "reference": "b04add31978a95b5d50cd900f593337a522e163e",
                 "shasum": ""
             },
             "require": {
@@ -1878,7 +1878,6 @@
                 "openspout/openspout": "^4.22",
                 "php": ">=8.4.6"
             },
-            "default-branch": true,
             "type": "windwalker-package",
             "extra": {
                 "windwalker": {
@@ -1908,9 +1907,9 @@
             "description": "LYRASOFT Action Log Package",
             "support": {
                 "issues": "https://github.com/lyrasoft/luna-action-log/issues",
-                "source": "https://github.com/lyrasoft/luna-action-log/tree/master"
+                "source": "https://github.com/lyrasoft/luna-action-log/tree/1.1.0"
             },
-            "time": "2025-10-31T04:31:25+00:00"
+            "time": "2025-11-06T11:09:34+00:00"
         },
         {
             "name": "lyrasoft/backup",
@@ -1960,16 +1959,16 @@
         },
         {
             "name": "lyrasoft/banner",
-            "version": "1.2.1",
+            "version": "1.2.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/lyrasoft/luna-banner.git",
-                "reference": "db2feff10cf3138dd326cf91d17e54b859cf5138"
+                "reference": "802331705c97d67ec0a8213c2dcc305282abf9c9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/lyrasoft/luna-banner/zipball/db2feff10cf3138dd326cf91d17e54b859cf5138",
-                "reference": "db2feff10cf3138dd326cf91d17e54b859cf5138",
+                "url": "https://api.github.com/repos/lyrasoft/luna-banner/zipball/802331705c97d67ec0a8213c2dcc305282abf9c9",
+                "reference": "802331705c97d67ec0a8213c2dcc305282abf9c9",
                 "shasum": ""
             },
             "require": {
@@ -1988,7 +1987,7 @@
                             "youtube-background": "^1.0.14"
                         },
                         "vendors": {
-                            "swiper": "^8.3.2"
+                            "swiper": "^8.0||^9.0||^10.0||^11.0||^12.0"
                         }
                     },
                     "modules": [
@@ -2017,9 +2016,9 @@
             "description": "Luna Banner package",
             "support": {
                 "issues": "https://github.com/lyrasoft/luna-banner/issues",
-                "source": "https://github.com/lyrasoft/luna-banner/tree/1.2.1"
+                "source": "https://github.com/lyrasoft/luna-banner/tree/1.2.2"
             },
-            "time": "2025-10-13T16:35:23+00:00"
+            "time": "2025-11-07T07:02:06+00:00"
         },
         {
             "name": "lyrasoft/contact",
@@ -2136,23 +2135,22 @@
         },
         {
             "name": "lyrasoft/faq",
-            "version": "dev-master",
+            "version": "1.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/lyrasoft/luna-faq.git",
-                "reference": "3f178a21babbc5906f9b2775cb7c131f7d3a73e6"
+                "reference": "4eece0d3b1b5c93da7274d74ab89580268e8f122"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/lyrasoft/luna-faq/zipball/3f178a21babbc5906f9b2775cb7c131f7d3a73e6",
-                "reference": "3f178a21babbc5906f9b2775cb7c131f7d3a73e6",
+                "url": "https://api.github.com/repos/lyrasoft/luna-faq/zipball/4eece0d3b1b5c93da7274d74ab89580268e8f122",
+                "reference": "4eece0d3b1b5c93da7274d74ab89580268e8f122",
                 "shasum": ""
             },
             "require": {
                 "lyrasoft/luna": "^2.2",
                 "php": ">=8.4.6"
             },
-            "default-branch": true,
             "type": "windwalker-package",
             "extra": {
                 "windwalker": {
@@ -2186,13 +2184,13 @@
             "description": "LYRASOFT faq package",
             "support": {
                 "issues": "https://github.com/lyrasoft/luna-faq/issues",
-                "source": "https://github.com/lyrasoft/luna-faq/tree/master"
+                "source": "https://github.com/lyrasoft/luna-faq/tree/1.2.0"
             },
-            "time": "2025-10-30T04:38:00+00:00"
+            "time": "2025-11-06T09:26:29+00:00"
         },
         {
             "name": "lyrasoft/favorite",
-            "version": "dev-master",
+            "version": "1.2.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/lyrasoft/luna-favorite.git",
@@ -2208,7 +2206,6 @@
                 "lyrasoft/luna": "^2.2",
                 "php": ">=8.4.6"
             },
-            "default-branch": true,
             "type": "library",
             "extra": {
                 "windwalker": {
@@ -2243,7 +2240,7 @@
             "description": "Lyrasoft Favorite package",
             "support": {
                 "issues": "https://github.com/lyrasoft/luna-favorite/issues",
-                "source": "https://github.com/lyrasoft/luna-favorite/tree/master"
+                "source": "https://github.com/lyrasoft/luna-favorite/tree/1.2.2"
             },
             "time": "2025-11-01T06:17:24+00:00"
         },
@@ -2355,16 +2352,16 @@
         },
         {
             "name": "lyrasoft/formkit",
-            "version": "dev-main",
+            "version": "0.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/lyrasoft/luna-formkit.git",
-                "reference": "6eadbc75ab49123df6cfa3542e72927c56d1a683"
+                "reference": "fa0499b25a84cc9300358878f0be551ee8a19a5e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/lyrasoft/luna-formkit/zipball/6eadbc75ab49123df6cfa3542e72927c56d1a683",
-                "reference": "6eadbc75ab49123df6cfa3542e72927c56d1a683",
+                "url": "https://api.github.com/repos/lyrasoft/luna-formkit/zipball/fa0499b25a84cc9300358878f0be551ee8a19a5e",
+                "reference": "fa0499b25a84cc9300358878f0be551ee8a19a5e",
                 "shasum": ""
             },
             "require": {
@@ -2374,7 +2371,6 @@
                 "phpoffice/phpspreadsheet": "^2.2",
                 "thunderer/shortcode": "^0.7.5"
             },
-            "default-branch": true,
             "type": "windwalker-package",
             "extra": {
                 "windwalker": {
@@ -2407,22 +2403,22 @@
             "description": "LYRASOFT FormKit Package",
             "support": {
                 "issues": "https://github.com/lyrasoft/luna-formkit/issues",
-                "source": "https://github.com/lyrasoft/luna-formkit/tree/main"
+                "source": "https://github.com/lyrasoft/luna-formkit/tree/0.2.1"
             },
-            "time": "2025-10-14T08:01:21+00:00"
+            "time": "2025-11-05T11:47:02+00:00"
         },
         {
             "name": "lyrasoft/luna",
-            "version": "2.2.3",
+            "version": "2.2.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/lyrasoft/luna.git",
-                "reference": "27bc6e997905fcc0d2f1ca08fc68018f82261a0c"
+                "reference": "1415f9c5a3c504bf1a149c79090430cfb42b4aed"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/lyrasoft/luna/zipball/27bc6e997905fcc0d2f1ca08fc68018f82261a0c",
-                "reference": "27bc6e997905fcc0d2f1ca08fc68018f82261a0c",
+                "url": "https://api.github.com/repos/lyrasoft/luna/zipball/1415f9c5a3c504bf1a149c79090430cfb42b4aed",
+                "reference": "1415f9c5a3c504bf1a149c79090430cfb42b4aed",
                 "shasum": ""
             },
             "require": {
@@ -2482,13 +2478,13 @@
             "homepage": "https://github.com/lyrasoft/luna",
             "support": {
                 "issues": "https://github.com/lyrasoft/luna/issues",
-                "source": "https://github.com/lyrasoft/luna/tree/2.2.3"
+                "source": "https://github.com/lyrasoft/luna/tree/2.2.4"
             },
-            "time": "2025-10-31T08:08:07+00:00"
+            "time": "2025-11-07T08:06:26+00:00"
         },
         {
             "name": "lyrasoft/member",
-            "version": "dev-master",
+            "version": "1.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/lyrasoft/luna-member.git",
@@ -2504,7 +2500,6 @@
                 "lyrasoft/luna": "^2.2",
                 "php": ">=8.4.6"
             },
-            "default-branch": true,
             "type": "windwalker-package",
             "extra": {
                 "windwalker": {
@@ -2534,29 +2529,28 @@
             "description": "LYRASOFT member package",
             "support": {
                 "issues": "https://github.com/lyrasoft/luna-member/issues",
-                "source": "https://github.com/lyrasoft/luna-member/tree/master"
+                "source": "https://github.com/lyrasoft/luna-member/tree/1.3.1"
             },
             "time": "2025-10-31T08:12:18+00:00"
         },
         {
             "name": "lyrasoft/portfolio",
-            "version": "dev-master",
+            "version": "1.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/lyrasoft/luna-portfolio.git",
-                "reference": "9d4e3cb221bc7c65cd928b810792f439225c897a"
+                "reference": "0c03e7974452dbdeeb3f0aa6a6920510ed207d11"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/lyrasoft/luna-portfolio/zipball/9d4e3cb221bc7c65cd928b810792f439225c897a",
-                "reference": "9d4e3cb221bc7c65cd928b810792f439225c897a",
+                "url": "https://api.github.com/repos/lyrasoft/luna-portfolio/zipball/0c03e7974452dbdeeb3f0aa6a6920510ed207d11",
+                "reference": "0c03e7974452dbdeeb3f0aa6a6920510ed207d11",
                 "shasum": ""
             },
             "require": {
                 "lyrasoft/luna": "^2.2",
                 "php": ">=8.4.6"
             },
-            "default-branch": true,
             "type": "windwalker-package",
             "extra": {
                 "windwalker": {
@@ -2589,9 +2583,9 @@
             "description": "LYRASOFT portfolio package",
             "support": {
                 "issues": "https://github.com/lyrasoft/luna-portfolio/issues",
-                "source": "https://github.com/lyrasoft/luna-portfolio/tree/master"
+                "source": "https://github.com/lyrasoft/luna-portfolio/tree/1.2.0"
             },
-            "time": "2025-10-31T08:43:31+00:00"
+            "time": "2025-10-31T08:42:49+00:00"
         },
         {
             "name": "lyrasoft/security",
@@ -2692,16 +2686,16 @@
         },
         {
             "name": "lyrasoft/shopgo",
-            "version": "dev-master",
+            "version": "0.2.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/lyrasoft/luna-shopgo.git",
-                "reference": "072de17fb683944f210733f178be8842f515d03a"
+                "reference": "867121c35fa95b2decd1414563d1523d4f7cef9e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/lyrasoft/luna-shopgo/zipball/072de17fb683944f210733f178be8842f515d03a",
-                "reference": "072de17fb683944f210733f178be8842f515d03a",
+                "url": "https://api.github.com/repos/lyrasoft/luna-shopgo/zipball/867121c35fa95b2decd1414563d1523d4f7cef9e",
+                "reference": "867121c35fa95b2decd1414563d1523d4f7cef9e",
                 "shasum": ""
             },
             "require": {
@@ -2713,10 +2707,14 @@
             "require-dev": {
                 "lyrasoft/sequence": "^1.0"
             },
-            "default-branch": true,
             "type": "luna-package",
             "extra": {
                 "windwalker": {
+                    "assets": {
+                        "vendors": {
+                            "@lyrasoft/shopgo": "portal:./vendor/lyrasoft/shopgo/assets"
+                        }
+                    },
                     "modules": [
                         "src/Module"
                     ],
@@ -2743,29 +2741,39 @@
             "description": "Luna ShopGo package",
             "support": {
                 "issues": "https://github.com/lyrasoft/luna-shopgo/issues",
-                "source": "https://github.com/lyrasoft/luna-shopgo/tree/master"
+                "source": "https://github.com/lyrasoft/luna-shopgo/tree/0.2.2"
             },
-            "time": "2025-11-04T16:55:24+00:00"
+            "time": "2025-11-09T14:33:28+00:00"
         },
         {
             "name": "lyrasoft/shopgo-ecpay",
-            "version": "dev-master",
+            "version": "1.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/lyrasoft/shopgo-ecpay.git",
-                "reference": "da6a66de0065419d1bb947569df13ff19fa366d8"
+                "reference": "256ba4feb584a156e9384c98cc95fbde128a21f9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/lyrasoft/shopgo-ecpay/zipball/da6a66de0065419d1bb947569df13ff19fa366d8",
-                "reference": "da6a66de0065419d1bb947569df13ff19fa366d8",
+                "url": "https://api.github.com/repos/lyrasoft/shopgo-ecpay/zipball/256ba4feb584a156e9384c98cc95fbde128a21f9",
+                "reference": "256ba4feb584a156e9384c98cc95fbde128a21f9",
                 "shasum": ""
             },
             "require": {
-                "ecpay/sdk": "^1.2"
+                "ecpay/sdk": "^1.2",
+                "lyrasoft/shopgo": "0.*",
+                "php": ">=8.4.6"
             },
-            "default-branch": true,
             "type": "shopgo-package",
+            "extra": {
+                "windwalker": {
+                    "assets": {
+                        "vendors": {
+                            "@lyrasoft/shopgo-ecpay": "portal:./vendor/lyrasoft/shopgo-ecpay/assets"
+                        }
+                    }
+                }
+            },
             "autoload": {
                 "psr-4": {
                     "Lyrasoft\\ShopGo\\Ecpay\\": "src/"
@@ -2784,28 +2792,27 @@
             "description": "ShopGo Ecpay package",
             "support": {
                 "issues": "https://github.com/lyrasoft/shopgo-ecpay/issues",
-                "source": "https://github.com/lyrasoft/shopgo-ecpay/tree/master"
+                "source": "https://github.com/lyrasoft/shopgo-ecpay/tree/1.1.1"
             },
-            "time": "2025-11-04T16:56:04+00:00"
+            "time": "2025-11-10T04:07:02+00:00"
         },
         {
             "name": "lyrasoft/theme-nexus",
-            "version": "dev-main",
+            "version": "1.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/lyrasoft/theme-nexus.git",
-                "reference": "a8005f37d3e09dfc1d08d090687d88cd6c65cb54"
+                "reference": "b96c4cfa52c909972729ac18fb84ac3dab156772"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/lyrasoft/theme-nexus/zipball/a8005f37d3e09dfc1d08d090687d88cd6c65cb54",
-                "reference": "a8005f37d3e09dfc1d08d090687d88cd6c65cb54",
+                "url": "https://api.github.com/repos/lyrasoft/theme-nexus/zipball/b96c4cfa52c909972729ac18fb84ac3dab156772",
+                "reference": "b96c4cfa52c909972729ac18fb84ac3dab156772",
                 "shasum": ""
             },
             "require-dev": {
                 "windwalker/core": "^4.2"
             },
-            "default-branch": true,
             "type": "theme",
             "extra": {
                 "windwalker": {
@@ -2833,9 +2840,9 @@
             ],
             "support": {
                 "issues": "https://github.com/lyrasoft/theme-nexus/issues",
-                "source": "https://github.com/lyrasoft/theme-nexus/tree/main"
+                "source": "https://github.com/lyrasoft/theme-nexus/tree/1.1.1"
             },
-            "time": "2025-10-13T16:48:51+00:00"
+            "time": "2025-10-13T16:46:09+00:00"
         },
         {
             "name": "lyrasoft/token-coin",
@@ -2887,16 +2894,16 @@
         },
         {
             "name": "lyrasoft/toolkit",
-            "version": "1.2.0",
+            "version": "1.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/lyrasoft/toolkit.git",
-                "reference": "82d1672c9440eb02bddad7f30c93f45a1b5c93cb"
+                "reference": "ea62d4861a1a95c83abf2a7c32682af7cf821c2c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/lyrasoft/toolkit/zipball/82d1672c9440eb02bddad7f30c93f45a1b5c93cb",
-                "reference": "82d1672c9440eb02bddad7f30c93f45a1b5c93cb",
+                "url": "https://api.github.com/repos/lyrasoft/toolkit/zipball/ea62d4861a1a95c83abf2a7c32682af7cf821c2c",
+                "reference": "ea62d4861a1a95c83abf2a7c32682af7cf821c2c",
                 "shasum": ""
             },
             "require": {
@@ -2934,9 +2941,9 @@
             "description": "LYRASOFY development toolkit",
             "support": {
                 "issues": "https://github.com/lyrasoft/toolkit/issues",
-                "source": "https://github.com/lyrasoft/toolkit/tree/1.2.0"
+                "source": "https://github.com/lyrasoft/toolkit/tree/1.2.1"
             },
-            "time": "2025-10-06T08:15:42+00:00"
+            "time": "2025-11-09T15:49:27+00:00"
         },
         {
             "name": "maennchen/zipstream-php",
@@ -6020,16 +6027,16 @@
         },
         {
             "name": "symfony/service-contracts",
-            "version": "v3.6.0",
+            "version": "v3.6.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/service-contracts.git",
-                "reference": "f021b05a130d35510bd6b25fe9053c2a8a15d5d4"
+                "reference": "45112560a3ba2d715666a509a0bc9521d10b6c43"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/service-contracts/zipball/f021b05a130d35510bd6b25fe9053c2a8a15d5d4",
-                "reference": "f021b05a130d35510bd6b25fe9053c2a8a15d5d4",
+                "url": "https://api.github.com/repos/symfony/service-contracts/zipball/45112560a3ba2d715666a509a0bc9521d10b6c43",
+                "reference": "45112560a3ba2d715666a509a0bc9521d10b6c43",
                 "shasum": ""
             },
             "require": {
@@ -6083,7 +6090,7 @@
                 "standards"
             ],
             "support": {
-                "source": "https://github.com/symfony/service-contracts/tree/v3.6.0"
+                "source": "https://github.com/symfony/service-contracts/tree/v3.6.1"
             },
             "funding": [
                 {
@@ -6095,11 +6102,15 @@
                     "type": "github"
                 },
                 {
+                    "url": "https://github.com/nicolas-grekas",
+                    "type": "github"
+                },
+                {
                     "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-04-25T09:37:31+00:00"
+            "time": "2025-07-15T11:30:57+00:00"
         },
         {
             "name": "symfony/stopwatch",
@@ -6514,16 +6525,16 @@
         },
         {
             "name": "windwalker/core",
-            "version": "4.2.4",
+            "version": "4.2.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/windwalker-io/core.git",
-                "reference": "73c895da8c0e17a1718d79624f3603c7cace43d1"
+                "reference": "6cf795b9ddbfdf95c2ee782728371363eb412ad2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/windwalker-io/core/zipball/73c895da8c0e17a1718d79624f3603c7cace43d1",
-                "reference": "73c895da8c0e17a1718d79624f3603c7cace43d1",
+                "url": "https://api.github.com/repos/windwalker-io/core/zipball/6cf795b9ddbfdf95c2ee782728371363eb412ad2",
+                "reference": "6cf795b9ddbfdf95c2ee782728371363eb412ad2",
                 "shasum": ""
             },
             "require": {
@@ -6594,9 +6605,9 @@
             "homepage": "https://github.com/windwalker-io/core",
             "support": {
                 "issues": "https://github.com/windwalker-io/core/issues",
-                "source": "https://github.com/windwalker-io/core/tree/4.2.4"
+                "source": "https://github.com/windwalker-io/core/tree/4.2.5"
             },
-            "time": "2025-11-04T06:36:32+00:00"
+            "time": "2025-11-09T15:36:10+00:00"
         },
         {
             "name": "windwalker/framework",
@@ -6604,12 +6615,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/windwalker-io/framework.git",
-                "reference": "e738ffa7125576a0e8889eefc6507773b2d66f0b"
+                "reference": "3fe04c132a5f4e42f59fa5988469ee82b3e9d553"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/windwalker-io/framework/zipball/e738ffa7125576a0e8889eefc6507773b2d66f0b",
-                "reference": "e738ffa7125576a0e8889eefc6507773b2d66f0b",
+                "url": "https://api.github.com/repos/windwalker-io/framework/zipball/3fe04c132a5f4e42f59fa5988469ee82b3e9d553",
+                "reference": "3fe04c132a5f4e42f59fa5988469ee82b3e9d553",
                 "shasum": ""
             },
             "require": {
@@ -6840,7 +6851,7 @@
                 "issues": "https://github.com/windwalker-io/framework/issues",
                 "source": "https://github.com/windwalker-io/framework/tree/master"
             },
-            "time": "2025-10-26T08:19:06+00:00"
+            "time": "2025-11-09T15:34:19+00:00"
         },
         {
             "name": "windwalker/srp",
@@ -6895,16 +6906,16 @@
         },
         {
             "name": "windwalker/unicorn",
-            "version": "1.2.2",
+            "version": "1.2.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/windwalker-io/unicorn.git",
-                "reference": "20e89d98cb6417c912f0250f212548fadc728e9a"
+                "reference": "a47c07f53cde7146e8d0d48714022a49e1bdb213"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/windwalker-io/unicorn/zipball/20e89d98cb6417c912f0250f212548fadc728e9a",
-                "reference": "20e89d98cb6417c912f0250f212548fadc728e9a",
+                "url": "https://api.github.com/repos/windwalker-io/unicorn/zipball/a47c07f53cde7146e8d0d48714022a49e1bdb213",
+                "reference": "a47c07f53cde7146e8d0d48714022a49e1bdb213",
                 "shasum": ""
             },
             "require": {
@@ -6959,36 +6970,19 @@
             "homepage": "https://github.com/ventoviro/unicorn",
             "support": {
                 "issues": "https://github.com/windwalker-io/unicorn/issues",
-                "source": "https://github.com/windwalker-io/unicorn/tree/1.2.2"
+                "source": "https://github.com/windwalker-io/unicorn/tree/1.2.5"
             },
-            "time": "2025-10-19T14:07:25+00:00"
+            "time": "2025-11-09T15:34:51+00:00"
         }
     ],
     "packages-dev": [],
-    "aliases": [
-        {
-            "package": "lyrasoft/favorite",
-            "version": "9999999-dev",
-            "alias": "1.2.1",
-            "alias_normalized": "1.2.1.0"
-        }
-    ],
+    "aliases": [],
     "minimum-stability": "beta",
     "stability-flags": {
-        "lyrasoft/action-log": 20,
         "lyrasoft/event-booking": 20,
-        "lyrasoft/faq": 20,
-        "lyrasoft/favorite": 20,
         "lyrasoft/feedback": 20,
         "lyrasoft/firewall": 20,
-        "lyrasoft/formkit": 20,
-        "lyrasoft/member": 20,
-        "lyrasoft/portfolio": 20,
-        "lyrasoft/shopgo": 20,
-        "lyrasoft/shopgo-ecpay": 20,
-        "lyrasoft/theme-nexus": 20,
         "lyrasoft/token-coin": 20,
-        "symfony/mime": 10,
         "windwalker/framework": 20
     },
     "prefer-stable": false,
