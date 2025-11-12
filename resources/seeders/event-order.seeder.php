@@ -83,7 +83,7 @@ return new /** EventOrder Seeder */ class extends AbstractSeeder {
                 $attend->phone = $faker->numerify('02-####-####');
                 $attend->address = $faker->address();
                 $attend->state = AttendState::PENDING;
-                $attend->screenshots = [
+                $attend->snapshots = [
                     'plan' => $plan
                 ];
 
@@ -99,24 +99,22 @@ return new /** EventOrder Seeder */ class extends AbstractSeeder {
             $item->stageId = $stage->id;
             $item->no = $orderService->createNo($item);
             $item->invoiceType = $faker->randomElement(InvoiceType::cases());
-            $invoice = $item->invoiceData
-                ->setNo($invoiceService->createNo($item));
+
+            $invoice = $item->invoiceData;
+            $invoice->no = $invoiceService->createNo($item);
 
             if ($item->invoiceType === InvoiceType::BUSINESS) {
-                $invoice->setVat($faker->numerify('########'));
-                $invoice->setTitle($faker->company());
+                $invoice->vat = $faker->numerify('########');
+                $invoice->title = $faker->company();
             }
 
             $item->total = $total;
-            $item->totals
-                ->set(
-                    'grand_total',
-                    (new EventOrderTotal())
-                        ->setTitle('Grand Total')
-                        ->setCode('grand_total')
-                        ->setValue($total->toFloat())
-                        ->setType('total')
-                );
+            $orderTotal = new EventOrderTotal();
+            $orderTotal->title = 'Grand Total';
+            $orderTotal->code = 'grand_total';
+            $orderTotal->value = $total->toFloat();
+            $orderTotal->type = 'total';
+            $item->totals->set('grand_total', $orderTotal);
 
             $item->name = $faker->name();
             $item->nick = $faker->firstName();
@@ -126,15 +124,16 @@ return new /** EventOrder Seeder */ class extends AbstractSeeder {
             $item->state = EventOrderState::DONE;
             $item->histories
                 ->push(
-                    new EventOrderHistory()
-                        ->setState(EventOrderState::UNPAID)
-                        ->setStateText(EventOrderState::UNPAID->getTitle($lang))
-                        ->setType(OrderHistoryType::SYSTEM)
-                        ->setMessage('Order Created')
+                    new EventOrderHistory(
+                        type: OrderHistoryType::SYSTEM,
+                        state: EventOrderState::UNPAID,
+                        stateText: EventOrderState::UNPAID->getTitle($lang),
+                        message: 'Order Created'
+                    )
                 );
             // $item->setPayment('atm');
             $item->expiredAt = '+14days';
-            $item->screenshots = [
+            $item->snapshots = [
                 'event' => $event,
                 'stage' => $stage
             ];

@@ -26,7 +26,8 @@ $router->group('event-order')
 
         $router->any('event_order_item', '/my/event/order/{no}')
             ->controller(EventOrderController::class)
-            ->view(EventOrderItemView::class);
+            ->view(EventOrderItemView::class)
+            ->var('layout', 'event-order-item');
 
         $router->any('my_event_list', '/my/events')
             ->view(MyEventListView::class)

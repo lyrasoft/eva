@@ -25,7 +25,17 @@ export default defineConfig(({ mode }) => {
       },
     },
     plugins: [
-      vuePlugin({}),
+      vuePlugin({
+        features: {
+          prodDevtools: true,
+        },
+        template: {
+          compilerOptions: {
+            preserveWhitespace: false,
+            whitespace: 'preserve',
+          }
+        }
+      }),
       useFusion(() => import('./fusionfile')),
     ],
   };

@@ -36,7 +36,9 @@ $router->group('front')
         CsrfMiddleware::class,
         excludes: [
             'front::backup',
-            'front::shipping_task'
+            'front::shipping_task',
+            'front::payment_task',
+            'front::event_payment_task',
         ]
     )
     ->middleware(LocaleMiddleware::class)

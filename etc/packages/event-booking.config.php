@@ -7,12 +7,14 @@ namespace App\Config;
 use Lyrasoft\EventBooking\Entity\EventAttend;
 use Lyrasoft\EventBooking\Entity\EventOrder;
 use Lyrasoft\EventBooking\Enum\AttendState;
+use Lyrasoft\EventBooking\Enum\EcpayPaymentType;
 use Lyrasoft\EventBooking\Enum\EventOrderState;
 use Lyrasoft\EventBooking\EventBookingPackage;
 use Lyrasoft\EventBooking\Payment\TransferPayment;
 use Lyrasoft\Sequence\Service\SequenceService;
 use Lyrasoft\Toolkit\Encode\BaseConvert;
 use Windwalker\Core\Attributes\ConfigModule;
+use Windwalker\Core\DateTime\Clock;
 
 use function Lyrasoft\EventBooking\numberFormat;
 
@@ -34,7 +36,7 @@ static fn() => [
         'no_handler' => function (EventOrder $order, SequenceService $sequenceService) {
             return $sequenceService->getNextSerialWithPrefix(
                 'event_order',
-                'EVT' . \Windwalker\now('ym') . '-',
+                'EVT' . Clock::now()->format('ym') . '-',
                 5
             );
         },
@@ -45,7 +47,7 @@ static fn() => [
         'no_handler' => function (EventOrder $order, EventAttend $attend, SequenceService $sequenceService) {
             return $sequenceService->getNextSerialWithPrefix(
                 'event_attend',
-                'A' . \Windwalker\now('ym') . '-',
+                'A' . Clock::now()->format('ym') . '-',
                 6
             );
         },
@@ -67,7 +69,7 @@ static fn() => [
     'payment' => [
         'no_handler' => function (EventOrder $order) {
             // Max length: 20
-            $no = 'P' . str_pad((string) $order->id, 13, '0', STR_PAD_LEFT);
+            $no = 'P' . str_pad((string) $order->id, 12, '0', STR_PAD_LEFT);
 
             if (WINDWALKER_DEBUG) {
                 $no .= 'T' . BaseConvert::encode(time(), BaseConvert::BASE62);
@@ -84,6 +86,14 @@ static fn() => [
                         銀行帳戶: (800) 123123123
                         TEXT
                 )
+            ),
+            'ecpay_credit' => \Windwalker\DI\create(
+                \Lyrasoft\EventBooking\Payment\EcpayPayment::class,
+                type: EcpayPaymentType::CREDIT,
+            ),
+            'ecpay_atm' => \Windwalker\DI\create(
+                \Lyrasoft\EventBooking\Payment\EcpayPayment::class,
+                type: EcpayPaymentType::ATM
             ),
         ],
     ],

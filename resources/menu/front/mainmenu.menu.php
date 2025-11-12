@@ -92,6 +92,14 @@ $menu->registerChildren(
 $menu->link('活動', $nav->to('event_stage_list'))
     ->icon('fal fa-calendar');
 
+$menu->registerChildren(
+    function (MenuBuilder $menu) use ($app, $nav) {
+        $menu->link('活動列表', $nav->to('event_stage_list'));
+        $menu->link('我的活動', $nav->to('my_event_list'));
+        $menu->link('我的活動訂單', $nav->to('event_order_list'));
+    }
+);
+
 $menu->link('商城', $nav->to('product_list'))
     ->icon('fal fa-shopping-cart');
 
