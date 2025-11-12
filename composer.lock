@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9bb0b10d88da754840016f63caf16a11",
+    "content-hash": "7a31ad1644dfeb18d052886dc3e29091",
     "packages": [
         {
             "name": "asika/agent",
@@ -233,16 +233,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.359.9",
+            "version": "3.359.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "754b25dae2f50b568b55735931a3cd73263ac5ae"
+                "reference": "10989892e99083c73e8421b85b5d6f7d2ca0f2f5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/754b25dae2f50b568b55735931a3cd73263ac5ae",
-                "reference": "754b25dae2f50b568b55735931a3cd73263ac5ae",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/10989892e99083c73e8421b85b5d6f7d2ca0f2f5",
+                "reference": "10989892e99083c73e8421b85b5d6f7d2ca0f2f5",
                 "shasum": ""
             },
             "require": {
@@ -324,9 +324,9 @@
             "support": {
                 "forum": "https://github.com/aws/aws-sdk-php/discussions",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.359.9"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.359.10"
             },
-            "time": "2025-11-10T19:14:56+00:00"
+            "time": "2025-11-11T19:08:54+00:00"
         },
         {
             "name": "brick/math",
@@ -2077,12 +2077,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/lyrasoft/luna-event-booking.git",
-                "reference": "dd1f01c42873882fb7021005d72c2893b71f39e5"
+                "reference": "4f783da871262eb194996f1890aacf1fb36229d8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/lyrasoft/luna-event-booking/zipball/dd1f01c42873882fb7021005d72c2893b71f39e5",
-                "reference": "dd1f01c42873882fb7021005d72c2893b71f39e5",
+                "url": "https://api.github.com/repos/lyrasoft/luna-event-booking/zipball/4f783da871262eb194996f1890aacf1fb36229d8",
+                "reference": "4f783da871262eb194996f1890aacf1fb36229d8",
                 "shasum": ""
             },
             "require": {
@@ -2091,6 +2091,9 @@
                 "lyrasoft/luna": "^2.2",
                 "lyrasoft/sequence": "^1.0",
                 "php": ">=8.4.6"
+            },
+            "require-dev": {
+                "ecpay/sdk": "^1.3"
             },
             "suggest": {
                 "lyrasoft/attachment": "Install this if you want to ask attender upload certificate files.",
@@ -2131,7 +2134,7 @@
                 "issues": "https://github.com/lyrasoft/luna-event-booking/issues",
                 "source": "https://github.com/lyrasoft/luna-event-booking/tree/main"
             },
-            "time": "2025-11-10T06:18:01+00:00"
+            "time": "2025-11-12T17:34:37+00:00"
         },
         {
             "name": "lyrasoft/faq",
