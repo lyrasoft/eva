@@ -47,7 +47,7 @@ $root = $app->service(\Lyrasoft\Luna\Services\MenuService::class)
                 <ul class="dropdown-menu collapse {{ $menuItem->isActive(true) ? 'show' : '' }}" aria-expanded="false" style="">
                     @foreach ($menuItem->getChildren() as $childItem)
                         <div class="{{ $childItem->isActive(true) ? 'active' : '' }} dropdown">
-                            <a href="{{ $childItem->route($nav) }}"
+                            <a href="{{ ((string) $childItem->route($nav)) ?: 'javascript://' }}"
                                 class="dropdown-item {{ $childItem->isActive(true) ? 'active' : '' }}">
                                 <i class="nav-icon fa-fw far fa-circle"></i>
                                 <span>{{ $childItem->getTitle() }}</span>
