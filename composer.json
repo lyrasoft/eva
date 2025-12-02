@@ -36,7 +36,7 @@
         "asika32764/pinyin": "^1.2",
         "lyrasoft/backup": "^2.0",
         "lyrasoft/firewall": "dev-main",
-        "lyrasoft/security": "^0.1.2",
+        "lyrasoft/security": "^0.2.0",
         "lyrasoft/formkit": "^0.2.1",
         "lyrasoft/faq": "^1.2",
         "lyrasoft/feedback": "dev-main",
@@ -57,7 +57,7 @@
     },
     "require-dev": {
         "windwalker/framework": "dev-master",
-        "phpoffice/phpspreadsheet": "^2.2"
+        "phpoffice/phpspreadsheet": "^5.0"
     },
     "scripts": {
         "post-create-project-cmd": [
