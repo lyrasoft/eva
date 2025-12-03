@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Config;
 
+use Lyrasoft\Attachment\AttachmentPackage;
 use Lyrasoft\Sequence\SequencePackage;
 use Windwalker\Utilities\Arr;
 
@@ -14,7 +15,8 @@ return Arr::mergeRecursive(
     [
         'factories' => include_arrays(__DIR__ . '/di/*.php'),
         'providers' => [
-            SequencePackage::class
+            SequencePackage::class,
+            AttachmentPackage::class,
         ],
         'bindings' => [
             //

@@ -28,7 +28,8 @@
         "tw-city-selector": "^2.1.2",
         "vite": "^7.1.7",
         "vue": "^3.5.24",
-        "youtube-background": "^1.1.8"
+        "youtube-background": "^1.1.8",
+        "@lyrasoft/attachment": "portal:./vendor/lyrasoft/attachment/assets"
     },
     "workspaces": [
         "vendor/windwalker/unicorn/*"

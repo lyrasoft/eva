@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5c80384ce9c468ba18aea83ae7d3ac77",
+    "content-hash": "782eaadcf65bb56ff76017600f749baa",
     "packages": [
         {
             "name": "asika/agent",
@@ -1910,6 +1910,62 @@
                 "source": "https://github.com/lyrasoft/luna-action-log/tree/1.1.0"
             },
             "time": "2025-11-06T11:09:34+00:00"
+        },
+        {
+            "name": "lyrasoft/attachment",
+            "version": "1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/lyrasoft/luna-attachment.git",
+                "reference": "404613f2a76e3b4e3277cffd93784411354a2c64"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/lyrasoft/luna-attachment/zipball/404613f2a76e3b4e3277cffd93784411354a2c64",
+                "reference": "404613f2a76e3b4e3277cffd93784411354a2c64",
+                "shasum": ""
+            },
+            "require": {
+                "lyrasoft/luna": "^2.2",
+                "php": ">=8.4.6"
+            },
+            "type": "windwalker-package",
+            "extra": {
+                "windwalker": {
+                    "assets": {
+                        "vendors": {
+                            "@lyrasoft/attachment": "portal:./vendor/lyrasoft/attachment/assets"
+                        }
+                    },
+                    "modules": [
+                        "src/Module"
+                    ],
+                    "packages": [
+                        "Lyrasoft\\Attachment\\AttachmentPackage"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Lyrasoft\\Attachment\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "chokeslam",
+                    "email": "chokeslam5608@gmail.com"
+                }
+            ],
+            "description": "LYRASOFT attachment package",
+            "support": {
+                "issues": "https://github.com/lyrasoft/luna-attachment/issues",
+                "source": "https://github.com/lyrasoft/luna-attachment/tree/1.1.0"
+            },
+            "time": "2025-10-23T05:45:18+00:00"
         },
         {
             "name": "lyrasoft/backup",
