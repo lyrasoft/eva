@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "992b58ef8041024774212d138e694f1b",
+    "content-hash": "a0ff4967627f92da6edd009cf1117c03",
     "packages": [
         {
             "name": "asika/agent",
@@ -1912,6 +1912,62 @@
             "time": "2025-11-06T11:09:34+00:00"
         },
         {
+            "name": "lyrasoft/attachment",
+            "version": "1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/lyrasoft/luna-attachment.git",
+                "reference": "404613f2a76e3b4e3277cffd93784411354a2c64"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/lyrasoft/luna-attachment/zipball/404613f2a76e3b4e3277cffd93784411354a2c64",
+                "reference": "404613f2a76e3b4e3277cffd93784411354a2c64",
+                "shasum": ""
+            },
+            "require": {
+                "lyrasoft/luna": "^2.2",
+                "php": ">=8.4.6"
+            },
+            "type": "windwalker-package",
+            "extra": {
+                "windwalker": {
+                    "assets": {
+                        "vendors": {
+                            "@lyrasoft/attachment": "portal:./vendor/lyrasoft/attachment/assets"
+                        }
+                    },
+                    "modules": [
+                        "src/Module"
+                    ],
+                    "packages": [
+                        "Lyrasoft\\Attachment\\AttachmentPackage"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Lyrasoft\\Attachment\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "chokeslam",
+                    "email": "chokeslam5608@gmail.com"
+                }
+            ],
+            "description": "LYRASOFT attachment package",
+            "support": {
+                "issues": "https://github.com/lyrasoft/luna-attachment/issues",
+                "source": "https://github.com/lyrasoft/luna-attachment/tree/1.1.0"
+            },
+            "time": "2025-10-23T05:45:18+00:00"
+        },
+        {
             "name": "lyrasoft/backup",
             "version": "2.0.6",
             "source": {
@@ -2357,23 +2413,23 @@
         },
         {
             "name": "lyrasoft/formkit",
-            "version": "0.2.1",
+            "version": "0.2.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/lyrasoft/luna-formkit.git",
-                "reference": "fa0499b25a84cc9300358878f0be551ee8a19a5e"
+                "reference": "c2ca1d5efe809c5c37760821382bbf6ffbda2589"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/lyrasoft/luna-formkit/zipball/fa0499b25a84cc9300358878f0be551ee8a19a5e",
-                "reference": "fa0499b25a84cc9300358878f0be551ee8a19a5e",
+                "url": "https://api.github.com/repos/lyrasoft/luna-formkit/zipball/c2ca1d5efe809c5c37760821382bbf6ffbda2589",
+                "reference": "c2ca1d5efe809c5c37760821382bbf6ffbda2589",
                 "shasum": ""
             },
             "require": {
                 "gregwar/captcha": "^1.2",
                 "lyrasoft/luna": "^2.2",
                 "php": ">=8.4.6",
-                "phpoffice/phpspreadsheet": "^2.2",
+                "phpoffice/phpspreadsheet": "^5.0",
                 "thunderer/shortcode": "^0.7.5"
             },
             "type": "windwalker-package",
@@ -2408,9 +2464,9 @@
             "description": "LYRASOFT FormKit Package",
             "support": {
                 "issues": "https://github.com/lyrasoft/luna-formkit/issues",
-                "source": "https://github.com/lyrasoft/luna-formkit/tree/0.2.1"
+                "source": "https://github.com/lyrasoft/luna-formkit/tree/0.2.2"
             },
-            "time": "2025-11-05T11:47:02+00:00"
+            "time": "2025-12-02T13:58:40+00:00"
         },
         {
             "name": "lyrasoft/luna",
@@ -2594,21 +2650,21 @@
         },
         {
             "name": "lyrasoft/security",
-            "version": "0.1.2",
+            "version": "0.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/lyrasoft/luna-security.git",
-                "reference": "b8ed62b9b8319f4eb441e5798dbb77ce7b0bf347"
+                "reference": "e398820eae0e5d784e65c26b29cfcb2802b95b61"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/lyrasoft/luna-security/zipball/b8ed62b9b8319f4eb441e5798dbb77ce7b0bf347",
-                "reference": "b8ed62b9b8319f4eb441e5798dbb77ce7b0bf347",
+                "url": "https://api.github.com/repos/lyrasoft/luna-security/zipball/e398820eae0e5d784e65c26b29cfcb2802b95b61",
+                "reference": "e398820eae0e5d784e65c26b29cfcb2802b95b61",
                 "shasum": ""
             },
             "require": {
-                "php": ">=8.2",
-                "windwalker/core": "^4.1"
+                "php": ">=8.4.6",
+                "windwalker/core": "^4.2"
             },
             "type": "windwalker-package",
             "extra": {
@@ -2637,9 +2693,9 @@
             "description": "LYRASOFT Secutity Package",
             "support": {
                 "issues": "https://github.com/lyrasoft/luna-security/issues",
-                "source": "https://github.com/lyrasoft/luna-security/tree/0.1.2"
+                "source": "https://github.com/lyrasoft/luna-security/tree/0.2.0"
             },
-            "time": "2024-08-16T09:44:40+00:00"
+            "time": "2025-12-02T13:47:54+00:00"
         },
         {
             "name": "lyrasoft/sequence",
@@ -3766,20 +3822,20 @@
         },
         {
             "name": "phpoffice/phpspreadsheet",
-            "version": "2.4.2",
+            "version": "5.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPOffice/PhpSpreadsheet.git",
-                "reference": "931ad61fb2c229063fc4e7e665fb52b87249cc56"
+                "reference": "4d597c1aacdde1805a33c525b9758113ea0d90df"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHPOffice/PhpSpreadsheet/zipball/931ad61fb2c229063fc4e7e665fb52b87249cc56",
-                "reference": "931ad61fb2c229063fc4e7e665fb52b87249cc56",
+                "url": "https://api.github.com/repos/PHPOffice/PhpSpreadsheet/zipball/4d597c1aacdde1805a33c525b9758113ea0d90df",
+                "reference": "4d597c1aacdde1805a33c525b9758113ea0d90df",
                 "shasum": ""
             },
             "require": {
-                "composer/pcre": "^1 || ^2 || ^3",
+                "composer/pcre": "^1||^2||^3",
                 "ext-ctype": "*",
                 "ext-dom": "*",
                 "ext-fileinfo": "*",
@@ -3796,7 +3852,7 @@
                 "maennchen/zipstream-php": "^2.1 || ^3.0",
                 "markbaker/complex": "^3.0",
                 "markbaker/matrix": "^3.0",
-                "php": ">=8.1.0 <8.6.0",
+                "php": "^8.1",
                 "psr/http-client": "^1.0",
                 "psr/http-factory": "^1.0",
                 "psr/simple-cache": "^1.0 || ^2.0 || ^3.0"
@@ -3808,15 +3864,16 @@
                 "mitoteam/jpgraph": "^10.5",
                 "mpdf/mpdf": "^8.1.1",
                 "phpcompatibility/php-compatibility": "^9.3",
-                "phpstan/phpstan": "^1.1",
-                "phpstan/phpstan-phpunit": "^1.0",
-                "phpunit/phpunit": "^9.6 || ^10.5",
+                "phpstan/phpstan": "^1.1 || ^2.0",
+                "phpstan/phpstan-deprecation-rules": "^1.0 || ^2.0",
+                "phpstan/phpstan-phpunit": "^1.0 || ^2.0",
+                "phpunit/phpunit": "^10.5",
                 "squizlabs/php_codesniffer": "^3.7",
                 "tecnickcom/tcpdf": "^6.5"
             },
             "suggest": {
                 "dompdf/dompdf": "Option for rendering PDF with PDF Writer",
-                "ext-intl": "PHP Internationalization Functions, required for NumberFormatter Wizard",
+                "ext-intl": "PHP Internationalization Functions, required for NumberFormat Wizard",
                 "mitoteam/jpgraph": "Option for rendering charts, or including charts with PDF or HTML Writers",
                 "mpdf/mpdf": "Option for rendering PDF with PDF Writer",
                 "tecnickcom/tcpdf": "Option for rendering PDF with PDF Writer"
@@ -3865,9 +3922,9 @@
             ],
             "support": {
                 "issues": "https://github.com/PHPOffice/PhpSpreadsheet/issues",
-                "source": "https://github.com/PHPOffice/PhpSpreadsheet/tree/2.4.2"
+                "source": "https://github.com/PHPOffice/PhpSpreadsheet/tree/5.3.0"
             },
-            "time": "2025-11-24T15:59:19+00:00"
+            "time": "2025-11-24T15:47:10+00:00"
         },
         {
             "name": "psr/cache",
