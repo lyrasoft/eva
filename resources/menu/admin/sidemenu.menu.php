@@ -163,6 +163,27 @@ $menu->registerChildren(
     }
 );
 
+$menu->link('課程管理', '#')
+    ->icon('fal fa-person-chalkboard');
+
+$menu->registerChildren(
+    function (MenuBuilder $menu) use ($nav, $lang) {
+        // Category
+        $menu->link('課程分類管理')
+            ->to($nav->to('category_list', ['type' => 'lesson']))
+            ->icon('fal fa-sitemap');
+
+        // Lesson
+        $menu->link($lang('unicorn.title.grid', title: '課程'))
+            ->to($nav->to('lesson_list'))
+            ->icon('fal fa-book');
+
+        $menu->link($lang('unicorn.title.grid', title: '課程訂單'))
+            ->to($nav->to('order_list'))
+            ->icon('fal fa-file-invoice');
+    }
+);
+
 $menu->link('表單管理')
     ->to($nav->to('formkit_list'))
     ->icon('fal fa-layer-group');

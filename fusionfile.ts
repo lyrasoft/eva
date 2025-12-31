@@ -66,6 +66,7 @@ export function install() {
     installVendors(
       [
         '@fortawesome/fontawesome-pro',
+        'lyrasoft/melo',
       ],
     ),
     callbackAfterBuild(async () => {

@@ -13,6 +13,7 @@ use Lyrasoft\Firewall\FirewallPackage;
 use Lyrasoft\Luna\LunaPackage;
 use Lyrasoft\Luna\Script\FontAwesomeScript;
 use Lyrasoft\Luna\Services\ConfigService;
+use Lyrasoft\Melo\MeloPackage;
 use Lyrasoft\Member\MemberPackage;
 use Lyrasoft\Portfolio\PortfolioPackage;
 use Lyrasoft\ShopGo\Script\ShopGoScript;
@@ -66,6 +67,7 @@ class FrontMiddleware extends AbstractLifecycleMiddleware
         $this->lang->loadAllFromVendor(FavoritePackage::class, 'ini');
         $this->lang->loadAllFromVendor(FirewallPackage::class, 'ini');
         $this->lang->loadAllFromVendor(FeedbackPackage::class, 'ini');
+        $this->lang->loadAllFromVendor(MeloPackage::class, 'ini');
 
         $this->lang->loadAll('ini');
 

@@ -15,6 +15,13 @@ return [
     // Banner
     __DIR__ . '/banner.seeder.php',
 
+    // Melo
+    __DIR__ . '/lesson-seeder.php',
+    __DIR__ . '/order-seeder.php',
+    __DIR__ . '/segment-seeder.php',
+    __DIR__ . '/question-seeder.php',
+    __DIR__ . '/option-seeder.php',
+
     // Member
     __DIR__ . '/member.seeder.php',
 

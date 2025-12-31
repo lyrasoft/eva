@@ -15,7 +15,8 @@ static fn() => [
         'type_protect' => true,
         'allow_types' => [
             'article',
-            'product'
+            'product',
+            'lesson',
         ],
     ],
 ];

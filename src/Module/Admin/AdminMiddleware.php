@@ -13,6 +13,7 @@ use Lyrasoft\Feedback\FeedbackPackage;
 use Lyrasoft\Firewall\FirewallPackage;
 use Lyrasoft\Luna\LunaPackage;
 use Lyrasoft\Luna\Script\FontAwesomeScript;
+use Lyrasoft\Melo\MeloPackage;
 use Lyrasoft\Member\MemberPackage;
 use Lyrasoft\Portfolio\PortfolioPackage;
 use Lyrasoft\ShopGo\ShopGoPackage;
@@ -54,6 +55,7 @@ class AdminMiddleware extends AbstractLifecycleMiddleware
         $this->lang->loadAllFromVendor(FirewallPackage::class, 'ini');
         $this->lang->loadAllFromVendor(FeedbackPackage::class, 'ini');
         $this->lang->loadAllFromVendor(ActionLogPackage::class, 'ini');
+        $this->lang->loadAllFromVendor(MeloPackage::class, 'ini');
 
         $this->lang->loadAll('ini');
 

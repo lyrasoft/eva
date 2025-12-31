@@ -107,6 +107,26 @@ static fn() => [
                     'ACL' => S3Service::ACL_PUBLIC_READ,
                 ],
             ),
+
+            // For Melo testing
+            'video' => [
+                'storage' => env('UPLOAD_STORAGE_DEFAULT') ?: 'local',
+                'accept' => null,
+                'dir' => 'lesson-videos/{year}/{month}/{day}',
+                'force_redraw' => true,
+                'resize' => [
+                    'enabled' => true,
+                    'driver' => env('IMAGE_RESIZE_DRIVER', 'gd'),
+                    'width' => 1920,
+                    'height' => 1920,
+                    'crop' => false,
+                    'quality' => 85,
+                    'output_format' => null
+                ],
+                'options' => [
+                    'ACL' => S3Service::ACL_PUBLIC_READ
+                ]
+            ],
         ],
     ],
 ];

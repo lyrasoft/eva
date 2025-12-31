@@ -11,6 +11,7 @@
     },
     "dependencies": {
         "@fortawesome/fontawesome-pro": "^7.0",
+        "@lyrasoft/attachment": "portal:./vendor/lyrasoft/attachment/assets",
         "@lyrasoft/favorite": "portal:./vendor/lyrasoft/favorite/assets",
         "@lyrasoft/luna": "portal:./vendor/lyrasoft/luna/assets",
         "@lyrasoft/nexus": "portal:./vendor/lyrasoft/theme-nexus",
@@ -24,12 +25,12 @@
         "bootstrap": "^5.0.0",
         "cross-env": "^7.0.3",
         "swiper": "^8.0||^9.0||^10.0||^11.0||^12.0",
+        "ts-luxon": "^6.2.0",
         "ts-md5": "^2.0.1",
         "tw-city-selector": "^2.1.2",
         "vite": "^7.1.7",
         "vue": "^3.5.24",
-        "youtube-background": "^1.1.8",
-        "@lyrasoft/attachment": "portal:./vendor/lyrasoft/attachment/assets"
+        "youtube-background": "^1.1.8"
     },
     "workspaces": [
         "vendor/windwalker/unicorn/*"

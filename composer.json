@@ -55,7 +55,8 @@
         "symfony/mime": "^7.0||^8.0",
         "ecpay/sdk": "^1.3",
         "lyrasoft/throttle": "^0.1.3",
-        "lyrasoft/attachment": "^1.1"
+        "lyrasoft/attachment": "^1.1",
+        "lyrasoft/melo": "dev-master"
     },
     "require-dev": {
         "windwalker/framework": "dev-master",
