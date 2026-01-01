@@ -20,6 +20,6 @@ $router->group('shopgo-config')
             ->var('type', 'shopgo_shop')
             ->var('form', ShopgoShopForm::class)
             ->layoutPaths(
-                ShopGoPackage::path('src/Module/Admin/Config/views')
+                ShopGoPackage::path('Module/Admin/Config/views')
             );
     });

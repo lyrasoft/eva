@@ -21,9 +21,10 @@ $router->group('action-log')
             ->putHandler('filter')
             ->patchHandler('batch');
 
+        $router->any('action_log_edit', '/action-log/edit[/{id}]')
+            ->controller(ActionLogController::class)
+            ->view(ActionLogEditView::class);
+
         $router->any('action_log_export', '/action-log/export')
             ->controller(ActionLogController::class, 'export');
-
-        $router->any('action_log_download', '/action-log/download/{id}')
-            ->controller(ActionLogController::class, 'download');
     });

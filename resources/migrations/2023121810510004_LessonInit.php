@@ -1,12 +1,5 @@
 <?php
 
-/**
- * Part of Windwalker project.
- *
- * @copyright  Copyright (C) 2023.
- * @license    __LICENSE__
- */
-
 declare(strict_types=1);
 
 namespace App\Migration;
@@ -14,19 +7,16 @@ namespace App\Migration;
 use Lyrasoft\Melo\Entity\LessonCategoryMap;
 use Lyrasoft\Melo\Entity\Lesson;
 use Lyrasoft\Melo\Entity\UserLessonMap;
-use Windwalker\Core\Console\ConsoleApplication;
-use Windwalker\Core\Migration\Migration;
+use Windwalker\Core\Migration\AbstractMigration;
+use Windwalker\Core\Migration\MigrateDown;
+use Windwalker\Core\Migration\MigrateUp;
 use Windwalker\Database\Schema\Schema;
 
-/**
- * Migration UP: 2023121810510004_LessonInit.
- *
- * @var Migration          $mig
- * @var ConsoleApplication $app
- */
-$mig->up(
-    static function () use ($mig) {
-        $mig->createTable(
+return new /** 2023121810510004_LessonInit */ class extends AbstractMigration {
+    #[MigrateUp]
+    public function up(): void
+    {
+        $this->createTable(
             Lesson::class,
             function (Schema $schema) {
                 $schema->primary('id');
@@ -60,7 +50,7 @@ $mig->up(
             }
         );
 
-        $mig->createTable(
+        $this->createTable(
             LessonCategoryMap::class,
             function (Schema $schema) {
                 $schema->integer('lesson_id');
@@ -72,7 +62,7 @@ $mig->up(
             }
         );
 
-        $mig->createTable(
+        $this->createTable(
             UserLessonMap::class,
             function (Schema $schema) {
                 $schema->primary('id');
@@ -86,17 +76,14 @@ $mig->up(
             }
         );
     }
-);
 
-/**
- * Migration DOWN.
- */
-$mig->down(
-    static function () use ($mig) {
-        $mig->dropTables(
+    #[MigrateDown]
+    public function down(): void
+    {
+        $this->dropTables(
             Lesson::class,
             LessonCategoryMap::class,
-            UserLessonMap::class,
+            UserLessonMap::class
         );
     }
-);
+};

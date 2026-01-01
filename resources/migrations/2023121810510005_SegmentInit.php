@@ -1,31 +1,21 @@
 <?php
 
-/**
- * Part of Windwalker project.
- *
- * @copyright  Copyright (C) 2023.
- * @license    __LICENSE__
- */
-
 declare(strict_types=1);
 
 namespace App\Migration;
 
 use Lyrasoft\Melo\Entity\Segment;
 use Lyrasoft\Melo\Entity\UserSegmentMap;
-use Windwalker\Core\Console\ConsoleApplication;
-use Windwalker\Core\Migration\Migration;
+use Windwalker\Core\Migration\AbstractMigration;
+use Windwalker\Core\Migration\MigrateDown;
+use Windwalker\Core\Migration\MigrateUp;
 use Windwalker\Database\Schema\Schema;
 
-/**
- * Migration UP: 2023121810510005_SegmentInit.
- *
- * @var Migration          $mig
- * @var ConsoleApplication $app
- */
-$mig->up(
-    static function () use ($mig) {
-        $mig->createTable(
+return new /** 2023121810510005_SegmentInit */ class extends AbstractMigration {
+    #[MigrateUp]
+    public function up(): void
+    {
+        $this->createTable(
             Segment::class,
             function (Schema $schema) {
                 $schema->primary('id');
@@ -54,7 +44,7 @@ $mig->up(
             }
         );
 
-        $mig->createTable(
+        $this->createTable(
             UserSegmentMap::class,
             function (Schema $schema) {
                 $schema->primary('id');
@@ -76,16 +66,13 @@ $mig->up(
             }
         );
     }
-);
 
-/**
- * Migration DOWN.
- */
-$mig->down(
-    static function () use ($mig) {
-        $mig->dropTables(
+    #[MigrateDown]
+    public function down(): void
+    {
+        $this->dropTables(
             Segment::class,
-            UserSegmentMap::class,
+            UserSegmentMap::class
         );
     }
-);
+};

@@ -17,7 +17,7 @@ export default defineConfig(({ mode }) => {
     css: {
       preprocessorOptions: {
         scss: {
-          silenceDeprecations: ['mixed-decls', 'color-functions', 'global-builtin', 'import'],
+          silenceDeprecations: ['if-function', 'mixed-decls', 'color-functions', 'global-builtin', 'import'],
           loadPaths: [
             resolve('./vendor/lyrasoft/theme-nexus/'),
           ],

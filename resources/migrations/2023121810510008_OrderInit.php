@@ -1,33 +1,23 @@
 <?php
 
-/**
- * Part of Windwalker project.
- *
- * @copyright  Copyright (C) 2023.
- * @license    __LICENSE__
- */
-
 declare(strict_types=1);
 
 namespace Lyrasoft\Melo\Migration;
 
-use Lyrasoft\Melo\Entity\OrderHistory;
-use Lyrasoft\Melo\Entity\OrderItem;
-use Lyrasoft\Melo\Entity\Order;
-use Windwalker\Core\Console\ConsoleApplication;
-use Windwalker\Core\Migration\Migration;
+use Lyrasoft\Melo\Entity\MeloOrderHistory;
+use Lyrasoft\Melo\Entity\MeloOrderItem;
+use Lyrasoft\Melo\Entity\MeloOrder;
+use Windwalker\Core\Migration\AbstractMigration;
+use Windwalker\Core\Migration\MigrateDown;
+use Windwalker\Core\Migration\MigrateUp;
 use Windwalker\Database\Schema\Schema;
 
-/**
- * Migration UP: 2023121810510008_OrderInit.
- *
- * @var Migration          $mig
- * @var ConsoleApplication $app
- */
-$mig->up(
-    static function () use ($mig) {
-        $mig->createTable(
-            Order::class,
+return new /** 2023121810510008_OrderInit */ class extends AbstractMigration {
+    #[MigrateUp]
+    public function up(): void
+    {
+        $this->createTable(
+            MeloOrder::class,
             function (Schema $schema) {
                 $schema->primary('id');
                 $schema->integer('user_id');
@@ -57,8 +47,9 @@ $mig->up(
                 $schema->addIndex('payment_no');
             }
         );
-        $mig->createTable(
-            OrderItem::class,
+
+        $this->createTable(
+            MeloOrderItem::class,
             function (Schema $schema) {
                 $schema->primary('id');
                 $schema->integer('order_id');
@@ -76,8 +67,9 @@ $mig->up(
                 $schema->addIndex('lesson_id');
             }
         );
-        $mig->createTable(
-            OrderHistory::class,
+
+        $this->createTable(
+            MeloOrderHistory::class,
             function (Schema $schema) {
                 $schema->primary('id');
                 $schema->integer('order_id');
@@ -92,15 +84,14 @@ $mig->up(
             }
         );
     }
-);
 
-/**
- * Migration DOWN.
- */
-$mig->down(
-    static function () use ($mig) {
-        $mig->dropTables(Order::class);
-        $mig->dropTables(OrderItem::class);
-        $mig->dropTables(OrderHistory::class);
+    #[MigrateDown]
+    public function down(): void
+    {
+        $this->dropTables(
+            MeloOrder::class,
+            MeloOrderItem::class,
+            MeloOrderHistory::class
+        );
     }
-);
+};

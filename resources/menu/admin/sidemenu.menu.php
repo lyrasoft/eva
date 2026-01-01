@@ -179,7 +179,7 @@ $menu->registerChildren(
             ->icon('fal fa-book');
 
         $menu->link($lang('unicorn.title.grid', title: '課程訂單'))
-            ->to($nav->to('order_list'))
+            ->to($nav->to('melo_order_list'))
             ->icon('fal fa-file-invoice');
     }
 );
