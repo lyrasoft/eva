@@ -3,11 +3,11 @@ import {
   pushUnicornToGlobal,
   useUIBootstrap5,
   useUnicorn,
-  useUnicornPhpAdapter
+  useUnicornPhpAdapter,
+  useListDependent,
 } from '@windwalker-io/unicorn-next';
 import { useNexusTheme } from '@lyrasoft/nexus';
 import { useLuna } from '@lyrasoft/luna';
-import { useListDependent } from '../../../../vendor/windwalker/unicorn/assets/src/composable';
 
 const app = new App(defineJsModules());
 
@@ -22,6 +22,7 @@ pushUnicornToGlobal();
 
 useNexusTheme();
 
+// Todo: Remove after Unicorn Fix this
 // @ts-ignore
 u.$ui.listDependent = useListDependent;
 
