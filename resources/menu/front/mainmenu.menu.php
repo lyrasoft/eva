@@ -108,6 +108,7 @@ $menu->link('課程', $nav->to('lesson_list'))
 
 $menu->registerChildren(
     function (MenuBuilder $menu) use ($app, $nav) {
+        $menu->link('課程總覽', $nav->to('lesson_list'));
         $menu->link('我的課程訂單', $nav->to('melo_order_list'));
     }
 );
