@@ -4,15 +4,14 @@ declare(strict_types=1);
 
 namespace App\Seeder;
 
-use Lyrasoft\Melo\Entity\Lesson;
 use Lyrasoft\Luna\Entity\User;
+use Lyrasoft\Melo\Entity\Lesson;
 use Lyrasoft\Melo\Entity\MeloOrder;
 use Lyrasoft\Melo\Entity\MeloOrderItem;
 use Lyrasoft\Melo\Enum\InvoiceType;
 use Lyrasoft\Melo\Enum\OrderState;
 use Lyrasoft\Melo\Enum\Payment;
-use Lyrasoft\Melo\Service\OrderService;
-use Windwalker\Core\Application\ApplicationInterface;
+use Lyrasoft\Melo\Features\OrderService;
 use Windwalker\Core\Seed\AbstractSeeder;
 use Windwalker\Core\Seed\SeedClear;
 use Windwalker\Core\Seed\SeedImport;

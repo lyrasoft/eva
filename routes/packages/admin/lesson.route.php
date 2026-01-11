@@ -6,6 +6,7 @@ namespace App\Routes;
 
 use Lyrasoft\Melo\Module\Admin\Lesson\LessonController;
 use Lyrasoft\Melo\Module\Admin\Lesson\LessonEditView;
+use Lyrasoft\Melo\Module\Admin\Lesson\LessonFileController;
 use Lyrasoft\Melo\Module\Admin\Lesson\LessonListView;
 use Lyrasoft\Melo\Module\Admin\Segment\SegmentController;
 use Unicorn\Middleware\KeepUrlQueryMiddleware;
@@ -27,8 +28,11 @@ $router->group('lesson')
             ->controller(LessonController::class)
             ->view(LessonEditView::class);
 
-        $router->any('ajax_segment', '/ajax/segment')
+        $router->any('ajax_segment', '/ajax/segment[/{task}]')
             ->controller(SegmentController::class, 'ajax');
+
+        $router->any('lesson_file', '/lesson/file[/{task}]')
+            ->controller(LessonFileController::class, 'index');
 
         $router->group('lesson_scope')
             ->middleware(

@@ -11,6 +11,11 @@ use Lyrasoft\Melo\Entity\UserSegmentMap;
 use Lyrasoft\Melo\Enum\SegmentType;
 use Lyrasoft\Melo\Enum\UserSegmentStatus;
 use Lyrasoft\Luna\Entity\User;
+use Lyrasoft\Melo\Features\Section\AbstractSection;
+use Lyrasoft\Melo\Features\Section\Homework\HomeworkSection;
+use Lyrasoft\Melo\Features\Section\Quiz\QuizSection;
+use Lyrasoft\Melo\Features\Section\SectionComposer;
+use Lyrasoft\Melo\Features\Section\Video\VideoSection;
 use Windwalker\Core\Seed\AbstractSeeder;
 use Windwalker\Core\Seed\SeedClear;
 use Windwalker\Core\Seed\SeedImport;
@@ -20,7 +25,7 @@ use Windwalker\Utilities\Utf8String;
 return new /** Segment Seeder */ class extends AbstractSeeder
 {
     #[SeedImport]
-    public function import(): void
+    public function import(SectionComposer $sectionComposer): void
     {
         $faker = $this->faker('zh_TW');
         /** @var EntityMapper<Segment> $mapper */
@@ -28,6 +33,9 @@ return new /** Segment Seeder */ class extends AbstractSeeder
         $mapMapper = $this->orm->mapper(UserSegmentMap::class);
         $lessonIds = $this->orm->findColumn(Lesson::class, 'id')->dump(true);
         $userIds = $this->orm->findColumn(User::class, 'id')->dump(true);
+
+        /** @var array<class-string<AbstractSection>> $defines */
+        $defines = $sectionComposer->getDefines();
 
         foreach ($lessonIds as $lessonId) {
             $lessonStudentIds = $this->orm->findColumn(
@@ -44,7 +52,7 @@ return new /** Segment Seeder */ class extends AbstractSeeder
                 $chapter = $mapper->createEntity();
 
                 $chapter->lessonId = (int) $lessonId;
-                $chapter->type = SegmentType::DEFAULT;
+                $chapter->type = '';
                 $chapter->parentId = 0;
                 $chapter->title = Utf8String::ucwords(
                     $faker->sentence(3)
@@ -59,30 +67,26 @@ return new /** Segment Seeder */ class extends AbstractSeeder
 
                 $k = 1;
 
-                foreach (SegmentType::values() as $type) {
-                    if ($type === SegmentType::DEFAULT) {
-                        continue;
-                    }
-
+                foreach ($defines as $define) {
                     // segment
                     ++$k;
 
                     $segment = $mapper->createEntity();
 
                     $segment->lessonId = (int) $lessonId;
-                    $segment->type = $type;
+                    $segment->type = $type = $define::id();
                     $segment->parentId = $chapter->id;
                     $segment->title = Utf8String::ucwords(
                         $faker->sentence(3)
                     );
-                    $segment->state = $faker->optional(0.7, 0)->passthrough(1);
-                    $segment->preview = $faker->optional(0.7, false)->passthrough(true);
+                    $segment->state = $faker->boolean(70) ? 1 : 0;
+                    $segment->preview = !$faker->boolean(70);
                     $segment->ordering = $k;
                     $segment->created = $faker->dateTimeThisYear();
                     $segment->modified = $segment->created?->modify('+10days');
                     $segment->createdBy = (int) $faker->randomElement($userIds);
 
-                    if ($type === SegmentType::VIDEO) {
+                    if ($type === VideoSection::id()) {
                         $segment->src = 'https://lyratest.s3.amazonaws.com/emooc/sintel-short.mp4';
                         $segment->captionSrc = 'https://lyratest.s3.amazonaws.com/emooc/sintel-subtitles-en.vtt';
                         $segment->filename = 'sintel-short.mp4';
@@ -90,12 +94,12 @@ return new /** Segment Seeder */ class extends AbstractSeeder
                         $segment->duration = random_int(40, 240);
                     }
 
-                    if ($type === SegmentType::HOMEWORK) {
+                    if ($type === HomeworkSection::id()) {
                         $segment->content = $faker->paragraph(5);
                     }
 
-                    if ($type === SegmentType::QUIZ) {
-                        $segment->canSkip = $faker->optional(0.8, true)->passthrough(false);
+                    if ($type === QuizSection::id()) {
+                        $segment->canSkip = !$faker->boolean(80);
                     }
 
                     $segment = $mapper->createOne($segment);
@@ -111,7 +115,7 @@ return new /** Segment Seeder */ class extends AbstractSeeder
                         $map->description = $faker->paragraph();
                         $map->created = $faker->dateTimeThisYear();
 
-                        if ($map->segmentType === SegmentType::QUIZ) {
+                        if ($map->segmentType === QuizSection::id()) {
                             $map->score = random_int(60, 100);
                             $map->status = $faker->randomElement(
                                 [
@@ -122,7 +126,7 @@ return new /** Segment Seeder */ class extends AbstractSeeder
                             );
                         }
 
-                        if ($map->segmentType === SegmentType::HOMEWORK) {
+                        if ($map->segmentType === HomeworkSection::id()) {
                             $map->assignment = $faker->unsplashImage();
                             $map->status = $faker->randomElement(
                                 [

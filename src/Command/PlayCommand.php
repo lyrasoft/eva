@@ -13,6 +13,8 @@ use Windwalker\Console\CommandWrapper;
 use Windwalker\Console\IOInterface;
 use Windwalker\Core\Application\ApplicationInterface;
 
+use Windwalker\Core\Asset\AssetService;
+
 use function Windwalker\collect;
 
 #[CommandWrapper(
@@ -31,16 +33,11 @@ class PlayCommand implements CommandInterface
 
     public function execute(IOInterface $io): int
     {
-        $throttleService = $this->app->retrieve(ThrottleService::class);
+        $asset = $this->app->retrieve(AssetService::class);
 
-        $limiter = $throttleService->createRateLimiter(
-            'hello',
-            policy: RateLimitPolicy::FIXED_WINDOW,
-            limit: 5,
-            interval: '1minutes',
-        );
+        $uri = $asset->resolveViteUri('resources/assets/src/front/test.ts');
 
-        show($limiter->consume(1));
+        show($uri);
 
         return 0;
     }

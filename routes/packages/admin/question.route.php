@@ -12,6 +12,6 @@ use Windwalker\Core\Router\RouteCreator;
 $router->group('question')
     ->extra('menu', ['sidemenu' => 'question_list'])
     ->register(function (RouteCreator $router) {
-        $router->any('ajax_question', '/ajax/question')
+        $router->any('ajax_question', '/ajax/question[/{task}]')
             ->controller(QuestionController::class, 'ajax');
     });

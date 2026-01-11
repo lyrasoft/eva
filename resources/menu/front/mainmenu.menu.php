@@ -103,3 +103,11 @@ $menu->registerChildren(
 $menu->link('商城', $nav->to('product_list'))
     ->icon('fal fa-shopping-cart');
 
+$menu->link('課程', $nav->to('lesson_list'))
+    ->icon('fal fa-calendar');
+
+$menu->registerChildren(
+    function (MenuBuilder $menu) use ($app, $nav) {
+        $menu->link('我的課程訂單', $nav->to('melo_order_list'));
+    }
+);

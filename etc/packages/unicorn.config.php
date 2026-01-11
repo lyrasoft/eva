@@ -108,25 +108,25 @@ static fn() => [
                 ],
             ),
 
-            // For Melo testing
-            'video' => [
-                'storage' => env('UPLOAD_STORAGE_DEFAULT') ?: 'local',
-                'accept' => null,
-                'dir' => 'lesson-videos/{year}/{month}/{day}',
-                'force_redraw' => true,
-                'resize' => [
-                    'enabled' => true,
-                    'driver' => env('IMAGE_RESIZE_DRIVER', 'gd'),
-                    'width' => 1920,
-                    'height' => 1920,
-                    'crop' => false,
-                    'quality' => 85,
-                    'output_format' => null
+            // Melo
+            'video' => fn () => new FileUploadOptions(
+                storage: env('UPLOAD_STORAGE_DEFAULT') ?: 'local',
+                dir: 'lesson/files/{year}/{month}/{day}',
+                accept: null,
+                forceRedraw: true,
+                resize: new ResizeConfig(
+                    enabled: true,
+                    driver: env('IMAGE_RESIZE_DRIVER', 'gd'),
+                    width: 1920,
+                    height: 1920,
+                    quality: 85,
+                    crop: false,
+                    outputFormat: null,
+                ),
+                storageOptions: [
+                    'ACL' => S3Service::ACL_AUTHENTICATED_READ,
                 ],
-                'options' => [
-                    'ACL' => S3Service::ACL_PUBLIC_READ
-                ]
-            ],
+            ),
         ],
     ],
 ];

@@ -233,16 +233,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.369.5",
+            "version": "3.369.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "7cb482768899d510e8bcb3e9ef685d2ed0afcbfe"
+                "reference": "e179090bf2d658be7be37afc146111966ba6f41b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/7cb482768899d510e8bcb3e9ef685d2ed0afcbfe",
-                "reference": "7cb482768899d510e8bcb3e9ef685d2ed0afcbfe",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/e179090bf2d658be7be37afc146111966ba6f41b",
+                "reference": "e179090bf2d658be7be37afc146111966ba6f41b",
                 "shasum": ""
             },
             "require": {
@@ -324,9 +324,9 @@
             "support": {
                 "forum": "https://github.com/aws/aws-sdk-php/discussions",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.369.5"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.369.10"
             },
-            "time": "2025-12-30T19:07:16+00:00"
+            "time": "2026-01-09T19:08:12+00:00"
         },
         {
             "name": "brick/math",
@@ -1664,16 +1664,16 @@
         },
         {
             "name": "intervention/gif",
-            "version": "4.2.2",
+            "version": "4.2.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Intervention/gif.git",
-                "reference": "5999eac6a39aa760fb803bc809e8909ee67b451a"
+                "reference": "c3598a16ebe7690cd55640c44144a9df383ea73c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Intervention/gif/zipball/5999eac6a39aa760fb803bc809e8909ee67b451a",
-                "reference": "5999eac6a39aa760fb803bc809e8909ee67b451a",
+                "url": "https://api.github.com/repos/Intervention/gif/zipball/c3598a16ebe7690cd55640c44144a9df383ea73c",
+                "reference": "c3598a16ebe7690cd55640c44144a9df383ea73c",
                 "shasum": ""
             },
             "require": {
@@ -1712,7 +1712,7 @@
             ],
             "support": {
                 "issues": "https://github.com/Intervention/gif/issues",
-                "source": "https://github.com/Intervention/gif/tree/4.2.2"
+                "source": "https://github.com/Intervention/gif/tree/4.2.4"
             },
             "funding": [
                 {
@@ -1728,7 +1728,7 @@
                     "type": "ko_fi"
                 }
             ],
-            "time": "2025-03-29T07:46:21+00:00"
+            "time": "2026-01-04T09:27:23+00:00"
         },
         {
             "name": "intervention/image",
@@ -2549,17 +2549,19 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/lyrasoft/luna-melo.git",
-                "reference": "6082a5713ca03add9859645f4602cac3f9c7db7c"
+                "reference": "72cee824495f1d65967a2c911215c6d93b63cd71"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/lyrasoft/luna-melo/zipball/6082a5713ca03add9859645f4602cac3f9c7db7c",
-                "reference": "6082a5713ca03add9859645f4602cac3f9c7db7c",
+                "url": "https://api.github.com/repos/lyrasoft/luna-melo/zipball/72cee824495f1d65967a2c911215c6d93b63cd71",
+                "reference": "72cee824495f1d65967a2c911215c6d93b63cd71",
                 "shasum": ""
             },
             "require": {
                 "lyrasoft/attachment": "^1.0",
-                "lyrasoft/favorite": "^1.0||^2.0"
+                "lyrasoft/favorite": "^1.0||^2.0",
+                "lyrasoft/luna": "^2.2",
+                "php": ">=8.4.6"
             },
             "require-dev": {
                 "lyrasoft/sequence": "^1.0"
@@ -2597,9 +2599,9 @@
             "description": "LYRASOFT melo package",
             "support": {
                 "issues": "https://github.com/lyrasoft/luna-melo/issues",
-                "source": "https://github.com/lyrasoft/luna-melo/tree/0.1.18"
+                "source": "https://github.com/lyrasoft/luna-melo/tree/master"
             },
-            "time": "2025-04-29T09:34:30+00:00"
+            "time": "2026-01-11T16:41:18+00:00"
         },
         {
             "name": "lyrasoft/member",
@@ -3376,29 +3378,28 @@
         },
         {
             "name": "mobiledetect/mobiledetectlib",
-            "version": "4.8.09",
+            "version": "4.8.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/serbanghita/Mobile-Detect.git",
-                "reference": "a06fe2e546a06bb8c2639d6823d5250b2efb3209"
+                "reference": "96b1e1fa9a968de7660a031106ab529f659d0192"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/serbanghita/Mobile-Detect/zipball/a06fe2e546a06bb8c2639d6823d5250b2efb3209",
-                "reference": "a06fe2e546a06bb8c2639d6823d5250b2efb3209",
+                "url": "https://api.github.com/repos/serbanghita/Mobile-Detect/zipball/96b1e1fa9a968de7660a031106ab529f659d0192",
+                "reference": "96b1e1fa9a968de7660a031106ab529f659d0192",
                 "shasum": ""
             },
             "require": {
                 "php": ">=8.0",
-                "psr/cache": "^3.0",
                 "psr/simple-cache": "^3"
             },
             "require-dev": {
-                "friendsofphp/php-cs-fixer": "^v3.65.0",
+                "friendsofphp/php-cs-fixer": "^v3.75.0",
                 "phpbench/phpbench": "^1.2",
-                "phpstan/phpstan": "^1.12.x-dev",
-                "phpunit/phpunit": "^9.6.18",
-                "squizlabs/php_codesniffer": "^3.11.1"
+                "phpstan/phpstan": "^2.1.11",
+                "phpunit/phpunit": "^9.6.22",
+                "squizlabs/php_codesniffer": "^3.12.1"
             },
             "type": "library",
             "autoload": {
@@ -3429,7 +3430,7 @@
             ],
             "support": {
                 "issues": "https://github.com/serbanghita/Mobile-Detect/issues",
-                "source": "https://github.com/serbanghita/Mobile-Detect/tree/4.8.09"
+                "source": "https://github.com/serbanghita/Mobile-Detect/tree/4.8.10"
             },
             "funding": [
                 {
@@ -3437,20 +3438,20 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-12-10T15:32:06+00:00"
+            "time": "2026-01-09T16:21:59+00:00"
         },
         {
             "name": "monolog/monolog",
-            "version": "3.9.0",
+            "version": "3.10.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Seldaek/monolog.git",
-                "reference": "10d85740180ecba7896c87e06a166e0c95a0e3b6"
+                "reference": "b321dd6749f0bf7189444158a3ce785cc16d69b0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/10d85740180ecba7896c87e06a166e0c95a0e3b6",
-                "reference": "10d85740180ecba7896c87e06a166e0c95a0e3b6",
+                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/b321dd6749f0bf7189444158a3ce785cc16d69b0",
+                "reference": "b321dd6749f0bf7189444158a3ce785cc16d69b0",
                 "shasum": ""
             },
             "require": {
@@ -3468,7 +3469,7 @@
                 "graylog2/gelf-php": "^1.4.2 || ^2.0",
                 "guzzlehttp/guzzle": "^7.4.5",
                 "guzzlehttp/psr7": "^2.2",
-                "mongodb/mongodb": "^1.8",
+                "mongodb/mongodb": "^1.8 || ^2.0",
                 "php-amqplib/php-amqplib": "~2.4 || ^3",
                 "php-console/php-console": "^3.1.8",
                 "phpstan/phpstan": "^2",
@@ -3528,7 +3529,7 @@
             ],
             "support": {
                 "issues": "https://github.com/Seldaek/monolog/issues",
-                "source": "https://github.com/Seldaek/monolog/tree/3.9.0"
+                "source": "https://github.com/Seldaek/monolog/tree/3.10.0"
             },
             "funding": [
                 {
@@ -3540,7 +3541,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-03-24T10:02:05+00:00"
+            "time": "2026-01-02T08:56:05+00:00"
         },
         {
             "name": "mtdowling/jmespath.php",
@@ -3880,16 +3881,16 @@
         },
         {
             "name": "phpoffice/phpspreadsheet",
-            "version": "5.3.0",
+            "version": "5.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPOffice/PhpSpreadsheet.git",
-                "reference": "4d597c1aacdde1805a33c525b9758113ea0d90df"
+                "reference": "48f2fe37d64c2dece0ef71fb2ac55497566782af"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHPOffice/PhpSpreadsheet/zipball/4d597c1aacdde1805a33c525b9758113ea0d90df",
-                "reference": "4d597c1aacdde1805a33c525b9758113ea0d90df",
+                "url": "https://api.github.com/repos/PHPOffice/PhpSpreadsheet/zipball/48f2fe37d64c2dece0ef71fb2ac55497566782af",
+                "reference": "48f2fe37d64c2dece0ef71fb2ac55497566782af",
                 "shasum": ""
             },
             "require": {
@@ -3897,6 +3898,7 @@
                 "ext-ctype": "*",
                 "ext-dom": "*",
                 "ext-fileinfo": "*",
+                "ext-filter": "*",
                 "ext-gd": "*",
                 "ext-iconv": "*",
                 "ext-libxml": "*",
@@ -3911,13 +3913,12 @@
                 "markbaker/complex": "^3.0",
                 "markbaker/matrix": "^3.0",
                 "php": "^8.1",
-                "psr/http-client": "^1.0",
-                "psr/http-factory": "^1.0",
                 "psr/simple-cache": "^1.0 || ^2.0 || ^3.0"
             },
             "require-dev": {
                 "dealerdirect/phpcodesniffer-composer-installer": "dev-main",
                 "dompdf/dompdf": "^2.0 || ^3.0",
+                "ext-intl": "*",
                 "friendsofphp/php-cs-fixer": "^3.2",
                 "mitoteam/jpgraph": "^10.5",
                 "mpdf/mpdf": "^8.1.1",
@@ -3931,7 +3932,7 @@
             },
             "suggest": {
                 "dompdf/dompdf": "Option for rendering PDF with PDF Writer",
-                "ext-intl": "PHP Internationalization Functions, required for NumberFormat Wizard",
+                "ext-intl": "PHP Internationalization Functions, required for NumberFormat Wizard and StringHelper::setLocale()",
                 "mitoteam/jpgraph": "Option for rendering charts, or including charts with PDF or HTML Writers",
                 "mpdf/mpdf": "Option for rendering PDF with PDF Writer",
                 "tecnickcom/tcpdf": "Option for rendering PDF with PDF Writer"
@@ -3964,6 +3965,9 @@
                 },
                 {
                     "name": "Adrien Crivelli"
+                },
+                {
+                    "name": "Owen Leibman"
                 }
             ],
             "description": "PHPSpreadsheet - Read, Create and Write Spreadsheet documents in PHP - Spreadsheet engine",
@@ -3980,9 +3984,9 @@
             ],
             "support": {
                 "issues": "https://github.com/PHPOffice/PhpSpreadsheet/issues",
-                "source": "https://github.com/PHPOffice/PhpSpreadsheet/tree/5.3.0"
+                "source": "https://github.com/PHPOffice/PhpSpreadsheet/tree/5.4.0"
             },
-            "time": "2025-11-24T15:47:10+00:00"
+            "time": "2026-01-11T04:52:00+00:00"
         },
         {
             "name": "psr/cache",
@@ -5387,16 +5391,16 @@
         },
         {
             "name": "symfony/lock",
-            "version": "v8.0.1",
+            "version": "v8.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/lock.git",
-                "reference": "ae0d489404cdd33c4651326103388fa1e7a47192"
+                "reference": "34eb1f4532f67ef00dd612e5fb38cb7f51e07bce"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/lock/zipball/ae0d489404cdd33c4651326103388fa1e7a47192",
-                "reference": "ae0d489404cdd33c4651326103388fa1e7a47192",
+                "url": "https://api.github.com/repos/symfony/lock/zipball/34eb1f4532f67ef00dd612e5fb38cb7f51e07bce",
+                "reference": "34eb1f4532f67ef00dd612e5fb38cb7f51e07bce",
                 "shasum": ""
             },
             "require": {
@@ -5445,7 +5449,7 @@
                 "semaphore"
             ],
             "support": {
-                "source": "https://github.com/symfony/lock/tree/v8.0.1"
+                "source": "https://github.com/symfony/lock/tree/v8.0.3"
             },
             "funding": [
                 {
@@ -7015,12 +7019,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/windwalker-io/framework.git",
-                "reference": "f18f87f8832deba546d3934fb0e28bb33ea2d729"
+                "reference": "adb59dad543f17f85313101288fff376db64df25"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/windwalker-io/framework/zipball/f18f87f8832deba546d3934fb0e28bb33ea2d729",
-                "reference": "f18f87f8832deba546d3934fb0e28bb33ea2d729",
+                "url": "https://api.github.com/repos/windwalker-io/framework/zipball/adb59dad543f17f85313101288fff376db64df25",
+                "reference": "adb59dad543f17f85313101288fff376db64df25",
                 "shasum": ""
             },
             "require": {
@@ -7251,7 +7255,7 @@
                 "issues": "https://github.com/windwalker-io/framework/issues",
                 "source": "https://github.com/windwalker-io/framework/tree/master"
             },
-            "time": "2025-12-20T15:01:57+00:00"
+            "time": "2026-01-08T15:55:30+00:00"
         },
         {
             "name": "windwalker/srp",

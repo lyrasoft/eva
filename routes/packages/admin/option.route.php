@@ -12,6 +12,6 @@ use Windwalker\Core\Router\RouteCreator;
 $router->group('option')
     ->extra('menu', ['sidemenu' => 'option_list'])
     ->register(function (RouteCreator $router) {
-        $router->any('ajax_option', '/ajax/option')
+        $router->any('ajax_option', '/ajax/option[/{task}]')
             ->controller(OptionController::class, 'ajax');
     });
