@@ -11,6 +11,7 @@ return [
     __DIR__ . '/category.seeder.php',
     __DIR__ . '/tag.seeder.php',
     __DIR__ . '/article.seeder.php',
+    __DIR__ . '/contact.seeder.php',
     __DIR__ . '/page.seeder.php',
     __DIR__ . '/menu.seeder.php',
     __DIR__ . '/widget.seeder.php',
