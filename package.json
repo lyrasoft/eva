@@ -14,6 +14,7 @@
         "@lyrasoft/attachment": "portal:./vendor/lyrasoft/attachment/assets",
         "@lyrasoft/favorite": "portal:./vendor/lyrasoft/favorite/assets",
         "@lyrasoft/luna": "portal:./vendor/lyrasoft/luna/assets",
+        "@lyrasoft/melo": "portal:./vendor/lyrasoft/melo/assets",
         "@lyrasoft/nexus": "portal:./vendor/lyrasoft/theme-nexus",
         "@lyrasoft/shopgo": "portal:./vendor/lyrasoft/shopgo/assets",
         "@lyrasoft/shopgo-ecpay": "portal:./vendor/lyrasoft/shopgo-ecpay/assets",

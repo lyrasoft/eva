@@ -4,11 +4,9 @@ declare(strict_types=1);
 
 namespace App\Seeder;
 
-use Lyrasoft\Melo\Entity\MeloOption;
+use Lyrasoft\Melo\Data\QnOption;
 use Lyrasoft\Melo\Entity\Question;
 use Lyrasoft\Melo\Entity\Segment;
-use Lyrasoft\Melo\Enum\QuestionType;
-use Lyrasoft\Melo\Enum\SegmentType;
 use Lyrasoft\Luna\Entity\User;
 use Lyrasoft\Melo\Features\Question\AbstractQuestion;
 use Lyrasoft\Melo\Features\Question\Boolean\BooleanQuestion;
@@ -20,6 +18,8 @@ use Windwalker\Core\Seed\SeedClear;
 use Windwalker\Core\Seed\SeedImport;
 use Windwalker\ORM\EntityMapper;
 use Windwalker\Utilities\Utf8String;
+
+use function Windwalker\uid;
 
 return new /** Question Seeder */ class extends AbstractSeeder
 {
@@ -87,19 +87,21 @@ return new /** Question Seeder */ class extends AbstractSeeder
 
                 shuffle($answers);
 
+                $options = [];
+
                 foreach (range(1, $total) as $j) {
-                    $option = new MeloOption();
-
-                    $option->title = Utf8String::ucwords(
-                        $faker->sentence(3)
+                    $options[] = new QnOption(
+                        id: uid(),
+                        text: Utf8String::ucwords(
+                            $faker->sentence(3)
+                        ),
+                        isAnswer: $answers[$j - 1]
                     );
-                    $option->questionId = $question->id;
-                    $option->state = 1;
-                    $option->ordering = $j;
-                    $option->isAnswer = $answers[$j - 1];
-
-                    $this->orm->createOne($option);
                 }
+
+                $item->params['options'] = $options;
+
+                $this->orm->updateOne($item);
 
                 $this->printCounting();
             }

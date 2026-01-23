@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Migration;
 
-use Lyrasoft\Melo\Entity\MeloOption;
 use Lyrasoft\Melo\Entity\Question;
 use Lyrasoft\Melo\Entity\UserAnswer;
 use Windwalker\Core\Migration\AbstractMigration;
@@ -23,7 +22,6 @@ return new /** 2023121810510006_QuestionInit */ class extends AbstractMigration 
                 $schema->integer('lesson_id');
                 $schema->integer('segment_id');
                 $schema->varchar('type');
-                $schema->bool('is_multiple');
                 $schema->varchar('title');
                 $schema->longtext('content');
                 $schema->longtext('answer');
@@ -60,21 +58,6 @@ return new /** 2023121810510006_QuestionInit */ class extends AbstractMigration 
                 $schema->addIndex('question_id');
             }
         );
-
-        $this->createTable(
-            MeloOption::class,
-            function (Schema $schema) {
-                $schema->primary('id');
-                $schema->integer('question_id');
-                $schema->varchar('title');
-                $schema->bool('is_answer');
-                $schema->tinyint('state');
-                $schema->integer('ordering');
-                $schema->json('params')->nullable(true);
-
-                $schema->addIndex('question_id');
-            }
-        );
     }
 
     #[MigrateDown]
@@ -82,7 +65,6 @@ return new /** 2023121810510006_QuestionInit */ class extends AbstractMigration 
     {
         $this->dropTables(
             Question::class,
-            MeloOption::class,
             UserAnswer::class,
         );
     }

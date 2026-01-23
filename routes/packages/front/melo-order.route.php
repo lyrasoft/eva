@@ -21,7 +21,7 @@ $router->group('melo_order')
             ->putHandler('filter')
             ->patchHandler('batch');
 
-        $router->any('melo_order_item', '/lesson/order[/{id}]')
+        $router->any('melo_order_item', '/lesson/order[/{no}]')
             ->controller(OrderController::class)
             ->view(OrderItemView::class);
     });

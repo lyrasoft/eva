@@ -233,16 +233,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.369.10",
+            "version": "3.369.18",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "e179090bf2d658be7be37afc146111966ba6f41b"
+                "reference": "48d809eda94dd528ef539cff827e7542ac01cce6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/e179090bf2d658be7be37afc146111966ba6f41b",
-                "reference": "e179090bf2d658be7be37afc146111966ba6f41b",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/48d809eda94dd528ef539cff827e7542ac01cce6",
+                "reference": "48d809eda94dd528ef539cff827e7542ac01cce6",
                 "shasum": ""
             },
             "require": {
@@ -324,9 +324,9 @@
             "support": {
                 "forum": "https://github.com/aws/aws-sdk-php/discussions",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.369.10"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.369.18"
             },
-            "time": "2026-01-09T19:08:12+00:00"
+            "time": "2026-01-22T19:05:57+00:00"
         },
         {
             "name": "brick/math",
@@ -2549,12 +2549,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/lyrasoft/luna-melo.git",
-                "reference": "72cee824495f1d65967a2c911215c6d93b63cd71"
+                "reference": "1455bc571c58f3a584d4a6de8fb5b4d3880c6c25"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/lyrasoft/luna-melo/zipball/72cee824495f1d65967a2c911215c6d93b63cd71",
-                "reference": "72cee824495f1d65967a2c911215c6d93b63cd71",
+                "url": "https://api.github.com/repos/lyrasoft/luna-melo/zipball/1455bc571c58f3a584d4a6de8fb5b4d3880c6c25",
+                "reference": "1455bc571c58f3a584d4a6de8fb5b4d3880c6c25",
                 "shasum": ""
             },
             "require": {
@@ -2571,7 +2571,9 @@
             "extra": {
                 "windwalker": {
                     "assets": {
-                        "link": "assets/"
+                        "vendors": {
+                            "@lyrasoft/melo": "portal:./vendor/lyrasoft/melo/assets"
+                        }
                     },
                     "modules": [
                         "src/Module"
@@ -2582,6 +2584,9 @@
                 }
             },
             "autoload": {
+                "files": [
+                    "src/bootstrap.php"
+                ],
                 "psr-4": {
                     "Lyrasoft\\Melo\\": "src/"
                 }
@@ -2594,6 +2599,10 @@
                 {
                     "name": "yinminc",
                     "email": "a1598742002@gmail.com"
+                },
+                {
+                    "name": "Simon Asika",
+                    "email": "asika32764@gmail.com"
                 }
             ],
             "description": "LYRASOFT melo package",
@@ -2601,7 +2610,7 @@
                 "issues": "https://github.com/lyrasoft/luna-melo/issues",
                 "source": "https://github.com/lyrasoft/luna-melo/tree/master"
             },
-            "time": "2026-01-11T16:41:18+00:00"
+            "time": "2026-01-22T14:03:01+00:00"
         },
         {
             "name": "lyrasoft/member",
@@ -2710,16 +2719,16 @@
         },
         {
             "name": "lyrasoft/security",
-            "version": "0.2.0",
+            "version": "0.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/lyrasoft/luna-security.git",
-                "reference": "e398820eae0e5d784e65c26b29cfcb2802b95b61"
+                "reference": "cf9eef2a56be995dc2531e32ff2237ab06e3cfbe"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/lyrasoft/luna-security/zipball/e398820eae0e5d784e65c26b29cfcb2802b95b61",
-                "reference": "e398820eae0e5d784e65c26b29cfcb2802b95b61",
+                "url": "https://api.github.com/repos/lyrasoft/luna-security/zipball/cf9eef2a56be995dc2531e32ff2237ab06e3cfbe",
+                "reference": "cf9eef2a56be995dc2531e32ff2237ab06e3cfbe",
                 "shasum": ""
             },
             "require": {
@@ -2753,9 +2762,9 @@
             "description": "LYRASOFT Secutity Package",
             "support": {
                 "issues": "https://github.com/lyrasoft/luna-security/issues",
-                "source": "https://github.com/lyrasoft/luna-security/tree/0.2.0"
+                "source": "https://github.com/lyrasoft/luna-security/tree/0.2.1"
             },
-            "time": "2025-12-02T13:47:54+00:00"
+            "time": "2026-01-12T10:46:37+00:00"
         },
         {
             "name": "lyrasoft/sequence",

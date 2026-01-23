@@ -39,6 +39,7 @@ $router->group('front')
             'front::shipping_task',
             'front::payment_task',
             'front::event_payment_task',
+            'front::melo_payment_task',
         ]
     )
     ->middleware(LocaleMiddleware::class)

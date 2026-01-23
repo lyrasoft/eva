@@ -7,6 +7,7 @@ namespace Lyrasoft\Melo\Migration;
 use Lyrasoft\Melo\Entity\MeloOrderHistory;
 use Lyrasoft\Melo\Entity\MeloOrderItem;
 use Lyrasoft\Melo\Entity\MeloOrder;
+use Lyrasoft\Melo\Entity\MeloOrderTotal;
 use Windwalker\Core\Migration\AbstractMigration;
 use Windwalker\Core\Migration\MigrateDown;
 use Windwalker\Core\Migration\MigrateUp;
@@ -83,6 +84,26 @@ return new /** 2023121810510008_OrderInit */ class extends AbstractMigration {
                 $schema->addIndex('order_id');
             }
         );
+
+        $this->createTable(
+            MeloOrderTotal::class,
+            function (Schema $schema) {
+                $schema->primary('id');
+                $schema->integer('order_id');
+                $schema->integer('discount_id');
+                $schema->varchar('discount_type');
+                $schema->varchar('type');
+                $schema->varchar('title');
+                $schema->varchar('code');
+                $schema->decimal('value')->length('20,4');
+                $schema->integer('ordering');
+                $schema->bool('protect');
+                $schema->json('params');
+
+                $schema->addIndex('order_id');
+                $schema->addIndex('discount_id');
+            }
+        );
     }
 
     #[MigrateDown]
@@ -91,7 +112,8 @@ return new /** 2023121810510008_OrderInit */ class extends AbstractMigration {
         $this->dropTables(
             MeloOrder::class,
             MeloOrderItem::class,
-            MeloOrderHistory::class
+            MeloOrderHistory::class,
+            MeloOrderTotal::class
         );
     }
 };
