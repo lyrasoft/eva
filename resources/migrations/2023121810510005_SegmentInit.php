@@ -58,7 +58,10 @@ return new /** 2023121810510005_SegmentInit */ class extends AbstractMigration {
                 $schema->varchar('assignment');
                 $schema->datetime('assignment_upload_time')->nullable(true)->comment('作業上傳時間');
                 $schema->bool('front_show');
-                $schema->datetime('created')->nullable(true);
+                $schema->json('details');
+                $schema->datetime('created');
+                $schema->datetime('modified');
+                $schema->json('params');
 
                 $schema->addIndex('user_id');
                 $schema->addIndex('lesson_id');

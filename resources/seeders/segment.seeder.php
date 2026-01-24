@@ -135,6 +135,7 @@ return new /** Segment Seeder */ class extends AbstractSeeder
                                 ]
                             );
                             $map->assignmentUploadTime = $map->created?->modify('+3 days');
+                            $map->frontShow = $faker->boolean(80);
                         }
 
                         $mapMapper->createOne($map);

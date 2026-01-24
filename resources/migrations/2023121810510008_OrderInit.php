@@ -76,7 +76,7 @@ return new /** 2023121810510008_OrderInit */ class extends AbstractMigration {
                 $schema->primary('id');
                 $schema->integer('order_id');
                 $schema->char('type')->length(7)->comment('OrderHistoryType: member,admin,system');
-                $schema->varchar('state');
+                $schema->varchar('state')->nullable(true);
                 $schema->bool('notify');
                 $schema->longtext('message');
                 $schema->datetime('created')->nullable(true);
