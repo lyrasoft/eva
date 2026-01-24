@@ -71,7 +71,10 @@ static fn() => [
         ]
     ],
 
-    'price_formatter' => static fn(mixed $price) => numberFormat($price, '$'),
+    'price_formatter' => [
+        'short' => fn(mixed $price) => numberFormat($price, '$'),
+        'full' => fn(mixed $price) => numberFormat($price, 'TWD $'),
+    ],
 
     'payment' => [
         'no_handler' => function (MeloOrder $order) {

@@ -6,11 +6,15 @@ namespace App\Seeder;
 
 use Lyrasoft\Luna\Entity\User;
 use Lyrasoft\Melo\Cart\CartService;
+use Lyrasoft\Melo\Data\AddressInfo;
+use Lyrasoft\Melo\Data\InvoiceData;
 use Lyrasoft\Melo\Entity\Lesson;
 use Lyrasoft\Melo\Entity\MeloOrder;
+use Lyrasoft\Melo\Entity\MeloOrderHistory;
 use Lyrasoft\Melo\Entity\MeloOrderItem;
 use Lyrasoft\Melo\Entity\MeloOrderTotal;
 use Lyrasoft\Melo\Enum\InvoiceType;
+use Lyrasoft\Melo\Enum\OrderHistoryType;
 use Lyrasoft\Melo\Enum\OrderState;
 use Lyrasoft\Melo\Features\LessonCheckoutService;
 use Lyrasoft\Melo\Features\OrderService;
@@ -38,7 +42,7 @@ return new /** Order Seeder */ class extends AbstractSeeder {
         /** @var EntityMapper<MeloOrderItem> $itemMapper */
         $itemMapper = $this->orm->mapper(MeloOrderItem::class);
         $lessons = $this->orm->findList(Lesson::class)->all();
-        $userIds = $this->orm->findColumn(User::class, 'id')->dump(true);
+        $users = $this->orm->findList(User::class)->all()->dump();
         /** @var MeloPaymentInterface[] $payments */
         $payments = $paymentComposer->getGateways()->dump();
 
@@ -48,13 +52,34 @@ return new /** Order Seeder */ class extends AbstractSeeder {
             /** @var MeloPaymentInterface $payment */
             $payment = $faker->randomElement($payments);
 
-            $item->userId = (int) $faker->randomElement($userIds);
+            /** @var User $user */
+            $user = $faker->randomElement($users);
+            unset($user->password);
+
+            $item->userId = $user->id;
             $item->invoiceNo = 'T' . $faker->ean8();
+            $item->invoiceType = $faker->randomElement(InvoiceType::cases());
+            $item->invoiceData = match ($item->invoiceType) {
+                InvoiceType::IDV => new InvoiceData(
+                    name: $user->name,
+                    carrier: $faker->lexify('/???????'),
+                ),
+                InvoiceType::COMPANY => new InvoiceData(
+                    title: $faker->company(),
+                    vat: $faker->numerify('########'),
+                    address: new AddressInfo(
+                        city: '台北市',
+                        dist: '中山區',
+                        zip: '104',
+                        address: $faker->streetAddress(),
+                    ),
+                ),
+            };
             $item->state = $faker->randomElement(OrderState::cases());
             $item->payment = $payment::getId();
             $item->paymentData->paymentTitle = $payment->getTitle($lang);
             $item->note = $faker->paragraph();
-            $item->invoiceType = $faker->randomElement(InvoiceType::cases());
+            $item->snapshots['user'] = $user;
 
             if ($item->state === OrderState::CANCELLED) {
                 $item->cancelledAt = $faker->dateTimeThisYear();
@@ -92,10 +117,28 @@ return new /** Order Seeder */ class extends AbstractSeeder {
             $item->no = $orderService->createOrderNo($item);
 
             if ($item->state === OrderState::PAID || $item->state === OrderState::FREE) {
-                $orderService->assignOrderLessonsToUser($item, $orderItems->dump());
+                $orderService->assignLessonsToOrderBuyer($item, $orderItems->dump());
             }
 
-            $mapper->saveOne($item);
+            // Histories
+            foreach (range(1, 5) as $s) {
+                $history = new MeloOrderHistory();
+                $history->orderId = $item->id;
+                $history->type = $faker->randomElement(OrderHistoryType::cases());
+                $history->message = $faker->boolean(30) ? '' : $faker->sentence();
+                $history->state = $faker->randomElement([null, null, null, ...OrderState::cases()]);
+                $history->notify = false;
+
+                $this->orm->createOne($history);
+
+                if ($history->state) {
+                    $item->state = $history->state;
+                }
+            }
+
+            $mapper->updateOne($item);
+
+            $this->printCounting();
         }
     }
 

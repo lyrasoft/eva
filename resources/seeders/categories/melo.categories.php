@@ -6,5 +6,5 @@ return [
     'lesson' => [
         'max_level' => 3,
         'number' => 30,
-    ]
+    ],
 ];

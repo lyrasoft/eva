@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace App\Command;
 
+use Lyrasoft\Melo\Data\AddressInfo;
+use Lyrasoft\Melo\Data\InvoiceData;
+use Lyrasoft\Melo\Entity\MeloOrder;
 use Lyrasoft\Throttle\Enum\RateLimitPolicy;
 use Lyrasoft\Throttle\Service\ThrottleService;
 use Symfony\Component\Console\Command\Command;
@@ -15,6 +18,8 @@ use Windwalker\Core\Application\ApplicationInterface;
 
 use Windwalker\Core\Asset\AssetService;
 
+use Windwalker\ORM\ORM;
+
 use function Windwalker\collect;
 
 #[CommandWrapper(
@@ -22,7 +27,7 @@ use function Windwalker\collect;
 )]
 class PlayCommand implements CommandInterface
 {
-    public function __construct(protected ApplicationInterface $app)
+    public function __construct(protected ORM $orm, protected ApplicationInterface $app)
     {
     }
 
@@ -33,11 +38,23 @@ class PlayCommand implements CommandInterface
 
     public function execute(IOInterface $io): int
     {
-        $asset = $this->app->retrieve(AssetService::class);
+        $item = new MeloOrder();
+        $item->invoiceData = new InvoiceData(
+            name: 'John Doe',
+            title: 'Mr.',
+            vat: '12345678',
+            carrier: 'XYZ123',
+            address: new AddressInfo(
+                city: 'New York',
+                dist: 'Manhattan',
+                zip: '10001',
+                address: '123 5th Ave'
+            )
+        );
 
-        $uri = $asset->resolveViteUri('resources/assets/src/front/test.ts');
-
-        show($uri);
+        show(
+            $this->orm->extractEntity($item),
+        );
 
         return 0;
     }
