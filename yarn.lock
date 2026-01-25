@@ -366,6 +366,7 @@ __metadata:
   dependencies:
     "@asika32764/vue-animate": "npm:^3.0.2"
     "@lyrasoft/ts-toolkit": "npm:^0.2.2"
+    "@popperjs/core": "npm:^2.11.8"
     bootstrap: "npm:^5.3.8"
     sortablejs: "npm:^1.15.6"
     sweetalert: "npm:^2.1.2"
