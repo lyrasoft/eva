@@ -33,11 +33,14 @@ return [
     __DIR__ . '/event-order.seeder.php',
 
     // Feedback
-    __DIR__ . '/comment-seeder.php',
-    __DIR__ . '/rating-seeder.php',
+    __DIR__ . '/comment.seeder.php',
+    __DIR__ . '/rating.seeder.php',
 
     // Formkit
-    __DIR__ . '/formkit-seeder.php',
+    __DIR__ . '/formkit.seeder.php',
+
+    // Faq
+    __DIR__ . '/faq.seeder.php',
 
     // Contact
     __DIR__ . '/contact.seeder.php',

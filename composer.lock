@@ -1913,16 +1913,16 @@
         },
         {
             "name": "lyrasoft/attachment",
-            "version": "1.1.0",
+            "version": "1.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/lyrasoft/luna-attachment.git",
-                "reference": "404613f2a76e3b4e3277cffd93784411354a2c64"
+                "reference": "c41baad1206f851e7c562bea41805fb079232448"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/lyrasoft/luna-attachment/zipball/404613f2a76e3b4e3277cffd93784411354a2c64",
-                "reference": "404613f2a76e3b4e3277cffd93784411354a2c64",
+                "url": "https://api.github.com/repos/lyrasoft/luna-attachment/zipball/c41baad1206f851e7c562bea41805fb079232448",
+                "reference": "c41baad1206f851e7c562bea41805fb079232448",
                 "shasum": ""
             },
             "require": {
@@ -1963,9 +1963,9 @@
             "description": "LYRASOFT attachment package",
             "support": {
                 "issues": "https://github.com/lyrasoft/luna-attachment/issues",
-                "source": "https://github.com/lyrasoft/luna-attachment/tree/1.1.0"
+                "source": "https://github.com/lyrasoft/luna-attachment/tree/1.1.1"
             },
-            "time": "2025-10-23T05:45:18+00:00"
+            "time": "2026-01-25T11:19:02+00:00"
         },
         {
             "name": "lyrasoft/backup",
@@ -2309,24 +2309,26 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/lyrasoft/luna-feedback.git",
-                "reference": "1b539fe3b5ffa69b5ee390ba468e92016ca1bc0e"
+                "reference": "c2422b61a30e2e723e8bd3c87b80481599890803"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/lyrasoft/luna-feedback/zipball/1b539fe3b5ffa69b5ee390ba468e92016ca1bc0e",
-                "reference": "1b539fe3b5ffa69b5ee390ba468e92016ca1bc0e",
+                "url": "https://api.github.com/repos/lyrasoft/luna-feedback/zipball/c2422b61a30e2e723e8bd3c87b80481599890803",
+                "reference": "c2422b61a30e2e723e8bd3c87b80481599890803",
                 "shasum": ""
             },
             "require": {
-                "lyrasoft/luna": "^2.1",
-                "php": ">=8.2"
+                "lyrasoft/luna": "^2.2",
+                "php": ">=8.4.6"
             },
             "default-branch": true,
             "type": "windwalker-package",
             "extra": {
                 "windwalker": {
                     "assets": {
-                        "link": "assets/"
+                        "vendors": {
+                            "@lyrasoft/feedback": "portal:./vendor/lyrasoft/feedback/assets"
+                        }
                     },
                     "modules": [
                         "src/Module"
@@ -2354,9 +2356,9 @@
             "description": "LYRASOFT feedback package",
             "support": {
                 "issues": "https://github.com/lyrasoft/luna-feedback/issues",
-                "source": "https://github.com/lyrasoft/luna-feedback/tree/main"
+                "source": "https://github.com/lyrasoft/luna-feedback/tree/1.1.0"
             },
-            "time": "2025-02-17T14:14:30+00:00"
+            "time": "2026-01-25T13:51:51+00:00"
         },
         {
             "name": "lyrasoft/firewall",
@@ -2413,16 +2415,16 @@
         },
         {
             "name": "lyrasoft/formkit",
-            "version": "0.2.2",
+            "version": "0.2.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/lyrasoft/luna-formkit.git",
-                "reference": "c2ca1d5efe809c5c37760821382bbf6ffbda2589"
+                "reference": "55f3c238e7d74cd6623a3bf9c7558f9d3a636bc9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/lyrasoft/luna-formkit/zipball/c2ca1d5efe809c5c37760821382bbf6ffbda2589",
-                "reference": "c2ca1d5efe809c5c37760821382bbf6ffbda2589",
+                "url": "https://api.github.com/repos/lyrasoft/luna-formkit/zipball/55f3c238e7d74cd6623a3bf9c7558f9d3a636bc9",
+                "reference": "55f3c238e7d74cd6623a3bf9c7558f9d3a636bc9",
                 "shasum": ""
             },
             "require": {
@@ -2464,9 +2466,9 @@
             "description": "LYRASOFT FormKit Package",
             "support": {
                 "issues": "https://github.com/lyrasoft/luna-formkit/issues",
-                "source": "https://github.com/lyrasoft/luna-formkit/tree/0.2.2"
+                "source": "https://github.com/lyrasoft/luna-formkit/tree/0.2.3"
             },
-            "time": "2025-12-02T13:58:40+00:00"
+            "time": "2026-01-25T14:15:05+00:00"
         },
         {
             "name": "lyrasoft/luna",

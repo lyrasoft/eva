@@ -10,25 +10,23 @@ use Lyrasoft\Formkit\Enum\ResState;
 use Lyrasoft\Formkit\FormkitPackage;
 use Lyrasoft\Luna\Entity\User;
 use Windwalker\Core\Http\Browser;
-use Windwalker\Core\Seed\Seeder;
+use Windwalker\Core\Http\BrowserNext;
+use Windwalker\Core\Seed\AbstractSeeder;
+use Windwalker\Core\Seed\SeedClear;
+use Windwalker\Core\Seed\SeedImport;
 use Windwalker\Database\DatabaseAdapter;
 use Windwalker\ORM\EntityMapper;
 use Windwalker\ORM\ORM;
 
-/**
- * Formkit Seeder
- *
- * @var Seeder          $seeder
- * @var ORM             $orm
- * @var DatabaseAdapter $db
- */
-$seeder->import(
-    static function (FormkitPackage $formkitPackage) use ($seeder, $orm, $db) {
-        $faker = $seeder->faker('en_US');
+return new /** Formkit Seeder */ class extends AbstractSeeder {
+    #[SeedImport]
+    public function import(FormkitPackage $formkitPackage): void
+    {
+        $faker = $this->faker('en_US');
 
         /** @var EntityMapper<Formkit> $mapper */
-        $mapper = $orm->mapper(Formkit::class);
-        $userIds = $orm->findColumn(User::class, 'id')->map('intval')->dump();
+        $mapper = $this->orm->mapper(Formkit::class);
+        $userIds = $this->orm->findColumn(User::class, 'id')->map('intval')->dump();
 
         $content = json_decode(file_get_contents(__DIR__ . '/data/formkit.json'), true);
         $resContent = json_decode(file_get_contents(__DIR__ . '/data/formkit_response.json'), true);
@@ -50,10 +48,10 @@ $seeder->import(
 
             $item = $mapper->createOne($item);
 
-            $seeder->outCounting();
+            $this->printCounting();
 
             foreach (range(1, 30) as $k) {
-                $agent = new Browser([], $faker->userAgent());
+                $agent = new BrowserNext([], $faker->userAgent());
 
                 $res = new FormkitResponse();
                 $res->formkitId = $item->id;
@@ -61,21 +59,21 @@ $seeder->import(
                 $res->state = $faker->randomElement(ResState::cases());
                 $res->from = $faker->url();
                 $res->ip = $faker->ipv4();
-                $res->ua = $agent->getUserAgent();
-                $res->browser = $agent->browser() . '/' . $agent->version($agent->browser());
-                $res->device = $agent->deviceType() . '/' . ($agent->device() ?: 'PC');
-                $res->os = $agent->platform();
+                $res->ua = $agent->userAgent;
+                $res->browser = $agent->browserString() . '/' . $agent->engine->toString();
+                $res->device = $agent->device->type . '/' . ($agent->deviceString() ?: 'PC');
+                $res->os = $agent->osString();
 
-                $orm->createOne($res);
+                $this->orm->createOne($res);
 
-                $seeder->outCounting();
+                $this->printCounting();
             }
         }
     }
-);
 
-$seeder->clear(
-    static function () use ($seeder, $orm, $db) {
-        $seeder->truncate(Formkit::class, FormkitResponse::class);
+    #[SeedClear]
+    public function clear(): void
+    {
+        $this->truncate(Formkit::class, FormkitResponse::class);
     }
-);
+};

@@ -8,7 +8,6 @@ use Lyrasoft\Melo\Entity\Lesson;
 use Lyrasoft\Melo\Entity\Segment;
 use Lyrasoft\Melo\Entity\UserLessonMap;
 use Lyrasoft\Melo\Entity\UserSegmentMap;
-use Lyrasoft\Melo\Enum\SegmentType;
 use Lyrasoft\Melo\Enum\UserSegmentStatus;
 use Lyrasoft\Luna\Entity\User;
 use Lyrasoft\Melo\Features\Section\AbstractSection;

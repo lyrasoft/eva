@@ -13,6 +13,7 @@
         "@fortawesome/fontawesome-pro": "^7.0",
         "@lyrasoft/attachment": "portal:./vendor/lyrasoft/attachment/assets",
         "@lyrasoft/favorite": "portal:./vendor/lyrasoft/favorite/assets",
+        "@lyrasoft/feedback": "portal:./vendor/lyrasoft/feedback/assets",
         "@lyrasoft/luna": "portal:./vendor/lyrasoft/luna/assets",
         "@lyrasoft/melo": "portal:./vendor/lyrasoft/melo/assets",
         "@lyrasoft/nexus": "portal:./vendor/lyrasoft/theme-nexus",

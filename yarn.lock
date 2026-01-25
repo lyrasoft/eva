@@ -319,6 +319,12 @@ __metadata:
   languageName: node
   linkType: soft
 
+"@lyrasoft/feedback@portal:./vendor/lyrasoft/feedback/assets::locator=windwalker%40workspace%3A.":
+  version: 0.0.0-use.local
+  resolution: "@lyrasoft/feedback@portal:./vendor/lyrasoft/feedback/assets::locator=windwalker%40workspace%3A."
+  languageName: node
+  linkType: soft
+
 "@lyrasoft/luna@portal:./vendor/lyrasoft/luna/assets::locator=windwalker%40workspace%3A.":
   version: 0.0.0-use.local
   resolution: "@lyrasoft/luna@portal:./vendor/lyrasoft/luna/assets::locator=windwalker%40workspace%3A."
@@ -3831,6 +3837,7 @@ __metadata:
     "@fortawesome/fontawesome-pro": "npm:^7.0"
     "@lyrasoft/attachment": "portal:./vendor/lyrasoft/attachment/assets"
     "@lyrasoft/favorite": "portal:./vendor/lyrasoft/favorite/assets"
+    "@lyrasoft/feedback": "portal:./vendor/lyrasoft/feedback/assets"
     "@lyrasoft/luna": "portal:./vendor/lyrasoft/luna/assets"
     "@lyrasoft/melo": "portal:./vendor/lyrasoft/melo/assets"
     "@lyrasoft/nexus": "portal:./vendor/lyrasoft/theme-nexus"

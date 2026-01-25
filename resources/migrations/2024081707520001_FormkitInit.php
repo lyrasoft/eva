@@ -6,19 +6,16 @@ namespace Lyrasoft\Formkit\Migration;
 
 use Lyrasoft\Formkit\Entity\Formkit;
 use Lyrasoft\Formkit\Entity\FormkitResponse;
-use Windwalker\Core\Console\ConsoleApplication;
-use Windwalker\Core\Migration\Migration;
+use Windwalker\Core\Migration\AbstractMigration;
+use Windwalker\Core\Migration\MigrateDown;
+use Windwalker\Core\Migration\MigrateUp;
 use Windwalker\Database\Schema\Schema;
 
-/**
- * Migration UP: 2024081707520001_FormkitInit.
- *
- * @var Migration          $mig
- * @var ConsoleApplication $app
- */
-$mig->up(
-    static function () use ($mig) {
-        $mig->createTable(
+return new /** 2024081707520001_FormkitInit */ class extends AbstractMigration {
+    #[MigrateUp]
+    public function up(): void
+    {
+        $this->createTable(
             Formkit::class,
             function (Schema $schema) {
                 $schema->primary('id')->comment('Primary Key');
@@ -45,7 +42,8 @@ $mig->up(
                 $schema->addIndex('created_by');
             }
         );
-        $mig->createTable(
+
+        $this->createTable(
             FormkitResponse::class,
             function (Schema $schema) {
                 $schema->primary('id')->comment('Primary Key');
@@ -69,13 +67,10 @@ $mig->up(
             }
         );
     }
-);
 
-/**
- * Migration DOWN.
- */
-$mig->down(
-    static function () use ($mig) {
-        $mig->dropTables(Formkit::class, FormkitResponse::class);
+    #[MigrateDown]
+    public function down(): void
+    {
+        $this->dropTables(Formkit::class, FormkitResponse::class);
     }
-);
+};

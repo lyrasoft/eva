@@ -6,21 +6,16 @@ namespace App\Migration;
 
 use Lyrasoft\Feedback\Entity\Comment;
 use Lyrasoft\Feedback\Entity\Rating;
-use Lyrasoft\Firewall\Entity\IpRule;
-use Lyrasoft\Firewall\Entity\Redirect;
-use Windwalker\Core\Console\ConsoleApplication;
-use Windwalker\Core\Migration\Migration;
+use Windwalker\Core\Migration\AbstractMigration;
+use Windwalker\Core\Migration\MigrateDown;
+use Windwalker\Core\Migration\MigrateUp;
 use Windwalker\Database\Schema\Schema;
 
-/**
- * Migration UP: 2025010510100001_CommentRatingInit.
- *
- * @var Migration          $mig
- * @var ConsoleApplication $app
- */
-$mig->up(
-    static function () use ($mig) {
-        $mig->createTable(
+return new /** 2025010510100001_CommentRatingInit */ class extends AbstractMigration {
+    #[MigrateUp]
+    public function up(): void
+    {
+        $this->createTable(
             Rating::class,
             function (Schema $schema) {
                 $schema->primary('id');
@@ -38,7 +33,8 @@ $mig->up(
                 $schema->addIndex('ordering');
             }
         );
-        $mig->createTable(
+
+        $this->createTable(
             Comment::class,
             function (Schema $schema) {
                 $schema->primary('id');
@@ -76,13 +72,10 @@ $mig->up(
             }
         );
     }
-);
 
-/**
- * Migration DOWN.
- */
-$mig->down(
-    static function () use ($mig) {
-        $mig->dropTables(Rating::class, Comment::class);
+    #[MigrateDown]
+    public function down(): void
+    {
+        $this->dropTables(Rating::class, Comment::class);
     }
-);
+};

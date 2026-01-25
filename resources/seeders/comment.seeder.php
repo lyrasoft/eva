@@ -8,29 +8,24 @@ use Lyrasoft\Feedback\Entity\Comment;
 use Lyrasoft\Feedback\Service\CommentService;
 use Lyrasoft\Luna\Entity\Article;
 use Lyrasoft\Luna\Entity\User;
-use Windwalker\Core\Seed\Seeder;
-use Windwalker\Database\DatabaseAdapter;
+use Windwalker\Core\Seed\AbstractSeeder;
+use Windwalker\Core\Seed\SeedClear;
+use Windwalker\Core\Seed\SeedImport;
 use Windwalker\ORM\EntityMapper;
-use Windwalker\ORM\ORM;
 
-/**
- * Comment Seeder
- *
- * @var Seeder          $seeder
- * @var ORM             $orm
- * @var DatabaseAdapter $db
- */
-$seeder->import(
-    static function (CommentService $commentService) use ($seeder, $orm, $db) {
-        $faker = $seeder->faker('en_US');
+return new /** Comment Seeder */ class extends AbstractSeeder {
+    #[SeedImport]
+    public function import(CommentService $commentService): void
+    {
+        $faker = $this->faker('en_US');
 
         $type = 'article';
 
         /** @var EntityMapper<Comment> $mapper */
-        $mapper = $orm->mapper(Comment::class);
+        $mapper = $this->orm->mapper(Comment::class);
 
-        $articleIds = $orm->findColumn(Article::class, 'id')->map('intval')->dump();
-        $userIds = $orm->findColumn(User::class, 'id')->map('intval')->dump();
+        $articleIds = $this->orm->findColumn(Article::class, 'id')->map('intval')->dump();
+        $userIds = $this->orm->findColumn(User::class, 'id')->map('intval')->dump();
 
         foreach ($articleIds as $articleId) {
             foreach (range(1, random_int(2, 5)) as $i) {
@@ -42,9 +37,9 @@ $seeder->import(
                     $faker->paragraph(4),
                     $userId,
                     extra: function (Comment $item) use ($faker) {
-                        $item->setTitle($faker->sentence(2));
-                        $item->setCreated($faker->dateTimeThisYear());
-                        $item->setOrdering($item->count() + 1);
+                        $item->title = $faker->sentence(2);
+                        $item->created = $faker->dateTimeThisYear();
+                        $item->ordering = $item->count() + 1;
                     }
                 );
 
@@ -56,7 +51,7 @@ $seeder->import(
                         $item,
                         $faker->paragraph(3),
                         $faker->randomElement($userIds),
-                        $item->getCreated()->modify('+1 day')
+                        $item->created->modify('+1 day')
                     );
                 } else {
                     $commentService->addSubReply(
@@ -64,9 +59,9 @@ $seeder->import(
                         $faker->paragraph(3),
                         $faker->randomElement($userIds),
                         extra: function (Comment $reply) use ($item, $faker) {
-                            $reply->setTitle('Re: ' . $item->getTitle());
-                            $reply->setCreated($item->getCreated()->modify('+1 day'));
-                            $reply->setOrdering($reply->count() + 1);
+                            $reply->title = 'Re: ' . $item->title;
+                            $reply->created = $item->created->modify('+1 day');
+                            $reply->ordering = $reply->count() + 1;
                         }
                     );
                 }
@@ -77,7 +72,7 @@ $seeder->import(
                 //     $item->getId()
                 // );
 
-                $seeder->outCounting();
+                $this->printCounting();
             }
 
             // $commentService->reorderComments(
@@ -86,10 +81,10 @@ $seeder->import(
             // );
         }
     }
-);
 
-$seeder->clear(
-    static function () use ($seeder, $orm, $db) {
-        $seeder->truncate(Comment::class);
+    #[SeedClear]
+    public function clear(): void
+    {
+        $this->truncate(Comment::class);
     }
-);
+};
