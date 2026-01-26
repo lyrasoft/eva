@@ -2551,12 +2551,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/lyrasoft/luna-melo.git",
-                "reference": "6b18f6d2c2329386f0d26270df56fdbcdace67ab"
+                "reference": "cc9e38f4c42903f2dd7fc7ccb7db8b9a48a644c2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/lyrasoft/luna-melo/zipball/6b18f6d2c2329386f0d26270df56fdbcdace67ab",
-                "reference": "6b18f6d2c2329386f0d26270df56fdbcdace67ab",
+                "url": "https://api.github.com/repos/lyrasoft/luna-melo/zipball/cc9e38f4c42903f2dd7fc7ccb7db8b9a48a644c2",
+                "reference": "cc9e38f4c42903f2dd7fc7ccb7db8b9a48a644c2",
                 "shasum": ""
             },
             "require": {
@@ -2612,7 +2612,7 @@
                 "issues": "https://github.com/lyrasoft/luna-melo/issues",
                 "source": "https://github.com/lyrasoft/luna-melo/tree/master"
             },
-            "time": "2026-01-25T11:17:08+00:00"
+            "time": "2026-01-26T04:45:21+00:00"
         },
         {
             "name": "lyrasoft/member",
