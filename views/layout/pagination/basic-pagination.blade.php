@@ -3,8 +3,12 @@
 /**
  * Global variables
  * --------------------------------------------------------------
- * @var $pagination \Windwalker\Core\Pagination\Pagination
- * @var $result     \Windwalker\Core\Pagination\PaginationResult
+ * @var $app       AppContext      Application context.
+ * @var $uri       SystemUri       System Uri information.
+ * @var $chronos   ChronosService  The chronos datetime service.
+ * @var $nav       Navigator       Navigator object to build route.
+ * @var $asset     AssetService    The Asset manage service.
+ * @var $lang      LangService     The language translation service.
  */
 
 declare(strict_types=1);
@@ -12,10 +16,14 @@ declare(strict_types=1);
 namespace App\View;
 
 use Windwalker\Core\Pagination\Pagination;
+use Windwalker\Core\Pagination\PaginationResult;
 
 /**
  * @var $pagination Pagination
+ * @var $result     PaginationResult
+ * @var $allowQuery array|bool|null
  */
+
 $result = $pagination->compile();
 $current = $result->getCurrent();
 
