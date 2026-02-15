@@ -26,7 +26,7 @@ $user = $app->service(\Lyrasoft\Luna\User\UserService::class)->getUser();
 ?>
 
 @section('header')
-    <header class="navbar navbar-expand-md d-print-none position-sticky" style="top: 0; z-index: 5; min-height: var(--nx-header-height)">
+    <header class="navbar navbar-expand-md d-print-none position-sticky" style="top: 0; z-index: 10; min-height: var(--nx-header-height)">
         <div class="container-fluid">
             {{-- Sidebar Toggler --}}
             <div class="navbar-nav">
