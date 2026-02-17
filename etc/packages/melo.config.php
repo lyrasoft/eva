@@ -27,6 +27,10 @@ static fn() => [
         MeloPackage::class,
     ],
 
+    'upload' => [
+        'video_max_bitrate' => 2 * 1024 * 1024, // 2Mbps
+    ],
+
     'checkout' => [
         'allow_anonymous' => false,
         'default_expiry' => '+7days',
