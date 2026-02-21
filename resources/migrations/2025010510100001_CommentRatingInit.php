@@ -22,7 +22,7 @@ return new /** 2025010510100001_CommentRatingInit */ class extends AbstractMigra
                 $schema->integer('target_id');
                 $schema->integer('user_id');
                 $schema->varchar('type');
-                $schema->decimal('float')->length('10,2');
+                $schema->decimal('rank')->length('10,2');
                 $schema->integer('ordering');
                 $schema->datetime('created');
                 $schema->datetime('modified');

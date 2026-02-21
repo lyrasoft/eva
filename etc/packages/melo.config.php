@@ -28,7 +28,8 @@ static fn() => [
     ],
 
     'upload' => [
-        'video_max_bitrate' => 2 * 1024 * 1024, // 2Mbps
+        'video_max_bitrate' => 4 * 1024 * 1024, // 4Mbps
+        'video_bitrate_doc' => env('MELO_VIDEO_BITRATE_DOC') ?: 'https://simular.co/blog/post/54',
     ],
 
     'checkout' => [

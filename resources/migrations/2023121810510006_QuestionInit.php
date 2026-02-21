@@ -26,7 +26,7 @@ return new /** 2023121810510006_QuestionInit */ class extends AbstractMigration 
                 $schema->longtext('content');
                 $schema->longtext('answer');
                 $schema->varchar('image');
-                $schema->integer('score');
+                $schema->decimal('score')->length('10,2');
                 $schema->tinyint('state');
                 $schema->integer('ordering');
                 $schema->datetime('created')->nullable(true);
@@ -46,15 +46,17 @@ return new /** 2023121810510006_QuestionInit */ class extends AbstractMigration 
                 $schema->primary('id');
                 $schema->integer('user_id');
                 $schema->integer('lesson_id');
+                $schema->integer('quiz_id');
                 $schema->integer('question_id');
                 $schema->varchar('question_type');
-                $schema->integer('score');
+                $schema->decimal('score')->length('10,2');
                 $schema->json('value')->nullable(true);
                 $schema->bool('is_correct');
                 $schema->datetime('created')->nullable(true);
 
                 $schema->addIndex('user_id');
                 $schema->addIndex('lesson_id');
+                $schema->addIndex('quiz_id');
                 $schema->addIndex('question_id');
             }
         );

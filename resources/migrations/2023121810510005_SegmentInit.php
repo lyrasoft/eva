@@ -54,7 +54,7 @@ return new /** 2023121810510005_SegmentInit */ class extends AbstractMigration {
                 $schema->varchar('segment_type');
                 $schema->char('status')->length(7)->comment('UserSegmentStatus: pass, fail, process, done');
                 $schema->longtext('description');
-                $schema->integer('score');
+                $schema->decimal('score')->length('10,2');
                 $schema->varchar('assignment');
                 $schema->datetime('assignment_upload_time')->nullable(true)->comment('作業上傳時間');
                 $schema->bool('front_show');
