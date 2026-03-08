@@ -1,0 +1,131 @@
+name: Check Image Rules
+
+on:
+    pull_request:
+        types: [opened, synchronize, reopened]
+
+jobs:
+    check-images:
+        runs-on: ubuntu-latest
+
+        permissions:
+            pull-requests: write
+            contents: read
+
+        steps:
+            - uses: actions/checkout@v4
+
+            - name: Install ImageMagick
+              run: sudo apt-get update && sudo apt-get install -y imagemagick
+
+            - name: Filter changed images
+              id: filter
+              uses: dorny/paths-filter@v3
+              with:
+                  list-files: shell
+                  filters: |
+                      images:
+                        - '**/*.png'
+                        - '**/*.jpg'
+                        - '**/*.jpeg'
+                        - '**/*.webp'
+                        - '**/*.svg'
+
+            - name: Check image rules
+              id: density
+              shell: bash
+              run: |
+                  set -euo pipefail
+                  
+                  WARN_THRESHOLD=0.8
+                  TARGET_BPP=0.5
+                  MAX_WIDTH=2000
+                  TARGET_WIDTH=1920
+                  SVG_LIMIT=307200
+                  
+                  REPO="${{ github.repository }}"
+                  BRANCH="${{ github.head_ref }}"
+                  BASE_URL="https://github.com/${REPO}/blob/${BRANCH}"
+                  
+                  FILES="${{ steps.filter.outputs.images_files }}"
+                  TABLE_ROWS=""
+                  
+                  [ -z "$FILES" ] && { echo "FOUND=false" >> "$GITHUB_OUTPUT"; exit 0; }
+                  
+                  for file in $FILES; do
+                    [ -f "$file" ] || continue
+                  
+                    SIZE=$(stat -c%s "$file")
+                    CURRENT_MB=$(awk "BEGIN {printf \"%.2f\", $SIZE/1024/1024}")
+                    LINK="[${file}](${BASE_URL}/${file})"
+                  
+                    # ---------- SVG ----------
+                    if [[ "$file" =~ \.svg$ ]]; then
+                      if [ "$SIZE" -gt "$SVG_LIMIT" ]; then
+                        TARGET_KB=$(awk "BEGIN {printf \"%.0f\", $SVG_LIMIT/1024}")
+                        TABLE_ROWS="${TABLE_ROWS}| ${LINK} | ${CURRENT_MB} MB | 壓縮至 ${TARGET_KB} KB |\n"
+                      fi
+                      continue
+                    fi
+                  
+                    DIM=$(identify -format "%w %h" "$file" 2>/dev/null || true)
+                    [[ "$DIM" =~ ^[0-9]+\ [0-9]+$ ]] || continue
+                  
+                    WIDTH=$(echo "$DIM" | cut -d' ' -f1)
+                    HEIGHT=$(echo "$DIM" | cut -d' ' -f2)
+                    PIXELS=$((WIDTH * HEIGHT))
+                  
+                    # ---------- 規則 1：寬度優先 ----------
+                    if [ "$WIDTH" -gt "$MAX_WIDTH" ]; then
+                  
+                      SCALE=$(awk "BEGIN {print $TARGET_WIDTH / $WIDTH}")
+                      NEW_HEIGHT=$(awk "BEGIN {printf \"%.0f\", $HEIGHT * $SCALE}")
+                      NEW_PIXELS=$((TARGET_WIDTH * NEW_HEIGHT))
+                      TARGET_SIZE=$(awk "BEGIN {printf \"%.0f\", $NEW_PIXELS * $TARGET_BPP}")
+                      TARGET_MB=$(awk "BEGIN {printf \"%.2f\", $TARGET_SIZE/1024/1024}")
+                  
+                      TABLE_ROWS="${TABLE_ROWS}| ${LINK} | 寬 ${WIDTH}px | 寬 ${TARGET_WIDTH}px 以下，或壓縮至 ${TARGET_MB} MB |\n"
+                      continue
+                    fi
+                  
+                    # ---------- 規則 2：BPP ----------
+                    BPP=$(awk "BEGIN {print $SIZE / $PIXELS}")
+                    TRIGGER_BPP=$(awk "BEGIN {if ($BPP > $WARN_THRESHOLD) print 1; else print 0}")
+                  
+                    if [ "$TRIGGER_BPP" -eq 1 ]; then
+                      TARGET_SIZE=$(awk "BEGIN {printf \"%.0f\", $PIXELS * $TARGET_BPP}")
+                  
+                      if [ "$TARGET_SIZE" -gt 1048576 ]; then
+                        TARGET_STR=$(awk "BEGIN {printf \"%.2f MB\", $TARGET_SIZE/1024/1024}")
+                      else
+                        TARGET_STR=$(awk "BEGIN {printf \"%.0f KB\", $TARGET_SIZE/1024}")
+                      fi
+                  
+                      TABLE_ROWS="${TABLE_ROWS}| ${LINK} | ${CURRENT_MB} MB | 壓縮至 ${TARGET_STR} |\n"
+                    fi
+                  done
+                  
+                  if [ -n "$TABLE_ROWS" ]; then
+                    echo "FOUND=true" >> "$GITHUB_OUTPUT"
+                    echo "MESSAGE<<EOF" >> "$GITHUB_OUTPUT"
+                    echo "| 檔案 | 目前狀況 | 建議調整 |" >> "$GITHUB_OUTPUT"
+                    echo "|----|------|------|" >> "$GITHUB_OUTPUT"
+                    echo -e "$TABLE_ROWS" >> "$GITHUB_OUTPUT"
+                    echo "EOF" >> "$GITHUB_OUTPUT"
+                  else
+                    echo "FOUND=false" >> "$GITHUB_OUTPUT"
+                  fi
+
+            - name: Comment on PR
+              if: steps.density.outputs.FOUND == 'true'
+              uses: actions/github-script@v7
+              env:
+                  MESSAGE: ${{ steps.density.outputs.MESSAGE }}
+              with:
+                  script: |
+                      github.rest.issues.createComment({
+                        issue_number: context.issue.number,
+                        owner: context.repo.owner,
+                        repo: context.repo.repo,
+                        body: `⚠️ 以下圖片建議優化：\n\n${process.env.MESSAGE}`
+                      });
