@@ -107,7 +107,7 @@ return env('ERROR_REPORTING') ?? ErrorService::getReportLevel(
          * using the PHP function **trigger_error**.
          * @link https://php.net/manual/en/errorfunc.constants.php
          */
-        E_USER_WARNING => (bool) env('ERROR_REPORT_WARNING', '0'),
+        E_USER_WARNING => (bool) env('ERROR_REPORT_WARNING', env('APP_DEBUG')),
 
         /**
          * User-generated notice message. This is like an

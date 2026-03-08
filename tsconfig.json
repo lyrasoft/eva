@@ -3,9 +3,9 @@
         "@windwalker-io/unicorn-next/tsconfig.js.json"
     ],
     "include": [
-        "vendor/**/src/Module/**/assets/**/*.ts",
-        "resources/assets/src/**/*.ts",
-        "src/Module/**/*.ts"
+        "./resources/assets/src/**/*",
+        "./vendor/**/src/Module/**/assets/**/*",
+        "./src/Module/**/*",
     ],
     "exclude": [
         "node_modules/**/*"
@@ -14,6 +14,9 @@
         "reflect-metadata"
     ],
     "compilerOptions": {
+        "types": [
+            "vite/client"
+        ],
         "paths": {
             "~/*": [
                 "./resources/assets/*"

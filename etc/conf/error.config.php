@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Config;
 
 use Windwalker\Core\Application\AppType;
+use Windwalker\Core\Error\ErrorInlineHandler;
 use Windwalker\Core\Error\ErrorLogHandler;
 use Windwalker\Core\Error\SimpleErrorPageHandler;
 use Windwalker\Core\Provider\ErrorHandlingProvider;
@@ -85,6 +86,7 @@ return [
         AppType::CONSOLE->name => [],
         AppType::CLI_WEB->name => [],
         'all' => [
+            'inline' => ref('error.factories.handlers.inline'),
             'deprecation' => ref('error.factories.handlers.deprecation')
         ]
     ],
@@ -123,6 +125,7 @@ return [
                     'print' => false,
                 ]
             ),
+            'inline' => ErrorInlineHandler::class,
         ]
     ]
 ];
