@@ -38,13 +38,13 @@ jobs:
                   set -euo pipefail
                   
                   WARN_THRESHOLD=0.8
-                  TARGET_BPP=0.5
+                  TARGET_BPP=0.6 # Best Practice: 0.5
                   MAX_WIDTH=2000
                   TARGET_WIDTH=1920
                   SVG_LIMIT=307200
                   
-                  REPO="${{ github.repository }}"
-                  BRANCH="${{ github.head_ref }}"
+                  REPO="${{ github.event.pull_request.head.repo.full_name }}"
+                  BRANCH="${{ github.event.pull_request.head.ref }}"
                   BASE_URL="https://github.com/${REPO}/blob/${BRANCH}"
                   
                   FILES="${{ steps.filter.outputs.images_files }}"
@@ -63,7 +63,7 @@ jobs:
                     if [[ "$file" =~ \.svg$ ]]; then
                       if [ "$SIZE" -gt "$SVG_LIMIT" ]; then
                         TARGET_KB=$(awk "BEGIN {printf \"%.0f\", $SVG_LIMIT/1024}")
-                        TABLE_ROWS="${TABLE_ROWS}| ${LINK} | ${CURRENT_MB} MB | 壓縮至 ${TARGET_KB} KB |\n"
+                        TABLE_ROWS="${TABLE_ROWS}| ${LINK} | ${CURRENT_MB} MB | 壓縮至 ${TARGET_KB} KB 以內 |\n"
                       fi
                       continue
                     fi
@@ -84,7 +84,7 @@ jobs:
                       TARGET_SIZE=$(awk "BEGIN {printf \"%.0f\", $NEW_PIXELS * $TARGET_BPP}")
                       TARGET_MB=$(awk "BEGIN {printf \"%.2f\", $TARGET_SIZE/1024/1024}")
                   
-                      TABLE_ROWS="${TABLE_ROWS}| ${LINK} | 寬 ${WIDTH}px | 寬 ${TARGET_WIDTH}px 以下，或壓縮至 ${TARGET_MB} MB |\n"
+                      TABLE_ROWS="${TABLE_ROWS}| ${LINK} | 寬 ${WIDTH}px | 寬 ${TARGET_WIDTH}px 以下，或壓縮至 ${TARGET_MB} MB 以內 |\n"
                       continue
                     fi
                   
@@ -101,7 +101,7 @@ jobs:
                         TARGET_STR=$(awk "BEGIN {printf \"%.0f KB\", $TARGET_SIZE/1024}")
                       fi
                   
-                      TABLE_ROWS="${TABLE_ROWS}| ${LINK} | ${CURRENT_MB} MB | 壓縮至 ${TARGET_STR} |\n"
+                      TABLE_ROWS="${TABLE_ROWS}| ${LINK} | ${CURRENT_MB} MB | 壓縮至 ${TARGET_STR} 以內 |\n"
                     fi
                   done
                   
