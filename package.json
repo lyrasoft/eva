@@ -32,7 +32,7 @@
         "ts-luxon": "^6.2.0",
         "ts-md5": "^2.0.1",
         "tw-city-selector": "^2.1.2",
-        "vite": "^7.1.7",
+        "vite": "^8.0.0",
         "vue": "^3.5.24",
         "vue-multi-uploader": "^0.1.11",
         "youtube-background": "^1.1.8"
