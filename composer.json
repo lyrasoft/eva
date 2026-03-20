@@ -56,11 +56,13 @@
         "ecpay/sdk": "^1.3",
         "lyrasoft/throttle": "^0.1.3",
         "lyrasoft/attachment": "^1.1",
-        "lyrasoft/melo": "dev-master"
+        "lyrasoft/melo": "dev-master",
+        "lyrasoft/investor": "dev-main"
     },
     "require-dev": {
         "windwalker/framework": "dev-master",
-        "phpoffice/phpspreadsheet": "^5.0"
+        "phpoffice/phpspreadsheet": "^5.0",
+        "asika/better-units": "^0.1.1"
     },
     "scripts": {
         "post-create-project-cmd": [

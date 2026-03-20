@@ -198,6 +198,30 @@ $menu->link('橫幅管理')
     ->to($nav->to('banner_list'))
     ->icon('fal fa-gallery-thumbnails');
 
+// Investor
+$menu->link('投資人專區')
+    ->to($nav->to('banner_list'))
+    ->icon('fal fa-money-bill-trend-up');
+
+$menu->registerChildren(
+    function (MenuBuilder $menu) use ($nav, $lang) {
+        // Finance
+        $menu->link('財務及法人資訊')
+            ->to($nav->to('financial_statement_list'))
+            ->icon('fal fa-chart-line');
+
+        // Shareholder
+        $menu->link('股東專區')
+            ->to($nav->to('shareholder_info_list'))
+            ->icon('fal fa-user-friends');
+
+        // Dividend
+        $menu->link('歷年股利分派')
+            ->to($nav->to('dividend_history_list'))
+            ->icon('fal fa-coins');
+    }
+);
+
 // Token Coins
 $menu->link('點數歷史')
     ->to($nav->to('token_coin_history_list'))

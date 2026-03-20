@@ -72,5 +72,9 @@ static fn() => [
         'delete' => [
             'manager' => true,
         ],
+
+        'lesson::edit' => [
+            'admin' => true,
+        ]
     ],
 ];

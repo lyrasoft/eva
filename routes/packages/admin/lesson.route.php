@@ -36,7 +36,7 @@ $router->group('lesson')
 
         $router->group('lesson_scope')
             ->middleware(
-                KeepUrlQueryMiddleware::di(options: ['key' => 'lesson_id'])
+                KeepUrlQueryMiddleware::di(key: 'lesson_id', uid: 'lesson_edit_scope')
             )
             ->prefix('lesson/{lesson_id}')
             ->register(function (RouteCreator $router) {

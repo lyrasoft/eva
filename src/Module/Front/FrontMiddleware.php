@@ -10,6 +10,7 @@ use Lyrasoft\EventBooking\EventBookingPackage;
 use Lyrasoft\Favorite\FavoritePackage;
 use Lyrasoft\Feedback\FeedbackPackage;
 use Lyrasoft\Firewall\FirewallPackage;
+use Lyrasoft\Investor\InvestorPackage;
 use Lyrasoft\Luna\LunaPackage;
 use Lyrasoft\Luna\Script\FontAwesomeScript;
 use Lyrasoft\Luna\Services\ConfigService;
@@ -68,6 +69,7 @@ class FrontMiddleware extends AbstractLifecycleMiddleware
         $this->lang->loadAllFromVendor(FirewallPackage::class, 'ini');
         $this->lang->loadAllFromVendor(FeedbackPackage::class, 'ini');
         $this->lang->loadAllFromVendor(MeloPackage::class, 'ini');
+        $this->lang->loadAllFromVendor(InvestorPackage::class, 'ini');
 
         $this->lang->loadAll('ini');
 

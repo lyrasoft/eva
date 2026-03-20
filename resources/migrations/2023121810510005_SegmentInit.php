@@ -23,6 +23,7 @@ return new /** 2023121810510005_SegmentInit */ class extends AbstractMigration {
                 $schema->integer('parent_id');
                 $schema->varchar('type');
                 $schema->varchar('title');
+                $schema->varchar('cover');
                 $schema->longtext('content');
                 $schema->varchar('src');
                 $schema->varchar('filename');

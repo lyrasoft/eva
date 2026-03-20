@@ -12,6 +12,11 @@ return [
     __DIR__ . '/tag.seeder.php',
     __DIR__ . '/article.seeder.php',
 
+    // Investor
+    __DIR__ . '/financial-statement.seeder.php',
+    __DIR__ . '/dividend-history.seeder.php',
+    __DIR__ . '/shareholder-info.seeder.php',
+
     // Banner
     __DIR__ . '/banner.seeder.php',
 

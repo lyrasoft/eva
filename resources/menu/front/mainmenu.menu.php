@@ -86,6 +86,20 @@ $menu->registerChildren(
                 }
             }
         );
+
+        // Investor
+        $menu->link('投資人專區', '#');
+
+        $menu->registerChildren(
+            function (MenuBuilder $menu) use ($app, $nav) {
+                $menu->link('每月營收報告', $nav->to('investor_monthly_report'));
+                $menu->link('每季財務報告', $nav->to('investor_season_report'));
+                $menu->link('公司年報', $nav->to('investor_annual_report'));
+                $menu->link('歷年股利分派', $nav->to('investor_dividend_history'));
+                $menu->link('股東資訊', $nav->to('investor_shareholder_tops'));
+                $menu->link('股東會', $nav->to('investor_shareholder_meetings'));
+            }
+        );
     }
 );
 

@@ -5,11 +5,10 @@ declare(strict_types=1);
 namespace App\Routes;
 
 use Lyrasoft\Melo\Module\Admin\Student\StudentController;
+use Lyrasoft\Melo\Module\Admin\Student\StudentLessonListView;
 use Lyrasoft\Melo\Module\Admin\Student\StudentListView;
 use Lyrasoft\Melo\Module\Admin\UserHomework\UserHomeworkController;
 use Lyrasoft\Melo\Module\Admin\UserHomework\UserHomeworkListView;
-use Lyrasoft\Melo\Module\Admin\UserLesson\UserLessonController;
-use Lyrasoft\Melo\Module\Admin\UserLesson\UserLessonListView;
 use Lyrasoft\Melo\Module\Admin\UserQuiz\UserQuizController;
 use Lyrasoft\Melo\Module\Admin\UserQuiz\UserQuizListView;
 use Unicorn\Middleware\KeepUrlQueryMiddleware;
@@ -51,8 +50,8 @@ $router->group('student')
             ->register(function (RouteCreator $router) {
                 $router->any('student_lesson_list', '/lessons')
                     ->extra('menu', ['sidemenu' => 'student_lesson_list'])
-                    ->controller(UserLessonController::class)
-                    ->view(UserLessonListView::class)
+                    ->controller(StudentController::class)
+                    ->view(StudentLessonListView::class)
                     ->postHandler('copy')
                     ->putHandler('filter')
                     ->patchHandler('batch');
