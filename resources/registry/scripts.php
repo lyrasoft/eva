@@ -25,7 +25,7 @@ return [
 
     // Prepare assets and install dependencies
     'prepare:prod' => [
-        'yarn install --immutable',
+        'yarn install',
         'yarn build:prod',
     ],
 
