@@ -16,10 +16,8 @@ $router->group('ip-rule')
     ->extra('menu', ['sidemenu' => 'ip_rule_list'])
     ->middleware(
         KeepUrlQueryMiddleware::class,
-        options: [
-            'key' => 'type',
-            'uid' => 'ip_rule_type'
-        ]
+        key: 'type',
+        uid: 'ip_rule_type',
     )
     ->register(function (RouteCreator $router) {
         $router->any('ip_rule_list', '/ip-rule/list/{type}')

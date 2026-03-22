@@ -1,12 +1,5 @@
 <?php
 
-/**
- * Part of eva project.
- *
- * @copyright  Copyright (C) 2022 __ORGANIZATION__.
- * @license    __LICENSE__
- */
-
 declare(strict_types=1);
 
 use Lyrasoft\Contact\ContactPackage;
@@ -28,6 +21,20 @@ static fn() => [
                 //
             ]
         ]
+    ],
+
+    'rate_limit' => [
+        '_default' => [
+            'policy' => 'fixed_window',
+            'limit' => 10,
+            'interval' => '1day',
+        ],
+        // Add type config
+        // 'main' => [
+        //     'policy' => 'fixed_window',
+        //     'limit' => 10,
+        //     'interval' => '1day',
+        // ],
     ],
 
     'providers' => [

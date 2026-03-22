@@ -6,19 +6,16 @@ namespace App\Migration;
 
 use Lyrasoft\Firewall\Entity\IpRule;
 use Lyrasoft\Firewall\Entity\Redirect;
-use Windwalker\Core\Console\ConsoleApplication;
-use Windwalker\Core\Migration\Migration;
+use Windwalker\Core\Migration\AbstractMigration;
+use Windwalker\Core\Migration\MigrateDown;
+use Windwalker\Core\Migration\MigrateUp;
 use Windwalker\Database\Schema\Schema;
 
-/**
- * Migration UP: 2024073104460001_FirewallInit.
- *
- * @var Migration          $mig
- * @var ConsoleApplication $app
- */
-$mig->up(
-    static function () use ($mig) {
-        $mig->createTable(
+return new /** 2024073104460001_FirewallInit */ class extends AbstractMigration {
+    #[MigrateUp]
+    public function up(): void
+    {
+        $this->createTable(
             Redirect::class,
             function (Schema $schema) {
                 $schema->primary('id');
@@ -42,16 +39,18 @@ $mig->up(
                 $schema->addIndex('ordering');
             }
         );
-        $mig->createTable(
+        $this->createTable(
             IpRule::class,
             function (Schema $schema) {
                 $schema->primary('id');
                 $schema->varchar('type');
                 $schema->varchar('kind');
                 $schema->varchar('range');
+                $schema->text('paths');
                 $schema->tinyint('state')->length(1);
                 $schema->integer('ordering');
                 $schema->text('note');
+                $schema->datetime('expired_at');
                 $schema->datetime('created');
                 $schema->datetime('modified');
                 $schema->integer('created_by');
@@ -60,16 +59,14 @@ $mig->up(
 
                 $schema->addIndex('type');
                 $schema->addIndex('ordering');
+                $schema->addIndex('expired_at');
             }
         );
     }
-);
 
-/**
- * Migration DOWN.
- */
-$mig->down(
-    static function () use ($mig) {
-        $mig->dropTables(Redirect::class, IpRule::class);
+    #[MigrateDown]
+    public function down(): void
+    {
+        $this->dropTables(Redirect::class, IpRule::class);
     }
-);
+};
