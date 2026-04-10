@@ -5,24 +5,24 @@ declare(strict_types=1);
 namespace App\Migration;
 
 use Windwalker\Core\Migration\AbstractMigration;
-use Windwalker\Core\Migration\MigrateDown;
 use Windwalker\Core\Migration\MigrateUp;
+use Windwalker\Core\Migration\MigrateDown;
 use Windwalker\Database\Schema\Schema;
 
-return new /** 2025041715320001_RateLimitInit */ class extends AbstractMigration {
+return new /** 2026041004500001_CacheInit */ class extends AbstractMigration {
     #[MigrateUp]
     public function up(): void
     {
         $this->createTable(
-            'rate_limits',
+            'cache_items',
             function (Schema $schema) {
                 $schema->primaryBigint('id');
                 $schema->varchar('key');
-                $schema->json('payload');
-                $schema->datetime('expired_at');
-                $schema->json('params');
+                $schema->varchar('group');
+                $schema->longtext('payload');
+                $schema->integer('expired_at');
 
-                $schema->addUniqueKey('key');
+                $schema->addUniqueKey(['key', 'group']);
                 $schema->addIndex('expired_at');
             }
         );
@@ -31,6 +31,6 @@ return new /** 2025041715320001_RateLimitInit */ class extends AbstractMigration
     #[MigrateDown]
     public function down(): void
     {
-        $this->dropTables('rate_limits');
+        $this->dropTables('cache_items');
     }
 };
