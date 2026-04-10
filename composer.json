@@ -62,7 +62,7 @@
     "require-dev": {
         "windwalker/framework": "dev-master",
         "phpoffice/phpspreadsheet": "^5.0",
-        "asika/better-units": "^0.1.1"
+        "asika/better-units": "^0.2.0"
     },
     "scripts": {
         "post-create-project-cmd": [
