@@ -5,6 +5,11 @@ import { resolve } from 'node:path';
 export default defineConfig(({ mode }) => {
   return {
     base: './',
+    server: {
+      watch: {
+        ignored: ['**/.env*']
+      }
+    },
     build: {
       sourcemap: false,
       minify: mode === 'production',

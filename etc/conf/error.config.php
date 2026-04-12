@@ -103,14 +103,14 @@ return [
             'log' => static fn () => create(
                 ErrorLogHandler::class,
                 options: static fn(Container $container) => [
-                    'channel' => 'error',
+                    'channel' => 'system/error',
                     'enabled' => $container->getParam('error.log')
                 ]
             ),
             'console_log' => static fn () => create(
                 ErrorLogHandler::class,
                 options: static fn(Container $container) => [
-                    'channel' => 'console-error',
+                    'channel' => 'system/console-error',
                     'enabled' => $container->getParam('error.log'),
                     'ignore_40x' => false
                 ]

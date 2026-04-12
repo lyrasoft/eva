@@ -1,25 +1,19 @@
 <?php
 
-/**
- * Part of starter project.
- *
- * @copyright  Copyright (C) 2020 __ORGANIZATION__.
- * @license    __LICENSE__
- */
-
 declare(strict_types=1);
 
 namespace App\Routes;
 
-use Windwalker\Core\Middleware\ForceSslMiddleware;
+use Windwalker\Core\Middleware\CanonicalizeMiddleware;
 use Windwalker\Core\Router\RouteCreator;
 
 /** @var RouteCreator $router */
 
 $router->group('web')
     ->middleware(
-        ForceSslMiddleware::class,
-        enabled: (bool) env('FORCE_SSL')
+        CanonicalizeMiddleware::class,
+        forceSsl: (bool) env('FORCE_SSL'),
+        wwwRedirect: (int) env('WWW_REDIRECT')
     )
     ->register(function (RouteCreator $router) {
         $router->load(__DIR__ . '/front.route.php');
