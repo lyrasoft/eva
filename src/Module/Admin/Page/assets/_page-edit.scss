@@ -1,0 +1,142 @@
+// SCSS file for page-edit
+
+.view-page-edit {
+
+  // Modals (rendered outside page-builder-app): hide when not in dev mode
+  // Options modal: category / extends
+  &:not(:has(page-builder-app.env-dev)) {
+    #input-item-category_id-wrapper,
+    #input-item-extends-wrapper {
+      display: none;
+    }
+
+    // Row edit > General
+    #row-edit-general > .form-group:has(> label[for="input-row-edit-title-align"]),
+    #row-edit-general > .form-group:has(> label[for="input-row-edit-text-color"]),
+    #row-edit-general > .form-group:has(> label[for="input-row-edit-html-id"]),
+    #row-edit-general > .form-group:has(> label[for="input-row-edit-html-class"]) {
+      display: none;
+    }
+
+    // Row edit > Animation tab
+    .c-modal-row-edit .nav-item:has(> a[href="#row-edit-animation"]) {
+      display: none;
+    }
+
+    // Addon edit > Layout / Animation tabs (all addon types)
+    .c-modal-addon-edit .nav-item:has(> a[href="#addon-edit-layout"]),
+    .c-modal-addon-edit .nav-item:has(> a[href="#addon-edit-animation"]) {
+      display: none;
+    }
+
+    // Addon edit > General: Text addon (has title-align) / Feature addon (has layout-type)
+    #addon-edit-general:has(label[for="input-addon-edit-title-align"]),
+    #addon-edit-general:has(label[for="input-addon-edit-layout-type"]) {
+      // Title Font Size / Weight, Title Margin Top / Bottom,
+      // Content Font Size / Line Height
+      .c-title-options > .form-row:has(.c-title-font-size),
+      .c-title-options > .form-row:has(.c-title-margin_top),
+      .c-content-font-size,
+      .c-content-line-height {
+        display: none;
+      }
+    }
+
+    // Addon edit > General: Feature addon, icon Margin Top / Bottom (keep Icon Padding in the same row)
+    #addon-edit-general:has(label[for="input-addon-edit-layout-type"]) {
+      .form-row > .col-6:has(> .c-title-margin_top),
+      .form-row > .col-6:has(> .c-title-margin_bottom) {
+        display: none;
+      }
+    }
+
+    // Addon edit > General: Button addon
+    #addon-edit-general:has(#input-addon-edit-style) {
+      // Style, Size, Border Radius (label has no `for`, it follows Size),
+      // Full-Width, Icon Class Name, Icon Position
+      .form-group:has(> label[for="input-addon-edit-style"]),
+      .form-group:has(> label[for="input-addon-edit-size"]),
+      .form-group:has(> label[for="input-addon-edit-size"]) + .form-group,
+      .form-group:has(> label[for="input-addon-edit-block"]),
+      .form-group:has(> label[for="input-addon-edit-icon"]),
+      .form-group:has(> label[for="input-addon-edit-icon_position"]) {
+        display: none;
+      }
+    }
+
+    // Addon edit > General: Empty Space addon (only it has .c-empty-height)
+    #addon-edit-general:has(.c-empty-height) {
+      // Link, Open in New Window (shown when link is not empty)
+      .form-group:has(> label[for="input-addon-edit-link"]),
+      .form-group:has(> label[for="input-addon-edit-link-target"]) {
+        display: none;
+      }
+    }
+
+    // Addon edit > General: CSS Class (all addon types)
+    #addon-edit-general > .form-group:has(> label[for="input-addon-edit-html-class"]) {
+      display: none;
+    }
+
+    // Row edit > Layout
+    #row-edit-layout {
+      // Background Type: Gradient / Video
+      > .form-group:has(> label[for="input-row-edit-background"]) {
+        label[for$="__gradient"],
+        label[for$="__video"] {
+          display: none;
+        }
+
+        label[for$="__image"] {
+          border-top-right-radius: var(--bs-btn-border-radius);
+          border-bottom-right-radius: var(--bs-btn-border-radius);
+        }
+      }
+
+      // BG Size / Repeat / Attachment / Position, Color Overlay, Parallax,
+      // Content Justify, Vertical Align Middle, Fluid Row, No Gutters, Custom CSS (SCSS)
+      .form-row:has(#input-row-edit-bg-size),
+      .form-row:has(#input-row-edit-bg-attachment),
+      .form-group:has(> label[for="input-row-edit-bg-overlay"]),
+      .form-group:has(> div > .unicorn-switch input[name="row-edit-bg-parallax"]),
+      > hr:has(+ .form-group > label[for="input-row-edit-justify-content"]),
+      > .form-group:has(> label[for="input-row-edit-justify-content"]),
+      > .form-group:has(> label[for="input-row-edit-valign"]),
+      > .form-group:has(> label[for="input-row-edit-fluid_row"]),
+      > .form-group:has(> label[for="input-row-edit-no_gutter"]),
+      > hr:has(+ .form-group > label[for="input-row-edit-css"]),
+      > .form-group:has(> label[for="input-row-edit-css"]) {
+        display: none;
+      }
+    }
+  }
+
+  // Hide advanced functions when not in dev mode (dev.php + DEV_ALLOW_IPS)
+  page-builder-app:not(.env-dev) {
+
+    // Toolbar: Edit CSS / Copy page content
+    .page-builder__topbar > .ms-auto > button:has(> .fa-css3),
+    .page-builder__topbar > .ms-auto > button:has(> .fa-clone) {
+      display: none;
+    }
+
+    // Column: width
+    .column__actions .dropdown:has(> button > .fa-arrows-alt-h) {
+      display: none !important;
+    }
+
+    // Column: gear dropdown, keep Duplicate / Delete only
+    .column__actions .dropdown-menu > .dropdown-item:not(:has(> .fa-clone, > .fa-trash)) {
+      display: none;
+    }
+
+    // Addon: Duplicate / Copy / Gear
+    .c-addon-instance__toolbar {
+      > a:has(> .fa-clone),
+      > a:has(> .fa-copy),
+      > .dropdown:has(> button > .fa-gear) {
+        display: none !important;
+      }
+    }
+  }
+}
